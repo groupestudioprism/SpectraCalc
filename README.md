@@ -41,7 +41,7 @@ Même compte que le site Studio Prism, SPECTRA Writer, ARCHIPLAN et Archi Vision
 | `src/sheet/` | Le tableur : formats, moteur de formules, fonctions, modèle de données, modèles, grille, édition, interface, tiroirs, graphiques, import/export, Spectre, démarrage |
 | `src/js/` | Compte (`auth.js`), cloud et accueil (`cloud.js`), Communauté (`community.js`), IA (`ai.js`), menu du compte (`auth-end.js`) |
 | `tools/build.py` | `python3 tools/build.py` → `index.html` (en ligne) et `dist/spectracalc-demo.html` |
-| `firebase/firestore.rules` | Règles Firestore complètes (site + SPECTRA Writer + SPECTRA Calc), à coller telles quelles dans la console |
+| `firebase/firestore.rules` | Règles Firestore complètes (site + SPECTRA Writer, Calc et Slide), à coller telles quelles dans la console |
 | `firebase/firestore-spectracalc.rules` | Le seul bloc SPECTRA Calc (pour mémoire) |
 
 On modifie `src/`, on lance `python3 tools/build.py`, on enregistre sur `main` : GitHub Pages publie en une minute.
