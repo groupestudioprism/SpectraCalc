@@ -2244,7 +2244,7 @@ service cloud.firestore {
         && isString(d.get('ownerName', ''), 0, 160)
         && isString(d.get('updatedByName', ''), 0, 160)
         && isString(d.get('updatedBy', ''), 0, 128)
-        && d.get('size', 0) is int && d.get('size', 0) >= 0 && d.get('size', 0) <= 1000000
+        && d.get('size', 0) is int && d.get('size', 0) >= 0 && d.get('size', 0) <= 1000000000
         && isString(d.get('preview', ''), 0, 6000)
         && isString(d.get('theme', ''), 0, 40)
         && isString(d.get('tpl', ''), 0, 40)
@@ -2292,6 +2292,21 @@ service cloud.firestore {
                               && request.resource.data.data.size() <= getAfter(ssP(pid)).data.get('size', 0) + 2048
                               && request.resource.data.updatedAt == request.time;
         allow delete: if isSignedIn() && (!exists(ssP(pid)) || get(ssP(pid)).data.ownerUid == request.auth.uid || isAdmin());
+      }
+
+      // images of the presentation: one document per image (keeps the content document small).
+      // Their bytes are counted in the 'size' of the presentation record (quota), written by the app in the next save.
+      match /media/{mid} {
+        allow get, list: if ssCanRead(pid, get(ssP(pid)).data);
+        allow create: if mid.matches('^[A-Za-z0-9_-]{4,40}$')
+                      && ssCanEdit(pid, getAfter(ssP(pid)).data)
+                      && request.resource.data.keys().hasOnly(['data', 'updatedAt'])
+                      && request.resource.data.data is string
+                      && request.resource.data.data.size() <= 1000000
+                      && request.resource.data.data.matches('^data:image/(png|jpeg|webp|gif|svg[+]xml);base64,[A-Za-z0-9+/=]+$')
+                      && request.resource.data.updatedAt == request.time;
+        allow update: if false;
+        allow delete: if isSignedIn() && (!exists(ssP(pid)) || ssCanEdit(pid, get(ssP(pid)).data) || get(ssP(pid)).data.ownerUid == request.auth.uid || isAdmin());
       }
     }
 
