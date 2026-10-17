@@ -5972,7 +5972,7 @@ const FirebaseCloud = {
     return {docs:p.docs.map(d => this.meta(d)), folders:f.docs.map(d => ({...d.data(), id:d.id}))};
   },
   async listShared(){
-    const [s, g] = await Promise.all([this.db.collection('scShares').where('email', '==', this.email()).get(), this.db.collection('scGrants').where('uid', '==', this.uid()).get()]);
+    const [s, g] = await Promise.all([this.db.collection('scShares').where('email', '==', this.email()).get().catch(e => { if (e?.code === 'permission-denied') return {docs:[], size:0, empty:true, forEach(){}}; throw e; }), this.db.collection('scGrants').where('uid', '==', this.uid()).get()]);
     const docs = [], folders = [], seenP = new Set(), seenF = new Set();
     const getP = async (pid, role, via, extra = {}) => { if (seenP.has(pid)) return null; seenP.add(pid); try { const d = await this.P(pid).get(); if (!d.exists) return null; const m = this.meta(d); return {...m, role:role === 'link' ? m.linkMode : role, via, ...extra}; } catch(e){ return extra.fallback || null; } };
     const getF = async (fid, role, via, name, ownerName) => {
@@ -6935,11 +6935,35 @@ const AI_SDK = '13.0.0';
 /* gemini-3.6-flash d'abord ; gemini-3.8-flash prend le relais quand le premier est saturé (quotas séparés) */
 const AI_MODELS = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash'];
 const AI_DAY = {free:25, pro:300, admin:1000};
+/* Clé de site reCAPTCHA Enterprise d'App Check (console Firebase → App Check → Applications → l'app web). Vide = App Check pas encore activé. */
+const AI_APP_CHECK_KEY = '';
+/* Le quota du jour est compté par la base (spectraAiUsage/{uid}_spectracalc, règles Firestore) : vider le cache ne le remet pas à zéro.
+   Le compteur local ne sert plus qu'à l'affichage (« il vous reste … demandes »). */
+const AI_APP = 'spectracalc';
 let aiInit = null, aiBlocked = '', aiBlockedAt = 0;
 const aiGone = new Set();   // modèles introuvables pour ce projet
 const aiDayKey = () => `sc.ai.${me?.uid || 'x'}.${new Date().toISOString().slice(0, 10)}`;
 const aiUsed = () => +store.get(aiDayKey()) || 0;
 const aiLimit = () => AI_DAY[planKey()] || AI_DAY.free;
+const aiUtcDay = (ms = Date.now()) => { const d = new Date(ms); return d.getUTCFullYear() * 10000 + (d.getUTCMonth() + 1) * 100 + d.getUTCDate(); };
+async function aiBump(){
+  if (!Auth.db || !me) return;
+  const ref = Auth.db.collection('spectraAiUsage').doc(me.uid + '_' + AI_APP);
+  // jour UTC du navigateur, puis la veille / le lendemain si l'horloge de l'appareil est décalée autour de minuit
+  const days = [...new Set([aiUtcDay(), aiUtcDay(Date.now() - 36e5), aiUtcDay(Date.now() + 36e5)])];
+  let last = null;
+  for (const day of days){
+    try {
+      const n = await Auth.db.runTransaction(async tx => {
+        const s = await tx.get(ref), d = s.exists ? s.data() : null, next = (d && d.day === day ? d.n : 0) + 1;
+        tx.set(ref, {day, n:next, updatedAt:Auth.ts()}); return next;
+      });
+      store.set(aiDayKey(), n); return;
+    } catch(e){ last = e; if (e?.code !== 'permission-denied') break; }
+  }
+  if (last?.code === 'permission-denied'){ store.set(aiDayKey(), Math.max(aiUsed(), aiLimit())); throw new Error(aiWhy() || 'Limite de demandes à l\'IA atteinte pour aujourd\'hui. Le compteur repart demain.'); }
+  throw new Error('Impossible de vérifier votre quota d\'IA. Vérifiez votre connexion internet puis réessayez.');
+}
 function aiWhy(){
   if (!FIREBASE_CONFIG) return 'Cette version de démonstration n\'a pas d\'IA : elle fonctionne sur le site en ligne de SPECTRA Calc, avec votre compte Studio Prism. Les phrases simples (« total de la colonne C », « trie par prix », « graphique en barres »…) marchent partout.';
   if (!me) return 'Connectez-vous pour utiliser l\'IA.';
@@ -6952,6 +6976,10 @@ async function aiModel(sys = AI_SYSTEM, name = AI_MODELS[0]){
     const base = `https://www.gstatic.com/firebasejs/${AI_SDK}/`;
     const [A, I] = await Promise.all([import(base + 'firebase-app.js'), import(base + 'firebase-ai.js')]);
     const app = A.getApps().find(x => x.name === 'sw-ai') || A.initializeApp(FIREBASE_CONFIG, 'sw-ai');
+    if (AI_APP_CHECK_KEY){   // App Check : seules les pages du site (pas un robot muni de la clé publique) peuvent appeler l'IA
+      const C = await import(base + 'firebase-app-check.js');
+      try { C.initializeAppCheck(app, {provider:new C.ReCaptchaEnterpriseProvider(AI_APP_CHECK_KEY), isTokenAutoRefreshEnabled:true}); } catch(e){}
+    }
     return {I, ai:I.getAI(app, {backend:new I.GoogleAIBackend()})};
   })().catch(e => { aiInit = null; throw e; });
   const {I, ai} = await aiInit;
@@ -7017,12 +7045,12 @@ function aiErr(e){
 }
 async function aiCall(sys, prompt, onWait){
   const why = aiWhy(); if (why) throw new Error(why);
+  await aiBump();
   const list = AI_MODELS.filter(n => !aiGone.has(n)); let last = null, waited = false;
   for (let i = 0; i < list.length; i++){
     try {
       const model = await aiModel(sys, list[i]);
       const r = await withTimeout(model.generateContent(prompt), 90000, 'ai/timeout');
-      store.set(aiDayKey(), aiUsed() + 1);
       return aiParse(r.response.text());
     } catch(e){
       if (e?.code === 'ai/timeout') throw new Error('L\'IA a mis trop de temps à répondre. Réessayez avec une demande plus courte.');

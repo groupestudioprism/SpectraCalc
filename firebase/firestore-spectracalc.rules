@@ -228,10 +228,10 @@
     }
 
     match /scShares/{sid} {
-      allow get, list: if isSignedIn() && (resource.data.ownerUid == request.auth.uid || resource.data.email == scEmail() || isAdmin());
+      allow get, list: if isSignedIn() && (resource.data.ownerUid == request.auth.uid || (resource.data.email == scEmail() && scVerified()) || isAdmin());
       allow create: if isSignedIn() && isActiveUser() && scValidShare(sid) && request.resource.data.createdAt == request.time;
       allow update: if isSignedIn() && isActiveUser() && resource.data.ownerUid == request.auth.uid && scValidShare(sid);
-      allow delete: if isSignedIn() && (resource.data.ownerUid == request.auth.uid || resource.data.email == scEmail() || isAdmin());
+      allow delete: if isSignedIn() && (resource.data.ownerUid == request.auth.uid || (resource.data.email == scEmail() && scVerified()) || isAdmin());
     }
 
     function scValidGrant(gid) {
