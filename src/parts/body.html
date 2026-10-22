@@ -8,15 +8,21 @@
   </defs>
 </svg>
 <div id="splash" role="status" aria-live="polite">
-  <div class="sp-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="ci-bg" aria-hidden="true"></div>
+  <div class="ci-glow" aria-hidden="true"></div>
+  <button type="button" class="ci-skip" id="ciSkip" hidden>Passer l'animation</button>
   <div class="sp-center">
-    <div class="sp-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#swMark"/></svg><i class="sp-shine"></i></div>
-    <div class="sp-word"><b>SPECTRA</b><span>Calc</span></div>
-    <p class="sp-tag">Calculer, présenter, décider.</p>
+    <div class="ci-stage">
+      <div class="ci-sheet" id="ciSheet" aria-hidden="true"></div>
+      <div class="ci-mark" id="ciMark"><svg viewBox="0 0 64 64" role="img" aria-label="Logo SPECTRA Calc"><use href="#swMark"/><g id="ciTiles" clip-path="url(#schx)"></g></svg></div>
+    </div>
+    <div class="sp-word" id="ciWord"><b>SPECTRA</b><span>Calc</span></div>
+    <p class="sp-tag" id="ciTag">Calculer, présenter, décider.</p>
   </div>
-  <div class="sp-bar" aria-hidden="true"><i></i></div>
+  <div class="sp-bar" id="ciBar" aria-hidden="true"><i></i></div>
   <p class="sp-msg" id="spMsg">Préparation de votre espace de calcul…</p>
 </div>
+<!--INTRO-->
 
 <div id="auth" hidden>
   <aside class="ap-side">

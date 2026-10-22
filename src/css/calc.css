@@ -204,7 +204,5 @@
 [data-theme="dark"] .g-colh b,[data-theme="dark"] .g-rowh b{border-color:#2A2638}
 [data-theme="dark"] .g-colh b.on,[data-theme="dark"] .g-rowh b.on{background:color-mix(in srgb,var(--selc) 22%,#1E1A29)}
 /* logo hexagonal : pas de cadre arrondi, une ombre qui suit la forme */
-.sp-mark{border-radius:0;box-shadow:none;overflow:visible;filter:drop-shadow(0 18px 40px rgb(123 47 247 / .45))}
-.sp-mark .sp-shine{clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .ap-brand svg{border-radius:0;box-shadow:none;filter:drop-shadow(0 12px 30px rgb(123 47 247 / .5))}
 .hm-brand svg,.ed-home svg{border-radius:0}

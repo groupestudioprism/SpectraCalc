@@ -100,32 +100,52 @@ kbd{display:inline-block;min-width:22px;padding:1px 6px;border:1px solid var(--l
 [hidden]{display:none!important}
 @media (max-width:640px){.hide-s{display:none!important}}
 @media (max-width:900px){.hide-m{display:none!important}}
-/* ===== Intro animée : le prisme s'allume, le W apparaît ===== */
-#splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#0C0A16;color:#fff;overflow:hidden;transition:opacity .55s ease,visibility .55s}
+/* ===== Intro SPECTRA Calc : une formule se calcule, ses cellules se retirent et laissent le symbole ===== */
+#splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#0C0A16;color:#fff;overflow:hidden;transition:opacity .45s ease,visibility .45s;font-size:min(19px,3.7vw,2.9vh)}
 #splash.done{opacity:0;visibility:hidden}
-.sp-aurora{position:absolute;inset:0;filter:blur(70px);opacity:.75}
-.sp-aurora i{position:absolute;width:52vmax;height:52vmax;border-radius:50%;mix-blend-mode:screen;animation:aur 7s ease-in-out infinite alternate}
-.sp-aurora i:nth-child(1){left:-12vmax;top:-18vmax;background:radial-gradient(circle,#7B2FF7 0,transparent 62%)}
-.sp-aurora i:nth-child(2){right:-14vmax;top:8vmax;background:radial-gradient(circle,#14C2EC 0,transparent 62%);animation-delay:-2s}
-.sp-aurora i:nth-child(3){left:18vmax;bottom:-26vmax;background:radial-gradient(circle,#FF3F86 0,transparent 60%);animation-delay:-4s}
 @keyframes aur{to{transform:translate(6vmax,4vmax) scale(1.12)}}
-.sp-center{position:relative;display:grid;justify-items:center;gap:18px}
-.sp-mark{position:relative;width:112px;height:112px;border-radius:26px;overflow:hidden;box-shadow:0 20px 60px rgb(123 47 247 / .45),0 0 0 1px rgb(255 255 255 / .12);animation:markIn 1s cubic-bezier(.2,.9,.25,1.2) both}
-.sp-mark svg{width:100%;height:100%;display:block}
-.sp-shine{position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 40%,rgb(255 255 255 / .75) 50%,transparent 60%);transform:translateX(-80%);animation:shine 1.4s .7s ease-in-out both}
-@keyframes markIn{from{opacity:0;transform:scale(.6) rotate(-8deg)}}
-@keyframes shine{to{transform:translateX(80%)}}
-.sp-word{display:flex;align-items:baseline;gap:10px;animation:fadeUp .7s .55s ease-out both}
-.sp-word b{font:800 34px/1 var(--f-disp);letter-spacing:.06em}
-.sp-word span{font:500 30px/1 var(--f-disp);background:var(--prism);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sp-tag{margin:0;font:500 14px/1 var(--f-ui);color:rgb(255 255 255 / .62);animation:fadeUp .7s .8s ease-out both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}}
+.ci-bg{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgb(255 255 255 / .05) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / .05) 1px,transparent 1px);background-size:2.6em 2.6em;background-position:center;-webkit-mask-image:radial-gradient(circle at 50% 46%,#000 0,transparent 68%);mask-image:radial-gradient(circle at 50% 46%,#000 0,transparent 68%)}
+.ci-glow{position:absolute;left:50%;top:44%;width:60em;height:60em;max-width:150vmax;margin:-30em 0 0 -30em;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgb(123 47 247 / .30) 0,rgb(20 194 236 / .10) 34%,transparent 62%)}
+.sp-center{position:relative;display:grid;justify-items:center;gap:1.1em}
+.ci-stage{position:relative;width:21.5em;height:15em}
+.ci-mark{position:absolute;left:50%;top:50%;width:9.8em;height:9.8em;margin:-4.9em 0 0 -4.9em;filter:drop-shadow(0 1.1em 2.4em rgb(123 47 247 / .42))}
+.ci-mark svg{width:100%;height:100%;display:block;overflow:visible}
+.ci-sheet{position:absolute;inset:0;display:grid;grid-template-rows:2.4em 11.9em;row-gap:.7em;font:500 1em/1 var(--f-ui);transform-origin:50% 55%}
+.ci-fx{display:flex;align-items:center;gap:.7em;height:2.4em;padding:0 .8em;border-radius:.6em;background:#16132A;border:1px solid rgb(255 255 255 / .14)}
+.ci-nb{font:600 .86em var(--f-mono);color:rgb(255 255 255 / .6);padding-right:.7em;border-right:1px solid rgb(255 255 255 / .14)}
+.ci-fl{font:italic 700 .95em var(--f-disp);background:var(--prism);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.1em}
+.ci-fm{position:relative;font:500 .98em var(--f-mono);letter-spacing:.01em;white-space:pre;color:#fff}
+.ci-ch{position:relative;opacity:0}
+.ci-ch.rg{color:#47D4F5}
+.ci-ch i,.ci-caret{position:absolute;right:-.12em;top:-.15em;bottom:-.15em;width:.14em;background:#fff;opacity:0}
+.ci-caret{right:auto;left:-.12em}
+.ci-grid{position:relative;display:grid;grid-template-columns:2em repeat(3,6.5em);grid-template-rows:1.9em repeat(5,2em);border-radius:.6em;overflow:hidden;background:#110E1E;border:1px solid rgb(255 255 255 / .14);box-sizing:content-box;margin:-1px}
+.ci-c{display:flex;align-items:center;padding:0 .8em;font-size:.95em;color:rgb(255 255 255 / .92);border-right:1px solid rgb(255 255 255 / .08);border-bottom:1px solid rgb(255 255 255 / .08);background:rgb(255 255 255 / .025);min-width:0;white-space:nowrap}
+.ci-c.n{justify-content:flex-end;font-variant-numeric:tabular-nums;font-weight:600}
+.ci-c.h{justify-content:center;padding:0;font-size:.8em;font-weight:600;color:rgb(255 255 255 / .55);background:rgb(255 255 255 / .06)}
+.ci-c.l{color:rgb(255 255 255 / .6);font-weight:600}
+.ci-c.r{position:relative;justify-content:flex-end}
+.ci-c.r b{grid-area:1/1;font-weight:700;position:absolute;right:.8em;opacity:0}
+.ci-ov{position:absolute;pointer-events:none;border-radius:.2em;opacity:0}
+.ci-rg{left:8.5em;top:3.9em;width:6.5em;height:6em;border:1.5px solid #14C2EC;background:rgb(20 194 236 / .11)}
+.ci-ac{left:8.5em;top:9.9em;width:6.5em;height:2em;border:1.5px solid #8B3CF7}
+.ci-ring{left:8.5em;top:9.9em;width:6.5em;height:2em;border:1.5px solid #FFC83D;border-radius:.3em}
+.ci-chip{position:absolute;left:8.5em;width:6.5em;height:2em;display:flex;align-items:center;justify-content:flex-end;padding-right:.8em;box-sizing:border-box;font-size:.95em;font-weight:700;color:#47D4F5;opacity:0;pointer-events:none;font-variant-numeric:tabular-nums}
+.ci-tile{fill:#1D1932;stroke:rgb(255 255 255 / .2);stroke-width:.5}
+.sp-word{display:flex;align-items:baseline;gap:.3em;margin-top:-.6em;font-size:2.1em}
+.sp-word b{font:800 1em/1 var(--f-disp);letter-spacing:.06em}
+.sp-word span{font:500 .88em/1 var(--f-disp);background:var(--prism);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sp-tag{margin:0;font:500 .9em/1.2 var(--f-ui);color:rgb(255 255 255 / .66);text-align:center}
 .sp-bar{position:absolute;left:50%;bottom:72px;width:180px;height:3px;margin-left:-90px;border-radius:3px;background:rgb(255 255 255 / .12);overflow:hidden}
-.sp-bar i{display:block;height:100%;width:40%;border-radius:3px;background:var(--prism);animation:bar 1.3s ease-in-out infinite}
-@keyframes bar{from{transform:translateX(-110%)}to{transform:translateX(260%)}}
-.sp-msg{position:absolute;bottom:36px;left:0;right:0;margin:0;text-align:center;font-size:12.5px;color:rgb(255 255 255 / .55)}
-.sp-msg.err{color:#FF9DB8}
-@media (prefers-reduced-motion:reduce){.sp-aurora i,.sp-mark,.sp-shine,.sp-word,.sp-tag,.sp-bar i{animation:none}}
+.sp-bar i{display:block;height:100%;width:40%;border-radius:3px;background:var(--prism);animation:spbar 1.3s ease-in-out infinite}
+@keyframes spbar{from{transform:translateX(-110%)}to{transform:translateX(260%)}}
+.sp-msg{position:absolute;bottom:36px;left:0;right:0;margin:0;text-align:center;font-size:12.5px;color:rgb(255 255 255 / .6)}
+.sp-msg.err{color:#FF9DB8;opacity:1!important}
+.ci-skip{position:absolute;z-index:2;top:max(14px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));padding:9px 16px;border-radius:999px;border:1px solid rgb(255 255 255 / .34);background:rgb(255 255 255 / .08);color:rgb(255 255 255 / .9);font:500 13px/1 var(--f-ui);cursor:pointer}
+.ci-skip:hover{background:rgb(255 255 255 / .16)}
+.ci-skip:focus-visible{outline:2px solid #47D4F5;outline-offset:2px}
+@media (max-height:480px){.sp-bar{bottom:42px}.sp-msg{bottom:16px}}
+@media (prefers-reduced-motion:reduce){.sp-bar i{animation:none;width:40%;margin-left:30%}.ci-skip{display:none}}
 /* ===== Compte Studio Prism, au style SPECTRA : panneau prismatique sombre + carte claire ===== */
 #auth{position:fixed;inset:0;z-index:55;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);background:#FFFFFF;color:#16131F;color-scheme:light;overflow:auto;
   --ap-ink:#16131F;--ap-ink2:#4A4660;--ap-mut:#7A7690;--ap-line:#E5E2EF;--ap-in:#D7D3E4;--ap-ac:#6D3BFF}
@@ -1053,8 +1073,6 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
 [data-theme="dark"] .g-colh b,[data-theme="dark"] .g-rowh b{border-color:#2A2638}
 [data-theme="dark"] .g-colh b.on,[data-theme="dark"] .g-rowh b.on{background:color-mix(in srgb,var(--selc) 22%,#1E1A29)}
 /* logo hexagonal : pas de cadre arrondi, une ombre qui suit la forme */
-.sp-mark{border-radius:0;box-shadow:none;overflow:visible;filter:drop-shadow(0 18px 40px rgb(123 47 247 / .45))}
-.sp-mark .sp-shine{clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .ap-brand svg{border-radius:0;box-shadow:none;filter:drop-shadow(0 12px 30px rgb(123 47 247 / .5))}
 .hm-brand svg,.ed-home svg{border-radius:0}
 </style>
@@ -1069,15 +1087,178 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
   </defs>
 </svg>
 <div id="splash" role="status" aria-live="polite">
-  <div class="sp-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="ci-bg" aria-hidden="true"></div>
+  <div class="ci-glow" aria-hidden="true"></div>
+  <button type="button" class="ci-skip" id="ciSkip" hidden>Passer l'animation</button>
   <div class="sp-center">
-    <div class="sp-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#swMark"/></svg><i class="sp-shine"></i></div>
-    <div class="sp-word"><b>SPECTRA</b><span>Calc</span></div>
-    <p class="sp-tag">Calculer, présenter, décider.</p>
+    <div class="ci-stage">
+      <div class="ci-sheet" id="ciSheet" aria-hidden="true"></div>
+      <div class="ci-mark" id="ciMark"><svg viewBox="0 0 64 64" role="img" aria-label="Logo SPECTRA Calc"><use href="#swMark"/><g id="ciTiles" clip-path="url(#schx)"></g></svg></div>
+    </div>
+    <div class="sp-word" id="ciWord"><b>SPECTRA</b><span>Calc</span></div>
+    <p class="sp-tag" id="ciTag">Calculer, présenter, décider.</p>
   </div>
-  <div class="sp-bar" aria-hidden="true"><i></i></div>
+  <div class="sp-bar" id="ciBar" aria-hidden="true"><i></i></div>
   <p class="sp-msg" id="spMsg">Préparation de votre espace de calcul…</p>
 </div>
+<script>
+/* Intro SPECTRA Calc : scène décorative (aucun appel au moteur du tableur).
+   Les nombres affichés sont réels : la somme est calculée ici à partir des valeurs montrées.
+   Web Animations API : déterministe, pausable, « seekable ». État final = écran de chargement stable. */
+(() => {
+  'use strict';
+  const T0 = performance.now(), KEY = 'prism-intro-calc', HOLD = 3350, SEEN_HOLD = 900, REDUCED_HOLD = 600;
+  const $ = id => document.getElementById(id), sp = $('splash');
+  if (!sp) return;
+  const st = { playing: false, skipped: false, hold: HOLD, onSkip: null };
+  window.__spIntro = { remaining: () => st.skipped ? 0 : Math.max(0, st.hold - (performance.now() - T0)), onSkip: null };
+  let seen = false, force = false, reduce = false;
+  try { force = /[?&]intro=1(&|$)/.test(location.search); } catch (e) {}
+  try { seen = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+  try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  const A = [];
+  const EASE_IN = 'cubic-bezier(.22,.8,.2,1)', EASE_IO = 'cubic-bezier(.65,0,.35,1)', EASE_M = 'cubic-bezier(.4,0,.2,1)';
+  const at = (el, kf, start, dur, ease, fill) => { const a = el.animate(kf, { delay: start, duration: dur, easing: ease || EASE_IN, fill: fill || 'both' }); A.push(a); return a; };
+  const E = (cls, tag, txt) => { const e = document.createElement(tag || 'div'); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+  function finish() {
+    A.forEach(a => { try { if (a.effect && a.effect.getComputedTiming().iterations === Infinity) a.cancel(); else a.finish(); } catch (e) { try { a.cancel(); } catch (e2) {} } });
+    const sh = $('ciSheet'); if (sh) sh.remove();
+    const t = $('ciTiles'); if (t) t.remove();
+    const b = $('ciSkip'); if (b) b.remove();
+    document.removeEventListener('keydown', onKey, true);
+    st.playing = false;
+  }
+  function skip() {
+    if (st.skipped) return; st.skipped = true;
+    try { finish(); } catch (e) {}
+    const f = window.__spIntro.onSkip; if (typeof f === 'function') f();
+  }
+  function onKey(e) {
+    if (!st.playing) return;
+    const t = e.target, ok = !t || t.id === 'ciSkip' || !/^(BUTTON|A|SELECT|TEXTAREA)$/.test(t.tagName);
+    
+    if (e.key === 'Escape' || (e.key === 'Enter' && ok)) { e.preventDefault(); skip(); }
+  }
+
+  function scene() {
+    const data = [['Jan.', 120], ['Fév.', 85], ['Mars', 95]];
+    const total = data.reduce((s, d) => s + d[1], 0);            // vrai résultat de l'opération affichée
+    const FORMULA = '=SOMME(B2:B4)';
+    const sheet = $('ciSheet'), mark = $('ciMark'), tiles = $('ciTiles');
+
+    // barre de formule
+    const fx = E('ci-fx'), fm = E('ci-fm'), nb = E('ci-nb', 'span', 'B5');
+    fx.append(nb, E('ci-fl', 'span', 'fx'), fm);
+    const caret0 = E('ci-caret'); fm.append(caret0);
+    const chars = [...FORMULA].map((c, i) => { const s = E('ci-ch' + (i >= 7 && i <= 11 ? ' rg' : ''), 'span', c); s.append(E('', 'i')); fm.append(s); return s; });
+    // grille
+    const grid = E('ci-grid'), cells = [];
+    const put = (el, r, c) => { el.style.gridRow = r; el.style.gridColumn = c; grid.append(el); cells.push({ el, r, c }); return el; };
+    put(E('ci-c h'), 1, 1);
+    ['A', 'B', 'C'].forEach((l, i) => put(E('ci-c h', 'div', l), 1, i + 2));
+    for (let r = 1; r <= 5; r++) put(E('ci-c h', 'div', String(r)), r + 1, 1);
+    const content = [];
+    for (let r = 1; r <= 5; r++) for (let c = 1; c <= 3; c++) {
+      let cls = 'ci-c', txt = '';
+      if (r === 1 && c === 1) { cls += ' l'; txt = 'Mois'; } else if (r === 1 && c === 2) { cls += ' l n'; txt = 'Ventes'; }
+      else if (r >= 2 && r <= 4 && c === 1) { cls += ' l'; txt = data[r - 2][0]; }
+      else if (r >= 2 && r <= 4 && c === 2) { cls += ' n'; txt = String(data[r - 2][1]); }
+      else if (r === 5 && c === 1) { cls += ' l'; txt = 'Total'; }
+      else if (r === 5 && c === 2) cls += ' n r';
+      const el = put(E(cls), r + 1, c + 1); if (txt) { const t = E('', 'span', txt); el.append(t); content.push({ el, t, r, c }); }
+    }
+    const b5 = cells.find(o => o.r === 6 && o.c === 3).el;
+    // sommes partielles réelles (cumul des valeurs affichées)
+    let run = 0; const partial = data.map(d => { run += d[1]; const b = E('', 'b', String(run)); b5.append(b); return b; });
+    const rg = E('ci-ov ci-rg'), ac = E('ci-ov ci-ac'), ring = E('ci-ov ci-ring');
+    grid.append(rg, ac, ring);
+    const chips = data.map((d, i) => { const c = E('ci-chip', 'div', String(d[1])); c.style.top = (3.9 + 2 * i) + 'em'; grid.append(c); return c; });
+    sheet.append(fx, grid);
+
+    // pavage de cellules sur le vrai symbole : elles se retirent et laissent apparaître les vraies formes
+    const NS = 'http://www.w3.org/2000/svg', tl = [];
+    for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) {
+      const r = document.createElementNS(NS, 'rect'); r.setAttribute('class', 'ci-tile');
+      r.setAttribute('x', x * 8); r.setAttribute('y', y * 8); r.setAttribute('width', 8); r.setAttribute('height', 8);
+      r.style.transformBox = 'fill-box'; r.style.transformOrigin = 'center';
+      tiles.append(r); tl.push({ r, d: Math.hypot(x * 8 + 4 - 32, y * 8 + 4 - 32) });
+    }
+
+    // 1) environnement
+    at($('ciSheet'), [{ opacity: 0, transform: 'translateY(.6em) scale(.97)' }, { opacity: 1, transform: 'none' }], 0, 420);
+    cells.forEach(o => at(o.el, [{ opacity: 0 }, { opacity: 1 }], 60 + (o.r + o.c) * 24, 260, EASE_IN));
+    at(fx, [{ opacity: 0 }, { opacity: 1 }], 120, 300);
+    at(sp.querySelector('.ci-bg'), [{ opacity: 0 }, { opacity: 1 }], 0, 600);
+    // valeurs
+    content.forEach(o => { at(o.t, [{ opacity: 0, transform: 'translateY(.5em)' }, { opacity: 1, transform: 'none' }], 520 + (o.r * 3 + o.c) * 24, 300, EASE_IN); });
+    // 2) formule tapée, caret qui suit
+    const S0 = 780, STEP = 38;
+    at(ac, [{ opacity: 0 }, { opacity: 1 }], S0 - 40, 160);
+    at(caret0, [{ opacity: 1 }, { opacity: 0 }, { opacity: 1 }, { opacity: 0 }, { opacity: 1 }, { opacity: 1 }], 380, S0 - 380, 'steps(1,end)', 'both');
+    at(caret0, [{ opacity: 0 }, { opacity: 0 }], S0, 1, 'linear', 'forwards');
+    chars.forEach((c, i) => {
+      at(c, [{ opacity: 0 }, { opacity: 1 }], S0 + i * STEP, 1, 'linear', 'forwards');
+      at(c.lastElementChild, [{ opacity: 1 }, { opacity: 1 }], S0 + i * STEP, STEP, 'linear', 'none');
+    });
+    // (le caret de chaque caractère n'est visible que pendant sa frappe)
+    const lastCaret = chars[chars.length - 1].lastElementChild;
+    at(lastCaret, [{ opacity: 1 }, { opacity: 0 }], S0 + chars.length * STEP, 240, 'steps(1,end)', 'both');
+    // plage visée surlignée dès que « B2 » est tapé
+    const tr = S0 + 9 * STEP;
+    at(rg, [{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }], tr, 220);
+    // 3) le calcul s'exécute : les valeurs convergent vers B5
+    const D = [1320, 1390, 1460], FL = 250, dys = [0, 1, 2].map(i => 9.9 - (3.9 + 2 * i));
+    chips.forEach((c, i) => {
+      at(c, [{ opacity: 1, transform: 'none' }, { opacity: 1, transform: `translateY(${dys[i] * .8}em)`, offset: .75 }, { opacity: 0, transform: `translateY(${dys[i]}em) scale(.85)` }], D[i], FL, EASE_M, 'forwards');
+      at(content.find(o => o.r === i + 2 && o.c === 2).el, [{ color: 'rgb(255 255 255 / .92)' }, { color: 'rgb(255 255 255 / .35)' }], D[i], 200, 'linear', 'forwards');
+    });
+    partial.forEach((b, i) => {
+      const on = D[i] + FL; at(b, [{ opacity: 1 }, { opacity: 1 }], on, 1, 'linear', 'forwards');
+      if (i < 2) at(b, [{ opacity: 0 }, { opacity: 0 }], D[i + 1] + FL, 1, 'linear', 'forwards');
+    });
+    const done = D[2] + FL;
+    at(partial[2], [{ transform: 'scale(1.35)' }, { transform: 'none' }], done, 260, EASE_IN);
+    at(ring, [{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.5,1.9)' }], done, 420, EASE_IN, 'both');
+    at(rg, [{ opacity: 1 }, { opacity: 0 }], done + 40, 200, 'linear', 'forwards');
+    // 4) transformation : la feuille se replie en pavage de cellules, qui se retirent sur le symbole officiel
+    const X = 1850;
+    at(sheet, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.46)' }], X, 400, EASE_IO, 'forwards');
+    at(mark, [{ opacity: 0 }, { opacity: 1 }], X + 60, 240, 'linear', 'both');
+    tl.forEach(o => at(o.r, [{ transform: 'scale(1)' }, { transform: 'scale(0)' }], X + 280 + o.d / 45 * 300, 280, EASE_IO));
+    at(sp.querySelector('.ci-glow'), [{ opacity: 0 }, { opacity: 1 }], X + 300, 700, 'linear');
+    // 5) nom, signature, chargement
+    at($('ciWord'), [{ opacity: 0, transform: 'translateY(.35em)', clipPath: 'inset(0 100% 0 0)' }, { opacity: 1, transform: 'none', clipPath: 'inset(0 0 0 0)' }], 2350, 520, EASE_IN);
+    at($('ciTag'), [{ opacity: 0, transform: 'translateY(.4em)' }, { opacity: 1, transform: 'none' }], 2560, 400, EASE_IN);
+    at($('ciBar'), [{ opacity: 0 }, { opacity: 1 }], 2300, 500, 'linear');
+    at($('spMsg'), [{ opacity: 0 }, { opacity: 1 }], 2300, 500, 'linear');
+  }
+
+  function start() {
+    const btn = $('ciSkip');
+    if (reduce || (seen && !force)) {
+      st.hold = reduce ? REDUCED_HOLD : SEEN_HOLD;
+      if (reduce) { const m = $('ciMark'); try { m.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 150, fill: 'both' }); } catch (e) {} }
+      if (btn) btn.remove();
+      return;
+    }
+    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+    st.playing = true;
+    try {
+      scene();
+      if (btn) { btn.hidden = false; btn.addEventListener('click', skip); }
+      document.addEventListener('keydown', onKey, true);
+      // fin naturelle : on retire le décor de la scène
+      setTimeout(() => { if (st.playing) { try { finish(); } catch (e) {} } }, 3000);
+    } catch (e) {
+      st.playing = false; st.hold = REDUCED_HOLD; A.forEach(a => { try { a.cancel(); } catch (e2) {} });
+      ['ciSheet', 'ciTiles', 'ciSkip'].forEach(id => { const x = $(id); if (x) x.remove(); });
+      try { console.warn('intro: scène ignorée', e); } catch (e3) {}
+    }
+  }
+  start();
+})();
+</script>
 
 <div id="auth" hidden>
   <aside class="ap-side">
@@ -5679,10 +5860,13 @@ let splashT = 0;
 /* attend la fin complète de l'intro (écran d'accueil animé retiré) et du chargement de l'éditeur */
 function afterIntro(){ return new Promise(res => { const t0 = performance.now(); const tick = () => { const sp = $a('#splash'), ready = window.__swReady === true || performance.now() - t0 > 15000;
   if ((!sp || sp.classList.contains('done')) && ready) setTimeout(res, sp ? 700 : 250); else setTimeout(tick, 120); }; tick(); }); }
+function closeSplash(sp){ try { if (sp.contains(document.activeElement)) document.activeElement.blur(); } catch (e) {} sp.classList.add('done'); setTimeout(() => sp.remove(), 500); }
 function hideSplashSoon(){ // l'écran de compte n'attend pas l'éditeur
   if (splashT) return; const sp = $a('#splash'); if (!sp) return;
+  const I = window.__spIntro;   // scène d'intro (src/js/intro.js) : remaining() = temps restant avant la fin de la tenue
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  splashT = setTimeout(() => { sp.classList.add('done'); setTimeout(() => sp.remove(), 600); }, Math.max(0, (reduce ? 600 : 2900) - performance.now()));
+  splashT = setTimeout(() => closeSplash(sp), I ? I.remaining() : Math.max(0, (reduce ? 600 : 2900) - performance.now()));
+  if (I) I.onSkip = () => { clearTimeout(splashT); splashT = setTimeout(() => closeSplash(sp), 0); };   // « Passer l'animation » : sortie immédiate
 }
 function show(name, opts = {}){
   if (name !== 'loading') hideSplashSoon();

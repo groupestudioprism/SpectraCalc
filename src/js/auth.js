@@ -711,10 +711,13 @@ let splashT = 0;
 /* attend la fin complète de l'intro (écran d'accueil animé retiré) et du chargement de l'éditeur */
 function afterIntro(){ return new Promise(res => { const t0 = performance.now(); const tick = () => { const sp = $a('#splash'), ready = window.__swReady === true || performance.now() - t0 > 15000;
   if ((!sp || sp.classList.contains('done')) && ready) setTimeout(res, sp ? 700 : 250); else setTimeout(tick, 120); }; tick(); }); }
+function closeSplash(sp){ try { if (sp.contains(document.activeElement)) document.activeElement.blur(); } catch (e) {} sp.classList.add('done'); setTimeout(() => sp.remove(), 500); }
 function hideSplashSoon(){ // l'écran de compte n'attend pas l'éditeur
   if (splashT) return; const sp = $a('#splash'); if (!sp) return;
+  const I = window.__spIntro;   // scène d'intro (src/js/intro.js) : remaining() = temps restant avant la fin de la tenue
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  splashT = setTimeout(() => { sp.classList.add('done'); setTimeout(() => sp.remove(), 600); }, Math.max(0, (reduce ? 600 : 2900) - performance.now()));
+  splashT = setTimeout(() => closeSplash(sp), I ? I.remaining() : Math.max(0, (reduce ? 600 : 2900) - performance.now()));
+  if (I) I.onSkip = () => { clearTimeout(splashT); splashT = setTimeout(() => closeSplash(sp), 0); };   // « Passer l'animation » : sortie immédiate
 }
 function show(name, opts = {}){
   if (name !== 'loading') hideSplashSoon();
