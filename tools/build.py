@@ -19,7 +19,7 @@ CSS_ORDER = ['base.css', 'splash.css', 'auth.css', 'home.css', 'shell.css', 'cal
 FB = '10.12.2'
 CONFIG = '''const FIREBASE_CONFIG = {
   // Projet Firebase de Studio Prism : le même que le site et qu'ARCHIPLAN. Configuration publique par conception
-  // (la sécurité repose sur les règles Firestore, voir firebase/firestore-spectracalc.rules).
+  // (la sécurité repose sur les règles Firestore, voir les règles Firestore (dépôt Studio-Prism, firebase/rules)).
   apiKey: "AIzaSyAAD5rrHuVh6_PC2_45L3y9F7zWe5ACW6E",
   authDomain: "archivision-studioprism.firebaseapp.com",
   projectId: "archivision-studioprism",

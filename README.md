@@ -41,14 +41,14 @@ Même compte que le site Studio Prism, SPECTRA Writer, ARCHIPLAN et Archi Vision
 | `src/sheet/` | Le tableur : formats, moteur de formules, fonctions, modèle de données, modèles, grille, édition, interface, tiroirs, graphiques, import/export, Spectre, démarrage |
 | `src/js/` | Compte (`auth.js`), cloud et accueil (`cloud.js`), Communauté (`community.js`), IA (`ai.js`), menu du compte (`auth-end.js`) |
 | `tools/build.py` | `python3 tools/build.py` → `index.html` (en ligne) et `dist/spectracalc-demo.html` |
-| `firebase/firestore.rules` | Règles Firestore complètes (site + SPECTRA Writer, Calc et Slide), à coller telles quelles dans la console |
-| `firebase/firestore-spectracalc.rules` | Le seul bloc SPECTRA Calc (pour mémoire) |
+| `Studio-Prism/firebase/firestore.rules` | Règles Firestore complètes (site + SPECTRA Writer, Calc et Slide), à coller telles quelles dans la console |
+| `les règles Firestore (dépôt Studio-Prism, firebase/rules)` | Le seul bloc SPECTRA Calc (pour mémoire) |
 
 On modifie `src/`, on lance `python3 tools/build.py`, on enregistre sur `main` : GitHub Pages publie en une minute.
 
 ## À faire côté Firebase (une fois)
 
-1. Copier **tout** `firebase/firestore.rules` dans Firebase → Firestore → Règles, en remplaçant l'existant, puis Publier.
+1. Copier **tout** `Studio-Prism/firebase/firestore.rules` dans Firebase → Firestore → Règles, en remplaçant l'existant, puis Publier.
 2. Créer le produit `spectracalc` (nom « SPECTRA Calc ») dans l'administration du site, pour attribuer licences et clés.
 3. L'IA est la même que celle de SPECTRA Writer (Firebase AI Logic) : rien à activer de plus. Pour dépasser le quota gratuit de Gemini, passer le projet en formule Blaze.
 
