@@ -224,6 +224,7 @@ function updateStat(){
 /* ---------- menu contextuel ---------- */
 function ctxMenu(e){
   e.preventDefault(); if (EDIT.on) return;
+  const at = {x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})};
   const p = gvXY(e), isCol = p.y < V.hh && p.x > V.hw, isRow = p.x < V.hw && p.y > V.hh;
   const full = SEL.r1 === 0 && SEL.r2 >= MAXR - 1, fullR = SEL.c1 === 0 && SEL.c2 >= MAXC - 1;
   const ro = V.ro ? ' disabled' : '';
@@ -236,14 +237,15 @@ function ctxMenu(e){
     : `<button type="button" data-cx="ira"${ro}>Insérer une ligne au-dessus</button><button type="button" data-cx="icl"${ro}>Insérer une colonne à gauche</button><button type="button" data-cx="dr"${ro}>Supprimer la ligne</button><button type="button" data-cx="dc"${ro}>Supprimer la colonne</button>`}
     <hr><button type="button" data-cx="clear"${ro}>Effacer le contenu<kbd>Suppr</kbd></button><button type="button" data-cx="clearf"${ro}>Effacer la mise en forme</button>
     <button type="button" data-cx="sorta"${ro}>Trier de A à Z</button><button type="button" data-cx="sortz"${ro}>Trier de Z à A</button>
+    <button type="button" data-cx="sum"${ro}>Somme automatique</button><button type="button" data-cx="nf"${ro}>Format des nombres…</button>
     <button type="button" data-cx="note"${ro}>${sh0().get(SEL.r, SEL.c)?.note ? 'Modifier la note' : 'Ajouter une note'}</button>
     <button type="button" data-cx="freeze">${sh0().freeze.r || sh0().freeze.c ? 'Libérer les volets' : 'Figer jusqu\'ici'}</button>
     <button type="button" data-cx="chart"${ro}>Créer un graphique</button><button type="button" data-cx="name"${ro}>Nommer la plage…</button>`;
-  openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})}, `<div class="pop-list ctx">${items}</div>`, pp => {
-    pp.onclick = ev => { const b = ev.target.closest('[data-cx]'); if (!b || b.disabled) return; closePop(); ctxRun(b.dataset.cx); };
+  openPop(at, `<div class="pop-list ctx">${items}</div>`, pp => {
+    pp.onclick = ev => { const b = ev.target.closest('[data-cx]'); if (!b || b.disabled) return; closePop(); ctxRun(b.dataset.cx, at); };
   }, 'menu');
 }
-function ctxRun(k){
+function ctxRun(k, at){
   const sh = sh0();
   switch (k){
     case 'cut': g$('grid').focus(); document.execCommand('cut') || toast('Utilisez Ctrl + X'); break;
@@ -261,6 +263,8 @@ function ctxRun(k){
     case 'note': noteDlg(); break;
     case 'freeze': tx('Figer les volets', () => { sh.freeze = sh.freeze.r || sh.freeze.c ? {r:0, c:0} : {r:SEL.r, c:SEL.c}; }); g$('gScroll').scrollTo(0, 0); break;
     case 'chart': addChart('col'); break;
+    case 'sum': autoSum(); break;
+    case 'nf': nfPop(at || g$('grid')); break;
     case 'name': nameDlg(); break;
   }
 }

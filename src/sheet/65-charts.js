@@ -176,6 +176,20 @@ function onObjUp(){
   if (d.moved){ const after = {...d.ch}; Object.assign(d.ch, d.o); tx(d.mode === 'mv' ? 'Déplacer le graphique' : 'Redimensionner le graphique', () => Object.assign(d.ch, after)); layout(); schedule(); }
   return true;
 }
+/* clic droit sur un graphique : modifier, changer de type, dupliquer, supprimer */
+function chartMenu(e, id){
+  const ch = chartById(id); if (!ch) return; OBJ.sel = id; renderObjects();
+  const ro = V.ro ? ' disabled' : '';
+  openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})},
+    `<div class="pop-list ctx"><button type="button" data-cc="edit"${ro}>Modifier le graphique…</button><hr><p class="pop-h">Type de graphique</p>${CHART_TYPES.map(([k, n]) => `<button type="button" data-ct="${k}" class="${ch.type === k ? 'on' : ''}"${ro}>${n}</button>`).join('')}<hr>
+    <button type="button" data-cc="dup"${ro}>Dupliquer</button><button type="button" data-cc="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
+    pp.onclick = ev => { const b = ev.target.closest('button'); if (!b || b.disabled) return; closePop();
+      if (b.dataset.ct){ tx('Type de graphique', () => { ch.type = b.dataset.ct; }); renderObjects(); return; }
+      if (b.dataset.cc === 'edit') return chartEditor(id);
+      if (b.dataset.cc === 'dup'){ const c = {...JSON.parse(JSON.stringify(ch)), id:uidS(), x:ch.x + 24, y:ch.y + 24}; tx('Dupliquer le graphique', () => { sh0().charts.push(c); }); OBJ.sel = c.id; layout(); schedule(); return; }
+      if (b.dataset.cc === 'del') deleteChart(id); };
+  }, 'menu');
+}
 function deleteChart(id){ const sh = sh0(); tx('Supprimer le graphique', () => { sh.charts = sh.charts.filter(c => c.id !== id); }); OBJ.sel = null; renderObjects(); }
 function chartEditor(id){
   const ch = chartById(id); if (!ch) return;

@@ -126,7 +126,7 @@ function wire(){
   addEventListener('mousemove', e => { if (onObjMove(e)) return; if (DRAG.mode || e.target.closest?.('#gView')) onGridMove(e); });
   addEventListener('mouseup', e => { if (onObjUp(e)) return; onGridUp(e); });
   view.addEventListener('dblclick', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); return chartEditor(o.dataset.obj); } onGridDbl(e); });
-  view.addEventListener('contextmenu', e => { if (e.target.closest('.g-obj')){ e.preventDefault(); return; } ctxMenu(e); });
+  view.addEventListener('contextmenu', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); chartMenu(e, o.dataset.obj); return; } ctxMenu(e); });
   view.addEventListener('click', e => { const u = e.target.closest('[data-unhide-c]'), w = e.target.closest('[data-unhide-r]'); if (u){ const sh = sh0(), c = +u.dataset.unhideC; tx('Afficher', () => sh.hc.delete(c)); } if (w){ const sh = sh0(), r = +w.dataset.unhideR; tx('Afficher', () => sh.hr.delete(r)); } });
   view.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey){ e.preventDefault(); setZoom(V.z * (e.deltaY < 0 ? 1.1 : 1 / 1.1)); } }, {passive:false});
   // tactile : un appui long = menu

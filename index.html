@@ -3901,6 +3901,7 @@ function updateStat(){
 /* ---------- menu contextuel ---------- */
 function ctxMenu(e){
   e.preventDefault(); if (EDIT.on) return;
+  const at = {x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})};
   const p = gvXY(e), isCol = p.y < V.hh && p.x > V.hw, isRow = p.x < V.hw && p.y > V.hh;
   const full = SEL.r1 === 0 && SEL.r2 >= MAXR - 1, fullR = SEL.c1 === 0 && SEL.c2 >= MAXC - 1;
   const ro = V.ro ? ' disabled' : '';
@@ -3913,14 +3914,15 @@ function ctxMenu(e){
     : `<button type="button" data-cx="ira"${ro}>Insérer une ligne au-dessus</button><button type="button" data-cx="icl"${ro}>Insérer une colonne à gauche</button><button type="button" data-cx="dr"${ro}>Supprimer la ligne</button><button type="button" data-cx="dc"${ro}>Supprimer la colonne</button>`}
     <hr><button type="button" data-cx="clear"${ro}>Effacer le contenu<kbd>Suppr</kbd></button><button type="button" data-cx="clearf"${ro}>Effacer la mise en forme</button>
     <button type="button" data-cx="sorta"${ro}>Trier de A à Z</button><button type="button" data-cx="sortz"${ro}>Trier de Z à A</button>
+    <button type="button" data-cx="sum"${ro}>Somme automatique</button><button type="button" data-cx="nf"${ro}>Format des nombres…</button>
     <button type="button" data-cx="note"${ro}>${sh0().get(SEL.r, SEL.c)?.note ? 'Modifier la note' : 'Ajouter une note'}</button>
     <button type="button" data-cx="freeze">${sh0().freeze.r || sh0().freeze.c ? 'Libérer les volets' : 'Figer jusqu\'ici'}</button>
     <button type="button" data-cx="chart"${ro}>Créer un graphique</button><button type="button" data-cx="name"${ro}>Nommer la plage…</button>`;
-  openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})}, `<div class="pop-list ctx">${items}</div>`, pp => {
-    pp.onclick = ev => { const b = ev.target.closest('[data-cx]'); if (!b || b.disabled) return; closePop(); ctxRun(b.dataset.cx); };
+  openPop(at, `<div class="pop-list ctx">${items}</div>`, pp => {
+    pp.onclick = ev => { const b = ev.target.closest('[data-cx]'); if (!b || b.disabled) return; closePop(); ctxRun(b.dataset.cx, at); };
   }, 'menu');
 }
-function ctxRun(k){
+function ctxRun(k, at){
   const sh = sh0();
   switch (k){
     case 'cut': g$('grid').focus(); document.execCommand('cut') || toast('Utilisez Ctrl + X'); break;
@@ -3938,6 +3940,8 @@ function ctxRun(k){
     case 'note': noteDlg(); break;
     case 'freeze': tx('Figer les volets', () => { sh.freeze = sh.freeze.r || sh.freeze.c ? {r:0, c:0} : {r:SEL.r, c:SEL.c}; }); g$('gScroll').scrollTo(0, 0); break;
     case 'chart': addChart('col'); break;
+    case 'sum': autoSum(); break;
+    case 'nf': nfPop(at || g$('grid')); break;
     case 'name': nameDlg(); break;
   }
 }
@@ -4480,6 +4484,20 @@ function onObjUp(){
   const d = OBJ.drag; if (!d) return false; OBJ.drag = null;
   if (d.moved){ const after = {...d.ch}; Object.assign(d.ch, d.o); tx(d.mode === 'mv' ? 'Déplacer le graphique' : 'Redimensionner le graphique', () => Object.assign(d.ch, after)); layout(); schedule(); }
   return true;
+}
+/* clic droit sur un graphique : modifier, changer de type, dupliquer, supprimer */
+function chartMenu(e, id){
+  const ch = chartById(id); if (!ch) return; OBJ.sel = id; renderObjects();
+  const ro = V.ro ? ' disabled' : '';
+  openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})},
+    `<div class="pop-list ctx"><button type="button" data-cc="edit"${ro}>Modifier le graphique…</button><hr><p class="pop-h">Type de graphique</p>${CHART_TYPES.map(([k, n]) => `<button type="button" data-ct="${k}" class="${ch.type === k ? 'on' : ''}"${ro}>${n}</button>`).join('')}<hr>
+    <button type="button" data-cc="dup"${ro}>Dupliquer</button><button type="button" data-cc="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
+    pp.onclick = ev => { const b = ev.target.closest('button'); if (!b || b.disabled) return; closePop();
+      if (b.dataset.ct){ tx('Type de graphique', () => { ch.type = b.dataset.ct; }); renderObjects(); return; }
+      if (b.dataset.cc === 'edit') return chartEditor(id);
+      if (b.dataset.cc === 'dup'){ const c = {...JSON.parse(JSON.stringify(ch)), id:uidS(), x:ch.x + 24, y:ch.y + 24}; tx('Dupliquer le graphique', () => { sh0().charts.push(c); }); OBJ.sel = c.id; layout(); schedule(); return; }
+      if (b.dataset.cc === 'del') deleteChart(id); };
+  }, 'menu');
 }
 function deleteChart(id){ const sh = sh0(); tx('Supprimer le graphique', () => { sh.charts = sh.charts.filter(c => c.id !== id); }); OBJ.sel = null; renderObjects(); }
 function chartEditor(id){
@@ -5052,7 +5070,7 @@ function wire(){
   addEventListener('mousemove', e => { if (onObjMove(e)) return; if (DRAG.mode || e.target.closest?.('#gView')) onGridMove(e); });
   addEventListener('mouseup', e => { if (onObjUp(e)) return; onGridUp(e); });
   view.addEventListener('dblclick', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); return chartEditor(o.dataset.obj); } onGridDbl(e); });
-  view.addEventListener('contextmenu', e => { if (e.target.closest('.g-obj')){ e.preventDefault(); return; } ctxMenu(e); });
+  view.addEventListener('contextmenu', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); chartMenu(e, o.dataset.obj); return; } ctxMenu(e); });
   view.addEventListener('click', e => { const u = e.target.closest('[data-unhide-c]'), w = e.target.closest('[data-unhide-r]'); if (u){ const sh = sh0(), c = +u.dataset.unhideC; tx('Afficher', () => sh.hc.delete(c)); } if (w){ const sh = sh0(), r = +w.dataset.unhideR; tx('Afficher', () => sh.hr.delete(r)); } });
   view.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey){ e.preventDefault(); setZoom(V.z * (e.deltaY < 0 ? 1.1 : 1 / 1.1)); } }, {passive:false});
   // tactile : un appui long = menu
