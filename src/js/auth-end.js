@@ -54,6 +54,7 @@ window.addEventListener('keydown', e => {
     me = u; startWatchP();
     Auth.verifying?.then(v => { if (me?.uid === v.uid && v.firstName){ me.firstName = v.firstName; me.lastName = v.lastName; } })
       .catch(async e => { if (isGone(e) && me?.uid === u.uid) kickOut(e); });
+    BioShare.sync(u.uid);
     if (Lock.get(u.uid)?.pin) return show('lock');
     return afterLogin(u);
   } catch(e){
