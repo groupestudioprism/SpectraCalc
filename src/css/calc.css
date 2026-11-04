@@ -206,3 +206,8 @@
 /* logo hexagonal : pas de cadre arrondi, une ombre qui suit la forme */
 .ap-brand svg{border-radius:0;box-shadow:none;filter:drop-shadow(0 12px 30px rgb(123 47 247 / .5))}
 .hm-brand svg,.ed-home svg{border-radius:0}
+
+.ce-tabs{margin-bottom:2px}.ce-f{max-height:min(62vh,520px);overflow:auto;padding-right:4px}.ce-f [data-pane]{display:grid;gap:10px}.ce-f [data-pane][hidden]{display:none}
+.ce-pals{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.ce-pals button{display:grid;gap:3px;justify-items:center;padding:6px 3px;border:1px solid var(--line);border-radius:9px;background:var(--panel);font-size:10.5px;color:var(--ink2)}.ce-pals button.on{border-color:var(--r-v);background:var(--accent-soft);color:var(--ink)}.ce-pals span{display:flex;height:10px;border-radius:5px;overflow:hidden;width:70%}.ce-pals i{flex:1}
+.ce-col span{display:flex;gap:8px;align-items:center}.ce-col input[type=color]{width:44px;height:28px;padding:0;border:1px solid var(--line);border-radius:7px;background:none}
+.ce-types{grid-template-columns:repeat(4,1fr)}
