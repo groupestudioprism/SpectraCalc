@@ -1,6 +1,6 @@
 /* SPECTRA Calc · service worker : l'app s'installe et se rouvre même avec une connexion instable.
    Pages : réseau d'abord (toujours la dernière version), copie de secours hors ligne. Polices et bibliothèques : copie locale. */
-const CACHE = 'spectra-calc-v2';
+const CACHE = 'spectra-calc-v3';
 const CORE = ['./', './index.html', './manifest.webmanifest', './assets/favicon.svg', './assets/spectra-calc-192.png', './assets/spectra-calc-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
