@@ -73,13 +73,17 @@ function compileFmt(nf){
   const main = sec[0], plain = main.replace(/"[^"]*"/g, '').replace(/\[[^\]]*\]/g, '').replace(/\\./g, '');
   if (nf === '@') f = {kind:'text'};
   else if (/[dmyhs]/i.test(plain) && !/[0#]/.test(plain)) f = {kind:'date', code:main.replace(/\[[^\]]*\]/g, '')};
+  else if (/[?#0]\s*\/\s*[?#0-9]/.test(plain)){
+    const fm = /(?:([#0?]+)\s)?([#0?]+)\s*\/\s*([?#0]+|\d+)/.exec(main.replace(/"[^"]*"/g, '')), lit = main.replace(/\[[^\]]*\]/g, '').replace(/["\\]/g, '');
+    f = {kind:'frac', whole:!!fm[1], den:/^\d+$/.test(fm[3]) ? +fm[3] : 0, maxd:/^\d+$/.test(fm[3]) ? 0 : Math.pow(10, fm[3].length) - 1, pre:lit.slice(0, lit.search(/[#0?]/)), post:lit.slice(lit.search(/[#0?]\s*\/\s*[?#0\d]+/) + fm[0].length)};
+  }
   else {
     const m = plain.match(/[#0][#0,\s ]*(?:\.([0#]+))?/);
     const lit = main.replace(/\[[^\]]*\]/g, '');
     const i0 = m ? lit.indexOf(m[0].trim()[0]) : -1;
     const sci = /E\+/i.test(plain);
-    f = {kind:'num', dec:m && m[1] ? m[1].length : 0, opt:m && m[1] ? (m[1].match(/#/g) || []).length : 0, group:m ? /[#0][,\s ][#0]/.test(m[0]) : false, pct:/%/.test(plain), sci,
-      pre:m ? lit.slice(0, Math.max(0, i0)).replace(/"/g, '').replace(/\\/g, '') : '', post:m ? lit.slice(i0 + m[0].trim().length).replace(/"/g, '').replace(/\\/g, '').replace(/^0+/, '').replace(/E\+0+/i, '') : '',
+    f = {kind:'num', dec:m && m[1] ? m[1].length : 0, opt:m && m[1] ? (m[1].match(/#/g) || []).length : 0, group:m ? /[#0][,\s ][#0]/.test(m[0]) : false, scale:m ? (((/^(,+)/.exec(lit.slice(i0 + m[0].trim().length)) || [])[1] || '').length || ((/[#0](,+)$/.exec(m[0].trim()) || [])[1] || '').length) : 0, pct:/%/.test(plain), sci,
+      pre:m ? lit.slice(0, Math.max(0, i0)).replace(/"/g, '').replace(/\\/g, '') : '', post:m ? lit.slice(i0 + m[0].trim().length).replace(/^,+/, '').replace(/"/g, '').replace(/\\/g, '').replace(/^0+/, '').replace(/E\+0+/i, '') : '',
       neg:sec[1] != null ? sec[1] : null, red:/\[(red|rouge)\]/i.test(sec[1] || ''), zero:sec[2] != null ? sec[2].replace(/"/g, '') : null};
     if (!m) f = {kind:'num', dec:0, opt:0, group:false, pct:false, pre:'', post:lit.replace(/"/g, ''), neg:null};
   }
@@ -131,8 +135,10 @@ function formatValue(v, nf){
   const f = compileFmt(nf);
   if (f.kind === 'text') return {t:fmtGeneral(v), a:'l'};
   if (f.kind === 'date'){ if (v < 0 || v > 2958465) return {t:'#'.repeat(8), a:'r'}; return {t:fmtDate(v, f.code), a:'r'}; }
+  if (f.kind === 'frac'){ const a = Math.abs(v), w = Math.floor(a); let fr = a - w, n = 0, d = 1; if (f.den){ d = f.den; n = Math.round(fr * d); } else { let best = 1e9; for (let dd = 1; dd <= f.maxd; dd++){ const nn = Math.round(fr * dd), e = Math.abs(fr - nn / dd); if (e < best - 1e-12){ best = e; n = nn; d = dd; } } } let ww = w; if (n === d){ ww++; n = 0; } if (!f.whole){ n += ww * d; ww = 0; } const g = gcd2(n, d) || 1; if (!f.den){ n /= g; d /= g; } const body = n === 0 && f.whole ? String(ww) : (f.whole && ww ? ww + ' ' : '') + n + '/' + d; return {t:(v < 0 ? '-' : '') + f.pre + body + f.post, a:'r'}; }
+  if (f.kind === 'frac'){ const a = Math.abs(v), w = Math.floor(a), fr = a - w; let n = 0, d = 1; if (f.den){ d = f.den; n = Math.round(fr * d); } else { let best = 1e9; for (let dd = 1; dd <= f.maxd; dd++){ const nn = Math.round(fr * dd), e = Math.abs(fr - nn / dd); if (e < best - 1e-12){ best = e; n = nn; d = dd; } } } let ww = w; if (n === d){ ww++; n = 0; } if (!f.whole){ n += ww * d; ww = 0; } if (!f.den){ const g = gcd2(n, d) || 1; n /= g; d /= g; } const body = n === 0 && f.whole ? String(ww) : (f.whole && ww ? ww + ' ' : '') + n + '/' + d; return {t:(v < 0 ? '-' : '') + f.pre + body + f.post, a:'r'}; }
   if (v === 0 && f.zero != null) return {t:f.zero.trim() || '', a:'r'};
-  let x = f.pct ? v * 100 : v; const neg = x < 0; if (neg && f.neg != null) x = -x;
+  let x = f.pct ? v * 100 : v; if (f.scale) x = x / Math.pow(1000, f.scale); const neg = x < 0; if (neg && f.neg != null) x = -x;
   let body = f.sci ? x.toExponential(f.dec).replace('.', ',').toUpperCase() : fmtNum(x, f.dec, f.group, f.opt);
   let t = f.pre + body + f.post + (f.pct && !/%/.test(f.post) ? '%' : '');
   if (f.pct) t = t.replace(/(\d)\s?%$/, '$1\u00a0%');
@@ -154,5 +160,5 @@ function editText(v, nf){
 const NFORMATS = [
   ['', 'Automatique', '1234,5'], ['#,##0.00', 'Nombre', '1 234,50'], ['#,##0', 'Nombre entier', '1 235'], ['#,##0.00 €', 'Euros', '1 234,50 €'], ['#,##0 €', 'Euros sans centimes', '1 235 €'],
   ['0%', 'Pourcentage', '12 %'], ['0.0%', 'Pourcentage (1 déc.)', '12,5 %'], ['dd/mm/yyyy', 'Date', '16/10/2026'], ['d mmmm yyyy', 'Date longue', '16 octobre 2026'], ['dddd d mmmm', 'Jour et date', 'vendredi 16 octobre'],
-  ['mmmm yyyy', 'Mois', 'octobre 2026'], ['hh:mm', 'Heure', '14:30'], ['[h]:mm', 'Durée', '37:30'], ['dd/mm/yyyy hh:mm', 'Date et heure', '16/10/2026 14:30'], ['0.00E+00', 'Scientifique', '1,23E+03'], ['$#,##0.00', 'Dollars', '$1 234,50'], ['@', 'Texte', 'abc'],
+  ['mmmm yyyy', 'Mois', 'octobre 2026'], ['# ?/?', 'Fraction', '1 1/2'], ['# ??/??', 'Fraction précise', '3 17/100'], ['0.0,"k"', 'Milliers (k)', '1,2 k'], ['0.0,,"M"', 'Millions (M)', '1,2 M'], ['#,##0.00 $', 'Dollars', '1 234,50 $'], ['#,##0.00 £', 'Livres', '1 234,50 £'], ['0 "kg"', 'Kilogrammes', '12 kg'], ['0.00 "m²"', 'Mètres carrés', '12,50 m²'], ['# ?/?', 'Fraction', '1 1/2'], ['# ??/??', 'Fraction précise', '3 17/100'], ['0.0,"k"', 'Milliers (k)', '1,2 k'], ['0.0,,"M"', 'Millions (M)', '1,2 M'], ['#,##0.00 $', 'Dollars', '1 234,50 $'], ['#,##0.00 £', 'Livres', '1 234,50 £'], ['0 "kg"', 'Kilogrammes', '12 kg'], ['0.00 "m²"', 'Mètres carrés', '12,50 m²'], ['hh:mm', 'Heure', '14:30'], ['[h]:mm', 'Durée', '37:30'], ['dd/mm/yyyy hh:mm', 'Date et heure', '16/10/2026 14:30'], ['0.00E+00', 'Scientifique', '1,23E+03'], ['$#,##0.00', 'Dollars', '$1 234,50'], ['@', 'Texte', 'abc'],
 ];

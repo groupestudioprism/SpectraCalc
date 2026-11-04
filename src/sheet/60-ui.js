@@ -301,7 +301,7 @@ function sortSel(asc, col){
   if (g.r1 === g.r2) return toast('Rien à trier ici');
   // en-tête détectée : la première ligne est du texte alors que la colonne contient des nombres, ou elle est en gras
   const first = WB.val(sh, g.r1, col ?? SEL.c), second = WB.val(sh, g.r1 + 1, col ?? SEL.c);
-  const hdr = sh.get(g.r1, SEL.c)?.s?.b || (typeof first === 'string' && typeof second !== 'string' && second != null) || sh.tables.some(t => parseRange(t.range)?.r1 === g.r1);
+  const hdr = sh.get(g.r1, SEL.c)?.s?.b || (typeof first === 'string' && typeof second !== 'string' && second != null) || sh.tables.some(t => parseRange(t.range)?.r1 === g.r1) || range(g.c1, g.c2).some(c => typeof WB.val(sh, g.r1, c) === 'string' && typeof WB.val(sh, g.r1 + 1, c) === 'number');
   const r0 = hdr ? g.r1 + 1 : g.r1, key = (col ?? SEL.c);
   sortRows(sh, {r1:r0, c1:g.c1, r2:g.r2, c2:g.c2}, [{c:key, asc}]);
   toast(`Trié ${asc ? 'de A à Z' : 'de Z à A'} par la colonne ${colName(key)}${hdr ? ' (en-tête conservée)' : ''}`);
