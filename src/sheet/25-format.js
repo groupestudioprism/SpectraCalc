@@ -72,7 +72,7 @@ function compileFmt(nf){
   const sec = String(nf).split(/;(?=(?:[^"]*"[^"]*")*[^"]*$)/);
   const main = sec[0], plain = main.replace(/"[^"]*"/g, '').replace(/\[[^\]]*\]/g, '').replace(/\\./g, '');
   if (nf === '@') f = {kind:'text'};
-  else if (/[dmyhs]/i.test(plain) && !/[0#]/.test(plain)) f = {kind:'date', code:main.replace(/\[[^\]]*\]/g, '')};
+  else if (/[dmyhs]/i.test(plain) && !/[0#]/.test(plain)) f = {kind:'date', code:main.replace(/\[(?![hms]+\])[^\]]*\]/gi, '')};
   else if (/[?#0]\s*\/\s*[?#0-9]/.test(plain)){
     const fm = /(?:([#0?]+)\s)?([#0?]+)\s*\/\s*([?#0]+|\d+)/.exec(main.replace(/"[^"]*"/g, '')), lit = main.replace(/\[[^\]]*\]/g, '').replace(/["\\]/g, '');
     f = {kind:'frac', whole:!!fm[1], den:/^\d+$/.test(fm[3]) ? +fm[3] : 0, maxd:/^\d+$/.test(fm[3]) ? 0 : Math.pow(10, fm[3].length) - 1, pre:lit.slice(0, lit.search(/[#0?]/)), post:lit.slice(lit.search(/[#0?]\s*\/\s*[?#0\d]+/) + fm[0].length)};
@@ -104,9 +104,10 @@ function fmtGeneral(v){
 function fmtDate(v, code){
   const t = fromSerial(v), p2 = x => String(x).padStart(2, '0');
   const hasAmPm = /am\/pm/i.test(code);
-  return code.replace(/"([^"]*)"|\\(.)|yyyy|yy|mmmmm|mmmm|mmm|mm|m|dddd|ddd|dd|d|hh|h|ss|s|am\/pm/gi, (tok, q, esc, off, str) => {
+  return code.replace(/"([^"]*)"|\\(.)|\[h+\]|\[m+\]|\[s+\]|yyyy|yy|mmmmm|mmmm|mmm|mm|m|dddd|ddd|dd|d|hh|h|ss|s|am\/pm/gi, (tok, q, esc, off, str) => {
     if (q != null) return q; if (esc != null) return esc;
     const lt = tok.toLowerCase();
+    if (lt[0] === '[' ){ const k = lt[1], n = k === 'h' ? Math.floor(v * 24 + 1e-9) : k === 'm' ? Math.floor(v * 1440 + 1e-9) : Math.floor(v * 86400 + 1e-9); return String(n).padStart(lt.length - 2, '0'); }
     // « m » après h ou avant s = minutes
     const before = str.slice(0, off).replace(/"[^"]*"/g, ''), after = str.slice(off + tok.length);
     const isMin = (lt === 'm' || lt === 'mm') && (/h+[^dmy]*$/i.test(before) || /^[^dmy]*s/i.test(after));
@@ -117,7 +118,7 @@ function fmtDate(v, code){
       case 'mm': return isMin ? p2(t.mi) : p2(t.m); case 'm': return isMin ? t.mi : t.m;
       case 'dddd': return DAYS[t.wd]; case 'ddd': return DAYS[t.wd].slice(0, 3) + '.';
       case 'dd': return p2(t.d); case 'd': return t.d;
-      case 'hh': return p2(hasAmPm ? (t.hh % 12 || 12) : (v >= 1 && /\[h\]/.test(code) ? Math.floor(v * 24) : t.hh)); case 'h': return hasAmPm ? (t.hh % 12 || 12) : t.hh;
+      case 'hh': return p2(hasAmPm ? (t.hh % 12 || 12) : t.hh); case 'h': return hasAmPm ? (t.hh % 12 || 12) : t.hh;
       case 'ss': return p2(t.ss); case 's': return t.ss;
       case 'am/pm': return t.hh < 12 ? 'AM' : 'PM';
     }

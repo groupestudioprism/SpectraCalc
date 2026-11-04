@@ -34,7 +34,7 @@ const SC_TEMPLATES = [
     sty(s, `C6:E${e + 1}`, {nf:EUR}); sty(s, 'C9:E9', {nf:EUR});
     s.tables.push({range:'B5:E9', total:true}, {range:`B11:E${e + 1}`, total:true, color:'#F2387A'});
     s.cf.push({range:'E6:E8', type:'neg', style:{fc:'#D92D20'}}, {range:`E12:E${e}`, type:'neg', style:{fc:'#D92D20', bg:'#FFE4E4'}}, {range:`D12:D${e}`, type:'bar', color:'#F2387A'});
-    s.charts.push({id:'c1', type:'donut', range:`B11:B${e};D11:D${e}`, title:'Où va l\'argent (réel)', x:600, y:300, w:380, h:300, legend:true});
+    s.charts.push({id:'c1', type:'donut', range:`B11:B${e};D11:D${e}`, title:'Où va l\'argent (réel)', x:600, y:372, w:380, h:300, legend:true});
     W(s, {A:24, B:190, C:110, D:110, E:110, F:30, G:190}); s.rh = {1:34};
     return wbJSON(`Budget ${dm}${m} ${y}`, 'spectra', [s]);
   }},
@@ -146,7 +146,7 @@ const SC_TEMPLATES = [
     W(s, {A:110, B:110, C:110, D:140, E:120, F:100});
     put(d, 'B2', [[{r:`Ventes ${new Date().getFullYear()}`, s:{b:1, fs:22}}], [{r:'Tableau de bord mis à jour automatiquement depuis la feuille « Ventes »', s:SUB}]]);
     put(d, 'B5', [[{r:'Chiffre d\'affaires', s:LBL}, null, {r:'Meilleur mois', s:LBL}, null, {r:'Moyenne mensuelle', s:LBL}], [{r:'=Ventes!E14', s:{b:1, fs:20, nf:EUR0}}, null, {r:'=INDEX(Ventes!A2:A13;EQUIV(MAX(Ventes!E2:E13);Ventes!E2:E13;0))', s:{b:1, fs:20}}, null, {r:'=MOYENNE(Ventes!E2:E13)', s:{b:1, fs:20, nf:EUR0}}]]);
-    d.charts.push({id:'c1', type:'line', range:'A1:D13', sheet:'Ventes', title:'Ventes par mois et par activité', x:24, y:150, w:600, h:330, legend:true}, {id:'c2', type:'donut', range:'A1:D14', sheet:'Ventes', title:'Répartition par activité', x:640, y:150, w:360, h:330, legend:true, by:'rows', pick:'last'});
+    d.charts.push({id:'c1', type:'line', range:'A1:D13', sheet:'Ventes', title:'Ventes par mois et par activité', x:24, y:214, w:600, h:330, legend:true}, {id:'c2', type:'donut', range:'A1:D14', sheet:'Ventes', title:'Répartition par activité', x:640, y:214, w:360, h:330, legend:true, by:'rows', pick:'last'});
     W(d, {A:24, B:180, C:24, D:180, E:24, F:180});
     return wbJSON('Tableau de bord des ventes', 'minuit', [d, s]);
   }},
