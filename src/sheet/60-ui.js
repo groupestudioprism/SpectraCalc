@@ -105,6 +105,9 @@ const TB_IC = {
   theme:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg>',
   tpl:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
   plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  analyse:'<svg viewBox="0 0 24 24"><path d="M4 20h16M6 16v-4M11 16V6M16 16v-7"/><circle cx="18.5" cy="5.5" r="2"/></svg>',
+  shapes:'<svg viewBox="0 0 24 24"><rect x="3.5" y="11" width="9" height="9" rx="1.5"/><circle cx="15.5" cy="8.5" r="5"/></svg>',
+  style:'<svg viewBox="0 0 24 24"><path d="M12 3 4 12a8 8 0 0 0 16 0z"/><path d="M8.5 14.5a4 4 0 0 0 3.5 3"/></svg>',
 };
 function buildToolbar(){
   const b = (k, title, ic, cls = '') => `<button type="button" class="tb ${cls}" data-t="${k}" title="${title}" aria-label="${title}">${ic}</button>`;
@@ -114,7 +117,7 @@ function buildToolbar(){
       <button type="button" class="tb tcol" data-t="fc" title="Couleur du texte" aria-label="Couleur du texte">${IC.color}<i id="tFc"></i></button><button type="button" class="tb tcol" data-t="bg" title="Couleur de remplissage" aria-label="Couleur de remplissage">${TB_IC.fill}<i id="tBg"></i></button></div>
     <div class="tg">${b('border', 'Bordures', TB_IC.border)}${b('align', 'Alignement', IC.al)}${b('merge', 'Fusionner et centrer', TB_IC.merge, 'hide-s')}${b('wrap', 'Renvoyer à la ligne', TB_IC.wrap, 'hide-m')}</div>
     <div class="tg">${b('sum', 'Somme automatique (Alt + =)', TB_IC.sigma)}${b('sort', 'Trier de A à Z', TB_IC.sortA, 'hide-s')}${b('filter', 'Filtrer', TB_IC.filter, 'hide-s')}<button type="button" class="tb tb-magic" data-t="magic" title="Embellir : transforme la sélection en beau tableau" aria-label="Embellir">${TB_IC.magic}<span class="hide-m">Embellir</span></button></div>`;
-  const R = [['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
+  const R = [['style', 'Style', TB_IC.style, '#F2387A'], ['shapes', 'Formes', TB_IC.shapes, '#12B5E5'], ['analyse', 'Analyse', TB_IC.analyse, '#2FBF71'], ['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
   g$('edRail').innerHTML = R.map(([k, n, ic, c]) => `<button type="button" class="ray" data-panel="${k}" style="--ray:${c}" aria-pressed="false">${ic}<span>${n}</span></button>`).join('');
 }
 function refreshToolbar(){
@@ -343,7 +346,7 @@ function filterPop(anchor, c){
   }, 'wide');
 }
 /* listes déroulantes (validation) */
-function dvAtCell(sh, r, c){ return sh.dv.find(d => { const g = parseRange(d.range); return g && r >= g.r1 && r <= g.r2 && c >= g.c1 && c <= g.c2; }); }
+function dvAtCell(sh, r, c){ return sh.dv.find(d => { if (d.type && d.type !== 'list') return false; const g = parseRange(d.range); return g && r >= g.r1 && r <= g.r2 && c >= g.c1 && c <= g.c2; }); }
 function dvItems(d){ if (d.src){ const g = parseRange(d.src); const sh = d.srcSheet ? WB.byName(d.srcSheet) : sh0(); if (g && sh){ const out = []; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 500); r++) for (let c = g.c1; c <= g.c2; c++){ const v = WB.val(sh, r, c); if (v != null && v !== '') out.push(formatValue(v, sh.get(r, c)?.s?.nf).t); } return [...new Set(out)]; } } return d.list || []; }
 function dvPop(btn){
   const [r, c] = btn.dataset.dv.split(',').map(Number), sh = sh0(), d = dvAtCell(sh, r, c); if (!d) return;

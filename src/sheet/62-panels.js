@@ -5,10 +5,10 @@ function openPanel(k){
   panel = k; const ray = g$('edRail').querySelector(`[data-panel="${k}"]`);
   g$('edRail').querySelectorAll('.ray').forEach(r => r.setAttribute('aria-pressed', r === ray ? 'true' : 'false'));
   g$('edPanel').style.setProperty('--ray', ray?.style.getPropertyValue('--ray') || 'var(--r-v)');
-  g$('edPanel').hidden = false; renderPanel();
+  g$('edPanel').classList.toggle('side', ['shapes', 'style', 'analyse'].includes(k)); g$('edPanel').hidden = false; renderPanel();
 }
-function panelRefresh(){ if (panel === 'theme' || panel === 'cf') renderPanel(); }
-const PANEL_T = {insert:['Insérer', 'Graphiques, fonctions, lignes, listes déroulantes'], data:['Données', 'Trier, filtrer, nettoyer, figer'], cf:['Couleurs automatiques', 'Les cellules se colorent selon leurs valeurs'], theme:['Thème', 'Couleurs et police de tout le classeur'], templates:['Modèles', 'Repartir d\'un modèle, ou enregistrer le vôtre']};
+function panelRefresh(){ if (panel === 'theme' || panel === 'cf' || panel === 'style' || panel === 'shapes' || panel === 'analyse') renderPanel(); }
+const PANEL_T = {analyse:['Analyse', 'Tableau croisé, mini-graphiques, protection, impression'], shapes:['Formes et images', 'Formes, lignes, texte, icônes, images'], style:['Style', 'Styles de cellule, texte, dégradés, bordures'], insert:['Insérer', 'Graphiques, fonctions, lignes, listes déroulantes'], data:['Données', 'Trier, filtrer, nettoyer, figer'], cf:['Couleurs automatiques', 'Les cellules se colorent selon leurs valeurs'], theme:['Thème', 'Couleurs et police de tout le classeur'], templates:['Modèles', 'Repartir d\'un modèle, ou enregistrer le vôtre']};
 function renderPanel(){
   const [t, sub] = PANEL_T[panel] || ['', '']; g$('edPanelTitle').textContent = t; g$('edPanelSub').textContent = sub;
   const body = g$('edPanelBody'); const sel = rangeA1({...SEL, r2:Math.min(SEL.r2, Math.max(sh0().used().r, SEL.r1)), c2:Math.min(SEL.c2, Math.max(sh0().used().c, SEL.c1))});
@@ -21,6 +21,9 @@ function renderPanel(){
         <button type="button" data-ins="fn"><b class="pn-fx">ƒx</b>Fonction…</button><button type="button" data-ins="chk"><b class="pn-fx">☑</b>Cases à cocher</button><button type="button" data-ins="dv"><b class="pn-fx">▾</b>Liste déroulante…</button>
         <button type="button" data-ins="note"><b class="pn-fx">✎</b>Note</button><button type="button" data-ins="date"><b class="pn-fx">📅</b>Date du jour</button><button type="button" data-ins="seq"><b class="pn-fx">1·2·3</b>Numéroter</button><button type="button" data-ins="name"><b class="pn-fx">⌘</b>Nommer la plage</button></div>
       <p class="pn-h">Formules toutes prêtes <small>sur la sélection</small></p><div class="pn-acts">${[['SOMME', 'Total'], ['MOYENNE', 'Moyenne'], ['NB', 'Compter'], ['MAX', 'Maximum'], ['MIN', 'Minimum']].map(([f, n]) => `<button type="button" data-ins-sum="${f}"><b class="pn-fx">Σ</b>${n}</button>`).join('')}<button type="button" data-ins="pct"><b class="pn-fx">%</b>Part du total</button><button type="button" data-ins="evo"><b class="pn-fx">↗</b>Évolution en %</button><button type="button" data-ins="cumul"><b class="pn-fx">∑</b>Cumul</button></div>`;
+  } else if (panel === 'style'){ body.innerHTML = styleHTML();
+  } else if (panel === 'shapes'){ body.innerHTML = shapesPanelHTML();
+  } else if (panel === 'analyse'){ body.innerHTML = analyseHTML();
   } else if (panel === 'data'){
     const sh = sh0();
     body.innerHTML = `<div class="pn-acts">
@@ -63,6 +66,9 @@ function cfLabel(r){ return ({scale:'Dégradé', bar:'Barres de données', icons
 function tableMini(c, line){ const h = line ? `border-bottom:2px solid var(--ac,#6D3BFF)` : `background:${c}`; return `<span class="tm"><i style="${line ? 'border-bottom:2px solid #6D3BFF;background:#fff' : `background:${c}`}"></i>${[0, 1, 2, 3].map(i => `<i style="background:${line ? '#fff' : i % 2 ? '#fff' : mix(c, '#ffffff', .88)};${line ? 'border-bottom:1px solid #ddd' : ''}"></i>`).join('')}</span>`; }
 function onPanelClick(e){
   const t = e.target;
+  if (panel === 'shapes' && onShapesPanelClick(e)) return;
+  const an = t.closest('[data-an]'); if (an) return analyseAction(an.dataset.an);
+  const sty = t.closest('[data-sty]'); if (sty) return styleAction(sty.dataset.sty, sty);
   const ich = t.closest('[data-ins-ch]'); if (ich) return addChart(ich.dataset.insCh);
   const ins = t.closest('[data-ins]'); if (ins) return insertAction(ins.dataset.ins);
   const isum = t.closest('[data-ins-sum]'); if (isum) return autoSum(isum.dataset.insSum);
@@ -76,6 +82,7 @@ function onPanelClick(e){
   if (t.closest('[data-tpl-pub]')) return window.SWHome?.publishCurrent?.();
 }
 function onPanelInput(e){
+  if (panel === 'style') onStyleInput(e); if (panel === 'shapes' && onShapesPanelInput(e)) return;
   if (e.target.id === 'thAc'){ WB.theme = {...WB.theme, ac:e.target.value}; e.target.nextElementSibling.textContent = e.target.value; schedule(); renderObjects(); emitChange(); }
   if (e.target.id === 'thFont'){ WB.theme = {...WB.theme, fb:e.target.value}; ensureFont(e.target.value); applyThemeCss(); schedule(); emitChange(); }
 }

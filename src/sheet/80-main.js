@@ -70,12 +70,13 @@ function filePop(anchor){
     <button type="button" data-f="tpl"><b>Enregistrer comme modèle</b><span>Dans vos modèles personnels</span></button>
     <button type="button" data-f="publish"><b>Publier dans la Communauté</b><span>Proposez ce classeur comme modèle public, vérifié par Studio Prism</span></button>
     <hr><button type="button" data-f="print"><b>Imprimer</b><span>La feuille active</span></button>
+    <button type="button" data-f="page"><b>Mise en page…</b><span>Orientation, marges, zone, en-têtes, échelle</span></button>
     <button type="button" data-f="zoom"><b>Zoom</b><span>${Math.round(V.z * 100)} % · Ctrl + molette</span></button>
     <button type="button" data-f="keys"><b>Raccourcis clavier</b><span>Saisie, formules, sélection</span></button>
     <hr><button type="button" data-f="home"><b>Retour à l'accueil</b><span>Vos classeurs et modèles</span></button></div>`, p => {
     p.onclick = e => { const b = e.target.closest('[data-f]'); if (!b) return; closePop(); const k = b.dataset.f;
       if (k === 'new') window.SWHome?.show('templates'); else if (k === 'dup') window.SWHome?.duplicateCurrent(); else if (k === 'import') g$('homeFile').click(); else if (k === 'ins') g$('edInsFile').click();
-      else if (k === 'share') window.SWShareCurrent?.(); else if (k === 'tpl') saveTplDlg(); else if (k === 'publish') window.SWHome?.publishCurrent?.(); else if (k === 'print') printSheet(false); else if (k === 'keys') shortcutsDlg(); else if (k === 'home') window.SWHome?.show('home');
+      else if (k === 'share') window.SWShareCurrent?.(); else if (k === 'tpl') saveTplDlg(); else if (k === 'publish') window.SWHome?.publishCurrent?.(); else if (k === 'print') printSheet(false); else if (k === 'page') pageDlg(); else if (k === 'keys') shortcutsDlg(); else if (k === 'home') window.SWHome?.show('home');
       else if (k === 'zoom') zoomPop(anchor); };
   }, 'menu');
 }
@@ -112,6 +113,7 @@ function globalKeys(e){
   }
   if (mod && lk === 'p'){ e.preventDefault(); return printSheet(false); }
   if (mod && lk === 's'){ e.preventDefault(); window.SWHome?.flush?.(); return toast('Enregistré automatiquement'); }
+  if (onShapeKey(e)) return;
   if (OBJ.sel && (k === 'Delete' || k === 'Backspace') && document.activeElement === g$('grid') && !EDIT.on){ e.preventDefault(); return deleteChart(OBJ.sel); }
   if (!g$('spectre').hidden || !g$('apDlg').hidden || !g$('findBar').hidden && g$('findBar').contains(document.activeElement)) return;
   const ae = document.activeElement; if (ae && ae !== document.body && ae !== g$('grid') && !g$('grid').contains(ae) && ae !== g$('fxIn')) return;
@@ -122,11 +124,11 @@ function wire(){
   buildToolbar();
   const view = g$('gView'), sc = g$('gScroll');
   sc.addEventListener('scroll', () => { schedule(); if (OBJ.sel) placeObjBar(); }, {passive:true});
-  view.addEventListener('mousedown', e => { if (onObjDown(e)) return; if (OBJ.sel && !e.target.closest('.g-obj')){ OBJ.sel = null; renderObjects(); } onGridDown(e); });
+  view.addEventListener('mousedown', e => { if (onObjDown(e)) return; if (SHP.sel && !e.target.closest('.g-shp')){ SHP.sel = null; renderObjects(); } if (OBJ.sel && !e.target.closest('.g-obj')){ OBJ.sel = null; renderObjects(); } onGridDown(e); });
   addEventListener('mousemove', e => { if (onObjMove(e)) return; if (DRAG.mode || e.target.closest?.('#gView')) onGridMove(e); });
   addEventListener('mouseup', e => { if (onObjUp(e)) return; onGridUp(e); });
-  view.addEventListener('dblclick', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); return chartEditor(o.dataset.obj); } onGridDbl(e); });
-  view.addEventListener('contextmenu', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); chartMenu(e, o.dataset.obj); return; } ctxMenu(e); });
+  view.addEventListener('dblclick', e => { const sp = e.target.closest('.g-shp'); if (sp){ e.preventDefault(); return shapeEditText(sp.dataset.shp); } const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); return chartEditor(o.dataset.obj); } onGridDbl(e); });
+  view.addEventListener('contextmenu', e => { const sp = e.target.closest('.g-shp'); if (sp){ e.preventDefault(); return shapeMenu(e, sp.dataset.shp); } const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); chartMenu(e, o.dataset.obj); return; } ctxMenu(e); });
   view.addEventListener('click', e => { const u = e.target.closest('[data-unhide-c]'), w = e.target.closest('[data-unhide-r]'); if (u){ const sh = sh0(), c = +u.dataset.unhideC; tx('Afficher', () => sh.hc.delete(c)); } if (w){ const sh = sh0(), r = +w.dataset.unhideR; tx('Afficher', () => sh.hr.delete(r)); } });
   view.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey){ e.preventDefault(); setZoom(V.z * (e.deltaY < 0 ? 1.1 : 1 / 1.1)); } }, {passive:false});
   // tactile : un appui long = menu
@@ -197,7 +199,7 @@ function wire(){
   addEventListener('resize', debounce(() => { if (!g$('app').hidden){ layout(); schedule(); } }, 120));
   // glisser un fichier sur la grille : ajout de feuilles
   g$('grid').addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) e.preventDefault(); });
-  g$('grid').addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (!f) return; e.preventDefault(); insertFileSheets(f); });
+  g$('grid').addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (!f) return; e.preventDefault(); if (/^image\//.test(f.type)) return importImage(f); insertFileSheets(f); });
   // l'appli redevient visible : remise en page
   new MutationObserver(() => { if (!g$('app').hidden){ layout(); schedule(); g$('grid').focus({preventScroll:true}); } }).observe(g$('app'), {attributes:true, attributeFilter:['hidden']});
 }

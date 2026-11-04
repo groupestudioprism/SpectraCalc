@@ -8,6 +8,7 @@ function layout(){
   sh.calcAutoH();
   V.nr = Math.max(V.nr, u.r + 60, 120); V.nc = Math.max(V.nc, u.c + 8, 26);
   for (const ch of sh.charts){ const g = cellAtContent(ch.x + ch.w, ch.y + ch.h, true); if (g){ V.nr = Math.max(V.nr, g.r + 10); V.nc = Math.max(V.nc, g.c + 4); } }
+  for (const sp of sh.shapes){ const g = cellAtContent(sp.x + sp.w, sp.y + sp.h, true); if (g){ V.nr = Math.max(V.nr, g.r + 10); V.nc = Math.max(V.nc, g.c + 4); } }
   V.nr = Math.min(V.nr, MAXR); V.nc = Math.min(V.nc, MAXC);
   const cx = new Float64Array(V.nc + 1), ry = new Float64Array(V.nr + 1);
   for (let c = 0; c < V.nc; c++) cx[c + 1] = cx[c] + Math.round(sh.colW(c) * z);
@@ -112,14 +113,15 @@ function cfApply(sh, r, c, v){
 function cellCss(s, w, h){
   let css = '';
   if (!s) return css;
-  if (s.bg) css += `background:${s.bg};`;
+  if (s.grad && okCol(s.grad[0]) && okCol(s.grad[1])) css += `background:linear-gradient(${+s.grad[2] || 0}deg,${s.grad[0]},${s.grad[1]});`; else if (s.bg) css += `background:${s.bg};`;
+  if (s.sh) css += 'text-shadow:1px 1px 2px rgb(0 0 0 / .35);'; if (s.ls) css += `letter-spacing:${+s.ls || 0}px;`; if (s.tt) css += `text-transform:${s.tt === 'u' ? 'uppercase' : s.tt === 'l' ? 'lowercase' : 'capitalize'};`;
   if (s.fc) css += `color:${s.fc};`;
   if (s.b) css += 'font-weight:700;';
   if (s.i) css += 'font-style:italic;';
   if (s.u || s.st) css += `text-decoration:${s.u ? 'underline ' : ''}${s.st ? 'line-through' : ''};`;
   if (s.fs) css += `font-size:${(s.fs * 4 / 3 * V.z).toFixed(1)}px;`;
   if (s.ff){ ensureFont(s.ff); css += `font-family:${fontStack(s.ff).replace(/"/g, "'")};`; }
-  for (const [k, side] of [['bt', 'top'], ['br', 'right'], ['bb', 'bottom'], ['bl', 'left']]) if (s[k]){ const [wd, col] = String(s[k]).split(' '); css += `border-${side}:${wd || '1px'} ${/dash/.test(s[k]) ? 'dashed' : 'solid'} ${col || '#1A1726'};`; }
+  for (const [k, side] of [['bt', 'top'], ['br', 'right'], ['bb', 'bottom'], ['bl', 'left']]) if (s[k]){ const [wd, col, st] = String(s[k]).split(' '); css += `border-${side}:${wd || '1px'} ${st === 'dashed' || st === 'dotted' || st === 'double' ? st : 'solid'} ${col || '#1A1726'};`; }
   if (s.ind) css += `padding-left:${4 + s.ind * 12 * V.z}px;`;
   return css;
 }
@@ -136,29 +138,34 @@ function renderPane(cid, lnid, r1, r2, c1, c2, ox, oy){
   // fusions qui touchent la zone
   const skip = new Set(), mergesHere = [];
   for (const m of sh.merges){ if (m.r2 < r1 || m.r1 > r2 || m.c2 < c1 || m.c1 > c2) continue; mergesHere.push(m); for (let r = Math.max(m.r1, r1); r <= Math.min(m.r2, r2); r++) for (let c = Math.max(m.c1, c1); c <= Math.min(m.c2, c2); c++) skip.add(KEY(r, c)); }
-  const dvAt = dvIndex(sh);
+  const dvAt = dvIndex(sh), sparkAt = sparkIndex(sh);
   const one = (r, c, w, h, merged) => {
     const cell = sh.get(r, c), v = WB.val(sh, r, c);
     const ts = sh.tables.length ? tableStyleAt(sh, r, c) : null;
     const cf = sh.cf.length ? cfApply(sh, r, c, v) : null;
-    if (!cell && v == null && !ts && !cf && !dvAt.has(KEY(r, c))) return;
+    if (!cell && v == null && !ts && !cf && !dvAt.has(KEY(r, c)) && !sparkAt.has(KEY(r, c))) return;
     const s = cf || ts ? {...(ts || {}), ...(cell?.s || {}), ...(cf || {})} : cell?.s;
     const fv = formatValue(v, s?.nf);
     let txt = fv.t, ha = s?.ha || fv.a, cls = 'c';
-    if (s?.wrap) cls += ' w';
+    if (s?.wrap) cls += ' w'; if (s?.rot) cls += ' rt' + String(s.rot).replace('-', 'm');
     if (fv.err) cls += ' e';
     if (typeof v === 'string' && /^https?:\/\/\S+$/i.test(v)) cls += ' lk';
     let css = `left:${X(c)}px;top:${Y(r)}px;width:${w}px;height:${h}px;` + cellCss(s) + (fv.c ? `color:${fv.c};` : '');
     if (ha !== 'l') css += `justify-content:${ha === 'r' ? 'flex-end' : ha === 'c' ? 'center' : 'flex-start'};text-align:${ha === 'r' ? 'right' : ha === 'c' ? 'center' : 'left'};`;
     if (s?.va) css += `align-items:${s.va === 't' ? 'flex-start' : s.va === 'm' ? 'center' : 'flex-end'};`; else if (s?.wrap) css += 'align-items:flex-start;';
     // le texte déborde sur les cellules vides de droite
-    if (!merged && !s?.wrap && !s?.bg && typeof v === 'string' && ha === 'l' && txt){
+    if (!merged && !s?.wrap && !s?.bg && !s?.grad && !s?.rot && typeof v === 'string' && ha === 'l' && txt){
       let ww = w, cc = c + 1; while (cc <= c2 + 6 && cc < V.nc){ if (WB.val(sh, r, cc) != null || sh.mergeAt(r, cc)) break; ww += colW(cc); cc++; if (ww > 2000) break; }
       if (ww > w){ css = css.replace(`width:${w}px`, `width:${ww}px`); cls += ' ov'; }
     }
+    if (s?.shr && !s.wrap && typeof v !== 'boolean' && txt){ const tw = measureText(txt, s) * V.z; if (tw > w - 10) css += `font-size:${Math.max(6, ((s.fs || 10) * 4 / 3 * V.z) * (w - 10) / tw).toFixed(1)}px;`; }
     if (s?.chk || (typeof v === 'boolean' && s?.nf === 'chk')) txt = `<span class="cb${v === true ? ' on' : ''}" data-cb="${r},${c}"></span>`;
     else txt = escH(txt);
+    if (V.showF && cell?.raw && String(cell.raw)[0] === '=') txt = escH(cell.raw);
     let extra = '';
+    const spk = sparkAt.get(KEY(r, c)); if (spk){ const sv = sparkSVG(spk, sh, Math.max(20, w - 8), Math.max(12, h - 6)); if (sv) extra += `<span class="spkw">${sv}</span>`; }
+    if (V.bad?.has(KEY(r, c))) cls += ' bad';
+    if (sh.prot?.on && r === SEL.r && c === SEL.c && !cell?.s?.ul && false) extra += '';
     if (s?._bar != null) extra += `<b class="dbar" style="width:${(s._bar * 100).toFixed(1)}%;background:linear-gradient(90deg,${s._barc},${mix(s._barc, '#ffffff', .55)})"></b>`;
     if (s?._icon) extra += `<em class="ico" style="color:${s._iconc}">${s._icon}</em>`;
     if (cell?.note) extra += '<u class="nt"></u>';
@@ -173,7 +180,7 @@ function renderPane(cid, lnid, r1, r2, c1, c2, ox, oy){
   }
   g$(cid).innerHTML = cells.join('');
 }
-function dvIndex(sh){ const s = new Set(); for (const d of sh.dv){ const g = parseRange(d.range); if (!g) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 5000); r++) for (let c = g.c1; c <= g.c2; c++) s.add(KEY(r, c)); } return s; }
+function dvIndex(sh){ const s = new Set(); for (const d of sh.dv){ if (d.type && d.type !== 'list') continue; const g = parseRange(d.range); if (!g) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 5000); r++) for (let c = g.c1; c <= g.c2; c++) s.add(KEY(r, c)); } return s; }
 function render(){
   if (!g$('gView') || g$('app').hidden) return;
   const sc = g$('gScroll'); V.sx = sc.scrollLeft; V.sy = sc.scrollTop;

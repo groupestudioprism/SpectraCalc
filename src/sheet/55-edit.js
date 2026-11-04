@@ -77,6 +77,7 @@ function commitEdit(dr = 1, dc = 0){
     try { parseFormula(raw.slice(1)); }
     catch(e){ toast('Formule incomplète ou incorrecte : vérifiez les parenthèses et les « ; »'); edEl().focus(); return false; }
   }
+  if (raw !== EDIT.orig && !EDIT.fillAll && !dvGuard(sh, EDIT.r, EDIT.c, raw)){ edEl().focus(); return false; }
   closeEdit();
   if (WB.sh !== sh){ WB.active = WB.sheets.indexOf(sh); layout(); renderTabs(); }
   if (raw !== EDIT.orig){
@@ -162,6 +163,7 @@ function placeFloat(box){
 const DRAG = {mode:'', x:0, y:0};
 function gvXY(e){ const r = g$('gView').getBoundingClientRect(); return {x:e.clientX - r.left, y:e.clientY - r.top}; }
 function onGridDown(e){
+  if (V.bad){ V.bad = null; schedule(); }
   if (e.button === 2) { const p = gvXY(e); if (p.x > V.hw && p.y > V.hh){ const h = cellAt(p.x, p.y); if (!inSel(h.r, h.c) && !EDIT.on) selectCell(h.r, h.c); } return; }
   if (e.button !== 0) return;
   const t = e.target;
@@ -216,7 +218,7 @@ function onGridMove(e){
   }
 }
 function onGridUp(){
-  if (!DRAG.mode) return; const m = DRAG.mode; DRAG.mode = ''; stopAutoScroll(); g$('gTip').hidden = true;
+  if (!DRAG.mode) return; const m = DRAG.mode; DRAG.mode = ''; if (PAINT.on && m === 'sel') setTimeout(paintApply, 0); stopAutoScroll(); g$('gTip').hidden = true;
   if (m === 'cw' || m === 'rh'){ tx(m === 'cw' ? 'Largeur de colonne' : 'Hauteur de ligne', () => {}); afterChange(); return; }
   if (m === 'fill' && FILLP.box){ const box = FILLP.box; FILLP.box = null; fillOp(DRAG.src, box); return; }
   FILLP.box = null; renderSel();
@@ -307,6 +309,10 @@ function onGridKey(e){
   if (mod && lk === 'b'){ e.preventDefault(); return toggleStyle('b'); }
   if (mod && lk === 'i'){ e.preventDefault(); return toggleStyle('i'); }
   if (mod && lk === 'u'){ e.preventDefault(); return toggleStyle('u'); }
+  if (mod && (k === '`' || k === '²')){ e.preventDefault(); return toggleFormulas(); }
+  if (mod && k === '5'){ e.preventDefault(); return toggleStyle('st'); }
+  if (mod && e.shiftKey && lk === 'c'){ e.preventDefault(); PAINT.s = cloneS(sh0().get(SEL.r, SEL.c)?.s) || null; PAINT.on = false; PAINT.kb = true; return toast('Format copié : Ctrl + Maj + V pour l\'appliquer'); }
+  if (mod && e.shiftKey && lk === 'v' && PAINT.kb){ e.preventDefault(); PAINT.on = true; return paintApply(); }
   if (mod && lk === 'd'){ e.preventDefault(); return fillDir(1, 0); }
   if (mod && lk === 'r'){ e.preventDefault(); return fillDir(0, 1); }
   if (mod && lk === 'f'){ e.preventDefault(); return openFind(false); }
@@ -460,6 +466,7 @@ function onCopy(e, cut){
 function onPaste(e){
   if (g$('app').hidden || EDIT.on || V.ro) return; const a = document.activeElement; if (a && a !== g$('grid') && a !== document.body) return;
   e.preventDefault();
+  const imgf = [...(e.clipboardData.files || [])].find(f => /^image\//.test(f.type)); if (imgf) return importImage(imgf);
   const text = e.clipboardData.getData('text/plain'), html = e.clipboardData.getData('text/html');
   if (CLIP.cells && text.replace(/\r/g, '') === CLIP.text.replace(/\r/g, '')) return pasteInternal(e.shiftKey ? 'values' : 'all');
   let rows = null;

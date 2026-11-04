@@ -195,7 +195,7 @@ function renderObjects(){
     if (el.dataset.sig !== sig){ el.dataset.sig = sig; el.querySelector('.go-in').innerHTML = chartSVG(ch, ch.w, ch.h); }
   }
   layer.querySelectorAll('.g-obj').forEach(el => { if (!keep.has(el.dataset.obj)) el.remove(); });
-  placeObjBar();
+  renderShapes(); placeObjBar();
 }
 function addChart(type, rangeStr){
   if (V.ro) return; const sh = sh0();
@@ -225,15 +225,17 @@ function chartIcon(k){ return {col:'<svg viewBox="0 0 24 24"><path d="M5 20V11M1
   combo:'<svg viewBox="0 0 24 24"><path d="M5 20v-7M10 20V9M15 20v-5M20 20v-8"/><path d="m3 9 6-4 6 4 6-5"/></svg>', radar:'<svg viewBox="0 0 24 24"><path d="m12 3 8.5 6.2-3.2 10H6.7l-3.2-10z"/><path d="m12 8 4 3-1.5 5h-5L8 11z"/></svg>', bubble:'<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><circle cx="16" cy="9" r="3"/><circle cx="17" cy="17" r="2"/></svg>',
   waterfall:'<svg viewBox="0 0 24 24"><path d="M4 12h4v8H4zM10 6h4v6h-4zM16 6h4v10h-4z"/></svg>', funnel:'<svg viewBox="0 0 24 24"><path d="M3 5h18l-3 5H6zM7 12h10l-2 4H9zM10 18h4v2h-4z"/></svg>', gauge:'<svg viewBox="0 0 24 24"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="m12 17 4-6"/></svg>', histo:'<svg viewBox="0 0 24 24"><path d="M4 20v-6h4v6M8 20V6h4v14M12 20V9h4v11M16 20v-5h4v5"/></svg>'}[k] || ''; }
 function onObjDown(e){
+  if (onShapeDown(e)) return true;
   const el = e.target.closest('.g-obj'); if (!el) return false;
   e.preventDefault(); e.stopPropagation(); if (EDIT.on) commitEdit(0, 0);
   const ch = chartById(el.dataset.obj); if (!ch) return true;
-  OBJ.sel = ch.id; renderObjects(); g$('grid').focus({preventScroll:true});
+  OBJ.sel = ch.id; SHP.sel = null; renderObjects(); g$('grid').focus({preventScroll:true});
   if (V.ro) return true;
   OBJ.drag = {mode:e.target.dataset.rs ? 'rs' : 'mv', x:e.clientX, y:e.clientY, o:{...ch}, ch, moved:false};
   return true;
 }
 function onObjMove(e){
+  if (onShapeMove(e)) return true;
   const d = OBJ.drag; if (!d) return false;
   const dx = (e.clientX - d.x) / V.z, dy = (e.clientY - d.y) / V.z; if (Math.abs(dx) + Math.abs(dy) > 2) d.moved = true;
   if (d.mode === 'mv'){ d.ch.x = Math.max(0, Math.round(d.o.x + dx)); d.ch.y = Math.max(0, Math.round(d.o.y + dy)); }
@@ -241,6 +243,7 @@ function onObjMove(e){
   renderObjects(); return true;
 }
 function onObjUp(){
+  if (onShapeUp()) return true;
   const d = OBJ.drag; if (!d) return false; OBJ.drag = null;
   if (d.moved){ const after = {...d.ch}; Object.assign(d.ch, d.o); tx(d.mode === 'mv' ? 'Déplacer le graphique' : 'Redimensionner le graphique', () => Object.assign(d.ch, after)); layout(); schedule(); }
   return true;
@@ -251,11 +254,12 @@ function chartMenu(e, id){
   const ro = V.ro ? ' disabled' : '';
   openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})},
     `<div class="pop-list ctx"><button type="button" data-cc="edit"${ro}>Modifier le graphique…</button><hr><p class="pop-h">Type de graphique</p>${CHART_TYPES.slice(0, 8).map(([k, n]) => `<button type="button" data-ct="${k}" class="${ch.type === k ? 'on' : ''}"${ro}>${n}</button>`).join('')}<hr>
-    <button type="button" data-cc="dup"${ro}>Dupliquer</button><button type="button" data-cc="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
+    <button type="button" data-cc="dup"${ro}>Dupliquer</button><button type="button" data-cc="png">Télécharger en image (PNG)</button><button type="button" data-cc="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
     pp.onclick = ev => { const b = ev.target.closest('button'); if (!b || b.disabled) return; closePop();
       if (b.dataset.ct){ tx('Type de graphique', () => { ch.type = b.dataset.ct; }); renderObjects(); return; }
       if (b.dataset.cc === 'edit') return chartEditor(id);
       if (b.dataset.cc === 'dup'){ const c = {...JSON.parse(JSON.stringify(ch)), id:uidS(), x:ch.x + 24, y:ch.y + 24}; tx('Dupliquer le graphique', () => { sh0().charts.push(c); }); OBJ.sel = c.id; layout(); schedule(); return; }
+      if (b.dataset.cc === 'png') return chartPNG(ch);
       if (b.dataset.cc === 'del') deleteChart(id); };
   }, 'menu');
 }

@@ -9,7 +9,7 @@ class Sheet {
   constructor(wb, o = {}){
     this.wb = wb; this.id = o.id || uidS(); this.name = o.name || 'Feuille 1';
     this.cells = new Map(); this.cw = {}; this.rh = {}; this.merges = []; this.freeze = {r:0, c:0};
-    this.cf = []; this.charts = []; this.dv = []; this.tables = []; this.hr = new Set(); this.hc = new Set(); this.filter = null;
+    this.cf = []; this.charts = []; this.shapes = []; this.spark = []; this.prot = null; this.page = null; this.dv = []; this.tables = []; this.hr = new Set(); this.hc = new Set(); this.filter = null;
     this.tab = o.tab || ''; this.grid = o.grid !== false; this.spill = new Map(); this.spillNew = null; this._used = null; this.zoom = 1;
   }
   get(r, c){ return this.cells.get(KEY(r, c)); }
@@ -26,6 +26,7 @@ class Sheet {
   }
   /* écrit le contenu brut d'une cellule (texte, nombre, formule) en gardant son style */
   setRaw(r, c, raw, keepNf){
+    if (this.prot?.on && this.wb.recording && !this.canEdit(r, c)){ this.wb.protHit = true; return; }
     const k = KEY(r, c); let cell = this.cells.get(k);
     this.wb.rec(this, k, cell);
     raw = raw == null ? '' : String(raw);
@@ -44,7 +45,9 @@ class Sheet {
       if (cell.s?.nf === '@' && raw !== '') cell.v = raw;
     }
   }
+  canEdit(r, c){ return !!this.get(r, c)?.s?.ul; }
   setStyle(r, c, patch){
+    if (this.prot?.on && this.wb.recording && !this.canEdit(r, c) && !('ul' in patch)){ this.wb.protHit = true; return; }
     const k = KEY(r, c); let cell = this.cells.get(k); this.wb.rec(this, k, cell);
     if (!cell){ cell = {raw:'', v:null}; this.cells.set(k, cell); this._used = null; }
     const s = {...(cell.s || {})};
@@ -53,6 +56,7 @@ class Sheet {
     if (!cell.s && cell.raw === '' && !cell.note){ this.cells.delete(k); this._used = null; }
   }
   setCell(r, c, data){   // data : {raw, s, note} ou null
+    if (this.prot?.on && this.wb.recording && !this.canEdit(r, c)){ this.wb.protHit = true; return; }
     const k = KEY(r, c); this.wb.rec(this, k, this.cells.get(k));
     if (!data || (data.raw === '' && !data.s && !data.note)){ this.cells.delete(k); this._used = null; return; }
     this.cells.delete(k); this._used = null;
@@ -62,8 +66,8 @@ class Sheet {
   setRawSilent(r, c, raw){ const rec = this.wb.recording; this.wb.recording = null; this.setRaw(r, c, raw, true); this.wb.recording = rec; }
   mergeAt(r, c){ for (const m of this.merges){ if (r >= m.r1 && r <= m.r2 && c >= m.c1 && c <= m.c2) return m; } return null; }
   /* métadonnées (sans les cellules) */
-  meta(){ return {name:this.name, cw:this.cw, rh:this.rh, merges:this.merges, freeze:this.freeze, cf:this.cf, charts:this.charts, dv:this.dv, tables:this.tables, hr:[...this.hr], hc:[...this.hc], filter:this.filter, tab:this.tab, grid:this.grid}; }
-  setMeta(m){ m = JSON.parse(JSON.stringify(m)); this.name = m.name; this.cw = m.cw || {}; this.rh = m.rh || {}; this.merges = m.merges || []; this.freeze = m.freeze || {r:0, c:0}; this.cf = m.cf || []; this.charts = m.charts || []; this.dv = m.dv || []; this.tables = m.tables || []; this.hr = new Set(m.hr || []); this.hc = new Set(m.hc || []); this.filter = m.filter || null; this.tab = m.tab || ''; this.grid = m.grid !== false; }
+  meta(){ return {name:this.name, cw:this.cw, rh:this.rh, merges:this.merges, freeze:this.freeze, cf:this.cf, charts:this.charts, shapes:this.shapes, spark:this.spark, prot:this.prot, page:this.page, dv:this.dv, tables:this.tables, hr:[...this.hr], hc:[...this.hc], filter:this.filter, tab:this.tab, grid:this.grid}; }
+  setMeta(m){ m = JSON.parse(JSON.stringify(m)); this.name = m.name; this.cw = m.cw || {}; this.rh = m.rh || {}; this.merges = m.merges || []; this.freeze = m.freeze || {r:0, c:0}; this.cf = m.cf || []; this.charts = m.charts || []; this.shapes = m.shapes || []; this.spark = m.spark || []; this.prot = m.prot || null; this.page = m.page || null; this.dv = m.dv || []; this.tables = m.tables || []; this.hr = new Set(m.hr || []); this.hc = new Set(m.hc || []); this.filter = m.filter || null; this.tab = m.tab || ''; this.grid = m.grid !== false; }
   toJSON(){
     const cells = {};
     for (const [k, cell] of this.cells){ const a = A1(KR(k), KC(k)); cells[a] = cell.s || cell.note ? {r:cell.raw, ...(cell.s ? {s:cell.s} : {}), ...(cell.note ? {n:cell.note} : {})} : cell.raw; }
@@ -95,7 +99,7 @@ function inferNf(n, sh, depth = 0){
 }
 
 class Workbook {
-  constructor(){ this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
+  constructor(){ this.assets = {}; this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
   get sh(){ return this.sheets[this.active]; }
   byName(n){ const l = String(n).toLowerCase(); return this.sheets.find(s => s.name.toLowerCase() === l) || null; }
   addSheet(name, at){ const s = new Sheet(this, {name:name || this.freeName()}); if (at == null) this.sheets.push(s); else this.sheets.splice(at, 0, s); return s; }
@@ -148,9 +152,9 @@ class Workbook {
       if (!changed) break;
     }
   }
-  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, sheets:this.sheets.map(s => s.toJSON())}; }
+  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, ...(this.assets && Object.keys(this.assets).length ? {assets:this.assets} : {}), sheets:this.sheets.map(s => s.toJSON())}; }
   load(o){
-    this.sheets = []; this.title = o.title || 'Classeur sans titre'; this.theme = o.theme || {id:'spectra'}; this.names = o.names || {};
+    this.sheets = []; this.title = o.title || 'Classeur sans titre'; this.theme = o.theme || {id:'spectra'}; this.names = o.names || {}; this.assets = o.assets && typeof o.assets === 'object' ? o.assets : {};
     for (const so of (o.sheets && o.sheets.length ? o.sheets : [{name:'Feuille 1'}])){ const s = new Sheet(this, {name:so.name}); this.sheets.push(s); }
     (o.sheets || []).forEach((so, i) => this.sheets[i].load(so));
     this.active = clamp(o.active || 0, 0, this.sheets.length - 1);
@@ -168,7 +172,7 @@ function beginTx(label, opts = {}){
 }
 function endTx(){
   const t = UNDO.cur; if (!t) return; if (--t.depth > 0) return;
-  WB.recording = null; UNDO.cur = null;
+  WB.recording = null; UNDO.cur = null; if (WB.protHit){ WB.protHit = false; toast('Feuille protégée : cellule verrouillée'); }
   const sh = WB.sheets.find(s => s.id === t.sheet);
   const step = {label:t.label, sel:t.sel, selA:{...SEL}, sheet:t.sheet};
   if (t.full){ step.fullB = t.full; step.fullA = JSON.stringify(WB.toJSON()); if (step.fullA === step.fullB) return; }

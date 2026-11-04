@@ -23,6 +23,7 @@ function spectreActions(){
   add('Classeur', 'Imprimer', () => printSheet(false)); add('Classeur', 'Partager', () => window.SWShareCurrent?.()); add('Classeur', 'Dupliquer le classeur', () => window.SWHome?.duplicateCurrent());
   add('Classeur', 'Enregistrer comme modèle', saveTplDlg); add('Classeur', 'Publier dans la Communauté', () => window.SWHome?.publishCurrent?.());
   add('Classeur', 'Interface claire ou sombre', () => { const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = t; lsSet('sc.theme', t); }, 'sombre nuit');
+  extraActions(add);
   add('Aller', 'Accueil', () => window.SWHome?.show('home')); add('Aller', 'Nouveau classeur', () => window.SWHome?.show('templates'));
   return A;
 }

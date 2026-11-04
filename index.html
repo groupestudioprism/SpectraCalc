@@ -1080,6 +1080,34 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
 .ce-pals{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.ce-pals button{display:grid;gap:3px;justify-items:center;padding:6px 3px;border:1px solid var(--line);border-radius:9px;background:var(--panel);font-size:10.5px;color:var(--ink2)}.ce-pals button.on{border-color:var(--r-v);background:var(--accent-soft);color:var(--ink)}.ce-pals span{display:flex;height:10px;border-radius:5px;overflow:hidden;width:70%}.ce-pals i{flex:1}
 .ce-col span{display:flex;gap:8px;align-items:center}.ce-col input[type=color]{width:44px;height:28px;padding:0;border:1px solid var(--line);border-radius:7px;background:none}
 .ce-types{grid-template-columns:repeat(4,1fr)}
+
+.g-cells .c.rt90>span,.g-cells .c.rtm90>span,.g-cells .c.rtv>span{writing-mode:vertical-rl;max-height:100%}.g-cells .c.rt90>span{transform:rotate(180deg)}.g-cells .c.rtv>span{text-orientation:upright;letter-spacing:-.05em}
+.g-cells .c.rt45>span,.g-cells .c.rtm45>span{display:inline-block;overflow:visible;transform-origin:left bottom;white-space:nowrap}.g-cells .c.rt45,.g-cells .c.rtm45{overflow:visible}.g-cells .c.rt45>span{transform:rotate(-45deg)}.g-cells .c.rtm45>span{transform:rotate(45deg);transform-origin:left top}
+.sty-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.sty-gal button{padding:4px;border:1px solid var(--line);border-radius:9px;background:var(--panel);text-align:left}.sty-gal button:hover{border-color:var(--r-v)}.sty-gal span{display:block;padding:4px 7px;border-radius:5px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sty-tg{display:flex;flex-wrap:wrap;gap:5px}.sty-tg button,.sty-b .seg button{padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:12px;color:var(--ink)}.sty-tg button.on{border-color:var(--r-v);background:var(--accent-soft)}
+.sty-rg{display:grid;grid-template-columns:1fr 1.2fr 24px;gap:8px;align-items:center;font-size:12px;color:var(--ink2);margin-top:8px}
+.sty-rot{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.sty-rot button{height:34px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}.sty-rot button.on{border-color:var(--r-v);background:var(--accent-soft)}.sty-rot svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.sty-grads{display:grid;grid-template-columns:repeat(9,1fr);gap:5px}.sty-grads button{height:30px;border-radius:8px;border:1px solid var(--line)}.sty-none{background:var(--panel);color:var(--ink2)}
+.sty-gc{display:flex;gap:10px;align-items:center;margin-top:8px;font-size:12px;color:var(--ink2)}.sty-gc label,.sty-bc{display:flex;gap:6px;align-items:center}.sty-gc input[type=color],.sty-bc input{width:34px;height:26px;padding:0;border:1px solid var(--line);border-radius:6px;background:none}.sty-gc input[type=range]{width:90px}
+.sty-b{display:grid;gap:6px}.sty-bc{font-size:12px;color:var(--ink2)}
+.pn-acts button.on{border-color:var(--r-v);background:var(--accent-soft)}
+
+.g-shp{position:absolute;pointer-events:auto;cursor:move;transform-origin:50% 50%}.g-shp .gs-in,.g-shp svg{width:100%;height:100%;display:block}.g-shp.on{outline:1.5px solid var(--selc);outline-offset:1px}.g-shp.lk{cursor:default}
+.gs-h{position:absolute;width:11px;height:11px;background:#fff;border:2px solid var(--selc);border-radius:50%;margin:-6px 0 0 -6px}.gs-h.nw{left:0;top:0;cursor:nwse-resize}.gs-h.n{left:50%;top:0;cursor:ns-resize}.gs-h.ne{left:100%;top:0;cursor:nesw-resize}.gs-h.e{left:100%;top:50%;cursor:ew-resize}.gs-h.se{left:100%;top:100%;cursor:nwse-resize}.gs-h.s{left:50%;top:100%;cursor:ns-resize}.gs-h.sw{left:0;top:100%;cursor:nesw-resize}.gs-h.w{left:0;top:50%;cursor:ew-resize}.gs-h.rot{left:50%;top:-26px;background:var(--selc);cursor:grab}
+.gs-ta{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;resize:none;outline:2px dashed var(--selc);line-height:1.25;box-sizing:border-box;padding-left:6px;padding-right:6px;overflow:hidden}
+.tcolr{display:flex;gap:5px;align-items:center;font-size:12px;cursor:pointer;padding:0 6px;width:auto}.tcolr input{width:22px;height:22px;padding:0;border:1px solid #fff4;border-radius:6px;background:none}
+.shp-tabs{margin:10px 0}.shp-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.shp-grid button{aspect-ratio:1;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink);display:grid;place-items:center;padding:3px}.shp-grid button:hover,.shp-pre button:hover,.shp-emo button:hover,.shp-lines button:hover{border-color:var(--r-v);background:var(--accent-soft)}.shp-grid svg{width:100%;height:100%}
+.shp-lines{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.shp-lines button{display:grid;gap:2px;justify-items:center;padding:7px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink);font-size:11px}.shp-lines svg{width:80px;height:24px}
+.shp-txt{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.shp-txt button{padding:10px 8px;border:1px solid var(--line);border-radius:9px;background:var(--panel);text-align:left;white-space:nowrap;overflow:hidden}
+.shp-pre{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.shp-pre button{display:grid;gap:3px;justify-items:center;padding:5px;border:1px solid var(--line);border-radius:9px;background:var(--panel);font-size:10.5px;color:var(--ink2)}.shp-pv{display:block;width:100%;height:48px}.shp-pv svg{width:100%;height:100%}
+.shp-emo{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}.shp-emo button{border:1px solid transparent;border-radius:8px;background:transparent;font-size:20px;padding:3px}
+.shp-props{display:grid;gap:8px;padding:10px;margin-bottom:6px;border:1px solid var(--line);border-radius:12px;background:var(--bg2,transparent)}.shp-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--ink2)}.shp-row>button,.shp-row .seg button{padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font-size:12px}.shp-row>button.on{border-color:var(--r-v);background:var(--accent-soft)}.shp-row .danger{color:#D92D20}
+.shp-c{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink2)}.shp-c input{width:30px;height:24px;padding:0;border:1px solid var(--line);border-radius:6px;background:none}
+.shp-r{display:grid;grid-template-columns:1.2fr 1.4fr 34px;gap:6px;align-items:center;font-size:12px;color:var(--ink2)}.shp-ta{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--panel);color:var(--ink);font:inherit;resize:vertical}.shp-row select,.shp-row input[type=number]{border:1px solid var(--line);border-radius:8px;padding:5px;background:var(--panel);color:var(--ink);font-size:12px}.shp-row input[type=number]{width:60px}
+@media (min-width:900px){.drawer.side{left:auto;right:14px;transform:none;top:72px;bottom:118px;width:352px;max-height:none}.drawer.side .pn-acts{grid-template-columns:repeat(2,1fr)}.drawer.side .shp-pre{grid-template-columns:repeat(2,1fr)}}
+.g-cells .c.bad{outline:2px solid #D92D20;outline-offset:-3px;border-radius:50%/60%}.g-cells .spkw{position:absolute;left:4px;right:4px;top:3px;bottom:3px;display:block;pointer-events:none}.g-cells .spkw svg{width:100%;height:100%}
+.vr-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px}.pg-w{grid-column:1/-1}.pgf select,.pgf input[type=number]{width:100%;box-sizing:border-box}
+.sc-wrap.ng .sc-tbl td{border-color:transparent}.sc-h td{background:#F3F1F9;color:#7B7690;text-align:center;font-size:11px}
 </style>
 </head><body>
 
@@ -2521,7 +2549,7 @@ class Sheet {
   constructor(wb, o = {}){
     this.wb = wb; this.id = o.id || uidS(); this.name = o.name || 'Feuille 1';
     this.cells = new Map(); this.cw = {}; this.rh = {}; this.merges = []; this.freeze = {r:0, c:0};
-    this.cf = []; this.charts = []; this.dv = []; this.tables = []; this.hr = new Set(); this.hc = new Set(); this.filter = null;
+    this.cf = []; this.charts = []; this.shapes = []; this.spark = []; this.prot = null; this.page = null; this.dv = []; this.tables = []; this.hr = new Set(); this.hc = new Set(); this.filter = null;
     this.tab = o.tab || ''; this.grid = o.grid !== false; this.spill = new Map(); this.spillNew = null; this._used = null; this.zoom = 1;
   }
   get(r, c){ return this.cells.get(KEY(r, c)); }
@@ -2538,6 +2566,7 @@ class Sheet {
   }
   /* écrit le contenu brut d'une cellule (texte, nombre, formule) en gardant son style */
   setRaw(r, c, raw, keepNf){
+    if (this.prot?.on && this.wb.recording && !this.canEdit(r, c)){ this.wb.protHit = true; return; }
     const k = KEY(r, c); let cell = this.cells.get(k);
     this.wb.rec(this, k, cell);
     raw = raw == null ? '' : String(raw);
@@ -2556,7 +2585,9 @@ class Sheet {
       if (cell.s?.nf === '@' && raw !== '') cell.v = raw;
     }
   }
+  canEdit(r, c){ return !!this.get(r, c)?.s?.ul; }
   setStyle(r, c, patch){
+    if (this.prot?.on && this.wb.recording && !this.canEdit(r, c) && !('ul' in patch)){ this.wb.protHit = true; return; }
     const k = KEY(r, c); let cell = this.cells.get(k); this.wb.rec(this, k, cell);
     if (!cell){ cell = {raw:'', v:null}; this.cells.set(k, cell); this._used = null; }
     const s = {...(cell.s || {})};
@@ -2565,6 +2596,7 @@ class Sheet {
     if (!cell.s && cell.raw === '' && !cell.note){ this.cells.delete(k); this._used = null; }
   }
   setCell(r, c, data){   // data : {raw, s, note} ou null
+    if (this.prot?.on && this.wb.recording && !this.canEdit(r, c)){ this.wb.protHit = true; return; }
     const k = KEY(r, c); this.wb.rec(this, k, this.cells.get(k));
     if (!data || (data.raw === '' && !data.s && !data.note)){ this.cells.delete(k); this._used = null; return; }
     this.cells.delete(k); this._used = null;
@@ -2574,8 +2606,8 @@ class Sheet {
   setRawSilent(r, c, raw){ const rec = this.wb.recording; this.wb.recording = null; this.setRaw(r, c, raw, true); this.wb.recording = rec; }
   mergeAt(r, c){ for (const m of this.merges){ if (r >= m.r1 && r <= m.r2 && c >= m.c1 && c <= m.c2) return m; } return null; }
   /* métadonnées (sans les cellules) */
-  meta(){ return {name:this.name, cw:this.cw, rh:this.rh, merges:this.merges, freeze:this.freeze, cf:this.cf, charts:this.charts, dv:this.dv, tables:this.tables, hr:[...this.hr], hc:[...this.hc], filter:this.filter, tab:this.tab, grid:this.grid}; }
-  setMeta(m){ m = JSON.parse(JSON.stringify(m)); this.name = m.name; this.cw = m.cw || {}; this.rh = m.rh || {}; this.merges = m.merges || []; this.freeze = m.freeze || {r:0, c:0}; this.cf = m.cf || []; this.charts = m.charts || []; this.dv = m.dv || []; this.tables = m.tables || []; this.hr = new Set(m.hr || []); this.hc = new Set(m.hc || []); this.filter = m.filter || null; this.tab = m.tab || ''; this.grid = m.grid !== false; }
+  meta(){ return {name:this.name, cw:this.cw, rh:this.rh, merges:this.merges, freeze:this.freeze, cf:this.cf, charts:this.charts, shapes:this.shapes, spark:this.spark, prot:this.prot, page:this.page, dv:this.dv, tables:this.tables, hr:[...this.hr], hc:[...this.hc], filter:this.filter, tab:this.tab, grid:this.grid}; }
+  setMeta(m){ m = JSON.parse(JSON.stringify(m)); this.name = m.name; this.cw = m.cw || {}; this.rh = m.rh || {}; this.merges = m.merges || []; this.freeze = m.freeze || {r:0, c:0}; this.cf = m.cf || []; this.charts = m.charts || []; this.shapes = m.shapes || []; this.spark = m.spark || []; this.prot = m.prot || null; this.page = m.page || null; this.dv = m.dv || []; this.tables = m.tables || []; this.hr = new Set(m.hr || []); this.hc = new Set(m.hc || []); this.filter = m.filter || null; this.tab = m.tab || ''; this.grid = m.grid !== false; }
   toJSON(){
     const cells = {};
     for (const [k, cell] of this.cells){ const a = A1(KR(k), KC(k)); cells[a] = cell.s || cell.note ? {r:cell.raw, ...(cell.s ? {s:cell.s} : {}), ...(cell.note ? {n:cell.note} : {})} : cell.raw; }
@@ -2607,7 +2639,7 @@ function inferNf(n, sh, depth = 0){
 }
 
 class Workbook {
-  constructor(){ this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
+  constructor(){ this.assets = {}; this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
   get sh(){ return this.sheets[this.active]; }
   byName(n){ const l = String(n).toLowerCase(); return this.sheets.find(s => s.name.toLowerCase() === l) || null; }
   addSheet(name, at){ const s = new Sheet(this, {name:name || this.freeName()}); if (at == null) this.sheets.push(s); else this.sheets.splice(at, 0, s); return s; }
@@ -2660,9 +2692,9 @@ class Workbook {
       if (!changed) break;
     }
   }
-  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, sheets:this.sheets.map(s => s.toJSON())}; }
+  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, ...(this.assets && Object.keys(this.assets).length ? {assets:this.assets} : {}), sheets:this.sheets.map(s => s.toJSON())}; }
   load(o){
-    this.sheets = []; this.title = o.title || 'Classeur sans titre'; this.theme = o.theme || {id:'spectra'}; this.names = o.names || {};
+    this.sheets = []; this.title = o.title || 'Classeur sans titre'; this.theme = o.theme || {id:'spectra'}; this.names = o.names || {}; this.assets = o.assets && typeof o.assets === 'object' ? o.assets : {};
     for (const so of (o.sheets && o.sheets.length ? o.sheets : [{name:'Feuille 1'}])){ const s = new Sheet(this, {name:so.name}); this.sheets.push(s); }
     (o.sheets || []).forEach((so, i) => this.sheets[i].load(so));
     this.active = clamp(o.active || 0, 0, this.sheets.length - 1);
@@ -2680,7 +2712,7 @@ function beginTx(label, opts = {}){
 }
 function endTx(){
   const t = UNDO.cur; if (!t) return; if (--t.depth > 0) return;
-  WB.recording = null; UNDO.cur = null;
+  WB.recording = null; UNDO.cur = null; if (WB.protHit){ WB.protHit = false; toast('Feuille protégée : cellule verrouillée'); }
   const sh = WB.sheets.find(s => s.id === t.sheet);
   const step = {label:t.label, sel:t.sel, selA:{...SEL}, sheet:t.sheet};
   if (t.full){ step.fullB = t.full; step.fullA = JSON.stringify(WB.toJSON()); if (step.fullA === step.fullB) return; }
@@ -3065,6 +3097,7 @@ function layout(){
   sh.calcAutoH();
   V.nr = Math.max(V.nr, u.r + 60, 120); V.nc = Math.max(V.nc, u.c + 8, 26);
   for (const ch of sh.charts){ const g = cellAtContent(ch.x + ch.w, ch.y + ch.h, true); if (g){ V.nr = Math.max(V.nr, g.r + 10); V.nc = Math.max(V.nc, g.c + 4); } }
+  for (const sp of sh.shapes){ const g = cellAtContent(sp.x + sp.w, sp.y + sp.h, true); if (g){ V.nr = Math.max(V.nr, g.r + 10); V.nc = Math.max(V.nc, g.c + 4); } }
   V.nr = Math.min(V.nr, MAXR); V.nc = Math.min(V.nc, MAXC);
   const cx = new Float64Array(V.nc + 1), ry = new Float64Array(V.nr + 1);
   for (let c = 0; c < V.nc; c++) cx[c + 1] = cx[c] + Math.round(sh.colW(c) * z);
@@ -3169,14 +3202,15 @@ function cfApply(sh, r, c, v){
 function cellCss(s, w, h){
   let css = '';
   if (!s) return css;
-  if (s.bg) css += `background:${s.bg};`;
+  if (s.grad && okCol(s.grad[0]) && okCol(s.grad[1])) css += `background:linear-gradient(${+s.grad[2] || 0}deg,${s.grad[0]},${s.grad[1]});`; else if (s.bg) css += `background:${s.bg};`;
+  if (s.sh) css += 'text-shadow:1px 1px 2px rgb(0 0 0 / .35);'; if (s.ls) css += `letter-spacing:${+s.ls || 0}px;`; if (s.tt) css += `text-transform:${s.tt === 'u' ? 'uppercase' : s.tt === 'l' ? 'lowercase' : 'capitalize'};`;
   if (s.fc) css += `color:${s.fc};`;
   if (s.b) css += 'font-weight:700;';
   if (s.i) css += 'font-style:italic;';
   if (s.u || s.st) css += `text-decoration:${s.u ? 'underline ' : ''}${s.st ? 'line-through' : ''};`;
   if (s.fs) css += `font-size:${(s.fs * 4 / 3 * V.z).toFixed(1)}px;`;
   if (s.ff){ ensureFont(s.ff); css += `font-family:${fontStack(s.ff).replace(/"/g, "'")};`; }
-  for (const [k, side] of [['bt', 'top'], ['br', 'right'], ['bb', 'bottom'], ['bl', 'left']]) if (s[k]){ const [wd, col] = String(s[k]).split(' '); css += `border-${side}:${wd || '1px'} ${/dash/.test(s[k]) ? 'dashed' : 'solid'} ${col || '#1A1726'};`; }
+  for (const [k, side] of [['bt', 'top'], ['br', 'right'], ['bb', 'bottom'], ['bl', 'left']]) if (s[k]){ const [wd, col, st] = String(s[k]).split(' '); css += `border-${side}:${wd || '1px'} ${st === 'dashed' || st === 'dotted' || st === 'double' ? st : 'solid'} ${col || '#1A1726'};`; }
   if (s.ind) css += `padding-left:${4 + s.ind * 12 * V.z}px;`;
   return css;
 }
@@ -3193,29 +3227,34 @@ function renderPane(cid, lnid, r1, r2, c1, c2, ox, oy){
   // fusions qui touchent la zone
   const skip = new Set(), mergesHere = [];
   for (const m of sh.merges){ if (m.r2 < r1 || m.r1 > r2 || m.c2 < c1 || m.c1 > c2) continue; mergesHere.push(m); for (let r = Math.max(m.r1, r1); r <= Math.min(m.r2, r2); r++) for (let c = Math.max(m.c1, c1); c <= Math.min(m.c2, c2); c++) skip.add(KEY(r, c)); }
-  const dvAt = dvIndex(sh);
+  const dvAt = dvIndex(sh), sparkAt = sparkIndex(sh);
   const one = (r, c, w, h, merged) => {
     const cell = sh.get(r, c), v = WB.val(sh, r, c);
     const ts = sh.tables.length ? tableStyleAt(sh, r, c) : null;
     const cf = sh.cf.length ? cfApply(sh, r, c, v) : null;
-    if (!cell && v == null && !ts && !cf && !dvAt.has(KEY(r, c))) return;
+    if (!cell && v == null && !ts && !cf && !dvAt.has(KEY(r, c)) && !sparkAt.has(KEY(r, c))) return;
     const s = cf || ts ? {...(ts || {}), ...(cell?.s || {}), ...(cf || {})} : cell?.s;
     const fv = formatValue(v, s?.nf);
     let txt = fv.t, ha = s?.ha || fv.a, cls = 'c';
-    if (s?.wrap) cls += ' w';
+    if (s?.wrap) cls += ' w'; if (s?.rot) cls += ' rt' + String(s.rot).replace('-', 'm');
     if (fv.err) cls += ' e';
     if (typeof v === 'string' && /^https?:\/\/\S+$/i.test(v)) cls += ' lk';
     let css = `left:${X(c)}px;top:${Y(r)}px;width:${w}px;height:${h}px;` + cellCss(s) + (fv.c ? `color:${fv.c};` : '');
     if (ha !== 'l') css += `justify-content:${ha === 'r' ? 'flex-end' : ha === 'c' ? 'center' : 'flex-start'};text-align:${ha === 'r' ? 'right' : ha === 'c' ? 'center' : 'left'};`;
     if (s?.va) css += `align-items:${s.va === 't' ? 'flex-start' : s.va === 'm' ? 'center' : 'flex-end'};`; else if (s?.wrap) css += 'align-items:flex-start;';
     // le texte déborde sur les cellules vides de droite
-    if (!merged && !s?.wrap && !s?.bg && typeof v === 'string' && ha === 'l' && txt){
+    if (!merged && !s?.wrap && !s?.bg && !s?.grad && !s?.rot && typeof v === 'string' && ha === 'l' && txt){
       let ww = w, cc = c + 1; while (cc <= c2 + 6 && cc < V.nc){ if (WB.val(sh, r, cc) != null || sh.mergeAt(r, cc)) break; ww += colW(cc); cc++; if (ww > 2000) break; }
       if (ww > w){ css = css.replace(`width:${w}px`, `width:${ww}px`); cls += ' ov'; }
     }
+    if (s?.shr && !s.wrap && typeof v !== 'boolean' && txt){ const tw = measureText(txt, s) * V.z; if (tw > w - 10) css += `font-size:${Math.max(6, ((s.fs || 10) * 4 / 3 * V.z) * (w - 10) / tw).toFixed(1)}px;`; }
     if (s?.chk || (typeof v === 'boolean' && s?.nf === 'chk')) txt = `<span class="cb${v === true ? ' on' : ''}" data-cb="${r},${c}"></span>`;
     else txt = escH(txt);
+    if (V.showF && cell?.raw && String(cell.raw)[0] === '=') txt = escH(cell.raw);
     let extra = '';
+    const spk = sparkAt.get(KEY(r, c)); if (spk){ const sv = sparkSVG(spk, sh, Math.max(20, w - 8), Math.max(12, h - 6)); if (sv) extra += `<span class="spkw">${sv}</span>`; }
+    if (V.bad?.has(KEY(r, c))) cls += ' bad';
+    if (sh.prot?.on && r === SEL.r && c === SEL.c && !cell?.s?.ul && false) extra += '';
     if (s?._bar != null) extra += `<b class="dbar" style="width:${(s._bar * 100).toFixed(1)}%;background:linear-gradient(90deg,${s._barc},${mix(s._barc, '#ffffff', .55)})"></b>`;
     if (s?._icon) extra += `<em class="ico" style="color:${s._iconc}">${s._icon}</em>`;
     if (cell?.note) extra += '<u class="nt"></u>';
@@ -3230,7 +3269,7 @@ function renderPane(cid, lnid, r1, r2, c1, c2, ox, oy){
   }
   g$(cid).innerHTML = cells.join('');
 }
-function dvIndex(sh){ const s = new Set(); for (const d of sh.dv){ const g = parseRange(d.range); if (!g) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 5000); r++) for (let c = g.c1; c <= g.c2; c++) s.add(KEY(r, c)); } return s; }
+function dvIndex(sh){ const s = new Set(); for (const d of sh.dv){ if (d.type && d.type !== 'list') continue; const g = parseRange(d.range); if (!g) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 5000); r++) for (let c = g.c1; c <= g.c2; c++) s.add(KEY(r, c)); } return s; }
 function render(){
   if (!g$('gView') || g$('app').hidden) return;
   const sc = g$('gScroll'); V.sx = sc.scrollLeft; V.sy = sc.scrollTop;
@@ -3377,6 +3416,7 @@ function commitEdit(dr = 1, dc = 0){
     try { parseFormula(raw.slice(1)); }
     catch(e){ toast('Formule incomplète ou incorrecte : vérifiez les parenthèses et les « ; »'); edEl().focus(); return false; }
   }
+  if (raw !== EDIT.orig && !EDIT.fillAll && !dvGuard(sh, EDIT.r, EDIT.c, raw)){ edEl().focus(); return false; }
   closeEdit();
   if (WB.sh !== sh){ WB.active = WB.sheets.indexOf(sh); layout(); renderTabs(); }
   if (raw !== EDIT.orig){
@@ -3462,6 +3502,7 @@ function placeFloat(box){
 const DRAG = {mode:'', x:0, y:0};
 function gvXY(e){ const r = g$('gView').getBoundingClientRect(); return {x:e.clientX - r.left, y:e.clientY - r.top}; }
 function onGridDown(e){
+  if (V.bad){ V.bad = null; schedule(); }
   if (e.button === 2) { const p = gvXY(e); if (p.x > V.hw && p.y > V.hh){ const h = cellAt(p.x, p.y); if (!inSel(h.r, h.c) && !EDIT.on) selectCell(h.r, h.c); } return; }
   if (e.button !== 0) return;
   const t = e.target;
@@ -3516,7 +3557,7 @@ function onGridMove(e){
   }
 }
 function onGridUp(){
-  if (!DRAG.mode) return; const m = DRAG.mode; DRAG.mode = ''; stopAutoScroll(); g$('gTip').hidden = true;
+  if (!DRAG.mode) return; const m = DRAG.mode; DRAG.mode = ''; if (PAINT.on && m === 'sel') setTimeout(paintApply, 0); stopAutoScroll(); g$('gTip').hidden = true;
   if (m === 'cw' || m === 'rh'){ tx(m === 'cw' ? 'Largeur de colonne' : 'Hauteur de ligne', () => {}); afterChange(); return; }
   if (m === 'fill' && FILLP.box){ const box = FILLP.box; FILLP.box = null; fillOp(DRAG.src, box); return; }
   FILLP.box = null; renderSel();
@@ -3607,6 +3648,10 @@ function onGridKey(e){
   if (mod && lk === 'b'){ e.preventDefault(); return toggleStyle('b'); }
   if (mod && lk === 'i'){ e.preventDefault(); return toggleStyle('i'); }
   if (mod && lk === 'u'){ e.preventDefault(); return toggleStyle('u'); }
+  if (mod && (k === '`' || k === '²')){ e.preventDefault(); return toggleFormulas(); }
+  if (mod && k === '5'){ e.preventDefault(); return toggleStyle('st'); }
+  if (mod && e.shiftKey && lk === 'c'){ e.preventDefault(); PAINT.s = cloneS(sh0().get(SEL.r, SEL.c)?.s) || null; PAINT.on = false; PAINT.kb = true; return toast('Format copié : Ctrl + Maj + V pour l\'appliquer'); }
+  if (mod && e.shiftKey && lk === 'v' && PAINT.kb){ e.preventDefault(); PAINT.on = true; return paintApply(); }
   if (mod && lk === 'd'){ e.preventDefault(); return fillDir(1, 0); }
   if (mod && lk === 'r'){ e.preventDefault(); return fillDir(0, 1); }
   if (mod && lk === 'f'){ e.preventDefault(); return openFind(false); }
@@ -3760,6 +3805,7 @@ function onCopy(e, cut){
 function onPaste(e){
   if (g$('app').hidden || EDIT.on || V.ro) return; const a = document.activeElement; if (a && a !== g$('grid') && a !== document.body) return;
   e.preventDefault();
+  const imgf = [...(e.clipboardData.files || [])].find(f => /^image\//.test(f.type)); if (imgf) return importImage(imgf);
   const text = e.clipboardData.getData('text/plain'), html = e.clipboardData.getData('text/html');
   if (CLIP.cells && text.replace(/\r/g, '') === CLIP.text.replace(/\r/g, '')) return pasteInternal(e.shiftKey ? 'values' : 'all');
   let rows = null;
@@ -3945,6 +3991,9 @@ const TB_IC = {
   theme:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg>',
   tpl:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
   plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  analyse:'<svg viewBox="0 0 24 24"><path d="M4 20h16M6 16v-4M11 16V6M16 16v-7"/><circle cx="18.5" cy="5.5" r="2"/></svg>',
+  shapes:'<svg viewBox="0 0 24 24"><rect x="3.5" y="11" width="9" height="9" rx="1.5"/><circle cx="15.5" cy="8.5" r="5"/></svg>',
+  style:'<svg viewBox="0 0 24 24"><path d="M12 3 4 12a8 8 0 0 0 16 0z"/><path d="M8.5 14.5a4 4 0 0 0 3.5 3"/></svg>',
 };
 function buildToolbar(){
   const b = (k, title, ic, cls = '') => `<button type="button" class="tb ${cls}" data-t="${k}" title="${title}" aria-label="${title}">${ic}</button>`;
@@ -3954,7 +4003,7 @@ function buildToolbar(){
       <button type="button" class="tb tcol" data-t="fc" title="Couleur du texte" aria-label="Couleur du texte">${IC.color}<i id="tFc"></i></button><button type="button" class="tb tcol" data-t="bg" title="Couleur de remplissage" aria-label="Couleur de remplissage">${TB_IC.fill}<i id="tBg"></i></button></div>
     <div class="tg">${b('border', 'Bordures', TB_IC.border)}${b('align', 'Alignement', IC.al)}${b('merge', 'Fusionner et centrer', TB_IC.merge, 'hide-s')}${b('wrap', 'Renvoyer à la ligne', TB_IC.wrap, 'hide-m')}</div>
     <div class="tg">${b('sum', 'Somme automatique (Alt + =)', TB_IC.sigma)}${b('sort', 'Trier de A à Z', TB_IC.sortA, 'hide-s')}${b('filter', 'Filtrer', TB_IC.filter, 'hide-s')}<button type="button" class="tb tb-magic" data-t="magic" title="Embellir : transforme la sélection en beau tableau" aria-label="Embellir">${TB_IC.magic}<span class="hide-m">Embellir</span></button></div>`;
-  const R = [['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
+  const R = [['style', 'Style', TB_IC.style, '#F2387A'], ['shapes', 'Formes', TB_IC.shapes, '#12B5E5'], ['analyse', 'Analyse', TB_IC.analyse, '#2FBF71'], ['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
   g$('edRail').innerHTML = R.map(([k, n, ic, c]) => `<button type="button" class="ray" data-panel="${k}" style="--ray:${c}" aria-pressed="false">${ic}<span>${n}</span></button>`).join('');
 }
 function refreshToolbar(){
@@ -4183,7 +4232,7 @@ function filterPop(anchor, c){
   }, 'wide');
 }
 /* listes déroulantes (validation) */
-function dvAtCell(sh, r, c){ return sh.dv.find(d => { const g = parseRange(d.range); return g && r >= g.r1 && r <= g.r2 && c >= g.c1 && c <= g.c2; }); }
+function dvAtCell(sh, r, c){ return sh.dv.find(d => { if (d.type && d.type !== 'list') return false; const g = parseRange(d.range); return g && r >= g.r1 && r <= g.r2 && c >= g.c1 && c <= g.c2; }); }
 function dvItems(d){ if (d.src){ const g = parseRange(d.src); const sh = d.srcSheet ? WB.byName(d.srcSheet) : sh0(); if (g && sh){ const out = []; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 500); r++) for (let c = g.c1; c <= g.c2; c++){ const v = WB.val(sh, r, c); if (v != null && v !== '') out.push(formatValue(v, sh.get(r, c)?.s?.nf).t); } return [...new Set(out)]; } } return d.list || []; }
 function dvPop(btn){
   const [r, c] = btn.dataset.dv.split(',').map(Number), sh = sh0(), d = dvAtCell(sh, r, c); if (!d) return;
@@ -4202,10 +4251,10 @@ function openPanel(k){
   panel = k; const ray = g$('edRail').querySelector(`[data-panel="${k}"]`);
   g$('edRail').querySelectorAll('.ray').forEach(r => r.setAttribute('aria-pressed', r === ray ? 'true' : 'false'));
   g$('edPanel').style.setProperty('--ray', ray?.style.getPropertyValue('--ray') || 'var(--r-v)');
-  g$('edPanel').hidden = false; renderPanel();
+  g$('edPanel').classList.toggle('side', ['shapes', 'style', 'analyse'].includes(k)); g$('edPanel').hidden = false; renderPanel();
 }
-function panelRefresh(){ if (panel === 'theme' || panel === 'cf') renderPanel(); }
-const PANEL_T = {insert:['Insérer', 'Graphiques, fonctions, lignes, listes déroulantes'], data:['Données', 'Trier, filtrer, nettoyer, figer'], cf:['Couleurs automatiques', 'Les cellules se colorent selon leurs valeurs'], theme:['Thème', 'Couleurs et police de tout le classeur'], templates:['Modèles', 'Repartir d\'un modèle, ou enregistrer le vôtre']};
+function panelRefresh(){ if (panel === 'theme' || panel === 'cf' || panel === 'style' || panel === 'shapes' || panel === 'analyse') renderPanel(); }
+const PANEL_T = {analyse:['Analyse', 'Tableau croisé, mini-graphiques, protection, impression'], shapes:['Formes et images', 'Formes, lignes, texte, icônes, images'], style:['Style', 'Styles de cellule, texte, dégradés, bordures'], insert:['Insérer', 'Graphiques, fonctions, lignes, listes déroulantes'], data:['Données', 'Trier, filtrer, nettoyer, figer'], cf:['Couleurs automatiques', 'Les cellules se colorent selon leurs valeurs'], theme:['Thème', 'Couleurs et police de tout le classeur'], templates:['Modèles', 'Repartir d\'un modèle, ou enregistrer le vôtre']};
 function renderPanel(){
   const [t, sub] = PANEL_T[panel] || ['', '']; g$('edPanelTitle').textContent = t; g$('edPanelSub').textContent = sub;
   const body = g$('edPanelBody'); const sel = rangeA1({...SEL, r2:Math.min(SEL.r2, Math.max(sh0().used().r, SEL.r1)), c2:Math.min(SEL.c2, Math.max(sh0().used().c, SEL.c1))});
@@ -4218,6 +4267,9 @@ function renderPanel(){
         <button type="button" data-ins="fn"><b class="pn-fx">ƒx</b>Fonction…</button><button type="button" data-ins="chk"><b class="pn-fx">☑</b>Cases à cocher</button><button type="button" data-ins="dv"><b class="pn-fx">▾</b>Liste déroulante…</button>
         <button type="button" data-ins="note"><b class="pn-fx">✎</b>Note</button><button type="button" data-ins="date"><b class="pn-fx">📅</b>Date du jour</button><button type="button" data-ins="seq"><b class="pn-fx">1·2·3</b>Numéroter</button><button type="button" data-ins="name"><b class="pn-fx">⌘</b>Nommer la plage</button></div>
       <p class="pn-h">Formules toutes prêtes <small>sur la sélection</small></p><div class="pn-acts">${[['SOMME', 'Total'], ['MOYENNE', 'Moyenne'], ['NB', 'Compter'], ['MAX', 'Maximum'], ['MIN', 'Minimum']].map(([f, n]) => `<button type="button" data-ins-sum="${f}"><b class="pn-fx">Σ</b>${n}</button>`).join('')}<button type="button" data-ins="pct"><b class="pn-fx">%</b>Part du total</button><button type="button" data-ins="evo"><b class="pn-fx">↗</b>Évolution en %</button><button type="button" data-ins="cumul"><b class="pn-fx">∑</b>Cumul</button></div>`;
+  } else if (panel === 'style'){ body.innerHTML = styleHTML();
+  } else if (panel === 'shapes'){ body.innerHTML = shapesPanelHTML();
+  } else if (panel === 'analyse'){ body.innerHTML = analyseHTML();
   } else if (panel === 'data'){
     const sh = sh0();
     body.innerHTML = `<div class="pn-acts">
@@ -4260,6 +4312,9 @@ function cfLabel(r){ return ({scale:'Dégradé', bar:'Barres de données', icons
 function tableMini(c, line){ const h = line ? `border-bottom:2px solid var(--ac,#6D3BFF)` : `background:${c}`; return `<span class="tm"><i style="${line ? 'border-bottom:2px solid #6D3BFF;background:#fff' : `background:${c}`}"></i>${[0, 1, 2, 3].map(i => `<i style="background:${line ? '#fff' : i % 2 ? '#fff' : mix(c, '#ffffff', .88)};${line ? 'border-bottom:1px solid #ddd' : ''}"></i>`).join('')}</span>`; }
 function onPanelClick(e){
   const t = e.target;
+  if (panel === 'shapes' && onShapesPanelClick(e)) return;
+  const an = t.closest('[data-an]'); if (an) return analyseAction(an.dataset.an);
+  const sty = t.closest('[data-sty]'); if (sty) return styleAction(sty.dataset.sty, sty);
   const ich = t.closest('[data-ins-ch]'); if (ich) return addChart(ich.dataset.insCh);
   const ins = t.closest('[data-ins]'); if (ins) return insertAction(ins.dataset.ins);
   const isum = t.closest('[data-ins-sum]'); if (isum) return autoSum(isum.dataset.insSum);
@@ -4273,6 +4328,7 @@ function onPanelClick(e){
   if (t.closest('[data-tpl-pub]')) return window.SWHome?.publishCurrent?.();
 }
 function onPanelInput(e){
+  if (panel === 'style') onStyleInput(e); if (panel === 'shapes' && onShapesPanelInput(e)) return;
   if (e.target.id === 'thAc'){ WB.theme = {...WB.theme, ac:e.target.value}; e.target.nextElementSibling.textContent = e.target.value; schedule(); renderObjects(); emitChange(); }
   if (e.target.id === 'thFont'){ WB.theme = {...WB.theme, fb:e.target.value}; ensureFont(e.target.value); applyThemeCss(); schedule(); emitChange(); }
 }
@@ -4468,6 +4524,70 @@ function frReplace(all){
 }
 function openFind(replace){ const b = g$('findBar'); b.hidden = false; b.classList.toggle('rep', !!replace); const q = g$('frQ'); q.focus(); q.select(); frSearch(); }
 function closeFind(){ g$('findBar').hidden = true; g$('grid').focus({preventScroll:true}); }
+
+/* ==== 63-style.js ==== */
+/* ---------- Tiroir « Style » : styles de cellule, texte, orientation, dégradés, bordures, pinceau ---------- */
+const CELL_STYLES = [
+  ['Titre', {b:1, fs:20, fc:'#1A1726'}], ['Sous-titre', {b:1, fs:14, fc:'#5B5670'}], ['En-tête', {b:1, fc:'#ffffff', bg:'#3E2FC7', ha:'c'}], ['Section', {b:1, fc:'#3E2FC7', bb:'2px #3E2FC7'}],
+  ['Bon', {bg:'#C6EFCE', fc:'#006100'}], ['Mauvais', {bg:'#FFC7CE', fc:'#9C0006'}], ['Neutre', {bg:'#FFEB9C', fc:'#7A5200'}], ['Avertissement', {bg:'#FFE0B2', fc:'#B23B00', b:1}],
+  ['Information', {bg:'#D6E4FF', fc:'#1D3F9E'}], ['Note', {bg:'#FFF8C5', fc:'#5E4B00', i:1}], ['Entrée', {bg:'#FFF2CC', fc:'#1F4E9E', bt:'1px #7F7F7F', br:'1px #7F7F7F', bb:'1px #7F7F7F', bl:'1px #7F7F7F'}], ['Calcul', {bg:'#F2F2F2', fc:'#FA7D00', b:1}],
+  ['Total', {b:1, bt:'1px #1A1726', bb:'3px #1A1726 double'}], ['Lien', {fc:'#2563EB', u:1}], ['Badge', {b:1, fc:'#ffffff', bg:'#7B3FF2', ha:'c', fs:9}], ['Étiquette', {b:1, fc:'#B3175F', bg:'#FFE0EC', ha:'c'}],
+  ['Code', {ff:'JetBrains Mono', bg:'#F1EFF8', fc:'#B3175F'}], ['Citation', {i:1, fc:'#5B5670', bl:'3px #7B3FF2', ind:1}], ['Discret', {fc:'#8D88A3', fs:9}], ['Néon', {b:1, fc:'#00E5FF', bg:'#0C0A16', fs:12}]];
+const GRADS = [['#7B3FF2', '#3D63FF'], ['#FF7A2F', '#F2387A'], ['#12B5E5', '#2FBF71'], ['#F5B82E', '#FF7A2F'], ['#1A1726', '#3E3A52'], ['#FFE0EC', '#E9D5FF'], ['#D6E4FF', '#CFF5E7'], ['#FFF1A8', '#FFE0B2']];
+const ROTS = [[0, 'Horizontal', 'M4 12h16'], [45, 'Monter 45°', 'm5 19 14-14'], [-45, 'Descendre 45°', 'm5 5 14 14'], [90, 'Monter 90°', 'M12 20V4'], [-90, 'Descendre 90°', 'M12 4v16'], ['v', 'Empilé', 'M12 4v16']];
+const BST = {w:1, st:'solid', col:'#1A1726'};
+const PAINT = {s:null, on:false};
+const okCol = c => /^#[0-9a-f]{3,8}$/i.test(String(c || ''));
+function styleHTML(){
+  const s = sh0().get(SEL.r, SEL.c)?.s || {}, g = s.grad || [], cl = (k, d) => okCol(s[k]) ? s[k] : d;
+  const prev = p => `${p.bg ? `background:${p.bg};` : ''}${p.fc ? `color:${p.fc};` : ''}${p.b ? 'font-weight:700;' : ''}${p.i ? 'font-style:italic;' : ''}${p.u ? 'text-decoration:underline;' : ''}${p.fs ? `font-size:${Math.min(16, p.fs * .9)}px;` : ''}${p.ff ? `font-family:'${p.ff}',monospace;` : ''}${p.bb ? `border-bottom:${p.bb.includes('double') ? '3px double' : '2px solid'} ${p.bb.split(' ')[1]};` : ''}${p.bl ? `border-left:3px solid ${p.bl.split(' ')[1]};padding-left:6px;` : ''}`;
+  const T = (k, n) => `<button type="button" data-sty="t:${k}" class="${s[k] ? 'on' : ''}">${n}</button>`;
+  return `<p class="pn-h">Styles de cellule <small>sur ${escH(rangeA1(SEL))}</small></p><div class="sty-gal">${CELL_STYLES.map(([n, p], i) => `<button type="button" data-sty="cs:${i}"><span style="${prev(p)}">${n}</span></button>`).join('')}</div>
+    <p class="pn-h">Texte</p><div class="sty-tg">${T('st', '<s>Barré</s>')}${T('b', '<b>Gras</b>')}${T('i', '<i>Italique</i>')}${T('u', '<u>Souligné</u>')}${T('sh', 'Ombre')}${T('shr', 'Réduire')}
+      <button type="button" data-sty="tt:u" class="${s.tt === 'u' ? 'on' : ''}">MAJ</button><button type="button" data-sty="tt:l" class="${s.tt === 'l' ? 'on' : ''}">min</button><button type="button" data-sty="tt:c" class="${s.tt === 'c' ? 'on' : ''}">Abc</button></div>
+    <label class="sty-rg">Espacement des lettres<input type="range" min="-1" max="8" step=".5" value="${s.ls || 0}" data-sty-rg="ls"><output>${s.ls || 0}</output></label>
+    <p class="pn-h">Orientation du texte</p><div class="sty-rot">${ROTS.map(([v, n, d]) => `<button type="button" data-sty="rot:${v}" class="${(s.rot || 0) === v ? 'on' : ''}" title="${n}"><svg viewBox="0 0 24 24"><path d="${d}"/>${v === 'v' ? '<path d="M9 8h6M9 12h6M9 16h6" opacity=".5"/>' : ''}</svg></button>`).join('')}</div>
+    <p class="pn-h">Remplissage dégradé</p><div class="sty-grads">${GRADS.map(([a, b], i) => `<button type="button" data-sty="gr:${i}" style="background:linear-gradient(135deg,${a},${b})" title="Dégradé ${i + 1}"></button>`).join('')}<button type="button" data-sty="gr:x" class="sty-none" title="Retirer">∅</button></div>
+    <div class="sty-gc"><label>De<input type="color" data-sty-gc="0" value="${cl('x', g[0] && okCol(g[0]) ? g[0] : '#7B3FF2')}"></label><label>À<input type="color" data-sty-gc="1" value="${g[1] && okCol(g[1]) ? g[1] : '#3D63FF'}"></label><label>Angle<input type="range" min="0" max="360" step="15" value="${g[2] ?? 135}" data-sty-gc="2"></label></div>
+    <p class="pn-h">Bordures <small>style appliqué au prochain tracé</small></p><div class="sty-b"><div class="seg" id="styBs">${[['solid', 'Plein'], ['dashed', 'Tirets'], ['dotted', 'Points'], ['double', 'Double']].map(([k, n]) => `<button type="button" data-sty="bs:${k}" aria-checked="${BST.st === k}">${n}</button>`).join('')}</div>
+      <div class="seg" id="styBw">${[1, 2, 3, 4].map(w => `<button type="button" data-sty="bw:${w}" aria-checked="${BST.w === w}">${w} px</button>`).join('')}</div><label class="sty-bc">Couleur<input type="color" data-sty-bc="1" value="${BST.col}"></label></div>
+    <div class="pn-acts"><button type="button" data-sty="bd:out">Contour</button><button type="button" data-sty="bd:all">Toutes</button><button type="button" data-sty="bd:in">Intérieures</button><button type="button" data-sty="bd:bottom">Bas</button><button type="button" data-sty="bd:top">Haut</button><button type="button" data-sty="bd:none">Aucune</button></div>
+    <p class="pn-h">Outils</p><div class="pn-acts"><button type="button" data-sty="paint" class="${PAINT.on ? 'on' : ''}">${IC.copy}Pinceau de format</button><button type="button" data-sty="clear">${IC.clear}Effacer la mise en forme</button></div>
+    <p class="pn-hint">Pinceau : cliquez-le (Maj + clic = plusieurs fois), puis sélectionnez les cellules à mettre en forme. Raccourci : Ctrl + Maj + C puis Ctrl + Maj + V.</p>`;
+}
+function bdStr(){ return `${BST.w}px ${BST.col}` + (BST.st === 'solid' ? '' : ' ' + BST.st); }
+function applyBordersStyled(kind){
+  const sh = sh0(), g = {...SEL}, u = sh.used(); g.r2 = Math.min(g.r2, Math.max(u.r, g.r1)); g.c2 = Math.min(g.c2, Math.max(u.c, g.c1)); const L = bdStr();
+  tx('Bordures', () => { for (let r = g.r1; r <= g.r2; r++) for (let c = g.c1; c <= g.c2; c++){
+    const top = r === g.r1, bot = r === g.r2, lef = c === g.c1, rig = c === g.c2, p = {};
+    if (kind === 'none') Object.assign(p, {bt:null, br:null, bb:null, bl:null}); if (kind === 'all') Object.assign(p, {bt:L, br:L, bb:L, bl:L});
+    if (kind === 'out'){ if (top) p.bt = L; if (bot) p.bb = L; if (lef) p.bl = L; if (rig) p.br = L; }
+    if (kind === 'in'){ if (!bot) p.bb = L; if (!rig) p.br = L; } if (kind === 'top' && top) p.bt = L; if (kind === 'bottom' && bot) p.bb = L;
+    if (Object.keys(p).length) sh.setStyle(r, c, p); } });
+}
+function styleAction(k, el){
+  const [a, v] = [k.split(':')[0], k.slice(k.indexOf(':') + 1)], s = sh0().get(SEL.r, SEL.c)?.s || {};
+  if (a === 'cs'){ const p = CELL_STYLES[+v][1]; styleSel({bg:null, fc:null, b:null, i:null, u:null, fs:null, ff:null, ha:null, ind:null, grad:null, ...p}, 'Style de cellule'); layoutRowsForFont(); }
+  else if (a === 't') styleSel({[v]:s[v] ? null : 1}, 'Texte');
+  else if (a === 'tt') styleSel({tt:s.tt === v ? null : v}, 'Casse');
+  else if (a === 'rot') styleSel({rot:(s.rot || 0) === (v === 'v' ? 'v' : +v) ? null : (v === 'v' ? 'v' : +v)}, 'Orientation');
+  else if (a === 'gr'){ styleSel(v === 'x' ? {grad:null} : {grad:[...GRADS[+v], 135], bg:null}, 'Dégradé'); }
+  else if (a === 'bs'){ BST.st = v; } else if (a === 'bw'){ BST.w = +v; } else if (a === 'bd') applyBordersStyled(v);
+  else if (a === 'clear') clearSel('format');
+  else if (a === 'paint'){ if (PAINT.on){ PAINT.on = false; } else { PAINT.s = cloneS(s); PAINT.on = true; toast('Pinceau : sélectionnez les cellules à mettre en forme'); } }
+  else return;
+  renderPanel(); refreshToolbar(); schedule();
+}
+function paintApply(){
+  if (!PAINT.on || !PAINT.s && PAINT.s !== null) return; const st = PAINT.s || {}, sh = sh0(); const keys = ['bg', 'fc', 'b', 'i', 'u', 'st', 'fs', 'ff', 'ha', 'va', 'wrap', 'ind', 'nf', 'bt', 'br', 'bb', 'bl', 'grad', 'rot', 'sh', 'shr', 'tt', 'ls'];
+  const patch = {}; for (const k of keys) patch[k] = st[k] ?? null; PAINT.on = false; styleSel(patch, 'Pinceau de format'); layoutRowsForFont(); if (panel === 'style') renderPanel();
+}
+function onStyleInput(e){
+  const t = e.target, rg = t.dataset.styRg, gc = t.dataset.styGc, bc = t.dataset.styBc;
+  if (rg){ t.nextElementSibling.textContent = t.value; styleSel({[rg]:+t.value || null}, 'Espacement'); }
+  if (gc != null){ const s = sh0().get(SEL.r, SEL.c)?.s || {}, g = [...(s.grad || ['#7B3FF2', '#3D63FF', 135])]; g[+gc] = +gc === 2 ? +t.value : t.value; styleSel({grad:g, bg:null}, 'Dégradé'); }
+  if (bc) BST.col = t.value;
+}
 
 /* ==== 65-charts.js ==== */
 /* ---------- Graphiques (SVG vivant, relié à une plage) ---------- */
@@ -4667,7 +4787,7 @@ function renderObjects(){
     if (el.dataset.sig !== sig){ el.dataset.sig = sig; el.querySelector('.go-in').innerHTML = chartSVG(ch, ch.w, ch.h); }
   }
   layer.querySelectorAll('.g-obj').forEach(el => { if (!keep.has(el.dataset.obj)) el.remove(); });
-  placeObjBar();
+  renderShapes(); placeObjBar();
 }
 function addChart(type, rangeStr){
   if (V.ro) return; const sh = sh0();
@@ -4697,15 +4817,17 @@ function chartIcon(k){ return {col:'<svg viewBox="0 0 24 24"><path d="M5 20V11M1
   combo:'<svg viewBox="0 0 24 24"><path d="M5 20v-7M10 20V9M15 20v-5M20 20v-8"/><path d="m3 9 6-4 6 4 6-5"/></svg>', radar:'<svg viewBox="0 0 24 24"><path d="m12 3 8.5 6.2-3.2 10H6.7l-3.2-10z"/><path d="m12 8 4 3-1.5 5h-5L8 11z"/></svg>', bubble:'<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><circle cx="16" cy="9" r="3"/><circle cx="17" cy="17" r="2"/></svg>',
   waterfall:'<svg viewBox="0 0 24 24"><path d="M4 12h4v8H4zM10 6h4v6h-4zM16 6h4v10h-4z"/></svg>', funnel:'<svg viewBox="0 0 24 24"><path d="M3 5h18l-3 5H6zM7 12h10l-2 4H9zM10 18h4v2h-4z"/></svg>', gauge:'<svg viewBox="0 0 24 24"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="m12 17 4-6"/></svg>', histo:'<svg viewBox="0 0 24 24"><path d="M4 20v-6h4v6M8 20V6h4v14M12 20V9h4v11M16 20v-5h4v5"/></svg>'}[k] || ''; }
 function onObjDown(e){
+  if (onShapeDown(e)) return true;
   const el = e.target.closest('.g-obj'); if (!el) return false;
   e.preventDefault(); e.stopPropagation(); if (EDIT.on) commitEdit(0, 0);
   const ch = chartById(el.dataset.obj); if (!ch) return true;
-  OBJ.sel = ch.id; renderObjects(); g$('grid').focus({preventScroll:true});
+  OBJ.sel = ch.id; SHP.sel = null; renderObjects(); g$('grid').focus({preventScroll:true});
   if (V.ro) return true;
   OBJ.drag = {mode:e.target.dataset.rs ? 'rs' : 'mv', x:e.clientX, y:e.clientY, o:{...ch}, ch, moved:false};
   return true;
 }
 function onObjMove(e){
+  if (onShapeMove(e)) return true;
   const d = OBJ.drag; if (!d) return false;
   const dx = (e.clientX - d.x) / V.z, dy = (e.clientY - d.y) / V.z; if (Math.abs(dx) + Math.abs(dy) > 2) d.moved = true;
   if (d.mode === 'mv'){ d.ch.x = Math.max(0, Math.round(d.o.x + dx)); d.ch.y = Math.max(0, Math.round(d.o.y + dy)); }
@@ -4713,6 +4835,7 @@ function onObjMove(e){
   renderObjects(); return true;
 }
 function onObjUp(){
+  if (onShapeUp()) return true;
   const d = OBJ.drag; if (!d) return false; OBJ.drag = null;
   if (d.moved){ const after = {...d.ch}; Object.assign(d.ch, d.o); tx(d.mode === 'mv' ? 'Déplacer le graphique' : 'Redimensionner le graphique', () => Object.assign(d.ch, after)); layout(); schedule(); }
   return true;
@@ -4723,11 +4846,12 @@ function chartMenu(e, id){
   const ro = V.ro ? ' disabled' : '';
   openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})},
     `<div class="pop-list ctx"><button type="button" data-cc="edit"${ro}>Modifier le graphique…</button><hr><p class="pop-h">Type de graphique</p>${CHART_TYPES.slice(0, 8).map(([k, n]) => `<button type="button" data-ct="${k}" class="${ch.type === k ? 'on' : ''}"${ro}>${n}</button>`).join('')}<hr>
-    <button type="button" data-cc="dup"${ro}>Dupliquer</button><button type="button" data-cc="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
+    <button type="button" data-cc="dup"${ro}>Dupliquer</button><button type="button" data-cc="png">Télécharger en image (PNG)</button><button type="button" data-cc="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
     pp.onclick = ev => { const b = ev.target.closest('button'); if (!b || b.disabled) return; closePop();
       if (b.dataset.ct){ tx('Type de graphique', () => { ch.type = b.dataset.ct; }); renderObjects(); return; }
       if (b.dataset.cc === 'edit') return chartEditor(id);
       if (b.dataset.cc === 'dup'){ const c = {...JSON.parse(JSON.stringify(ch)), id:uidS(), x:ch.x + 24, y:ch.y + 24}; tx('Dupliquer le graphique', () => { sh0().charts.push(c); }); OBJ.sel = c.id; layout(); schedule(); return; }
+      if (b.dataset.cc === 'png') return chartPNG(ch);
       if (b.dataset.cc === 'del') deleteChart(id); };
   }, 'menu');
 }
@@ -4782,6 +4906,450 @@ function chartEditor(id){
   }, 'wide');
 }
 
+/* ==== 67-shapes.js ==== */
+/* ---------- Formes, lignes, zones de texte, icônes et images posées sur la feuille (plus riche que Canva) ---------- */
+const SHP = {sel:null, drag:null, edit:null, tab:'shapes'};
+const poly = (pts, w, h) => 'M' + pts.map(p => `${(p[0] * w).toFixed(1)},${(p[1] * h).toFixed(1)}`).join('L') + 'Z';
+const ngon = (n, rot = -Math.PI / 2) => Array.from({length:n}, (_, i) => [.5 + .5 * Math.cos(rot + i * 2 * Math.PI / n), .5 + .5 * Math.sin(rot + i * 2 * Math.PI / n)]);
+const starP = (n, ri) => Array.from({length:n * 2}, (_, i) => { const r = i % 2 ? ri * .5 : .5, a = -Math.PI / 2 + i * Math.PI / n; return [.5 + r * Math.cos(a), .5 + r * Math.sin(a)]; });
+const rrect = (w, h, r) => { r = Math.min(r, w / 2, h / 2); return `M${r},0H${w - r}Q${w},0 ${w},${r}V${h - r}Q${w},${h} ${w - r},${h}H${r}Q0,${h} 0,${h - r}V${r}Q0,0 ${r},0Z`; };
+const ell = (w, h) => `M0,${h / 2}A${w / 2},${h / 2} 0 1 1 ${w},${h / 2}A${w / 2},${h / 2} 0 1 1 0,${h / 2}Z`;
+const SHAPES = {
+  rect:['Rectangle', (w, h) => `M0,0H${w}V${h}H0Z`], round:['Rectangle arrondi', (w, h, s) => rrect(w, h, Math.min(w, h) * (s.r ?? .2))], pill:['Pilule', (w, h) => rrect(w, h, h)], ellipse:['Ellipse', ell],
+  tri:['Triangle', (w, h) => poly([[.5, 0], [1, 1], [0, 1]], w, h)], rtri:['Triangle rectangle', (w, h) => poly([[0, 0], [1, 1], [0, 1]], w, h)], diamond:['Losange', (w, h) => poly([[.5, 0], [1, .5], [.5, 1], [0, .5]], w, h)],
+  para:['Parallélogramme', (w, h) => poly([[.2, 0], [1, 0], [.8, 1], [0, 1]], w, h)], trap:['Trapèze', (w, h) => poly([[.2, 0], [.8, 0], [1, 1], [0, 1]], w, h)],
+  pent:['Pentagone', (w, h) => poly(ngon(5), w, h)], hex:['Hexagone', (w, h) => poly(ngon(6, 0), w, h)], oct:['Octogone', (w, h) => poly(ngon(8, Math.PI / 8), w, h)],
+  star4:['Étoile 4', (w, h) => poly(starP(4, .38), w, h)], star5:['Étoile 5', (w, h) => poly(starP(5, .4), w, h)], star6:['Étoile 6', (w, h) => poly(starP(6, .55), w, h)], burst:['Explosion', (w, h) => poly(starP(12, .78), w, h)],
+  arrR:['Flèche droite', (w, h) => poly([[0, .3], [.6, .3], [.6, 0], [1, .5], [.6, 1], [.6, .7], [0, .7]], w, h)], arrL:['Flèche gauche', (w, h) => poly([[1, .3], [.4, .3], [.4, 0], [0, .5], [.4, 1], [.4, .7], [1, .7]], w, h)],
+  arrU:['Flèche haut', (w, h) => poly([[.3, 1], [.3, .4], [0, .4], [.5, 0], [1, .4], [.7, .4], [.7, 1]], w, h)], arrD:['Flèche bas', (w, h) => poly([[.3, 0], [.3, .6], [0, .6], [.5, 1], [1, .6], [.7, .6], [.7, 0]], w, h)],
+  arrLR:['Double flèche', (w, h) => poly([[0, .5], [.25, 0], [.25, .3], [.75, .3], [.75, 0], [1, .5], [.75, 1], [.75, .7], [.25, .7], [.25, 1]], w, h)], chev:['Chevron', (w, h) => poly([[0, 0], [.7, 0], [1, .5], [.7, 1], [0, 1], [.3, .5]], w, h)], home:['Étape', (w, h) => poly([[0, 0], [.75, 0], [1, .5], [.75, 1], [0, 1]], w, h)],
+  cross:['Croix', (w, h) => poly([[.35, 0], [.65, 0], [.65, .35], [1, .35], [1, .65], [.65, .65], [.65, 1], [.35, 1], [.35, .65], [0, .65], [0, .35], [.35, .35]], w, h)],
+  ring:['Anneau', (w, h) => ell(w, h) + ell(w * .56, h * .56).replace(/([\d.]+),([\d.]+)/g, (m, x, y) => `${(+x + w * .22).toFixed(1)},${(+y + h * .22).toFixed(1)}`), 'evenodd'],
+  heart:['Cœur', (w, h) => `M${w / 2},${h}C${-w * .15},${h * .55} ${w * .1},${-h * .1} ${w / 2},${h * .28}C${w * .9},${-h * .1} ${w * 1.15},${h * .55} ${w / 2},${h}Z`],
+  moon:['Lune', (w, h) => `M${w * .7},0A${w * .5},${h / 2} 0 1 0 ${w * .7},${h}A${w * .38},${h * .5} 0 1 1 ${w * .7},0Z`],
+  cloud:['Nuage', (w, h) => `M${w * .25},${h * .85}A${w * .2},${h * .2} 0 0 1 ${w * .22},${h * .45}A${w * .22},${h * .24} 0 0 1 ${w * .5},${h * .2}A${w * .22},${h * .22} 0 0 1 ${w * .78},${h * .38}A${w * .2},${h * .24} 0 0 1 ${w * .78},${h * .85}Z`],
+  drop:['Goutte', (w, h) => `M${w / 2},0C${w * .6},${h * .3} ${w},${h * .5} ${w},${h * .68}A${w / 2},${h * .32} 0 0 1 0,${h * .68}C0,${h * .5} ${w * .4},${h * .3} ${w / 2},0Z`],
+  bolt:['Éclair', (w, h) => poly([[.6, 0], [.15, .55], [.45, .55], [.35, 1], [.85, .4], [.55, .4]], w, h)], check:['Coche', (w, h) => poly([[.05, .55], [.2, .4], [.4, .6], [.8, .1], [.95, .25], [.4, .9]], w, h)],
+  bubble:['Bulle', (w, h) => `M${w * .1},0H${w * .9}Q${w},0 ${w},${h * .1}V${h * .62}Q${w},${h * .72} ${w * .9},${h * .72}H${w * .4}L${w * .2},${h}L${w * .25},${h * .72}H${w * .1}Q0,${h * .72} 0,${h * .62}V${h * .1}Q0,0 ${w * .1},0Z`],
+  banner:['Bandeau', (w, h) => poly([[0, 0], [1, 0], [.94, .5], [1, 1], [0, 1], [.06, .5]], w, h)], frame:['Cadre', (w, h) => `M0,0H${w}V${h}H0Z` + `M${w * .08},${h * .1}V${h * .9}H${w * .92}V${h * .1}Z`, 'evenodd'], arc:['Arc épais', (w, h) => `M0,${h}A${w / 2},${h} 0 0 1 ${w},${h}H${w * .75}A${w * .25},${h * .5} 0 0 0 ${w * .25},${h}Z`.replace(/A([\d.]+),([\d.]+) 0 0 0 ([\d.]+),([\d.]+)Z/, (m, a, b, c, d) => `A${w * .25},${h * .5} 0 0 0 ${w * .25},${h}Z`)],
+};
+const LINES = {ln:['Ligne', 0, 0], arr:['Flèche', 0, 1], darr:['Double flèche', 1, 1], curve:['Courbe', 2, 0], elb:['Coude', 3, 1]};
+const SHAPE_PRESETS = [ // éléments prêts à l'emploi (style Canva)
+  {n:'Carte', k:'round', w:220, h:120, fill:'#ffffff', stroke:'#E3E0EE', sw:1, sh:1, text:'Titre de la carte\nVotre texte ici', fs:14, fc:'#1A1726', b:1, ha:'l', va:'m'},
+  {n:'Chiffre clé', k:'round', w:200, h:110, fill:'#7B3FF2', fill2:'#3D63FF', gdeg:135, sw:0, sh:1, text:'1 250 €\nChiffre d\'affaires', fs:22, fc:'#ffffff', b:1, ha:'c', va:'m'},
+  {n:'Badge Nouveau', k:'pill', w:110, h:34, fill:'#F2387A', sw:0, text:'NOUVEAU', fs:12, fc:'#ffffff', b:1, ha:'c', va:'m'},
+  {n:'Promo', k:'burst', w:130, h:130, fill:'#F5B82E', sw:0, text:'-20 %', fs:26, fc:'#1A1726', b:1, ha:'c', va:'m', rot:-10},
+  {n:'Étoile', k:'star5', w:110, h:110, fill:'#F5B82E', stroke:'#B8860B', sw:2},
+  {n:'Bandeau titre', k:'banner', w:360, h:64, fill:'#1A1726', sw:0, text:'Titre de section', fs:22, fc:'#ffffff', b:1, ha:'c', va:'m', ff:'Poppins'},
+  {n:'Note adhésive', k:'rect', w:170, h:150, fill:'#FFF1A8', sw:0, sh:1, text:'Idée à noter…', fs:15, fc:'#5E4B00', ha:'l', va:'t', ff:'Caveat', rot:-3},
+  {n:'Étape', k:'home', w:180, h:60, fill:'#12B5E5', sw:0, text:'Étape 1', fs:15, fc:'#ffffff', b:1, ha:'c', va:'m'},
+  {n:'Citation', k:'bubble', w:240, h:130, fill:'#E9D5FF', sw:0, text:'« Une belle citation »', fs:16, fc:'#3E2FC7', i:1, ha:'c', va:'m', ff:'Playfair Display'},
+  {n:'Alerte', k:'round', w:260, h:56, fill:'#FFE4E4', stroke:'#D92D20', sw:2, text:'⚠ Attention : à vérifier', fs:14, fc:'#9C0006', b:1, ha:'l', va:'m'},
+  {n:'Validé', k:'round', w:200, h:50, fill:'#C6EFCE', stroke:'#13925C', sw:2, text:'✔ Validé', fs:15, fc:'#006100', b:1, ha:'c', va:'m'},
+  {n:'Cercle numéroté', k:'ellipse', w:70, h:70, fill:'#2FBF71', sw:0, text:'1', fs:28, fc:'#ffffff', b:1, ha:'c', va:'m'}];
+const TEXT_PRESETS = [{n:'Titre', fs:34, b:1, ff:'Poppins', text:'Votre titre'}, {n:'Sous-titre', fs:20, b:1, fc:'#5B5670', text:'Sous-titre'}, {n:'Texte', fs:14, text:'Zone de texte'}, {n:'Légende', fs:11, fc:'#7B7690', i:1, text:'Légende'},
+  {n:'Manuscrit', fs:28, ff:'Caveat', fc:'#B3175F', text:'Écrit à la main'}, {n:'Élégant', fs:30, ff:'Playfair Display', i:1, text:'Élégance'}, {n:'Code', fs:13, ff:'JetBrains Mono', fc:'#B3175F', fill:'#F1EFF8', text:'=SOMME(A1:A9)'}, {n:'Néon', fs:30, b:1, fc:'#00E5FF', fill:'#0C0A16', ff:'Space Grotesk', text:'NÉON', glow:1}];
+const EMOJIS = {Symboles:'⭐ ❤️ ✅ ❌ ⚠️ ❓ ❗ 💡 🔥 ⚡ 🎯 🏆 🚀 💎 🔒 🔔 📌 📎 ✏️ 🔍 📈 📉 📊 💰 💶 🧾 🛒 📦 🚚 🏠 🏗️ 🔧 ⚙️ 📅 ⏰ 📧 📞 👍 👎 👏 💬 🌍 ☀️ 🌧️ 🍀 🎉 🎁 🏁 🔴 🟠 🟡 🟢 🔵 🟣 ⬛ ⬜'.split(' '), Visages:'😀 😍 🤔 😎 😅 😭 😡 🤝 🙏 💪 👀 🧠'.split(' '), Flèches:'➡️ ⬅️ ⬆️ ⬇️ ↗️ ↘️ 🔄 ↩️ ▶️ ⏸️ ⏹️ ➕ ➖ ✖️ ➗ ♻️'.split(' ')};
+const okC = (c, d) => okCol(c) ? c : d;
+const shpAsset = s => { const a = WB.assets?.[s.asset]; return typeof a === 'string' && /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(a) ? a : ''; };
+function wrapLines(text, maxW, s){ const out = []; for (const para of String(text ?? '').split('\n')){ const words = para.split(/(\s+)/); let cur = ''; for (const w of words){ const t = cur + w; if (cur && measureText(t.trimEnd(), s) > maxW){ out.push(cur.trimEnd()); cur = w.trimStart(); } else cur = t; } out.push(cur.trimEnd()); } return out; }
+/* SVG complet d'une forme (affichage, impression, export image) : w × h en pixels */
+function shapeSVG(s, edit){
+  const w = Math.max(2, s.w), h = Math.max(2, s.h), id = 'sp' + String(s.id).replace(/\W/g, ''), fill = s.fill === 'none' ? 'none' : okC(s.fill, s.k === 'text' || s.k === 'emoji' || s.k === 'img' ? 'none' : '#7B3FF2'), stroke = okC(s.stroke, ''), sw = s.sw ?? (s.k === 'text' || s.k === 'emoji' || s.k === 'img' ? 0 : 0);
+  let o = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="overflow:visible"><defs>`;
+  if (s.fill2 && okCol(s.fill2) && fill !== 'none'){ const a = (+s.gdeg || 0) * Math.PI / 180, dx = Math.sin(a), dy = -Math.cos(a); o += `<linearGradient id="${id}g" x1="${.5 - dx / 2}" y1="${.5 - dy / 2}" x2="${.5 + dx / 2}" y2="${.5 + dy / 2}"><stop offset="0" stop-color="${fill}"/><stop offset="1" stop-color="${s.fill2}"/></linearGradient>`; }
+  if (s.sh) o += `<filter id="${id}s" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="${s.sh === 2 ? 6 : 0}" dy="${s.sh === 2 ? 6 : 4}" stdDeviation="${s.sh === 2 ? 0 : 6}" flood-color="${s.sh === 2 ? '#1A1726' : '#16131F'}" flood-opacity="${s.sh === 2 ? .85 : .28}"/></filter>`;
+  if (s.glow) o += `<filter id="${id}n" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+  if (s.k === 'img') o += `<clipPath id="${id}c"><path d="${rrect(w, h, s.r != null ? Math.min(w, h) * s.r : 0)}"/></clipPath>`;
+  o += '</defs>';
+  const fl = s.fill2 && okCol(s.fill2) && fill !== 'none' ? `url(#${id}g)` : fill, st = stroke && sw > 0 ? ` stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round"${s.dash === 'd' ? ' stroke-dasharray="9 6"' : s.dash === 'o' ? ` stroke-dasharray="1 ${Math.max(4, sw * 2)}"` : ''}` : '';
+  o += `<g opacity="${clamp(s.op ?? 1, 0, 1)}"${s.sh ? ` filter="url(#${id}s)"` : ''}${s.flip ? ` transform="translate(${w} 0) scale(-1 1)"` : ''}>`;
+  const L = LINES[s.k];
+  if (L){ const y = h / 2, c = okC(s.stroke, '#1A1726'), t = Math.max(1, s.sw ?? 3), dd = L[1] === 3 ? `M0,${y}H${w / 2}V${y}H${w - 8}` : L[1] === 2 ? '' : `M0,${y}H${w}`;
+    const path = L[1] === 2 ? `M0,${h}C${w * .4},${h} ${w * .6},0 ${w},0` : L[1] === 3 ? `M0,${h}H${w / 2}V0H${w}` : `M0,${y}H${w}`;
+    o += `<path d="${path}" fill="none" stroke="${c}" stroke-width="${t}" stroke-linecap="round" stroke-linejoin="round"${s.dash === 'd' ? ' stroke-dasharray="10 7"' : s.dash === 'o' ? ` stroke-dasharray="1 ${t * 2 + 2}"` : ''}/>`;
+    const tip = (x, y2, dir) => `<path d="M${x - dir * t * 4},${y2 - t * 2.6}L${x},${y2}L${x - dir * t * 4},${y2 + t * 2.6}" fill="none" stroke="${c}" stroke-width="${t}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const endY = L[1] === 2 || L[1] === 3 ? 0 : y; if (L[2]) o += tip(w, endY, 1); if (s.k === 'darr') o += tip(0, y, -1);
+  } else if (s.k === 'img'){ const src = shpAsset(s); const flt = {gray:'grayscale(1)', sepia:'sepia(.9)', blur:'blur(3px)', bright:'brightness(1.25)', dark:'brightness(.7)', contrast:'contrast(1.4)', sat:'saturate(1.8)', invert:'invert(1)'}[s.flt] || ''; o += src ? `<g clip-path="url(#${id}c)"><image href="${src}" width="${w}" height="${h}" preserveAspectRatio="${s.fit === 'contain' ? 'xMidYMid meet' : 'xMidYMid slice'}"${flt ? ` style="filter:${flt}"` : ''}/></g>` : `<rect width="${w}" height="${h}" fill="#ECEAF2"/>`; if (stroke && sw) o += `<path d="${rrect(w, h, s.r != null ? Math.min(w, h) * s.r : 0)}" fill="none" stroke="${stroke}" stroke-width="${sw}"/>`;
+  } else if (s.k === 'emoji'){ o += `<text x="${w / 2}" y="${h / 2}" text-anchor="middle" dominant-baseline="central" font-size="${Math.min(w, h) * .82}">${escH(s.text || '⭐')}</text>`;
+  } else if (s.k === 'text'){ if (fill !== 'none') o += `<path d="${rrect(w, h, Math.min(w, h) * (s.r ?? 0))}" fill="${fl}"${st}/>`; else if (stroke && sw) o += `<path d="${rrect(w, h, 0)}" fill="none"${st}/>`;
+  } else { const def = SHAPES[s.k] || SHAPES.rect; o += `<path d="${def[1](w, h, s)}" fill="${fl}"${def[2] ? ' fill-rule="evenodd"' : ''}${st}/>`; }
+  o += '</g>';
+  if (s.text && s.k !== 'emoji' && !edit){ o += shapeTextSVG(s, w, h, id); }
+  return o + '</svg>';
+}
+function shapeTextSVG(s, w, h, id){
+  const fs = s.fs || 14, st = {fs:fs * 3 / 4, b:s.b, i:s.i, ff:okFont(s.ff)}, pad = s.k === 'text' ? 6 : Math.max(6, Math.min(w, h) * .08), inset = ['tri', 'rtri', 'diamond', 'hex', 'oct', 'pent', 'heart', 'cloud', 'drop', 'star4', 'star5', 'star6', 'moon', 'ellipse', 'ring', 'burst', 'bolt', 'cross', 'check'].includes(s.k) ? .16 : 0, maxW = Math.max(10, w * (1 - 2 * inset) - 2 * pad);
+  const lines = wrapLines(s.text, maxW, st), lh = fs * 1.25, tot = lines.length * lh, ha = s.ha || 'c', va = s.va || 'm';
+  let y0 = va === 't' ? pad + fs * .95 : va === 'b' ? h - pad - tot + fs * .95 : (h - tot) / 2 + fs * .95; const x = ha === 'l' ? w * inset + pad : ha === 'r' ? w * (1 - inset) - pad : w / 2;
+  const ff = fontStack(okFont(s.ff) || themeColors().fb).replace(/"/g, "'");
+  return `<g font-family="${escH(ff)}" font-size="${fs}" fill="${okC(s.fc, '#1A1726')}" text-anchor="${ha === 'l' ? 'start' : ha === 'r' ? 'end' : 'middle'}"${s.b ? ' font-weight="700"' : ''}${s.i ? ' font-style="italic"' : ''}${s.u ? ' text-decoration="underline"' : ''}${s.glow ? ` filter="url(#${id}n)"` : ''}${s.tls ? ` letter-spacing="${+s.tls || 0}"` : ''}>${lines.map((l, i) => `<text x="${x}" y="${(y0 + i * lh).toFixed(1)}">${escH(s.tt === 'u' ? l.toUpperCase() : l) || ' '}</text>`).join('')}</g>`;
+}
+const okFont = f => FONTS.some(x => x[0] === f) ? f : '';
+function shapeById(id){ return sh0().shapes.find(s => s.id === id); }
+function shpPos(s){ const z = V.z, fw = V.cx[V.fc], fh = V.ry[V.fr], X = s.x * z, Y = s.y * z; return {x:X >= fw ? X - V.sx : X, y:Y >= fh ? Y - V.sy : Y}; }
+function renderShapes(){
+  const sh = sh0(), layer = g$('gObjs'), z = V.z, keep = new Set();
+  for (const s of sh.shapes){
+    keep.add(s.id); let el = layer.querySelector(`[data-shp="${s.id}"]`);
+    if (!el){ el = document.createElement('div'); el.className = 'g-shp'; el.dataset.shp = s.id; el.innerHTML = '<div class="gs-in"></div>'; layer.appendChild(el); }
+    const p = shpPos(s); el.style.cssText = `left:${p.x}px;top:${p.y}px;width:${s.w * z}px;height:${s.h * z}px;transform:rotate(${s.rot || 0}deg);z-index:${1 + sh.shapes.indexOf(s)}`;
+    el.classList.toggle('on', SHP.sel === s.id); el.classList.toggle('lk', !!s.lock);
+    const sig = z + '|' + WB.theme.fb + '|' + JSON.stringify(s) + '|' + (SHP.edit === s.id ? 'e' : ''); if (el.dataset.sig !== sig){ el.dataset.sig = sig; el.querySelector('.gs-in').innerHTML = shapeSVG(s, SHP.edit === s.id); const sv = el.querySelector('svg'); if (sv){ sv.style.width = '100%'; sv.style.height = '100%'; } }
+    el.querySelectorAll('.gs-h').forEach(x => x.remove());
+    if (SHP.sel === s.id && !s.lock && !V.ro){ for (const [d, cls] of [['nw', 'nw'], ['n', 'n'], ['ne', 'ne'], ['e', 'e'], ['se', 'se'], ['s', 's'], ['sw', 'sw'], ['w', 'w']]){ if (LINES[s.k] && !['e', 'w'].includes(d)) continue; el.insertAdjacentHTML('beforeend', `<i class="gs-h ${cls}" data-h="${d}"></i>`); } el.insertAdjacentHTML('beforeend', '<i class="gs-h rot" data-h="rot" title="Pivoter"></i>'); }
+  }
+  layer.querySelectorAll('.g-shp').forEach(el => { if (!keep.has(el.dataset.shp)) el.remove(); });
+  placeShpBar();
+}
+function placeShpBar(){
+  let bar = g$('shpBar'); if (!bar){ bar = document.createElement('div'); bar.className = 'ctx-bar'; bar.id = 'shpBar'; bar.hidden = true; g$('app').appendChild(bar); bar.addEventListener('click', onShpBar); bar.addEventListener('input', onShpBarInput); }
+  const s = SHP.sel && shapeById(SHP.sel); if (!s || EDIT.on || SHP.drag?.moved){ bar.hidden = true; return; }
+  const el = g$('gObjs').querySelector(`[data-shp="${s.id}"]`); if (!el){ bar.hidden = true; return; }
+  const r = el.getBoundingClientRect(), L = !!LINES[s.k];
+  const sig = s.id + s.fill + s.stroke + s.k; if (bar.dataset.sig !== sig){ bar.dataset.sig = sig; bar.innerHTML = `${L ? '' : `<label class="tb tcolr" title="Remplissage"><input type="color" data-sc="fill" value="${okC(s.fill, '#7B3FF2')}"><span>Remplir</span></label>`}<label class="tb tcolr" title="Couleur du trait"><input type="color" data-sc="stroke" value="${okC(s.stroke, '#1A1726')}"><span>Trait</span></label><span class="fsep"></span>
+    <button type="button" class="tb tb-txt" data-so="text">Texte</button><button type="button" class="tb tb-txt" data-so="front" title="Premier plan">↑ Devant</button><button type="button" class="tb tb-txt" data-so="back" title="Arrière-plan">↓ Derrière</button><button type="button" class="tb tb-txt" data-so="dup">Dupliquer</button><button type="button" class="tb tb-txt" data-so="png" title="Télécharger en image">PNG</button><button type="button" class="tb tb-txt" data-so="panel">Plus…</button><button type="button" class="tb" data-so="del" title="Supprimer">${IC.trash}</button>`; }
+  bar.hidden = false; bar.style.left = clamp(r.left, 8, innerWidth - bar.offsetWidth - 8) + 'px'; bar.style.top = Math.max(8, r.top - bar.offsetHeight - 40) + 'px';
+}
+function onShpBar(e){ const b = e.target.closest('[data-so]'); const s = SHP.sel && shapeById(SHP.sel); if (!b || !s) return; const k = b.dataset.so;
+  if (k === 'text') shapeEditText(s.id); else if (k === 'front') shapeZ(s.id, 'front'); else if (k === 'back') shapeZ(s.id, 'back'); else if (k === 'dup') dupShape(s.id); else if (k === 'del') delShape(s.id); else if (k === 'png') shapePNG(s); else if (k === 'panel'){ SHP.tab = 'shapes'; if (panel !== 'shapes') openPanel('shapes'); else renderPanel(); } }
+function onShpBarInput(e){ const t = e.target, s = SHP.sel && shapeById(SHP.sel); if (!s || !t.dataset.sc) return; s[t.dataset.sc] = t.value; if (t.dataset.sc === 'stroke' && !s.sw) s.sw = 2; renderShapes(); clearTimeout(SHP.t); SHP.t = setTimeout(() => { const v = {...s}; tx('Couleur de la forme', () => {}); schedule(); }, 400); }
+function selShape(id){ if (SHP.sel === id) return; SHP.sel = id; if (id) OBJ.sel = null; renderObjects(); if (panel === 'shapes') renderPanel(); }
+function viewCenterXY(){ const vr = visRange(), p = contentXY(vr.r1, vr.c1); return {x:p.x + 80 + (SHP.n = ((SHP.n || 0) + 1) % 6) * 22, y:p.y + 60 + SHP.n * 22}; }
+function addShape(o){
+  if (V.ro) return; const sh = sh0(), p = viewCenterXY(), s = {id:uidS(), k:'rect', x:p.x, y:p.y, w:160, h:100, rot:0, fill:'#7B3FF2', sw:0, ...o};
+  tx('Ajouter une forme', () => { sh.shapes.push(s); }); SHP.sel = s.id; OBJ.sel = null; layout(); renderObjects(); schedule(); if (panel === 'shapes') renderPanel(); return s;
+}
+function newShape(k){ const L = LINES[k]; if (L) return addShape({k, w:200, h:LINES[k][1] >= 2 ? 80 : 24, stroke:'#1A1726', sw:3, fill:'none'}); const sq = ['ellipse', 'star4', 'star5', 'star6', 'burst', 'heart', 'cloud', 'moon', 'drop', 'pent', 'hex', 'oct', 'cross', 'ring', 'check', 'bolt', 'diamond'].includes(k); return addShape({k, w:sq ? 120 : 160, h:sq ? 120 : 100}); }
+function delShape(id){ if (V.ro) return; tx('Supprimer la forme', () => { sh0().shapes = sh0().shapes.filter(s => s.id !== id); }); SHP.sel = null; renderObjects(); if (panel === 'shapes') renderPanel(); }
+function dupShape(id){ const s = shapeById(id); if (!s) return; const c = {...JSON.parse(JSON.stringify(s)), id:uidS(), x:s.x + 20, y:s.y + 20}; tx('Dupliquer la forme', () => { sh0().shapes.push(c); }); SHP.sel = c.id; renderObjects(); if (panel === 'shapes') renderPanel(); }
+function shapeZ(id, how){ const a = sh0().shapes, i = a.findIndex(s => s.id === id); if (i < 0) return; const [s] = a.splice(i, 1); const j = how === 'front' ? a.length : how === 'back' ? 0 : how === 'up' ? Math.min(a.length, i + 1) : Math.max(0, i - 1); tx('Ordre des formes', () => { a.splice(j, 0, s); }); renderObjects(); }
+function updShape(id, patch, label = 'Modifier la forme'){ const s = shapeById(id); if (!s) return; tx(label, () => { for (const [k, v] of Object.entries(patch)){ if (v === undefined || v === null || v === '') delete s[k]; else s[k] = v; } }); renderObjects(); }
+function shapeEditText(id){
+  const s = shapeById(id); if (!s || V.ro || s.k === 'img' || LINES[s.k]) return; selShape(id); SHP.edit = id; renderObjects();
+  const el = g$('gObjs').querySelector(`[data-shp="${id}"]`); if (!el) return; const ta = document.createElement('textarea'); ta.className = 'gs-ta'; ta.value = s.text || ''; ta.spellcheck = false;
+  const fs = (s.fs || 14) * V.z; ta.style.cssText = `font:${s.i ? 'italic ' : ''}${s.b ? '700 ' : ''}${fs}px ${fontStack(okFont(s.ff) || themeColors().fb)};color:${okC(s.fc, '#1A1726')};text-align:${s.ha === 'l' ? 'left' : s.ha === 'r' ? 'right' : 'center'};padding-top:${s.va === 't' ? 6 : s.va === 'b' ? Math.max(6, el.clientHeight - fs * 1.4) : Math.max(6, (el.clientHeight - fs * 1.3) / 2)}px`;
+  el.appendChild(ta); ta.focus(); ta.select();
+  const done = ok => { if (!ta.isConnected) return; const v = ta.value; ta.remove(); SHP.edit = null; if (ok && v !== (s.text || '')) updShape(id, {text:v}, 'Texte de la forme'); else renderObjects(); g$('grid').focus({preventScroll:true}); };
+  ta.onblur = () => done(true); ta.onkeydown = e => { e.stopPropagation(); if (e.key === 'Escape'){ e.preventDefault(); done(false); } else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)){ e.preventDefault(); done(true); } };
+  ta.onmousedown = e => e.stopPropagation();
+}
+function onShapeDown(e){
+  const el = e.target.closest('.g-shp'); if (!el) return false; if (e.target.closest('.gs-ta')) return true;
+  e.preventDefault(); e.stopPropagation(); if (EDIT.on) commitEdit(0, 0); const s = shapeById(el.dataset.shp); if (!s) return true;
+  selShape(s.id); g$('grid').focus({preventScroll:true}); if (V.ro || s.lock) return true;
+  const r = el.getBoundingClientRect(), h = e.target.dataset.h;
+  SHP.drag = {mode:h ? (h === 'rot' ? 'rot' : 'rs') : 'mv', h, x:e.clientX, y:e.clientY, o:{...s}, s, moved:false, cx:r.left + r.width / 2, cy:r.top + r.height / 2};
+  return true;
+}
+function onShapeMove(e){
+  const d = SHP.drag; if (!d) return false; const dx = (e.clientX - d.x) / V.z, dy = (e.clientY - d.y) / V.z; if (Math.abs(dx) + Math.abs(dy) > 2) d.moved = true; if (!d.moved) return true;
+  const s = d.s, o = d.o;
+  if (d.mode === 'mv'){ s.x = Math.max(0, Math.round(o.x + dx)); s.y = Math.max(0, Math.round(o.y + dy)); if (!e.altKey){ s.x = Math.round(s.x / 4) * 4; s.y = Math.round(s.y / 4) * 4; } }
+  else if (d.mode === 'rot'){ let a = Math.atan2(e.clientY - d.cy, e.clientX - d.cx) * 180 / Math.PI + 90; if (e.shiftKey) a = Math.round(a / 15) * 15; s.rot = Math.round(((a % 360) + 360) % 360 * 10) / 10; }
+  else { const th = (o.rot || 0) * Math.PI / 180, c = Math.cos(th), sn = Math.sin(th), ldx = dx * c + dy * sn, ldy = -dx * sn + dy * c, h = d.h, hx = h.includes('e') ? 1 : h.includes('w') ? -1 : 0, hy = h.includes('s') ? 1 : h.includes('n') ? -1 : 0;
+    let nw = Math.max(8, o.w + hx * ldx), nh = Math.max(8, o.h + hy * ldy); if (e.shiftKey && hx && hy){ const f = Math.max(nw / o.w, nh / o.h); nw = o.w * f; nh = o.h * f; }
+    const ddx = hx * (nw - o.w) / 2, ddy = hy * (nh - o.h) / 2, ocx = o.x + o.w / 2, ocy = o.y + o.h / 2, ncx = ocx + ddx * c - ddy * sn, ncy = ocy + ddx * sn + ddy * c;
+    s.w = Math.round(nw); s.h = Math.round(nh); s.x = Math.round(ncx - s.w / 2); s.y = Math.round(ncy - s.h / 2); }
+  renderShapes(); return true;
+}
+function onShapeUp(){
+  const d = SHP.drag; if (!d) return false; SHP.drag = null;
+  if (d.moved){ const after = {x:d.s.x, y:d.s.y, w:d.s.w, h:d.s.h, rot:d.s.rot}; Object.assign(d.s, {x:d.o.x, y:d.o.y, w:d.o.w, h:d.o.h, rot:d.o.rot}); tx(d.mode === 'mv' ? 'Déplacer la forme' : d.mode === 'rot' ? 'Pivoter la forme' : 'Redimensionner la forme', () => Object.assign(d.s, after)); layout(); schedule(); if (panel === 'shapes') renderPanel(); }
+  else renderShapes(); return true;
+}
+function onShapeKey(e){
+  const s = SHP.sel && shapeById(SHP.sel); if (!s || EDIT.on || SHP.edit) return false; const k = e.key, mod = e.ctrlKey || e.metaKey;
+  if (document.activeElement !== g$('grid') && document.activeElement !== document.body) return false;
+  if (k === 'Delete' || k === 'Backspace'){ e.preventDefault(); delShape(s.id); return true; }
+  if (k === 'Escape'){ selShape(null); return true; }
+  if (mod && k.toLowerCase() === 'd'){ e.preventDefault(); dupShape(s.id); return true; }
+  if (k === 'Enter' || k === 'F2'){ e.preventDefault(); shapeEditText(s.id); return true; }
+  if (k.startsWith('Arrow') && !s.lock){ e.preventDefault(); const n = e.shiftKey ? 10 : 1; updShape(s.id, {x:Math.max(0, s.x + (k === 'ArrowRight' ? n : k === 'ArrowLeft' ? -n : 0)), y:Math.max(0, s.y + (k === 'ArrowDown' ? n : k === 'ArrowUp' ? -n : 0))}, 'Déplacer la forme'); return true; }
+  return false;
+}
+function shapeMenu(e, id){
+  const s = shapeById(id); if (!s) return; selShape(id); const ro = V.ro ? ' disabled' : '';
+  openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})},
+    `<div class="pop-list ctx"><button type="button" data-sm="text"${ro}>Modifier le texte</button><button type="button" data-sm="dup"${ro}>Dupliquer</button><hr><button type="button" data-sm="front"${ro}>Premier plan</button><button type="button" data-sm="up"${ro}>Avancer</button><button type="button" data-sm="down"${ro}>Reculer</button><button type="button" data-sm="back"${ro}>Arrière-plan</button><hr><button type="button" data-sm="flip"${ro}>Retourner horizontalement</button><button type="button" data-sm="lock"${ro}>${s.lock ? 'Déverrouiller' : 'Verrouiller'}</button><button type="button" data-sm="png">Télécharger en image (PNG)</button><button type="button" data-sm="panel">Propriétés…</button><hr><button type="button" data-sm="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
+      pp.onclick = ev => { const b = ev.target.closest('button'); if (!b || b.disabled) return; closePop(); const k = b.dataset.sm;
+        if (k === 'text') shapeEditText(id); else if (k === 'dup') dupShape(id); else if (['front', 'up', 'down', 'back'].includes(k)) shapeZ(id, k); else if (k === 'flip') updShape(id, {flip:s.flip ? undefined : 1}); else if (k === 'lock') updShape(id, {lock:s.lock ? undefined : 1}); else if (k === 'png') shapePNG(s); else if (k === 'panel'){ SHP.tab = 'shapes'; if (panel !== 'shapes') openPanel('shapes'); else renderPanel(); } else if (k === 'del') delShape(id); }; }, 'menu');
+}
+/* export PNG d'une forme ou d'un graphique */
+async function svgToPNG(svg, w, h, name){
+  const img = new Image(); const url = URL.createObjectURL(new Blob([svg], {type:'image/svg+xml;charset=utf-8'}));
+  await new Promise((ok, ko) => { img.onload = ok; img.onerror = ko; img.src = url; }).catch(() => {});
+  const sc = 2, cv = document.createElement('canvas'); cv.width = Math.ceil(w * sc); cv.height = Math.ceil(h * sc); const cx = cv.getContext('2d'); cx.scale(sc, sc); cx.drawImage(img, 0, 0, w, h); URL.revokeObjectURL(url);
+  cv.toBlob(b => { if (b) SWDownload(name + '.png', b); }, 'image/png');
+}
+function shapePNG(s){ const pad = s.sh ? 20 : 4; let svg = shapeSVG(s).replace('viewBox="0 0 ' + Math.max(2, s.w) + ' ' + Math.max(2, s.h) + '"', `viewBox="${-pad} ${-pad} ${s.w + 2 * pad} ${s.h + 2 * pad}"`).replace(/width="[\d.]+" height="[\d.]+"/, `width="${s.w + 2 * pad}" height="${s.h + 2 * pad}"`); svgToPNG(svg, s.w + 2 * pad, s.h + 2 * pad, 'forme'); }
+function chartPNG(ch){ svgToPNG(chartSVG(ch, ch.w, ch.h), ch.w, ch.h, (ch.title || 'graphique').replace(/[^\w\- ]+/g, '').trim() || 'graphique'); }
+/* images */
+function pickImage(){ let f = g$('shpFile'); if (!f){ f = document.createElement('input'); f.type = 'file'; f.id = 'shpFile'; f.accept = 'image/png,image/jpeg,image/webp,image/gif'; f.hidden = true; document.body.appendChild(f); f.onchange = () => { const file = f.files[0]; f.value = ''; if (file) importImage(file); }; } f.click(); }
+function importImage(file){
+  if (!/^image\/(png|jpeg|webp|gif)$/.test(file.type)) return toast('Format non pris en charge (PNG, JPEG, WebP ou GIF)');
+  const fr = new FileReader(); fr.onload = () => { const im = new Image(); im.onload = () => {
+    const mx = 1000, k = Math.min(1, mx / Math.max(im.width, im.height)), w = Math.max(1, Math.round(im.width * k)), h = Math.max(1, Math.round(im.height * k)), cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(im, 0, 0, w, h);
+    const png = file.type === 'image/png' || file.type === 'image/gif'; let url = cv.toDataURL(png ? 'image/png' : 'image/jpeg', .82); if (png && url.length > 450000) url = cv.toDataURL('image/jpeg', .8);
+    if (url.length > 700000) return toast('Image trop lourde : choisissez une image plus petite');
+    const aid = 'a' + uidS(); WB.assets = WB.assets || {}; WB.assets[aid] = url; const dw = Math.min(320, w), dh = Math.round(dw * h / w); addShape({k:'img', asset:aid, w:dw, h:dh, fill:'none', sw:0}); toast('Image ajoutée'); }; im.onerror = () => toast('Image illisible'); im.src = fr.result; };
+  fr.readAsDataURL(file);
+}
+/* tiroir « Formes » */
+function shapesPanelHTML(){
+  const s = SHP.sel && shapeById(SHP.sel), tabs = [['shapes', 'Formes'], ['lines', 'Lignes'], ['text', 'Texte'], ['elems', 'Éléments'], ['img', 'Images']];
+  const lib = (() => { const t = SHP.tab;
+    if (t === 'shapes') return `<div class="shp-grid">${Object.entries(SHAPES).map(([k, [n, f, eo]]) => `<button type="button" data-nsh="${k}" title="${n}"><svg viewBox="0 0 40 40"><path d="${f(34, 34, {})}" transform="translate(3 3)" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="1.6"${eo ? ' fill-rule="evenodd"' : ''}/></svg></button>`).join('')}</div>`;
+    if (t === 'lines') return `<div class="shp-lines">${Object.entries(LINES).map(([k, [n]]) => `<button type="button" data-nsh="${k}"><svg viewBox="0 0 80 24"><path d="${k === 'curve' ? 'M4,20C30,20 50,4 74,4' : k === 'elb' ? 'M4,20H40V4H74' : 'M4,12H74'}" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>${k !== 'ln' && k !== 'curve' ? '<path d="M66,6l8,' + (k === 'elb' ? '-2' : '6') + 'l-8,6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" transform="translate(0 ' + (k === 'elb' ? '-4' : '0') + ')"/>' : ''}</svg>${n}</button>`).join('')}</div>`;
+    if (t === 'text') return `<div class="shp-txt">${TEXT_PRESETS.map((p, i) => `<button type="button" data-ntx="${i}" style="font:${p.i ? 'italic ' : ''}${p.b ? '700 ' : ''}${Math.min(22, p.fs * .7)}px ${fontStack(p.ff || 'Inter')};color:${p.fc || '#1A1726'};${p.fill ? `background:${p.fill};` : ''}">${p.n}</button>`).join('')}</div>`;
+    if (t === 'elems') return `<div class="shp-pre">${SHAPE_PRESETS.map((p, i) => `<button type="button" data-npre="${i}"><span class="shp-pv"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid meet">${shapeSVG({...p, id:'pv' + i, w:100, h:60, text:'', sh:0}).replace(/<svg[^>]*>/, '').replace('</svg>', '')}</svg></span>${p.n}</button>`).join('')}</div>` + Object.entries(EMOJIS).map(([g, l]) => `<p class="pn-h">${g}</p><div class="shp-emo">${l.map(e => `<button type="button" data-nem="${e}">${e}</button>`).join('')}</div>`).join('');
+    return `<button type="button" class="pn-wide" data-nimg="1">${IC.plus}Importer une image…</button><p class="pn-hint">PNG, JPEG, WebP ou GIF. L'image est réduite pour rester légère. Formats acceptés aussi par glisser-déposer sur la feuille.</p>`; })();
+  let props = '';
+  if (s){ const L = !!LINES[s.k], T = s.k !== 'img' && !L, cl = (k, d, n) => `<label class="shp-c">${n}<input type="color" data-sp="${k}" value="${okC(s[k], d)}"></label>`, rg = (k, n, a, b, st, d) => `<label class="shp-r">${n}<input type="range" data-spr="${k}" min="${a}" max="${b}" step="${st}" value="${s[k] ?? d}"><output>${s[k] ?? d}</output></label>`;
+    props = `<div class="shp-props"><p class="pn-h">Propriétés <small>${escH((SHAPES[s.k]?.[0] || LINES[s.k]?.[0] || {text:'Texte', emoji:'Icône', img:'Image'}[s.k] || ''))}</small></p>
+      ${L ? '' : `<div class="shp-row">${s.k === 'img' ? '' : cl('fill', '#7B3FF2', 'Remplissage')}${s.k === 'img' || !s.fill2 ? '' : cl('fill2', '#3D63FF', 'Dégradé')}${cl('stroke', '#1A1726', 'Trait')}</div>`}
+      ${L ? cl('stroke', '#1A1726', 'Couleur') : ''}${s.k === 'img' || L ? '' : `<div class="shp-row"><button type="button" data-sf="grad">${s.fill2 ? 'Retirer le dégradé' : 'Dégradé'}</button><button type="button" data-sf="nofill">${s.fill === 'none' ? 'Remplir' : 'Sans remplissage'}</button></div>`}
+      ${rg('sw', 'Épaisseur du trait', 0, 16, 1, L ? 3 : 0)}${s.fill2 ? rg('gdeg', 'Angle du dégradé', 0, 360, 15, 0) : ''}${rg('op', 'Opacité', 0, 1, .05, 1)}${rg('rot', 'Rotation', 0, 360, 1, 0)}${['round', 'text'].includes(s.k) ? rg('r', 'Arrondi', 0, .5, .02, s.k === 'round' ? .2 : 0) : ''}${s.k === 'img' ? rg('r', 'Arrondi (0,5 = cercle)', 0, .5, .02, 0) : ''}
+      <div class="shp-row"><span>Trait</span><div class="seg" data-segf="dash">${[['', 'Plein'], ['d', 'Tirets'], ['o', 'Points']].map(([k, n]) => `<button type="button" data-sd="${k}" aria-checked="${(s.dash || '') === k}">${n}</button>`).join('')}</div></div>
+      <div class="shp-row"><span>Ombre</span><div class="seg">${[[0, 'Aucune'], [1, 'Douce'], [2, 'Nette']].map(([k, n]) => `<button type="button" data-ssh="${k}" aria-checked="${(s.sh || 0) === k}">${n}</button>`).join('')}</div></div>
+      ${s.k === 'img' ? `<div class="shp-row"><span>Filtre</span><select data-sflt>${[['', 'Aucun'], ['gray', 'Noir et blanc'], ['sepia', 'Sépia'], ['blur', 'Flou'], ['bright', 'Éclairci'], ['dark', 'Assombri'], ['contrast', 'Contraste'], ['sat', 'Saturé'], ['invert', 'Inversé']].map(([k, n]) => `<option value="${k}"${(s.flt || '') === k ? ' selected' : ''}>${n}</option>`).join('')}</select></div><div class="shp-row"><span>Cadrage</span><div class="seg">${[['', 'Remplir'], ['contain', 'Ajuster']].map(([k, n]) => `<button type="button" data-sfit="${k}" aria-checked="${(s.fit || '') === k}">${n}</button>`).join('')}</div></div>` : ''}
+      ${T ? `<p class="pn-h">Texte</p><textarea class="shp-ta" data-stext rows="2" placeholder="Écrivez ici…">${escH(s.text || '')}</textarea>
+        <div class="shp-row"><select data-sfont>${FONTS.map(([f]) => `<option${(s.ff || themeColors().fb) === f ? ' selected' : ''}>${escH(f)}</option>`).join('')}</select><input type="number" min="6" max="200" data-sfs value="${s.fs || 14}" title="Taille"></div>
+        <div class="shp-row">${cl('fc', '#1A1726', 'Couleur')}<button type="button" data-stg="b" class="${s.b ? 'on' : ''}"><b>G</b></button><button type="button" data-stg="i" class="${s.i ? 'on' : ''}"><i>I</i></button><button type="button" data-stg="u" class="${s.u ? 'on' : ''}"><u>S</u></button><button type="button" data-stg="glow" class="${s.glow ? 'on' : ''}">Néon</button></div>
+        <div class="shp-row"><div class="seg">${[['l', 'Gauche'], ['c', 'Centre'], ['r', 'Droite']].map(([k, n]) => `<button type="button" data-sha="${k}" aria-checked="${(s.ha || 'c') === k}">${n}</button>`).join('')}</div><div class="seg">${[['t', 'Haut'], ['m', 'Milieu'], ['b', 'Bas']].map(([k, n]) => `<button type="button" data-sva="${k}" aria-checked="${(s.va || 'm') === k}">${n}</button>`).join('')}</div></div>` : ''}
+      <div class="shp-row"><button type="button" data-so2="front">Premier plan</button><button type="button" data-so2="up">Avancer</button><button type="button" data-so2="down">Reculer</button><button type="button" data-so2="back">Arrière</button></div>
+      <div class="shp-row"><button type="button" data-so2="dup">Dupliquer</button><button type="button" data-so2="flip">Retourner</button><button type="button" data-so2="lock">${s.lock ? 'Déverrouiller' : 'Verrouiller'}</button><button type="button" data-so2="png">PNG</button><button type="button" data-so2="del" class="danger">Supprimer</button></div></div>`; }
+  return `${props}<div class="seg shp-tabs">${tabs.map(([k, n]) => `<button type="button" data-stab="${k}" aria-checked="${SHP.tab === k}">${n}</button>`).join('')}</div>${lib}`;
+}
+function onShapesPanelClick(e){
+  const t = e.target, q = a => t.closest(`[${a}]`); let b;
+  if ((b = q('data-stab'))){ SHP.tab = b.dataset.stab; return renderPanel(), true; }
+  if ((b = q('data-nsh'))){ newShape(b.dataset.nsh); return true; }
+  if ((b = q('data-ntx'))){ const p = TEXT_PRESETS[+b.dataset.ntx]; const s = addShape({k:'text', w:Math.max(160, p.fs * 8), h:Math.round(p.fs * 2.2), fill:p.fill || 'none', sw:0, ...p, ha:'l', n:undefined}); if (s) setTimeout(() => shapeEditText(s.id), 50); return true; }
+  if ((b = q('data-npre'))){ const p = {...SHAPE_PRESETS[+b.dataset.npre]}; delete p.n; addShape(p); return true; }
+  if ((b = q('data-nem'))){ addShape({k:'emoji', text:b.dataset.nem, w:80, h:80, fill:'none', sw:0}); return true; }
+  if (q('data-nimg')){ pickImage(); return true; }
+  const s = SHP.sel && shapeById(SHP.sel); if (!s) return false;
+  if ((b = q('data-so2'))){ const k = b.dataset.so2; if (k === 'dup') dupShape(s.id); else if (k === 'del') delShape(s.id); else if (k === 'flip') updShape(s.id, {flip:s.flip ? undefined : 1}); else if (k === 'lock') updShape(s.id, {lock:s.lock ? undefined : 1}); else if (k === 'png') shapePNG(s); else shapeZ(s.id, k); renderPanel(); return true; }
+  if ((b = q('data-sf'))){ if (b.dataset.sf === 'grad') updShape(s.id, s.fill2 ? {fill2:null} : {fill2:'#3D63FF', gdeg:135}); else updShape(s.id, {fill:s.fill === 'none' ? '#7B3FF2' : 'none'}); renderPanel(); return true; }
+  if ((b = q('data-sd'))){ updShape(s.id, {dash:b.dataset.sd}); renderPanel(); return true; }
+  if ((b = q('data-ssh'))){ updShape(s.id, {sh:+b.dataset.ssh}); renderPanel(); return true; }
+  if ((b = q('data-sfit'))){ updShape(s.id, {fit:b.dataset.sfit}); renderPanel(); return true; }
+  if ((b = q('data-stg'))){ updShape(s.id, {[b.dataset.stg]:s[b.dataset.stg] ? null : 1}); renderPanel(); return true; }
+  if ((b = q('data-sha'))){ updShape(s.id, {ha:b.dataset.sha}); renderPanel(); return true; }
+  if ((b = q('data-sva'))){ updShape(s.id, {va:b.dataset.sva}); renderPanel(); return true; }
+  return false;
+}
+function onShapesPanelInput(e){
+  const t = e.target, s = SHP.sel && shapeById(SHP.sel); if (!s) return false; const d = t.dataset;
+  if (d.sp){ updShape(s.id, {[d.sp]:t.value}, 'Couleur'); if (d.sp === 'stroke' && !s.sw) updShape(s.id, {sw:2}); return true; }
+  if (d.spr){ t.nextElementSibling.textContent = t.value; updShape(s.id, {[d.spr]:+t.value}, 'Forme'); return true; }
+  if (d.stext != null){ updShape(s.id, {text:t.value}, 'Texte de la forme'); return true; }
+  if (d.sfont != null){ ensureFont(t.value); updShape(s.id, {ff:t.value}, 'Police'); return true; }
+  if (d.sfs != null){ updShape(s.id, {fs:clamp(+t.value || 14, 6, 200)}, 'Taille'); return true; }
+  if (d.sflt != null){ updShape(s.id, {flt:t.value}, 'Filtre'); return true; }
+  return false;
+}
+
+/* ==== 68-analyse.js ==== */
+/* ---------- Analyse : validation des données, tableau croisé, mini-graphiques, protection, valeur cible, mise en page et impression ---------- */
+const frN = n => FN_FR_OF[n] || n;
+const qSh = n => /^[A-Za-z0-9_]+$/.test(n) ? n : `'${n.replace(/'/g, "''")}'`;
+/* ----- validation avec règles (nombre, date, longueur, formule) ----- */
+const DV_TYPES = [['list', 'Liste'], ['whole', 'Nombre entier'], ['decimal', 'Nombre décimal'], ['date', 'Date'], ['len', 'Longueur du texte'], ['custom', 'Formule personnalisée']];
+const DV_OPS = [['between', 'entre'], ['notbetween', 'pas entre'], ['eq', 'égal à'], ['ne', 'différent de'], ['gt', 'supérieur à'], ['lt', 'inférieur à'], ['ge', 'supérieur ou égal à'], ['le', 'inférieur ou égal à']];
+const vrAt = (sh, r, c) => sh.dv.find(d => d.type && d.type !== 'list' && (() => { const g = parseRange(d.range); return g && r >= g.r1 && r <= g.r2 && c >= g.c1 && c <= g.c2; })());
+function dvValue(x, type){ if (type === 'date'){ const d = parseDateFr(String(x)); if (d) return d.v; } const n = parseNumberFr(String(x)); return n != null ? n : (typeof x === 'number' ? x : null); }
+function dvCheck(sh, r, c, raw){
+  const d = vrAt(sh, r, c); if (!d || raw === '' || raw == null) return true; let ok = true;
+  const txt = String(raw);
+  if (d.type === 'custom'){ try { ok = toBool(scalar(ev(parseFormula(shiftFormula(String(d.a || '').replace(/^=/, ''), r - (parseRange(d.range)?.r1 || r), c - (parseRange(d.range)?.c1 || c))), {wb:WB, sh, r, c, override:{r, c, raw}}))); } catch(e){ ok = false; } }
+  else if (d.type === 'len'){ const n = txt.length, a = +d.a, b = +d.b; ok = cmpOp(n, d.op, a, b); }
+  else { const v = raw[0] === '=' ? null : dvValue(raw, d.type); if (v == null) ok = false; else { if (d.type === 'whole' && !Number.isInteger(v)) ok = false; else ok = cmpOp(v, d.op, dvValue(d.a, d.type), dvValue(d.b, d.type)); } }
+  return ok;
+}
+function cmpOp(v, op, a, b){ switch (op){ case 'between': return v >= Math.min(a, b) && v <= Math.max(a, b); case 'notbetween': return v < Math.min(a, b) || v > Math.max(a, b); case 'eq': return v === a; case 'ne': return v !== a; case 'gt': return v > a; case 'lt': return v < a; case 'ge': return v >= a; case 'le': return v <= a; } return true; }
+function dvMessage(d){ return d.err || ({whole:'Entrez un nombre entier', decimal:'Entrez un nombre', date:'Entrez une date', len:'Longueur du texte non valide', custom:'Valeur non valide'}[d.type] + (d.type !== 'custom' && d.op ? ' ' + (DV_OPS.find(o => o[0] === d.op)?.[1] || '') + ' ' + d.a + (d.op.endsWith('between') ? ' et ' + d.b : '') : '') + '.'); }
+function dvRuleDlg(){
+  const sh = sh0(), rg = rangeA1({...SEL, r2:Math.min(SEL.r2, SEL.r1 + 4999), c2:Math.min(SEL.c2, SEL.c1 + 50)}), cur = vrAt(sh, SEL.r, SEL.c);
+  SWDlg.open(`<h3>Règle de validation</h3><p class="dlg-p">Les cellules ${escH(rg)} n'accepteront que les valeurs autorisées.</p>
+    <label class="pgf">Autoriser<select id="vrT">${DV_TYPES.map(([k, n]) => `<option value="${k}"${(cur?.type || 'whole') === k ? ' selected' : ''}>${n}</option>`).join('')}</select></label>
+    <div id="vrNum"><label class="pgf">Condition<select id="vrO">${DV_OPS.map(([k, n]) => `<option value="${k}"${(cur?.op || 'between') === k ? ' selected' : ''}>${n}</option>`).join('')}</select></label>
+      <div class="vr-2"><label class="pgf">Valeur<input id="vrA" value="${escH(cur?.a ?? '')}"></label><label class="pgf" id="vrBw">et<input id="vrB" value="${escH(cur?.b ?? '')}"></label></div></div>
+    <label class="pgf" id="vrF" hidden>Formule (VRAI = valide), par exemple =ESTNUM(A1)<input id="vrFx" value="${escH(cur?.type === 'custom' ? cur.a : '')}"></label>
+    <label class="pgf">Message d'erreur<input id="vrE" value="${escH(cur?.err || '')}" placeholder="Message personnalisé (facultatif)"></label>
+    <div class="pgf">En cas d'erreur<div class="seg" id="vrS">${[['stop', 'Refuser'], ['warn', 'Avertir'], ['info', 'Informer']].map(([k, n]) => `<button type="button" data-s="${k}" aria-checked="${(cur?.style || 'stop') === k}">${n}</button>`).join('')}</div></div>
+    <div class="dlg-acts">${cur ? '<button class="ap-btn alt danger-t" id="vrDel">Retirer</button>' : ''}<button class="ap-btn alt" data-dlg="close">Annuler</button><button class="ap-btn" id="vrOk">Appliquer</button></div>`, d => {
+    let style = cur?.style || 'stop'; const T = d.querySelector('#vrT'), sync = () => { d.querySelector('#vrNum').hidden = T.value === 'custom' || T.value === 'list'; d.querySelector('#vrF').hidden = T.value !== 'custom'; d.querySelector('#vrBw').hidden = !d.querySelector('#vrO').value.endsWith('between'); };
+    T.onchange = () => { if (T.value === 'list'){ SWDlg.close(); return dvDialog(); } sync(); }; d.querySelector('#vrO').onchange = sync; sync();
+    d.querySelectorAll('#vrS [data-s]').forEach(b => b.onclick = () => { style = b.dataset.s; d.querySelectorAll('#vrS [data-s]').forEach(x => x.setAttribute('aria-checked', x === b)); });
+    d.querySelector('#vrOk').onclick = () => { const type = T.value, o = d.querySelector('#vrO').value; const a = type === 'custom' ? d.querySelector('#vrFx').value : d.querySelector('#vrA').value, b = d.querySelector('#vrB').value; if (!a) return toast('Indiquez la valeur ou la formule'); if (type !== 'custom' && dvValue(a, type) == null) return toast('Valeur non reconnue');
+      SWDlg.close(); tx('Validation des données', () => { sh.dv = sh.dv.filter(x => x !== cur); sh.dv.push({range:rg, type, op:o, a, b, err:d.querySelector('#vrE').value.trim() || undefined, style}); }); schedule(); toast('Règle de validation appliquée'); };
+    const del = d.querySelector('#vrDel'); if (del) del.onclick = () => { SWDlg.close(); tx('Retirer la validation', () => { sh.dv = sh.dv.filter(x => x !== cur); }); };
+  });
+}
+/* appelée à la validation d'une saisie : renvoie false si la saisie est refusée */
+function dvGuard(sh, r, c, raw){
+  if (dvCheck(sh, r, c, raw)) return true; const d = vrAt(sh, r, c); const msg = dvMessage(d);
+  if (d.style === 'info'){ toast('Attention : ' + msg); return true; }
+  if (d.style === 'warn') return confirm(msg + '\n\nConserver quand même cette valeur ?');
+  toast(msg); return false;
+}
+/* ----- protection ----- */
+async function sha(t){ const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('sc:' + t)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); }
+const cellLocked = (sh, r, c) => !(sh.get(r, c)?.s?.ul);
+function protectDlg(){
+  const sh = sh0(), p = sh.prot;
+  if (p?.on){ return SWDlg.open(`<h3>Feuille protégée</h3><p class="dlg-p">Les cellules verrouillées ne peuvent plus être modifiées.${p.h ? ' Entrez le mot de passe pour retirer la protection.' : ''}</p>${p.h ? '<label class="pgf">Mot de passe<input id="pwI" type="password" autocomplete="off"></label>' : ''}<div class="dlg-acts"><button class="ap-btn alt" data-dlg="close">Fermer</button><button class="ap-btn" id="pwOk">Retirer la protection</button></div>`, d => {
+    d.querySelector('#pwOk').onclick = async () => { if (p.h && await sha(d.querySelector('#pwI').value) !== p.h) return toast('Mot de passe incorrect'); SWDlg.close(); tx('Retirer la protection', () => { sh.prot = null; }); renderTabs(); schedule(); toast('Protection retirée'); }; }); }
+  SWDlg.open(`<h3>Protéger la feuille « ${escH(sh.name)} »</h3><p class="dlg-p">Toutes les cellules sont verrouillées par défaut. Pour laisser des cellules modifiables, sélectionnez-les puis utilisez « Déverrouiller les cellules » avant de protéger.</p>
+    <label class="pgf">Mot de passe (facultatif)<input id="pwI" type="password" autocomplete="new-password"></label><label class="pop-toggle"><input type="checkbox" id="pwS" checked><span><b>Autoriser la sélection et la mise en forme des lignes et colonnes</b></span></label>
+    <div class="dlg-acts"><button class="ap-btn alt" data-dlg="close">Annuler</button><button class="ap-btn" id="pwOk">Protéger</button></div>`, d => {
+    d.querySelector('#pwOk').onclick = async () => { const pw = d.querySelector('#pwI').value, h = pw ? await sha(pw) : ''; SWDlg.close(); tx('Protéger la feuille', () => { sh.prot = {on:true, ...(h ? {h} : {})}; }); renderTabs(); schedule(); toast('Feuille protégée'); }; });
+}
+function lockCells(lock){ styleSel({ul:lock ? null : 1}, lock ? 'Verrouiller les cellules' : 'Déverrouiller les cellules'); toast(lock ? 'Cellules verrouillées' : 'Cellules déverrouillées : modifiables même si la feuille est protégée'); }
+/* ----- mini-graphiques ----- */
+const SPK = [['line', 'Courbe'], ['col', 'Colonnes'], ['win', 'Gain / perte']];
+function sparkIndex(sh){ const m = new Map(); for (const s of sh.spark || []) m.set(KEY(s.r, s.c), s); return m; }
+function sparkSVG(s, sh, w, h){
+  const g = parseRange(s.src); if (!g) return ''; const sr = s.sheet ? WB.byName(s.sheet) || sh : sh, v = []; for (let r = g.r1; r <= g.r2; r++) for (let c = g.c1; c <= g.c2; c++){ const x = WB.val(sr, r, c); v.push(typeof x === 'number' ? x : null); }
+  const nums = v.filter(x => x != null); if (!nums.length) return ''; const col = okC(s.color, '#7B3FF2'), neg = okC(s.neg, '#F2387A'), mn = Math.min(...nums, s.type === 'line' ? Infinity : 0), mx = Math.max(...nums, s.type === 'line' ? -Infinity : 0), span = mx - mn || 1, n = v.length, pad = 3;
+  const X = i => pad + (n > 1 ? i * (w - 2 * pad) / (n - 1) : (w - 2 * pad) / 2), Y = x => pad + (1 - (x - mn) / span) * (h - 2 * pad);
+  let o = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" class="spk">`;
+  if (s.type === 'line'){ const pts = v.map((x, i) => x == null ? null : [X(i), Y(x)]).filter(Boolean); o += `<path d="${pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join('')}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>`; const hi = nums.indexOf(mx), lo = v.indexOf(mn), last = v.length - 1; if (s.pts !== false){ const mk = (i, c2) => v[i] != null ? `<circle cx="${X(i).toFixed(1)}" cy="${Y(v[i]).toFixed(1)}" r="2.4" fill="${c2}"/>` : ''; o += mk(v.indexOf(mx), '#2FBF71') + mk(v.indexOf(mn), neg) + mk(last, col); } }
+  else { const bw = Math.max(1.5, (w - 2 * pad) / n - 1.5), z = s.type === 'win' ? h / 2 : Y(0); v.forEach((x, i) => { if (x == null) return; const cx = pad + i * ((w - 2 * pad) / n) + .75; if (s.type === 'win'){ const up = x >= 0; o += `<rect x="${cx.toFixed(1)}" y="${up ? 3 : z}" width="${bw.toFixed(1)}" height="${z - 3}" rx="1" fill="${up ? col : neg}"/>`; } else { const y = Y(x); o += `<rect x="${cx.toFixed(1)}" y="${Math.min(y, z).toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1, Math.abs(z - y)).toFixed(1)}" rx="1" fill="${x < 0 ? neg : col}"/>`; } }); }
+  return o + '</svg>';
+}
+function sparkDlg(){
+  const sh = sh0(), g = {r1:SEL.r1, c1:SEL.c1, r2:Math.min(SEL.r2, sh.used().r), c2:Math.min(SEL.c2, sh.used().c)}; if (g.r2 < g.r1 || g.c2 < g.c1 || (g.c1 === g.c2 && g.r1 === g.r2)) return toast('Sélectionnez les valeurs (une ligne par mini-graphique), par exemple B2:G10');
+  const byRow = g.c2 - g.c1 >= g.r2 - g.r1;
+  SWDlg.open(`<h3>Mini-graphiques</h3><p class="dlg-p">Un petit graphique par ${byRow ? 'ligne' : 'colonne'} de ${escH(rangeA1(g))}, placé ${byRow ? 'dans la colonne qui suit la sélection' : 'sous la sélection'}.</p>
+    <div class="pgf">Type<div class="seg" id="spT">${SPK.map(([k, n], i) => `<button type="button" data-t="${k}" aria-checked="${!i}">${n}</button>`).join('')}</div></div>
+    <label class="pgf ce-col">Couleur<span><input type="color" id="spC" value="#7B3FF2"></span></label><div class="dlg-acts"><button class="ap-btn alt" data-dlg="close">Annuler</button>${(sh.spark || []).length ? '<button class="ap-btn alt danger-t" id="spX">Tout retirer</button>' : ''}<button class="ap-btn" id="spOk">Créer</button></div>`, d => {
+    let type = 'line'; d.querySelectorAll('#spT [data-t]').forEach(b => b.onclick = () => { type = b.dataset.t; d.querySelectorAll('#spT [data-t]').forEach(x => x.setAttribute('aria-checked', x === b)); });
+    d.querySelector('#spOk').onclick = () => { SWDlg.close(); tx('Mini-graphiques', () => { const col = d.querySelector('#spC').value, keep = (sh.spark || []).filter(x => !(byRow ? x.c === g.c2 + 1 && x.r >= g.r1 && x.r <= g.r2 : x.r === g.r2 + 1 && x.c >= g.c1 && x.c <= g.c2)); sh.spark = keep;
+      if (byRow) for (let r = g.r1; r <= g.r2; r++) sh.spark.push({r, c:g.c2 + 1, src:rangeA1({r1:r, c1:g.c1, r2:r, c2:g.c2}), type, color:col}); else for (let c = g.c1; c <= g.c2; c++) sh.spark.push({r:g.r2 + 1, c, src:rangeA1({r1:g.r1, c1:c, r2:g.r2, c2:c}), type, color:col});
+      if (byRow && !sh.cw[g.c2 + 1]) sh.cw[g.c2 + 1] = 130; }); layout(); schedule(); };
+    const x = d.querySelector('#spX'); if (x) x.onclick = () => { SWDlg.close(); tx('Retirer les mini-graphiques', () => { sh.spark = []; }); schedule(); };
+  });
+}
+/* ----- valeur cible ----- */
+function goalDlg(){
+  SWDlg.open(`<h3>Valeur cible</h3><p class="dlg-p">Trouve la valeur à saisir dans une cellule pour qu'une formule atteigne le résultat voulu.</p>
+    <label class="pgf">Cellule à définir (formule)<input id="gsF" value="${A1(SEL.r, SEL.c)}"></label><label class="pgf">Pour obtenir la valeur<input id="gsV" placeholder="Par exemple 10000"></label><label class="pgf">En modifiant la cellule<input id="gsC" placeholder="Par exemple B2"></label>
+    <div class="dlg-acts"><button class="ap-btn alt" data-dlg="close">Annuler</button><button class="ap-btn" id="gsOk">Résoudre</button></div>`, d => {
+    d.querySelector('#gsOk').onclick = () => { const f = parseA1(d.querySelector('#gsF').value.trim().toUpperCase()), c = parseA1(d.querySelector('#gsC').value.trim().toUpperCase()), t = parseNumberFr(d.querySelector('#gsV').value); if (!f || !c || t == null) return toast('Renseignez les trois champs'); const sh = sh0();
+      const cur = WB.val(sh, c.r, c.c); const x0 = typeof cur === 'number' ? cur : 0;
+      const ev1 = x => { sh.setRawSilent(c.r, c.c, String(x)); WB.recalc(); const y = WB.val(sh, f.r, f.c); if (typeof y !== 'number') throw 0; return y - t; };
+      const orig = sh.get(c.r, c.c)?.raw ?? ''; let res = null;
+      try { let a = x0, b = x0 + Math.max(1, Math.abs(x0) * .1), fa = ev1(a), fb = ev1(b); for (let i = 0; i < 60 && Math.abs(fb) > 1e-9; i++){ if (fb === fa) break; const n = b - fb * (b - a) / (fb - fa); a = b; fa = fb; b = n; fb = ev1(b); } if (Math.abs(fb) < 1e-6) res = b; } catch(e){}
+      sh.setRawSilent(c.r, c.c, orig); WB.recalc();
+      if (res == null){ schedule(); return toast('Aucune solution trouvée : vérifiez que la formule dépend bien de la cellule modifiée'); }
+      SWDlg.close(); const v = +res.toPrecision(10); tx('Valeur cible', () => { sh.setRaw(c.r, c.c, String(v).replace('.', ',')); }); schedule(); toast(`Solution : ${A1(c.r, c.c)} = ${String(v).replace('.', ',')}`); };
+  });
+}
+/* ----- tableau croisé dynamique (formules vivantes dans une nouvelle feuille) ----- */
+function pivotDlg(){
+  const sh = sh0(), g = trimTotal(sh, SEL.r1 === SEL.r2 && SEL.c1 === SEL.c2 ? currentRegion(SEL.r, SEL.c) : {r1:SEL.r1, c1:SEL.c1, r2:Math.min(SEL.r2, sh.used().r), c2:Math.min(SEL.c2, sh.used().c)});
+  if (g.r2 <= g.r1 || g.c2 <= g.c1) return toast('Cliquez dans un tableau avec des en-têtes de colonnes');
+  const hd = range(g.c1, g.c2).map(c => ({c, n:String(WB.val(sh, g.r1, c) ?? 'Colonne ' + colName(c))})), opt = (sel, none) => `${none ? '<option value="">(aucun)</option>' : ''}${hd.map((h, i) => `<option value="${h.c}"${sel === i ? ' selected' : ''}>${escH(h.n)}</option>`).join('')}`;
+  const numCol = hd.findIndex(h => typeof WB.val(sh, g.r1 + 1, h.c) === 'number'), AG = [['sum', 'Somme'], ['count', 'Nombre'], ['avg', 'Moyenne'], ['min', 'Minimum'], ['max', 'Maximum']];
+  SWDlg.open(`<h3>Tableau croisé dynamique</h3><p class="dlg-p">Source : ${escH(rangeA1(g))}. Le résultat est créé dans une nouvelle feuille, avec des formules qui suivent vos données.</p>
+    <div class="vr-2"><label class="pgf">Lignes<select id="pvR">${opt(0)}</select></label><label class="pgf">Colonnes<select id="pvC">${opt(-1, true)}</select></label></div>
+    <div class="vr-2"><label class="pgf">Valeurs<select id="pvV">${opt(numCol >= 0 ? numCol : 1)}</select></label><label class="pgf">Calcul<select id="pvA">${AG.map(([k, n]) => `<option value="${k}">${n}</option>`).join('')}</select></label></div>
+    <label class="pgf" id="pvGw">Grouper les dates<select id="pvG"><option value="">Non</option><option value="yyyy">Par année</option><option value="yyyy-mm">Par mois</option></select></label>
+    <label class="pop-toggle"><input type="checkbox" id="pvT" checked><span><b>Totaux</b></span></label><label class="pop-toggle"><input type="checkbox" id="pvCh"><span><b>Ajouter un graphique</b></span></label>
+    <div class="dlg-acts"><button class="ap-btn alt" data-dlg="close">Annuler</button><button class="ap-btn" id="pvOk">Créer</button></div>`, d => {
+    d.querySelector('#pvOk').onclick = () => {
+      const rc = +d.querySelector('#pvR').value, cc = d.querySelector('#pvC').value === '' ? null : +d.querySelector('#pvC').value, vc = +d.querySelector('#pvV').value, ag = d.querySelector('#pvA').value, grp = d.querySelector('#pvG').value, tot = d.querySelector('#pvT').checked, chart = d.querySelector('#pvCh').checked;
+      if (rc === cc) return toast('Choisissez des champs différents pour les lignes et les colonnes');
+      if (grp && (ag === 'min' || ag === 'max')) return toast('Min et max ne se combinent pas avec le groupement de dates');
+      const last = g.r2 + 500, S = (c, a = true) => `${qSh(sh.name)}!${a ? '$' : ''}${colName(c)}${a ? '$' : ''}${g.r1 + 2}:${a ? '$' : ''}${colName(c)}${a ? '$' : ''}${last}`, Rg = S(rc), Cg = cc != null ? S(cc) : '', Vg = S(vc);
+      const uniq = c => { const m = new Map(); for (let r = g.r1 + 1; r <= g.r2; r++){ const v = WB.val(sh, r, c); if (v == null || v === '') continue; const key = grp && typeof v === 'number' ? fmtDate(v, grp) : v; if (!m.has(typeof key === 'string' ? key.toLowerCase() : key)) m.set(typeof key === 'string' ? key.toLowerCase() : key, key); } return [...m.values()].sort((a, b) => cmpVal(a, b)); };
+      const rows = uniq(rc), cols = cc != null ? uniq(cc) : [null]; if (!rows.length) return toast('Aucune donnée dans le champ des lignes'); if (rows.length * cols.length > 5000) return toast('Trop de combinaisons : choisissez d\'autres champs');
+      const cell = (rl, cl) => { const rK = grp ? `TEXTE(${Rg};"${grp}")` : null;
+        if (grp){ const cond = `(${rK}=${rl})` + (cl ? `*(${Cg}=${cl})` : ''); const sm = `SOMMEPROD(${cond}*${Vg}*1)`, ct = `SOMMEPROD(${cond}*1)`; return ag === 'sum' ? sm : ag === 'count' ? ct : `SIERREUR(${sm}/${ct};0)`; }
+        const F = {sum:frN('SUMIFS'), count:frN('COUNTIFS'), avg:frN('AVERAGEIFS'), min:frN('MINIFS'), max:frN('MAXIFS')}[ag]; const crit = `${Rg};${rl}` + (cl ? `;${Cg};${cl}` : ''); const f = ag === 'count' ? `${F}(${crit})` : `${F}(${Vg};${crit})`; return ag === 'avg' || ag === 'min' || ag === 'max' ? `SIERREUR(${f};0)` : f; };
+      const aggFn = {sum:frN('SUM'), count:frN('SUM'), avg:frN('AVERAGE'), min:frN('MIN'), max:frN('MAX')}[ag];
+      wbOp('Tableau croisé dynamique', () => {
+        const ns = WB.addSheet(uniqueSheetName('Tableau croisé'), WB.active + 1); WB.active = WB.sheets.indexOf(ns);
+        const title = `${{sum:'Somme', count:'Nombre', avg:'Moyenne', min:'Minimum', max:'Maximum'}[ag]} de ${hd.find(h => h.c === vc).n}`; ns.setRaw(0, 0, title); ns.setStyle(0, 0, {b:1, fs:14});
+        const hr = 2, c0 = 0; ns.setRaw(hr, 0, hd.find(h => h.c === rc).n + (cc != null ? ' \\ ' + hd.find(h => h.c === cc).n : ''));
+        cols.forEach((cv, j) => { if (cv != null) ns.setRaw(hr, 1 + j, typeof cv === 'string' && /^[=+\-@]/.test(cv) ? "'" + cv : String(cv)); }); if (cc == null) ns.setRaw(hr, 1, 'Valeur'); const nc = Math.max(1, cols.length);
+        if (tot && cc != null) ns.setRaw(hr, 1 + nc, 'Total');
+        rows.forEach((rv, i) => { const rr = hr + 1 + i; ns.setRaw(rr, 0, typeof rv === 'string' && /^[=+\-@]/.test(rv) ? "'" + rv : grp ? "'" + rv : String(rv));
+          for (let j = 0; j < nc; j++){ const cl = cc != null ? `${colName(1 + j)}$${hr + 1}` : null; ns.setRaw(rr, 1 + j, '=' + cell(`$A${rr + 1}`, cl)); }
+          if (tot && cc != null) ns.setRaw(rr, 1 + nc, `=${aggFn}(B${rr + 1}:${colName(nc)}${rr + 1})`); });
+        const er = hr + rows.length; if (tot){ ns.setRaw(er + 1, 0, 'Total'); const tc = cc != null ? nc + 1 : 1; for (let j = 0; j < tc; j++) ns.setRaw(er + 1, 1 + j, `=${aggFn}(${colName(1 + j)}${hr + 2}:${colName(1 + j)}${er + 1})`); }
+        const lastC = (cc != null ? nc + (tot ? 1 : 0) : 1), lastR = er + (tot ? 1 : 0); ns.tables.push({range:`A${hr + 1}:${colName(lastC)}${lastR + 1}`, total:tot}); ns.cw[0] = 170;
+        const nf = ag === 'count' ? '#,##0' : sh.get(g.r1 + 1, vc)?.s?.nf; if (nf) for (let r = hr + 1; r <= lastR; r++) for (let c = 1; c <= lastC; c++) ns.setStyle(r, c, {nf});
+        if (chart){ const rg = `A${hr + 1}:${colName(cc != null ? nc : 1)}${er + 1}`; ns.charts.push({id:uidS(), type:cc != null ? 'stack' : 'col', range:rg, title, x:contentXY(hr, lastC + 2).x + 10, y:contentXY(hr, 0).y, w:520, h:320, legend:cc != null}); } });
+      SWDlg.close(); toast('Tableau croisé créé dans une nouvelle feuille');
+    };
+  });
+}
+/* ----- mise en page et impression ----- */
+const PAGE_DEF = {orient:'auto', size:'A4', mar:12, scale:100, fit:false, grid:true, head:false, title:'', foot:'', num:true, area:'', ctr:false, objs:true};
+const PAGE_MM = {A4:[210, 297], A3:[297, 420], A5:[148, 210], Letter:[216, 279], Legal:[216, 356]};
+const pageCfg = sh => ({...PAGE_DEF, ...(sh.page || {})});
+function pageDlg(){
+  const sh = sh0(), p = pageCfg(sh), chk = (k, n, h = '') => `<label class="pop-toggle"><input type="checkbox" id="pg_${k}"${p[k] ? ' checked' : ''}><span><b>${n}</b>${h ? `<small>${h}</small>` : ''}</span></label>`;
+  SWDlg.open(`<h3>Mise en page et impression</h3><div class="pg-grid">
+    <label class="pgf">Orientation<select id="pg_orient">${[['auto', 'Automatique'], ['p', 'Portrait'], ['l', 'Paysage']].map(([k, n]) => `<option value="${k}"${p.orient === k ? ' selected' : ''}>${n}</option>`).join('')}</select></label>
+    <label class="pgf">Format<select id="pg_size">${Object.keys(PAGE_MM).map(k => `<option${p.size === k ? ' selected' : ''}>${k}</option>`).join('')}</select></label>
+    <label class="pgf">Marges (mm)<input id="pg_mar" type="number" min="0" max="50" value="${p.mar}"></label><label class="pgf">Échelle (%)<input id="pg_scale" type="number" min="20" max="200" value="${p.scale}"></label>
+    <label class="pgf pg-w">Zone d'impression (vide = tout)<input id="pg_area" value="${escH(p.area)}" placeholder="A1:H40" spellcheck="false"></label><label class="pgf pg-w">En-tête de page<input id="pg_title" value="${escH(p.title)}" placeholder="Titre répété en haut de chaque page"></label><label class="pgf pg-w">Pied de page<input id="pg_foot" value="${escH(p.foot)}" placeholder="Texte en bas de chaque page"></label></div>
+    ${chk('fit', 'Ajuster à la largeur de la page', 'Réduit la feuille pour qu\'elle tienne sur une page de large')}${chk('grid', 'Imprimer le quadrillage')}${chk('head', 'Imprimer les en-têtes de lignes et de colonnes (A, B, 1, 2…)')}${chk('num', 'Numéroter les pages')}${chk('ctr', 'Centrer horizontalement')}${chk('objs', 'Imprimer les graphiques, formes et images')}
+    <div class="dlg-acts"><button class="ap-btn alt" data-dlg="close">Annuler</button><button class="ap-btn alt" id="pgSave">Enregistrer</button><button class="ap-btn" id="pgPrint">Imprimer</button></div>`, d => {
+    const read = () => { const o = {}; for (const k of Object.keys(PAGE_DEF)){ const e = d.querySelector('#pg_' + k); if (!e) continue; o[k] = e.type === 'checkbox' ? e.checked : e.type === 'number' ? +e.value || PAGE_DEF[k] : e.value.trim(); } if (o.area && !parseRange(o.area.toUpperCase())) o.area = ''; else o.area = o.area.toUpperCase(); return o; };
+    d.querySelector('#pgSave').onclick = () => { const o = read(); SWDlg.close(); tx('Mise en page', () => { sh.page = o; }); toast('Mise en page enregistrée'); };
+    d.querySelector('#pgPrint').onclick = () => { const o = read(); SWDlg.close(); tx('Mise en page', () => { sh.page = o; }); printSheet(false); };
+  }, 'wide');
+}
+function objectsHTML(sh, ox, oy, area){
+  const o = []; for (const ch of sh.charts) o.push(`<div style="position:absolute;left:${ch.x - ox}px;top:${ch.y - oy}px;width:${ch.w}px;height:${ch.h}px">${chartSVG(ch, ch.w, ch.h)}</div>`);
+  for (const s of sh.shapes) o.push(`<div style="position:absolute;left:${s.x - ox}px;top:${s.y - oy}px;width:${s.w}px;height:${s.h}px;transform:rotate(${s.rot || 0}deg)">${shapeSVG(s)}</div>`); return o.join('');
+}
+function sectionHTML(sh, cfg, heading){
+  const u = sh.used(), a = cfg.area ? parseRange(cfg.area) : null, area = a ? {r1:a.r1, c1:a.c1, r2:a.r2, c2:a.c2} : {r1:0, c1:0, r2:u.r, c2:u.c};
+  let tw = 0, th = 0; for (let c = area.c1; c <= area.c2; c++) tw += sh.colW(c); for (let r = area.r1; r <= area.r2; r++) th += sh.rowH(r);
+  const hw = cfg.head ? 36 : 0, hh = cfg.head ? 22 : 0, o = contentXY(area.r1, area.c1), objs = cfg.objs ? objectsHTML(sh, o.x - hw, o.y - hh) : '';
+  let h = 0; if (cfg.objs){ for (const x of [...sh.charts, ...sh.shapes]) h = Math.max(h, x.y + x.h - o.y); } const H = Math.max(th + hh, h + hh), W = Math.max(tw + hw, cfg.objs ? Math.max(0, ...[...sh.charts, ...sh.shapes].map(x => x.x + x.w - o.x + hw)) : 0);
+  return `<section class="sc-sheet"${cfg._brk ? ' style="page-break-before:always"' : ''}><h2>${escH(heading)}</h2><div class="sc-wrap${cfg.grid ? '' : ' ng'}" style="position:relative;width:${W}px;height:${H}px;${cfg.fit || cfg.scale !== 100 ? `zoom:${(cfg._z || cfg.scale) / 100};` : ''}">${sheetHTML(sh, {area, head:cfg.head})}<div style="position:absolute;left:0;top:0;pointer-events:none">${objs}</div></div></section>`;
+}
+function pageCSS(cfg, wide, boxW){
+  const [w, h] = PAGE_MM[cfg.size] || PAGE_MM.A4, esc = t => String(t).replace(/[\\"]/g, '\\$&').replace(/\n/g, ' ');
+  return `@page{size:${cfg.size} ${wide ? 'landscape' : 'portrait'};margin:${cfg.mar}mm;${cfg.title ? `@top-center{content:"${esc(cfg.title)}";font:11px Inter,sans-serif;color:#7B7690}` : ''}${cfg.foot ? `@bottom-left{content:"${esc(cfg.foot)}";font:11px Inter,sans-serif;color:#7B7690}` : ''}${cfg.num ? '@bottom-right{content:counter(page) " / " counter(pages);font:11px Inter,sans-serif;color:#7B7690}' : ''}}${cfg.ctr ? '.sc-wrap{margin-left:auto;margin-right:auto}' : ''}`;
+}
+/* ----- panneau « Analyse » ----- */
+function analyseHTML(){
+  const sh = sh0(), B = (k, ic, n, hint = '') => `<button type="button" data-an="${k}"><b class="pn-fx">${ic}</b>${n}</button>`;
+  return `<p class="pn-h">Analyser</p><div class="pn-acts">${B('pivot', '▦', 'Tableau croisé dynamique…')}${B('spark', '〰', 'Mini-graphiques…')}${B('goal', '◎', 'Valeur cible…')}${B('stats', '∑', 'Statistiques de la sélection')}</div>
+    <p class="pn-h">Contrôle des données</p><div class="pn-acts">${B('dv', '▾', 'Liste déroulante…')}${B('vr', '✓', 'Règle de validation…')}${B('dvc', '○', 'Entourer les valeurs non valides')}${B('names', 'ƒ', 'Noms définis…')}</div>
+    <p class="pn-h">Protection</p><div class="pn-acts">${B('prot', sh.prot?.on ? '🔓' : '🔒', sh.prot?.on ? 'Retirer la protection' : 'Protéger la feuille…')}${B('lock', '🔒', 'Verrouiller les cellules')}${B('unlock', '🔓', 'Déverrouiller les cellules')}</div>
+    <p class="pn-h">Affichage et impression</p><div class="pn-acts">${B('formulas', 'ƒx', V.showF ? 'Masquer les formules' : 'Afficher les formules')}${B('grid', '▦', sh.grid ? 'Masquer le quadrillage' : 'Afficher le quadrillage')}${B('page', '🖨', 'Mise en page et impression…')}${B('print', '⎙', 'Imprimer')}
+      ${B('freeze', '❄', sh.freeze.r || sh.freeze.c ? 'Libérer les volets' : 'Figer les volets ici')}${B('tab', '●', 'Couleur de l\'onglet…')}</div>
+    <p class="pn-hint">Ctrl + apostrophe inversée affiche les formules. Les mini-graphiques se placent à droite des données sélectionnées.</p>`;
+}
+function analyseAction(k){
+  const sh = sh0();
+  if (k === 'pivot') pivotDlg(); else if (k === 'spark') sparkDlg(); else if (k === 'goal') goalDlg(); else if (k === 'stats') statsDlg();
+  else if (k === 'dv') dvDialog(); else if (k === 'vr') dvRuleDlg(); else if (k === 'names') nameDlg(); else if (k === 'dvc') circleInvalid();
+  else if (k === 'prot') protectDlg(); else if (k === 'lock') lockCells(true); else if (k === 'unlock') lockCells(false);
+  else if (k === 'formulas') toggleFormulas(); else if (k === 'grid'){ tx('Quadrillage', () => { sh.grid = !sh.grid; }); schedule(); renderPanel(); }
+  else if (k === 'page') pageDlg(); else if (k === 'print') printSheet(false);
+  else if (k === 'freeze') dataAction('freeze1'); else if (k === 'tab') tabColorDlg();
+}
+function toggleFormulas(){ V.showF = !V.showF; schedule(); if (panel === 'analyse') renderPanel(); toast(V.showF ? 'Formules affichées' : 'Valeurs affichées'); }
+function circleInvalid(){ const sh = sh0(); let n = 0; V.bad = new Set(); for (const d of sh.dv){ if (!d.type || d.type === 'list'){ const g = parseRange(d.range), items = dvItems(d).map(x => String(x).toLowerCase()); if (!g) continue; for (let r = g.r1; r <= Math.min(g.r2, sh.used().r); r++) for (let c = g.c1; c <= g.c2; c++){ const v = WB.val(sh, r, c); if (v != null && v !== '' && items.length && !items.includes(String(formatValue(v, sh.get(r, c)?.s?.nf).t).toLowerCase())){ V.bad.add(KEY(r, c)); n++; } } } else { const g = parseRange(d.range); if (!g) continue; for (let r = g.r1; r <= Math.min(g.r2, sh.used().r); r++) for (let c = g.c1; c <= g.c2; c++){ const cell = sh.get(r, c); if (cell && cell.raw !== '' && !dvCheck(sh, r, c, cell.raw)){ V.bad.add(KEY(r, c)); n++; } } } }
+  schedule(); toast(n ? `${n} valeur${n > 1 ? 's' : ''} non valide${n > 1 ? 's' : ''} entourée${n > 1 ? 's' : ''} en rouge (cliquez ailleurs pour effacer)` : 'Toutes les valeurs respectent les règles'); if (!n) V.bad = null; }
+function tabColorDlg(){ const TC = ['#7B3FF2', '#3D63FF', '#12B5E5', '#2FBF71', '#F5B82E', '#FF7A2F', '#F2387A', '#8D88A3']; openPop(g$('edRail'), `<p class="pop-h">Couleur de l'onglet</p><div class="pop-sw">${TC.map(c => `<button type="button" data-c="${c}" style="background:${c}"></button>`).join('')}</div><button type="button" class="pop-link" data-c="">Aucune</button>`, p => { p.onclick = e => { const b = e.target.closest('[data-c]'); if (!b) return; closePop(); tx('Couleur de l\'onglet', () => { sh0().tab = b.dataset.c; }); renderTabs(); }; }); }
+function extraActions(add){
+  add('Analyse', 'Tableau croisé dynamique', pivotDlg, 'pivot tcd synthèse'); add('Analyse', 'Mini-graphiques', sparkDlg, 'sparkline'); add('Analyse', 'Valeur cible', goalDlg, 'goal seek'); add('Analyse', 'Règle de validation des données', dvRuleDlg, 'validation nombre date');
+  add('Analyse', 'Protéger la feuille', protectDlg, 'verrouiller mot de passe'); add('Analyse', 'Mise en page et impression', pageDlg, 'imprimer orientation marges'); add('Analyse', 'Afficher les formules', toggleFormulas, 'ctrl `');
+  add('Insérer', 'Formes et images', () => openPanel('shapes'), 'forme rectangle flèche texte image logo'); add('Insérer', 'Importer une image', pickImage, 'photo png jpg'); add('Style', 'Styles de cellule', () => openPanel('style'), 'titre bon mauvais neutre');
+}
+
 /* ==== 70-io.js ==== */
 /* ---------- Import / export : Excel (.xlsx), CSV, PDF, page web, sauvegarde SPECTRA Calc ---------- */
 const LIB_EXCEL = 'https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js';
@@ -4817,7 +5385,7 @@ async function exportXlsx(){
       if (cell?.note) xc.note = cell.note;
     }
     for (const m of sh.merges) try { ws.mergeCells(m.r1 + 1, m.c1 + 1, m.r2 + 1, m.c2 + 1); } catch(e){}
-    for (const d of sh.dv){ const g = parseRange(d.range); if (!g) continue; const list = dvItems(d).join(',').replace(/"/g, ''); if (list.length > 250) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 999); r++) for (let c = g.c1; c <= g.c2; c++) ws.getCell(r + 1, c + 1).dataValidation = {type:'list', allowBlank:true, formulae:[`"${list}"`]}; }
+    for (const d of sh.dv){ const g = parseRange(d.range); if (!g) continue; if (d.type && d.type !== 'list'){ const T = {whole:'whole', decimal:'decimal', date:'date', len:'textLength', custom:'custom'}[d.type]; const OP = {between:'between', notbetween:'notBetween', eq:'equal', ne:'notEqual', gt:'greaterThan', lt:'lessThan', ge:'greaterThanOrEqual', le:'lessThanOrEqual'}[d.op]; const fm = d.type === 'custom' ? [String(d.a).replace(/^=/, '')] : [d.a, d.b].filter(x => x !== undefined && x !== '').map(x => +dvValue(x, d.type)); if (T && fm.length) for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 999); r++) for (let c = g.c1; c <= g.c2; c++) ws.getCell(r + 1, c + 1).dataValidation = {type:T, operator:OP, allowBlank:true, formulae:fm, showErrorMessage:true, errorStyle:d.style === 'warn' ? 'warning' : d.style === 'info' ? 'information' : 'stop', error:dvMessage(d)}; continue; } const list = dvItems(d).join(',').replace(/"/g, ''); if (list.length > 250) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 999); r++) for (let c = g.c1; c <= g.c2; c++) ws.getCell(r + 1, c + 1).dataValidation = {type:'list', allowBlank:true, formulae:[`"${list}"`]}; }
     for (const rule of sh.cf){
       const ref = rule.range; let rules = null;
       const st = rule.style ? {font:rule.style.fc || rule.style.b ? {color:rule.style.fc ? {argb:argb(rule.style.fc)} : undefined, bold:!!rule.style.b} : undefined, fill:rule.style.bg ? {type:'pattern', pattern:'solid', bgColor:{argb:argb(rule.style.bg)}} : undefined} : undefined;
@@ -4909,13 +5477,14 @@ function exportCSV(sh = sh0()){
 }
 /* ---------- HTML (export, impression, aperçus) ---------- */
 function sheetHTML(sh, opts = {}){
-  const u = sh.used(), maxR = Math.min(u.r, opts.maxR ?? u.r), maxC = Math.min(u.c, opts.maxC ?? u.c);
+  const u = sh.used(), ar = opts.area, r0 = ar ? ar.r1 : 0, c0 = ar ? ar.c1 : 0, maxR = ar ? ar.r2 : Math.min(u.r, opts.maxR ?? u.r), maxC = ar ? ar.c2 : Math.min(u.c, opts.maxC ?? u.c);
   const skip = new Set(); const span = new Map();
   for (const m of sh.merges){ span.set(KEY(m.r1, m.c1), m); for (let r = m.r1; r <= m.r2; r++) for (let c = m.c1; c <= m.c2; c++) if (r !== m.r1 || c !== m.c1) skip.add(KEY(r, c)); }
-  let h = `<table class="sc-tbl"><colgroup>${range(0, maxC).map(c => `<col style="width:${sh.hc.has(c) ? 0 : sh.colW(c)}px">`).join('')}</colgroup>`;
-  for (let r = 0; r <= maxR; r++){
-    if (sh.hr.has(r)) continue; h += `<tr style="height:${sh.rowH(r)}px">`;
-    for (let c = 0; c <= maxC; c++){
+  let h = `<table class="sc-tbl"><colgroup>${opts.head ? '<col style="width:36px">' : ''}${range(c0, maxC).map(c => `<col style="width:${sh.hc.has(c) ? 0 : sh.colW(c)}px">`).join('')}</colgroup>`;
+  if (opts.head) h += `<tr class="sc-h" style="height:22px"><td></td>${range(c0, maxC).filter(c => !sh.hc.has(c)).map(c => `<td>${colName(c)}</td>`).join('')}</tr>`;
+  for (let r = r0; r <= maxR; r++){
+    if (sh.hr.has(r)) continue; h += `<tr style="height:${sh.rowH(r)}px">${opts.head ? `<td class="sc-h" style="text-align:center;background:#F3F1F9;color:#7B7690;font-size:11px">${r + 1}</td>` : ''}`;
+    for (let c = c0; c <= maxC; c++){
       const k = KEY(r, c); if (skip.has(k) || sh.hc.has(c)) continue;
       const cell = sh.get(r, c), v = WB.val(sh, r, c), ts = sh.tables.length ? tableStyleAt(sh, r, c) : null, cf = sh.cf.length ? cfApply(sh, r, c, v) : null;
       const s = {...(ts || {}), ...(cell?.s || {}), ...(cf || {})}; const fv = formatValue(v, s.nf); const m = span.get(k);
@@ -4933,17 +5502,20 @@ const PRINT_CSS = `.sc-tbl{border-collapse:collapse;table-layout:fixed;font:13px
 .sc-sheet h2{font:700 15px Inter,system-ui,sans-serif;margin:0 0 10px}.sc-charts{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px}.sc-charts svg{max-width:100%;height:auto;border:1px solid #eee;border-radius:10px}`;
 function exportHTMLDoc(all = true){
   const sheets = all ? WB.sheets : [sh0()]; const t = themeColors();
-  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escH(WB.title)}</title><style>body{margin:0;padding:28px;font-family:${fontStack(t.fb).replace(/"/g, "'")};background:#fff}${PRINT_CSS}.sc-sheet{margin-bottom:40px;overflow:auto}h1{font:800 24px Inter,system-ui,sans-serif;margin:0 0 20px}</style></head><body><h1>${escH(WB.title)}</h1>${sheets.map(sh => `<section class="sc-sheet"><h2>${escH(sh.name)}</h2>${sheetHTML(sh)}${sh.charts.length ? `<div class="sc-charts">${sh.charts.map(ch => chartSVG(ch, ch.w, ch.h)).join('')}</div>` : ''}</section>`).join('')}</body></html>`;
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escH(WB.title)}</title><style>body{margin:0;padding:28px;font-family:${fontStack(t.fb).replace(/"/g, "'")};background:#fff}${PRINT_CSS}.sc-sheet{margin-bottom:40px;overflow:auto}h1{font:800 24px Inter,system-ui,sans-serif;margin:0 0 20px}</style></head><body><h1>${escH(WB.title)}</h1>${sheets.map(sh => sectionHTML(sh, {...pageCfg(sh), scale:100, fit:false, head:false, area:''}, sh.name)).join('')}</body></html>`;
 }
 function printSheet(all){
-  const sheets = all ? WB.sheets : [sh0()];
+  const sheets = all ? WB.sheets : [sh0()], cfg0 = pageCfg(sheets[0]);
   let pa = g$('printArea'); if (!pa){ pa = document.createElement('div'); pa.id = 'printArea'; document.body.appendChild(pa); }
-  const wide = sheets.some(sh => { let w = 0; for (let c = 0; c <= sh.used().c; c++) w += sh.colW(c); return w > 720; });
-  pa.innerHTML = `<style>@page{size:A4 ${wide ? 'landscape' : 'portrait'};margin:12mm}${PRINT_CSS}</style>` + sheets.map((sh, i) => `<section class="sc-sheet" style="${i ? 'page-break-before:always' : ''}">${sheets.length > 1 ? `<h2>${escH(sh.name)}</h2>` : `<h2>${escH(WB.title)}</h2>`}${sheetHTML(sh)}${sh.charts.length ? `<div class="sc-charts">${sh.charts.map(ch => chartSVG(ch, ch.w, ch.h)).join('')}</div>` : ''}</section>`).join('');
+  const [pw, ph] = PAGE_MM[cfg0.size] || PAGE_MM.A4, mmpx = 96 / 25.4;
+  const dims = sheets.map(sh => { const c = pageCfg(sh), a = c.area ? parseRange(c.area) : null; let w = 0; for (let k = a ? a.c1 : 0; k <= (a ? a.c2 : sh.used().c); k++) w += sh.colW(k); return w + (c.head ? 36 : 0); });
+  const maxW = Math.max(...dims), wide = cfg0.orient === 'l' || (cfg0.orient === 'auto' && maxW > (pw - 2 * cfg0.mar) * mmpx);
+  const boxW = ((wide ? ph : pw) - 2 * cfg0.mar) * mmpx;
+  pa.innerHTML = `<style>${pageCSS(cfg0, wide, boxW)}${PRINT_CSS}</style>` + sheets.map((sh, i) => { const c = {...pageCfg(sh), _brk:i > 0}; if (c.fit) c._z = Math.min(100, Math.floor(boxW / Math.max(1, dims[i]) * 100)); return sectionHTML(sh, c, sheets.length > 1 ? sh.name : WB.title); }).join('');
   document.body.classList.add('printing');
   const done = () => { document.body.classList.remove('printing'); pa.innerHTML = ''; window.removeEventListener('afterprint', done); };
   window.addEventListener('afterprint', done);
-  setTimeout(() => { window.print(); setTimeout(() => { if (document.body.classList.contains('printing')) done(); }, 2000); }, 80);
+  setTimeout(() => { window.print(); setTimeout(() => { if (document.body.classList.contains('printing')) done(); }, 2000); }, 120);
 }
 async function doExport(kind){
   closePop(); if (EDIT.on) commitEdit(0, 0);
@@ -5005,6 +5577,7 @@ function spectreActions(){
   add('Classeur', 'Imprimer', () => printSheet(false)); add('Classeur', 'Partager', () => window.SWShareCurrent?.()); add('Classeur', 'Dupliquer le classeur', () => window.SWHome?.duplicateCurrent());
   add('Classeur', 'Enregistrer comme modèle', saveTplDlg); add('Classeur', 'Publier dans la Communauté', () => window.SWHome?.publishCurrent?.());
   add('Classeur', 'Interface claire ou sombre', () => { const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = t; lsSet('sc.theme', t); }, 'sombre nuit');
+  extraActions(add);
   add('Aller', 'Accueil', () => window.SWHome?.show('home')); add('Aller', 'Nouveau classeur', () => window.SWHome?.show('templates'));
   return A;
 }
@@ -5270,12 +5843,13 @@ function filePop(anchor){
     <button type="button" data-f="tpl"><b>Enregistrer comme modèle</b><span>Dans vos modèles personnels</span></button>
     <button type="button" data-f="publish"><b>Publier dans la Communauté</b><span>Proposez ce classeur comme modèle public, vérifié par Studio Prism</span></button>
     <hr><button type="button" data-f="print"><b>Imprimer</b><span>La feuille active</span></button>
+    <button type="button" data-f="page"><b>Mise en page…</b><span>Orientation, marges, zone, en-têtes, échelle</span></button>
     <button type="button" data-f="zoom"><b>Zoom</b><span>${Math.round(V.z * 100)} % · Ctrl + molette</span></button>
     <button type="button" data-f="keys"><b>Raccourcis clavier</b><span>Saisie, formules, sélection</span></button>
     <hr><button type="button" data-f="home"><b>Retour à l'accueil</b><span>Vos classeurs et modèles</span></button></div>`, p => {
     p.onclick = e => { const b = e.target.closest('[data-f]'); if (!b) return; closePop(); const k = b.dataset.f;
       if (k === 'new') window.SWHome?.show('templates'); else if (k === 'dup') window.SWHome?.duplicateCurrent(); else if (k === 'import') g$('homeFile').click(); else if (k === 'ins') g$('edInsFile').click();
-      else if (k === 'share') window.SWShareCurrent?.(); else if (k === 'tpl') saveTplDlg(); else if (k === 'publish') window.SWHome?.publishCurrent?.(); else if (k === 'print') printSheet(false); else if (k === 'keys') shortcutsDlg(); else if (k === 'home') window.SWHome?.show('home');
+      else if (k === 'share') window.SWShareCurrent?.(); else if (k === 'tpl') saveTplDlg(); else if (k === 'publish') window.SWHome?.publishCurrent?.(); else if (k === 'print') printSheet(false); else if (k === 'page') pageDlg(); else if (k === 'keys') shortcutsDlg(); else if (k === 'home') window.SWHome?.show('home');
       else if (k === 'zoom') zoomPop(anchor); };
   }, 'menu');
 }
@@ -5312,6 +5886,7 @@ function globalKeys(e){
   }
   if (mod && lk === 'p'){ e.preventDefault(); return printSheet(false); }
   if (mod && lk === 's'){ e.preventDefault(); window.SWHome?.flush?.(); return toast('Enregistré automatiquement'); }
+  if (onShapeKey(e)) return;
   if (OBJ.sel && (k === 'Delete' || k === 'Backspace') && document.activeElement === g$('grid') && !EDIT.on){ e.preventDefault(); return deleteChart(OBJ.sel); }
   if (!g$('spectre').hidden || !g$('apDlg').hidden || !g$('findBar').hidden && g$('findBar').contains(document.activeElement)) return;
   const ae = document.activeElement; if (ae && ae !== document.body && ae !== g$('grid') && !g$('grid').contains(ae) && ae !== g$('fxIn')) return;
@@ -5322,11 +5897,11 @@ function wire(){
   buildToolbar();
   const view = g$('gView'), sc = g$('gScroll');
   sc.addEventListener('scroll', () => { schedule(); if (OBJ.sel) placeObjBar(); }, {passive:true});
-  view.addEventListener('mousedown', e => { if (onObjDown(e)) return; if (OBJ.sel && !e.target.closest('.g-obj')){ OBJ.sel = null; renderObjects(); } onGridDown(e); });
+  view.addEventListener('mousedown', e => { if (onObjDown(e)) return; if (SHP.sel && !e.target.closest('.g-shp')){ SHP.sel = null; renderObjects(); } if (OBJ.sel && !e.target.closest('.g-obj')){ OBJ.sel = null; renderObjects(); } onGridDown(e); });
   addEventListener('mousemove', e => { if (onObjMove(e)) return; if (DRAG.mode || e.target.closest?.('#gView')) onGridMove(e); });
   addEventListener('mouseup', e => { if (onObjUp(e)) return; onGridUp(e); });
-  view.addEventListener('dblclick', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); return chartEditor(o.dataset.obj); } onGridDbl(e); });
-  view.addEventListener('contextmenu', e => { const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); chartMenu(e, o.dataset.obj); return; } ctxMenu(e); });
+  view.addEventListener('dblclick', e => { const sp = e.target.closest('.g-shp'); if (sp){ e.preventDefault(); return shapeEditText(sp.dataset.shp); } const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); return chartEditor(o.dataset.obj); } onGridDbl(e); });
+  view.addEventListener('contextmenu', e => { const sp = e.target.closest('.g-shp'); if (sp){ e.preventDefault(); return shapeMenu(e, sp.dataset.shp); } const o = e.target.closest('.g-obj'); if (o){ e.preventDefault(); chartMenu(e, o.dataset.obj); return; } ctxMenu(e); });
   view.addEventListener('click', e => { const u = e.target.closest('[data-unhide-c]'), w = e.target.closest('[data-unhide-r]'); if (u){ const sh = sh0(), c = +u.dataset.unhideC; tx('Afficher', () => sh.hc.delete(c)); } if (w){ const sh = sh0(), r = +w.dataset.unhideR; tx('Afficher', () => sh.hr.delete(r)); } });
   view.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey){ e.preventDefault(); setZoom(V.z * (e.deltaY < 0 ? 1.1 : 1 / 1.1)); } }, {passive:false});
   // tactile : un appui long = menu
@@ -5397,7 +5972,7 @@ function wire(){
   addEventListener('resize', debounce(() => { if (!g$('app').hidden){ layout(); schedule(); } }, 120));
   // glisser un fichier sur la grille : ajout de feuilles
   g$('grid').addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) e.preventDefault(); });
-  g$('grid').addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (!f) return; e.preventDefault(); insertFileSheets(f); });
+  g$('grid').addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (!f) return; e.preventDefault(); if (/^image\//.test(f.type)) return importImage(f); insertFileSheets(f); });
   // l'appli redevient visible : remise en page
   new MutationObserver(() => { if (!g$('app').hidden){ layout(); schedule(); g$('grid').focus({preventScroll:true}); } }).observe(g$('app'), {attributes:true, attributeFilter:['hidden']});
 }

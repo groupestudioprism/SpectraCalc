@@ -32,7 +32,7 @@ async function exportXlsx(){
       if (cell?.note) xc.note = cell.note;
     }
     for (const m of sh.merges) try { ws.mergeCells(m.r1 + 1, m.c1 + 1, m.r2 + 1, m.c2 + 1); } catch(e){}
-    for (const d of sh.dv){ const g = parseRange(d.range); if (!g) continue; const list = dvItems(d).join(',').replace(/"/g, ''); if (list.length > 250) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 999); r++) for (let c = g.c1; c <= g.c2; c++) ws.getCell(r + 1, c + 1).dataValidation = {type:'list', allowBlank:true, formulae:[`"${list}"`]}; }
+    for (const d of sh.dv){ const g = parseRange(d.range); if (!g) continue; if (d.type && d.type !== 'list'){ const T = {whole:'whole', decimal:'decimal', date:'date', len:'textLength', custom:'custom'}[d.type]; const OP = {between:'between', notbetween:'notBetween', eq:'equal', ne:'notEqual', gt:'greaterThan', lt:'lessThan', ge:'greaterThanOrEqual', le:'lessThanOrEqual'}[d.op]; const fm = d.type === 'custom' ? [String(d.a).replace(/^=/, '')] : [d.a, d.b].filter(x => x !== undefined && x !== '').map(x => +dvValue(x, d.type)); if (T && fm.length) for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 999); r++) for (let c = g.c1; c <= g.c2; c++) ws.getCell(r + 1, c + 1).dataValidation = {type:T, operator:OP, allowBlank:true, formulae:fm, showErrorMessage:true, errorStyle:d.style === 'warn' ? 'warning' : d.style === 'info' ? 'information' : 'stop', error:dvMessage(d)}; continue; } const list = dvItems(d).join(',').replace(/"/g, ''); if (list.length > 250) continue; for (let r = g.r1; r <= Math.min(g.r2, g.r1 + 999); r++) for (let c = g.c1; c <= g.c2; c++) ws.getCell(r + 1, c + 1).dataValidation = {type:'list', allowBlank:true, formulae:[`"${list}"`]}; }
     for (const rule of sh.cf){
       const ref = rule.range; let rules = null;
       const st = rule.style ? {font:rule.style.fc || rule.style.b ? {color:rule.style.fc ? {argb:argb(rule.style.fc)} : undefined, bold:!!rule.style.b} : undefined, fill:rule.style.bg ? {type:'pattern', pattern:'solid', bgColor:{argb:argb(rule.style.bg)}} : undefined} : undefined;
@@ -124,13 +124,14 @@ function exportCSV(sh = sh0()){
 }
 /* ---------- HTML (export, impression, aperçus) ---------- */
 function sheetHTML(sh, opts = {}){
-  const u = sh.used(), maxR = Math.min(u.r, opts.maxR ?? u.r), maxC = Math.min(u.c, opts.maxC ?? u.c);
+  const u = sh.used(), ar = opts.area, r0 = ar ? ar.r1 : 0, c0 = ar ? ar.c1 : 0, maxR = ar ? ar.r2 : Math.min(u.r, opts.maxR ?? u.r), maxC = ar ? ar.c2 : Math.min(u.c, opts.maxC ?? u.c);
   const skip = new Set(); const span = new Map();
   for (const m of sh.merges){ span.set(KEY(m.r1, m.c1), m); for (let r = m.r1; r <= m.r2; r++) for (let c = m.c1; c <= m.c2; c++) if (r !== m.r1 || c !== m.c1) skip.add(KEY(r, c)); }
-  let h = `<table class="sc-tbl"><colgroup>${range(0, maxC).map(c => `<col style="width:${sh.hc.has(c) ? 0 : sh.colW(c)}px">`).join('')}</colgroup>`;
-  for (let r = 0; r <= maxR; r++){
-    if (sh.hr.has(r)) continue; h += `<tr style="height:${sh.rowH(r)}px">`;
-    for (let c = 0; c <= maxC; c++){
+  let h = `<table class="sc-tbl"><colgroup>${opts.head ? '<col style="width:36px">' : ''}${range(c0, maxC).map(c => `<col style="width:${sh.hc.has(c) ? 0 : sh.colW(c)}px">`).join('')}</colgroup>`;
+  if (opts.head) h += `<tr class="sc-h" style="height:22px"><td></td>${range(c0, maxC).filter(c => !sh.hc.has(c)).map(c => `<td>${colName(c)}</td>`).join('')}</tr>`;
+  for (let r = r0; r <= maxR; r++){
+    if (sh.hr.has(r)) continue; h += `<tr style="height:${sh.rowH(r)}px">${opts.head ? `<td class="sc-h" style="text-align:center;background:#F3F1F9;color:#7B7690;font-size:11px">${r + 1}</td>` : ''}`;
+    for (let c = c0; c <= maxC; c++){
       const k = KEY(r, c); if (skip.has(k) || sh.hc.has(c)) continue;
       const cell = sh.get(r, c), v = WB.val(sh, r, c), ts = sh.tables.length ? tableStyleAt(sh, r, c) : null, cf = sh.cf.length ? cfApply(sh, r, c, v) : null;
       const s = {...(ts || {}), ...(cell?.s || {}), ...(cf || {})}; const fv = formatValue(v, s.nf); const m = span.get(k);
@@ -148,17 +149,20 @@ const PRINT_CSS = `.sc-tbl{border-collapse:collapse;table-layout:fixed;font:13px
 .sc-sheet h2{font:700 15px Inter,system-ui,sans-serif;margin:0 0 10px}.sc-charts{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px}.sc-charts svg{max-width:100%;height:auto;border:1px solid #eee;border-radius:10px}`;
 function exportHTMLDoc(all = true){
   const sheets = all ? WB.sheets : [sh0()]; const t = themeColors();
-  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escH(WB.title)}</title><style>body{margin:0;padding:28px;font-family:${fontStack(t.fb).replace(/"/g, "'")};background:#fff}${PRINT_CSS}.sc-sheet{margin-bottom:40px;overflow:auto}h1{font:800 24px Inter,system-ui,sans-serif;margin:0 0 20px}</style></head><body><h1>${escH(WB.title)}</h1>${sheets.map(sh => `<section class="sc-sheet"><h2>${escH(sh.name)}</h2>${sheetHTML(sh)}${sh.charts.length ? `<div class="sc-charts">${sh.charts.map(ch => chartSVG(ch, ch.w, ch.h)).join('')}</div>` : ''}</section>`).join('')}</body></html>`;
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escH(WB.title)}</title><style>body{margin:0;padding:28px;font-family:${fontStack(t.fb).replace(/"/g, "'")};background:#fff}${PRINT_CSS}.sc-sheet{margin-bottom:40px;overflow:auto}h1{font:800 24px Inter,system-ui,sans-serif;margin:0 0 20px}</style></head><body><h1>${escH(WB.title)}</h1>${sheets.map(sh => sectionHTML(sh, {...pageCfg(sh), scale:100, fit:false, head:false, area:''}, sh.name)).join('')}</body></html>`;
 }
 function printSheet(all){
-  const sheets = all ? WB.sheets : [sh0()];
+  const sheets = all ? WB.sheets : [sh0()], cfg0 = pageCfg(sheets[0]);
   let pa = g$('printArea'); if (!pa){ pa = document.createElement('div'); pa.id = 'printArea'; document.body.appendChild(pa); }
-  const wide = sheets.some(sh => { let w = 0; for (let c = 0; c <= sh.used().c; c++) w += sh.colW(c); return w > 720; });
-  pa.innerHTML = `<style>@page{size:A4 ${wide ? 'landscape' : 'portrait'};margin:12mm}${PRINT_CSS}</style>` + sheets.map((sh, i) => `<section class="sc-sheet" style="${i ? 'page-break-before:always' : ''}">${sheets.length > 1 ? `<h2>${escH(sh.name)}</h2>` : `<h2>${escH(WB.title)}</h2>`}${sheetHTML(sh)}${sh.charts.length ? `<div class="sc-charts">${sh.charts.map(ch => chartSVG(ch, ch.w, ch.h)).join('')}</div>` : ''}</section>`).join('');
+  const [pw, ph] = PAGE_MM[cfg0.size] || PAGE_MM.A4, mmpx = 96 / 25.4;
+  const dims = sheets.map(sh => { const c = pageCfg(sh), a = c.area ? parseRange(c.area) : null; let w = 0; for (let k = a ? a.c1 : 0; k <= (a ? a.c2 : sh.used().c); k++) w += sh.colW(k); return w + (c.head ? 36 : 0); });
+  const maxW = Math.max(...dims), wide = cfg0.orient === 'l' || (cfg0.orient === 'auto' && maxW > (pw - 2 * cfg0.mar) * mmpx);
+  const boxW = ((wide ? ph : pw) - 2 * cfg0.mar) * mmpx;
+  pa.innerHTML = `<style>${pageCSS(cfg0, wide, boxW)}${PRINT_CSS}</style>` + sheets.map((sh, i) => { const c = {...pageCfg(sh), _brk:i > 0}; if (c.fit) c._z = Math.min(100, Math.floor(boxW / Math.max(1, dims[i]) * 100)); return sectionHTML(sh, c, sheets.length > 1 ? sh.name : WB.title); }).join('');
   document.body.classList.add('printing');
   const done = () => { document.body.classList.remove('printing'); pa.innerHTML = ''; window.removeEventListener('afterprint', done); };
   window.addEventListener('afterprint', done);
-  setTimeout(() => { window.print(); setTimeout(() => { if (document.body.classList.contains('printing')) done(); }, 2000); }, 80);
+  setTimeout(() => { window.print(); setTimeout(() => { if (document.body.classList.contains('printing')) done(); }, 2000); }, 120);
 }
 async function doExport(kind){
   closePop(); if (EDIT.on) commitEdit(0, 0);
