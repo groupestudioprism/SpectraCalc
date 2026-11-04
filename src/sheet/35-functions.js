@@ -117,7 +117,7 @@ function ev(n, ctx){
     }
     case 'fn': {
       const def = FN[n.name] || FN[FN_ALIAS[n.name]];
-      if (!def) return ER.name;
+      if (!def){ const lm = ctx.local?.[n.name]; if (lm && typeof lm.call === 'function'){ try { return lm.call(n.args.map(a => { const v = ev(a, ctx); return isRng(v) ? (v.h === 1 && v.w === 1 ? v.v(0, 0) : v.arr()) : v; })); } catch(e){ if (isErr(e)) return e; return ER.value; } } return ER.name; }
       try {
         if (def.lazy) return def.f(n.args, ctx);
         const args = n.args.map(a => ev(a, ctx));
