@@ -816,7 +816,7 @@ h2.hsec{margin:22px 0 12px}.hsec-h h2.hsec{margin:0}
 .pop-row4 svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 .pop-list kbd{margin-left:auto;font-size:10.5px}
 /* recherche */
-.find-bar{position:fixed;top:72px;right:18px;z-index:44;width:min(380px,calc(100vw - 24px));padding:8px;border-radius:14px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--sh3);display:grid;gap:6px}
+.find-bar{position:fixed;top:72px;right:18px;z-index:44;width:min(380px,calc(100vw - 24px));padding:8px;border-radius:14px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--sh3);display:grid;grid-template-columns:minmax(0,1fr);box-sizing:border-box;gap:6px}
 .fr-row{display:flex;align-items:center;gap:4px}
 .fr-row input{flex:1;min-width:0;height:34px;border:1px solid var(--line2);border-radius:9px;padding:0 10px;background:var(--panel2)}
 .fr-row button{height:32px;min-width:32px;border:0;border-radius:8px;background:transparent;color:var(--ink2);display:grid;place-items:center}
@@ -1111,6 +1111,9 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
 @media (max-width:760px){.pr-rays{overflow-x:auto;justify-content:flex-start!important;scrollbar-width:none}.pr-rays::-webkit-scrollbar{display:none}.ray{flex:0 0 auto;min-width:56px}}
 .shp-grid{grid-template-columns:repeat(auto-fill,minmax(52px,1fr))}.shp-grid button{max-height:64px}
 .cf-ex.ic{display:inline-flex;justify-content:center;gap:1px;align-items:center}
+.ray{min-width:52px;padding:4px 5px 6px;font-size:10.5px}.pr-rays{gap:1px}
+@media (max-width:1400px) and (min-width:761px){.ray span{display:none}.ray{min-width:38px;height:40px}.pr-rays{padding-left:4px;margin-left:4px}.tb{min-width:34px;padding:0 6px}.pr-tools .tsel{padding:0 8px}}
+.pr-tools.ov{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent)}
 </style>
 </head><body>
 
@@ -1403,7 +1406,7 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
   </footer>
   <section class="drawer" id="edPanel" hidden aria-labelledby="edPanelTitle"><header><b id="edPanelTitle"></b><span class="dr-sub" id="edPanelSub"></span><button type="button" class="ib" id="edPanelClose" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header><div class="dr-body" id="edPanelBody"></div></section>
   <div class="find-bar" id="findBar" hidden role="search">
-    <div class="fr-row"><span class="fr-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><input id="frQ" placeholder="Rechercher dans le classeur" aria-label="Rechercher"><small id="frN"></small>
+    <div class="fr-row"><span class="fr-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><input id="frQ" placeholder="Rechercher…" aria-label="Rechercher"><small id="frN"></small>
       <button type="button" data-fr="prev" aria-label="Précédent"><svg viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></svg></button><button type="button" data-fr="next" aria-label="Suivant"><svg viewBox="0 0 24 24"><path d="m6 10 6 6 6-6"/></svg></button>
       <button type="button" data-fr="more" class="fr-more" title="Remplacer">⇄</button><button type="button" data-fr="close" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="fr-row fr-rep"><span class="fr-ic">↳</span><input id="frR" placeholder="Remplacer par" aria-label="Remplacer par"><button type="button" data-fr="rep" class="fr-txt">Remplacer</button><button type="button" data-fr="all" class="fr-txt">Tout</button></div>
@@ -4014,7 +4017,7 @@ function buildToolbar(){
     <div class="tg">${b('border', 'Bordures', TB_IC.border)}${b('align', 'Alignement', IC.al)}${b('merge', 'Fusionner et centrer', TB_IC.merge, 'hide-s')}${b('wrap', 'Renvoyer à la ligne', TB_IC.wrap, 'hide-m')}</div>
     <div class="tg">${b('sum', 'Somme automatique (Alt + =)', TB_IC.sigma)}${b('sort', 'Trier de A à Z', TB_IC.sortA, 'hide-s')}${b('filter', 'Filtrer', TB_IC.filter, 'hide-s')}<button type="button" class="tb tb-magic" data-t="magic" title="Embellir : transforme la sélection en beau tableau" aria-label="Embellir">${TB_IC.magic}<span class="hide-m">Embellir</span></button></div>`;
   const R = [['style', 'Style', TB_IC.style, '#F2387A'], ['shapes', 'Formes', TB_IC.shapes, '#12B5E5'], ['analyse', 'Analyse', TB_IC.analyse, '#2FBF71'], ['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
-  g$('edRail').innerHTML = R.map(([k, n, ic, c]) => `<button type="button" class="ray" data-panel="${k}" style="--ray:${c}" aria-pressed="false">${ic}<span>${n}</span></button>`).join('');
+  g$('edRail').innerHTML = R.map(([k, n, ic, c]) => `<button type="button" class="ray" data-panel="${k}" title="${n}" style="--ray:${c}" aria-pressed="false">${ic}<span>${n}</span></button>`).join('');
 }
 function refreshToolbar(){
   const s = sh0().get(SEL.r, SEL.c)?.s || {};
@@ -5997,7 +6000,8 @@ function wire(){
   // presse-papiers et clavier
   document.addEventListener('copy', e => onCopy(e, false)); document.addEventListener('cut', e => { if (!V.ro) onCopy(e, true); }); document.addEventListener('paste', onPaste);
   addEventListener('keydown', globalKeys);
-  addEventListener('resize', debounce(() => { if (!g$('app').hidden){ layout(); schedule(); } }, 120));
+  const tbOv = () => { const t = document.querySelector('.pr-tools'); if (t) t.classList.toggle('ov', t.scrollWidth > t.clientWidth + 2 && t.scrollLeft + t.clientWidth < t.scrollWidth - 2); };
+  addEventListener('resize', debounce(() => { tbOv(); if (!g$('app').hidden){ layout(); schedule(); } }, 120)); document.querySelector('.pr-tools')?.addEventListener('scroll', tbOv, {passive:true}); setTimeout(tbOv, 600); new MutationObserver(tbOv).observe(document.body, {attributes:true, attributeFilter:['hidden', 'class'], subtree:false});
   // glisser un fichier sur la grille : ajout de feuilles
   g$('grid').addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) e.preventDefault(); });
   g$('grid').addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (!f) return; e.preventDefault(); if (/^image\//.test(f.type)) return importImage(f); insertFileSheets(f); });

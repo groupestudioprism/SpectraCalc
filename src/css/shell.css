@@ -326,7 +326,7 @@
 .pop-row4 svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 .pop-list kbd{margin-left:auto;font-size:10.5px}
 /* recherche */
-.find-bar{position:fixed;top:72px;right:18px;z-index:44;width:min(380px,calc(100vw - 24px));padding:8px;border-radius:14px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--sh3);display:grid;gap:6px}
+.find-bar{position:fixed;top:72px;right:18px;z-index:44;width:min(380px,calc(100vw - 24px));padding:8px;border-radius:14px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--sh3);display:grid;grid-template-columns:minmax(0,1fr);box-sizing:border-box;gap:6px}
 .fr-row{display:flex;align-items:center;gap:4px}
 .fr-row input{flex:1;min-width:0;height:34px;border:1px solid var(--line2);border-radius:9px;padding:0 10px;background:var(--panel2)}
 .fr-row button{height:32px;min-width:32px;border:0;border-radius:8px;background:transparent;color:var(--ink2);display:grid;place-items:center}

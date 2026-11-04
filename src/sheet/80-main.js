@@ -200,7 +200,8 @@ function wire(){
   // presse-papiers et clavier
   document.addEventListener('copy', e => onCopy(e, false)); document.addEventListener('cut', e => { if (!V.ro) onCopy(e, true); }); document.addEventListener('paste', onPaste);
   addEventListener('keydown', globalKeys);
-  addEventListener('resize', debounce(() => { if (!g$('app').hidden){ layout(); schedule(); } }, 120));
+  const tbOv = () => { const t = document.querySelector('.pr-tools'); if (t) t.classList.toggle('ov', t.scrollWidth > t.clientWidth + 2 && t.scrollLeft + t.clientWidth < t.scrollWidth - 2); };
+  addEventListener('resize', debounce(() => { tbOv(); if (!g$('app').hidden){ layout(); schedule(); } }, 120)); document.querySelector('.pr-tools')?.addEventListener('scroll', tbOv, {passive:true}); setTimeout(tbOv, 600); new MutationObserver(tbOv).observe(document.body, {attributes:true, attributeFilter:['hidden', 'class'], subtree:false});
   // glisser un fichier sur la grille : ajout de feuilles
   g$('grid').addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) e.preventDefault(); });
   g$('grid').addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (!f) return; e.preventDefault(); if (/^image\//.test(f.type)) return importImage(f); insertFileSheets(f); });

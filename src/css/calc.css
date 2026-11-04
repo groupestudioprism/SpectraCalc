@@ -242,3 +242,6 @@
 @media (max-width:760px){.pr-rays{overflow-x:auto;justify-content:flex-start!important;scrollbar-width:none}.pr-rays::-webkit-scrollbar{display:none}.ray{flex:0 0 auto;min-width:56px}}
 .shp-grid{grid-template-columns:repeat(auto-fill,minmax(52px,1fr))}.shp-grid button{max-height:64px}
 .cf-ex.ic{display:inline-flex;justify-content:center;gap:1px;align-items:center}
+.ray{min-width:52px;padding:4px 5px 6px;font-size:10.5px}.pr-rays{gap:1px}
+@media (max-width:1400px) and (min-width:761px){.ray span{display:none}.ray{min-width:38px;height:40px}.pr-rays{padding-left:4px;margin-left:4px}.tb{min-width:34px;padding:0 6px}.pr-tools .tsel{padding:0 8px}}
+.pr-tools.ov{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent)}

@@ -118,7 +118,7 @@ function buildToolbar(){
     <div class="tg">${b('border', 'Bordures', TB_IC.border)}${b('align', 'Alignement', IC.al)}${b('merge', 'Fusionner et centrer', TB_IC.merge, 'hide-s')}${b('wrap', 'Renvoyer à la ligne', TB_IC.wrap, 'hide-m')}</div>
     <div class="tg">${b('sum', 'Somme automatique (Alt + =)', TB_IC.sigma)}${b('sort', 'Trier de A à Z', TB_IC.sortA, 'hide-s')}${b('filter', 'Filtrer', TB_IC.filter, 'hide-s')}<button type="button" class="tb tb-magic" data-t="magic" title="Embellir : transforme la sélection en beau tableau" aria-label="Embellir">${TB_IC.magic}<span class="hide-m">Embellir</span></button></div>`;
   const R = [['style', 'Style', TB_IC.style, '#F2387A'], ['shapes', 'Formes', TB_IC.shapes, '#12B5E5'], ['analyse', 'Analyse', TB_IC.analyse, '#2FBF71'], ['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
-  g$('edRail').innerHTML = R.map(([k, n, ic, c]) => `<button type="button" class="ray" data-panel="${k}" style="--ray:${c}" aria-pressed="false">${ic}<span>${n}</span></button>`).join('');
+  g$('edRail').innerHTML = R.map(([k, n, ic, c]) => `<button type="button" class="ray" data-panel="${k}" title="${n}" style="--ray:${c}" aria-pressed="false">${ic}<span>${n}</span></button>`).join('');
 }
 function refreshToolbar(){
   const s = sh0().get(SEL.r, SEL.c)?.s || {};
