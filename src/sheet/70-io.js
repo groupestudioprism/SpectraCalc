@@ -25,9 +25,10 @@ async function exportXlsx(){
       const nf = xlNumFmt(s.nf); if (nf) xc.numFmt = nf;
       const font = {}; if (s.b) font.bold = true; if (s.i) font.italic = true; if (s.u) font.underline = true; if (s.st) font.strike = true; if (s.fc) font.color = {argb:argb(s.fc)}; if (s.fs) font.size = s.fs; if (s.ff) font.name = s.ff;
       if (Object.keys(font).length) xc.font = {name:s.ff || themeColors().fb, size:s.fs || 10, ...font};
-      if (s.bg) xc.fill = {type:'pattern', pattern:'solid', fgColor:{argb:argb(s.bg)}};
-      const al = {}; if (s.ha) al.horizontal = {l:'left', c:'center', r:'right'}[s.ha]; if (s.va) al.vertical = {t:'top', m:'middle', b:'bottom'}[s.va]; if (s.wrap) al.wrapText = true; if (s.ind) al.indent = s.ind; if (Object.keys(al).length) xc.alignment = al;
-      const bd = {}; for (const [kk, side] of [['bt', 'top'], ['br', 'right'], ['bb', 'bottom'], ['bl', 'left']]) if (s[kk]){ const [w, col, kind] = String(s[kk]).split(' '); bd[side] = {style:kind === 'double' ? 'double' : parseInt(w) >= 2 ? 'medium' : 'thin', color:{argb:argb(col || '#1A1726')}}; }
+      if (s.grad && okCol(s.grad[0]) && okCol(s.grad[1])) xc.fill = {type:'gradient', gradient:'angle', degree:+s.grad[2] || 0, stops:[{position:0, color:{argb:argb(s.grad[0])}}, {position:1, color:{argb:argb(s.grad[1])}}]}; else if (s.bg) xc.fill = {type:'pattern', pattern:'solid', fgColor:{argb:argb(s.bg)}};
+      if (s.ul) xc.protection = {locked:false};
+      const al = {}; if (s.ha) al.horizontal = {l:'left', c:'center', r:'right'}[s.ha]; if (s.va) al.vertical = {t:'top', m:'middle', b:'bottom'}[s.va]; if (s.wrap) al.wrapText = true; if (s.ind) al.indent = s.ind; if (s.shr) al.shrinkToFit = true; if (s.rot) al.textRotation = s.rot === 'v' ? 255 : s.rot < 0 ? 90 - s.rot : s.rot; if (Object.keys(al).length) xc.alignment = al;
+      const bd = {}; for (const [kk, side] of [['bt', 'top'], ['br', 'right'], ['bb', 'bottom'], ['bl', 'left']]) if (s[kk]){ const [w, col, kind] = String(s[kk]).split(' '); bd[side] = {style:kind === 'double' ? 'double' : kind === 'dashed' ? 'dashed' : kind === 'dotted' ? 'dotted' : parseInt(w) >= 2 ? 'medium' : 'thin', color:{argb:argb(col || '#1A1726')}}; }
       if (Object.keys(bd).length) xc.border = bd;
       if (cell?.note) xc.note = cell.note;
     }
@@ -49,6 +50,8 @@ async function exportXlsx(){
       else if (rule.type === 'text') rules = [{type:'containsText', operator:'containsText', text:String(rule.a), style:st}];
       if (rules) try { ws.addConditionalFormatting({ref, rules}); } catch(e){}
     }
+    try { await xlsxObjects(wb, ws, sh); } catch(e){ console.warn(e); }
+    if (sh.prot?.on) try { await ws.protect('', {selectLockedCells:true, selectUnlockedCells:true, formatColumns:true, formatRows:true}); } catch(e){}
   }
   for (const [k, n] of Object.entries(WB.names || {})){ const g = parseRange(n.ref); if (!g) continue; try { wb.definedNames.add(`'${n.sheet}'!$${colName(g.c1)}$${g.r1 + 1}:$${colName(g.c2)}$${g.r2 + 1}`, n.label || k); } catch(e){} }
   const buf = await wb.xlsx.writeBuffer();

@@ -174,6 +174,17 @@ async function svgToPNG(svg, w, h, name){
   cv.toBlob(b => { if (b) SWDownload(name + '.png', b); }, 'image/png');
 }
 function shapePNG(s){ const pad = s.sh ? 20 : 4; let svg = shapeSVG(s).replace('viewBox="0 0 ' + Math.max(2, s.w) + ' ' + Math.max(2, s.h) + '"', `viewBox="${-pad} ${-pad} ${s.w + 2 * pad} ${s.h + 2 * pad}"`).replace(/width="[\d.]+" height="[\d.]+"/, `width="${s.w + 2 * pad}" height="${s.h + 2 * pad}"`); svgToPNG(svg, s.w + 2 * pad, s.h + 2 * pad, 'forme'); }
+async function svgDataURL(svg, w, h, rot = 0){
+  const th = rot * Math.PI / 180, W = Math.ceil(Math.abs(w * Math.cos(th)) + Math.abs(h * Math.sin(th))), H = Math.ceil(Math.abs(w * Math.sin(th)) + Math.abs(h * Math.cos(th)));
+  const img = new Image(), url = URL.createObjectURL(new Blob([svg], {type:'image/svg+xml;charset=utf-8'})); await new Promise((ok, ko) => { img.onload = ok; img.onerror = ko; img.src = url; });
+  const sc = 2, cv = document.createElement('canvas'); cv.width = W * sc; cv.height = H * sc; const cx = cv.getContext('2d'); cx.scale(sc, sc); cx.translate(W / 2, H / 2); cx.rotate(th); cx.drawImage(img, -w / 2, -h / 2, w, h); URL.revokeObjectURL(url);
+  return {data:cv.toDataURL('image/png'), W, H};
+}
+function pxAnchor(sh, x, y){ let c = 0, acc = 0; while (c < 3000 && acc + sh.colW(c) <= x){ acc += sh.colW(c); c++; } let r = 0, ay = 0; while (r < 100000 && ay + sh.rowH(r) <= y){ ay += sh.rowH(r); r++; } return {col:c + (sh.colW(c) ? (x - acc) / sh.colW(c) : 0), row:r + (sh.rowH(r) ? (y - ay) / sh.rowH(r) : 0)}; }
+async function xlsxObjects(wb, ws, sh){
+  const items = [...sh.charts.map(c => ({x:c.x, y:c.y, w:c.w, h:c.h, rot:0, svg:chartSVG(c, c.w, c.h)})), ...sh.shapes.map(s => ({x:s.x, y:s.y, w:s.w, h:s.h, rot:s.rot || 0, svg:shapeSVG(s), shape:1}))];
+  for (const it of items){ const o = await svgDataURL(it.svg, it.w, it.h, it.rot); const cx = it.x + it.w / 2, cy = it.y + it.h / 2, a = pxAnchor(sh, Math.max(0, cx - o.W / 2), Math.max(0, cy - o.H / 2)); const id = wb.addImage({base64:o.data, extension:'png'}); ws.addImage(id, {tl:{col:a.col, row:a.row}, ext:{width:o.W, height:o.H}}); }
+}
 function chartPNG(ch){ svgToPNG(chartSVG(ch, ch.w, ch.h), ch.w, ch.h, (ch.title || 'graphique').replace(/[^\w\- ]+/g, '').trim() || 'graphique'); }
 /* images */
 function pickImage(){ let f = g$('shpFile'); if (!f){ f = document.createElement('input'); f.type = 'file'; f.id = 'shpFile'; f.accept = 'image/png,image/jpeg,image/webp,image/gif'; f.hidden = true; document.body.appendChild(f); f.onchange = () => { const file = f.files[0]; f.value = ''; if (file) importImage(file); }; } f.click(); }
