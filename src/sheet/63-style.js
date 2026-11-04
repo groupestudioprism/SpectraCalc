@@ -12,7 +12,7 @@ const PAINT = {s:null, on:false};
 const okCol = c => /^#[0-9a-f]{3,8}$/i.test(String(c || ''));
 function styleHTML(){
   const s = sh0().get(SEL.r, SEL.c)?.s || {}, g = s.grad || [], cl = (k, d) => okCol(s[k]) ? s[k] : d;
-  const prev = p => `${p.bg ? `background:${p.bg};` : ''}${p.fc ? `color:${p.fc};` : ''}${p.b ? 'font-weight:700;' : ''}${p.i ? 'font-style:italic;' : ''}${p.u ? 'text-decoration:underline;' : ''}${p.fs ? `font-size:${Math.min(16, p.fs * .9)}px;` : ''}${p.ff ? `font-family:'${p.ff}',monospace;` : ''}${p.bb ? `border-bottom:${p.bb.includes('double') ? '3px double' : '2px solid'} ${p.bb.split(' ')[1]};` : ''}${p.bl ? `border-left:3px solid ${p.bl.split(' ')[1]};padding-left:6px;` : ''}`;
+  const prev = p => `background:${p.bg || '#ffffff'};color:${p.fc || '#1A1726'};`+`${p.b ? 'font-weight:700;' : ''}${p.i ? 'font-style:italic;' : ''}${p.u ? 'text-decoration:underline;' : ''}${p.fs ? `font-size:${Math.min(16, p.fs * .9)}px;` : ''}${p.ff ? `font-family:'${p.ff}',monospace;` : ''}${p.bb ? `border-bottom:${p.bb.includes('double') ? '3px double' : '2px solid'} ${p.bb.split(' ')[1]};` : ''}${p.bl ? `border-left:3px solid ${p.bl.split(' ')[1]};padding-left:6px;` : ''}`;
   const T = (k, n) => `<button type="button" data-sty="t:${k}" class="${s[k] ? 'on' : ''}">${n}</button>`;
   return `<p class="pn-h">Styles de cellule <small>sur ${escH(rangeA1(SEL))}</small></p><div class="sty-gal">${CELL_STYLES.map(([n, p], i) => `<button type="button" data-sty="cs:${i}"><span style="${prev(p)}">${n}</span></button>`).join('')}</div>
     <p class="pn-h">Texte</p><div class="sty-tg">${T('st', '<s>Barré</s>')}${T('b', '<b>Gras</b>')}${T('i', '<i>Italique</i>')}${T('u', '<u>Souligné</u>')}${T('sh', 'Ombre')}${T('shr', 'Réduire')}

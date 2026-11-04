@@ -1110,6 +1110,7 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
 .sc-wrap.ng .sc-tbl td{border-color:transparent}.sc-h td{background:#F3F1F9;color:#7B7690;text-align:center;font-size:11px}
 @media (max-width:760px){.pr-rays{overflow-x:auto;justify-content:flex-start!important;scrollbar-width:none}.pr-rays::-webkit-scrollbar{display:none}.ray{flex:0 0 auto;min-width:56px}}
 .shp-grid{grid-template-columns:repeat(auto-fill,minmax(52px,1fr))}.shp-grid button{max-height:64px}
+.cf-ex.ic{display:inline-flex;justify-content:center;gap:1px;align-items:center}
 </style>
 </head><body>
 
@@ -3200,7 +3201,7 @@ function cfApply(sh, r, c, v){
       case 'formula': { try { let M = CF_AST.get(rule); if (!M || M.src !== rule.a){ M = new Map(); M.src = rule.a; CF_AST.set(rule, M); } const key = (r - g.r1) + ',' + (c - g.c1); let ast = M.get(key); if (!ast){ ast = parseFormula(shiftFormula(String(rule.a).replace(/^=/, ''), r - g.r1, c - g.c1)); if (M.size < 20000) M.set(key, ast); } hit = toBool(scalar(ev(ast, {wb:WB, sh, r, c}))); } catch(e){ hit = false; } break; }
       case 'scale': if (n != null){ const t = st.max > st.min ? (n - st.min) / (st.max - st.min) : .5; const cols = rule.colors || ['#F8696B', '#FFEB84', '#63BE7B']; const col = cols.length === 3 ? (t < .5 ? mix(cols[0], cols[1], t * 2) : mix(cols[1], cols[2], (t - .5) * 2)) : mix(cols[0], cols[1], t); s = {bg:col}; } break;
       case 'bar': if (n != null){ const t = st.max > Math.min(0, st.min) ? (n - Math.min(0, st.min)) / (st.max - Math.min(0, st.min)) : 0; s = {_bar:clamp(t, 0, 1), _barc:rule.color || themeColors().ac}; } break;
-      case 'icons': if (n != null){ const t = st.max > st.min ? (n - st.min) / (st.max - st.min) : .5; s = {_icon:rule.set === 'arrows' ? (t >= .67 ? '▲' : t >= .33 ? '▶' : '▼') : t >= .67 ? '●' : t >= .33 ? '●' : '●', _iconc:t >= .67 ? '#13925C' : t >= .33 ? '#E0A100' : '#D13B3B'}; } break;
+      case 'icons': if (n != null){ const t = st.max > st.min ? (n - st.min) / (st.max - st.min) : .5; const k = t >= .67 ? 2 : t >= .33 ? 1 : 0, IS = {arrows:['▼', '▶', '▲'], dots:['●', '●', '●'], stars:['★☆☆', '★★☆', '★★★'], check:['✖', '!', '✔'], flags:['⚑', '⚑', '⚑']}[rule.set] || ['●', '●', '●']; s = {_icon:IS[k], _iconc:rule.set === 'stars' ? '#E0A100' : ['#D13B3B', '#E0A100', '#13925C'][k]}; } break;
     }
     if (hit) s = {...rule.style};
     if (s){ out = {...(out || {}), ...s}; if (rule.stop) break; }
@@ -4302,6 +4303,18 @@ function renderPanel(){
         <button type="button" data-cf="above"><span class="cf-ex" style="background:#D6E4FF">&gt; moy.</span>Au-dessus de la moyenne</button>
         <button type="button" data-cf="dup"><span class="cf-ex" style="background:#FFE0B2">2×</span>Doublons</button>
         <button type="button" data-cf="late"><span class="cf-ex" style="background:#FFD1D1">📅</span>Dates dépassées</button>
+        <button type="button" data-cf="icons-dots"><span class="cf-ex ic"><i style="color:#D13B3B">●</i><i style="color:#E0A100">●</i><i style="color:#13925C">●</i></span>Feux tricolores</button>
+        <button type="button" data-cf="icons-stars"><span class="cf-ex ic" style="color:#E0A100">★★☆</span>Étoiles</button>
+        <button type="button" data-cf="icons-check"><span class="cf-ex ic"><i style="color:#D13B3B">✖</i><i style="color:#E0A100">!</i><i style="color:#13925C">✔</i></span>Coches</button>
+        <button type="button" data-cf="icons-flags"><span class="cf-ex ic"><i style="color:#D13B3B">⚑</i><i style="color:#E0A100">⚑</i><i style="color:#13925C">⚑</i></span>Drapeaux</button>
+        <button type="button" data-cf="bar2"><span class="cf-ex" style="background:linear-gradient(90deg,#2FBF71 50%,#eee 50%)"></span>Barres vertes</button>
+        <button type="button" data-cf="scale3"><span class="cf-ex" style="background:linear-gradient(90deg,#3D63FF,#fff,#F2387A)"></span>Dégradé bleu → rose</button>
+        <button type="button" data-cf="bottom"><span class="cf-ex" style="background:#FFE4E4">10</span>Les 10 plus petites</button>
+        <button type="button" data-cf="below"><span class="cf-ex" style="background:#FFE0B2">&lt; moy.</span>Sous la moyenne</button>
+        <button type="button" data-cf="uniq"><span class="cf-ex" style="background:#E9D5FF">1×</span>Valeurs uniques</button>
+        <button type="button" data-cf="empty"><span class="cf-ex" style="background:#FFF1A8">∅</span>Cellules vides</button>
+        <button type="button" data-cf="today"><span class="cf-ex" style="background:#CFF5E7">📅</span>Aujourd'hui</button>
+        <button type="button" data-cf="week"><span class="cf-ex" style="background:#D6E4FF">7 j</span>Cette semaine</button>
         <button type="button" data-cf="rule"><span class="cf-ex">…</span>Règle personnalisée</button></div>
       ${rules ? `<p class="pn-h">Règles de la feuille</p><div class="cf-rules">${rules}</div>` : ''}`;
   } else if (panel === 'theme'){
@@ -4465,6 +4478,8 @@ function addCf(kind){
     case 'scale2': return add({type:'scale', colors:['#ffffff', tv.ac]});
     case 'bar': return add({type:'bar', color:tv.ac});
     case 'icons': return add({type:'icons', set:'arrows'});
+    case 'icons-dots': return add({type:'icons', set:'dots'}); case 'icons-stars': return add({type:'icons', set:'stars'}); case 'icons-check': return add({type:'icons', set:'check'}); case 'icons-flags': return add({type:'icons', set:'flags'});
+    case 'bar2': return add({type:'bar', color:'#2FBF71'}); case 'scale3': return add({type:'scale', colors:['#3D63FF', '#ffffff', '#F2387A']}); case 'bottom': return add({type:'bottom', a:10, style:{bg:'#FFE4E4', fc:'#A12A2A', b:1}}); case 'below': return add({type:'below', style:{bg:'#FFE0B2'}}); case 'uniq': return add({type:'uniq', style:{bg:'#E9D5FF'}}); case 'empty': return add({type:'empty', style:{bg:'#FFF1A8'}}); case 'week': return add({type:'date', a:'week', style:{bg:'#D6E4FF'}}); case 'today': return add({type:'date', a:'today', style:{bg:'#CFF5E7', b:1}});
     case 'neg': return add({type:'neg', style:{fc:'#D92D20', bg:'#FFE4E4'}});
     case 'top': return add({type:'top', a:10, style:{bg:'#CFF5E7', fc:'#0F6E45', b:1}});
     case 'above': return add({type:'above', style:{bg:'#D6E4FF'}});
@@ -4549,7 +4564,7 @@ const PAINT = {s:null, on:false};
 const okCol = c => /^#[0-9a-f]{3,8}$/i.test(String(c || ''));
 function styleHTML(){
   const s = sh0().get(SEL.r, SEL.c)?.s || {}, g = s.grad || [], cl = (k, d) => okCol(s[k]) ? s[k] : d;
-  const prev = p => `${p.bg ? `background:${p.bg};` : ''}${p.fc ? `color:${p.fc};` : ''}${p.b ? 'font-weight:700;' : ''}${p.i ? 'font-style:italic;' : ''}${p.u ? 'text-decoration:underline;' : ''}${p.fs ? `font-size:${Math.min(16, p.fs * .9)}px;` : ''}${p.ff ? `font-family:'${p.ff}',monospace;` : ''}${p.bb ? `border-bottom:${p.bb.includes('double') ? '3px double' : '2px solid'} ${p.bb.split(' ')[1]};` : ''}${p.bl ? `border-left:3px solid ${p.bl.split(' ')[1]};padding-left:6px;` : ''}`;
+  const prev = p => `background:${p.bg || '#ffffff'};color:${p.fc || '#1A1726'};`+`${p.b ? 'font-weight:700;' : ''}${p.i ? 'font-style:italic;' : ''}${p.u ? 'text-decoration:underline;' : ''}${p.fs ? `font-size:${Math.min(16, p.fs * .9)}px;` : ''}${p.ff ? `font-family:'${p.ff}',monospace;` : ''}${p.bb ? `border-bottom:${p.bb.includes('double') ? '3px double' : '2px solid'} ${p.bb.split(' ')[1]};` : ''}${p.bl ? `border-left:3px solid ${p.bl.split(' ')[1]};padding-left:6px;` : ''}`;
   const T = (k, n) => `<button type="button" data-sty="t:${k}" class="${s[k] ? 'on' : ''}">${n}</button>`;
   return `<p class="pn-h">Styles de cellule <small>sur ${escH(rangeA1(SEL))}</small></p><div class="sty-gal">${CELL_STYLES.map(([n, p], i) => `<button type="button" data-sty="cs:${i}"><span style="${prev(p)}">${n}</span></button>`).join('')}</div>
     <p class="pn-h">Texte</p><div class="sty-tg">${T('st', '<s>Barré</s>')}${T('b', '<b>Gras</b>')}${T('i', '<i>Italique</i>')}${T('u', '<u>Souligné</u>')}${T('sh', 'Ombre')}${T('shr', 'Réduire')}
@@ -5879,6 +5894,10 @@ function shortcutsDlg(){
     ${k('Poignée ▪ en bas à droite', 'Glisser pour recopier ou prolonger une suite (1, 2, 3… · lundi, mardi… · janvier…) · double-clic pour recopier jusqu\'au bout')}
     ${k('<kbd>Ctrl</kbd> <kbd>;</kbd>', 'Date du jour · <kbd>Ctrl</kbd> <kbd>Maj</kbd> <kbd>;</kbd> heure')}
     ${k('<kbd>Ctrl</kbd> <kbd>B</kbd> / <kbd>I</kbd> / <kbd>U</kbd>', 'Gras, italique, souligné')}
+    ${k('<kbd>Ctrl</kbd> <kbd>5</kbd>', 'Texte barré')}
+    ${k('<kbd>Ctrl</kbd> <kbd>Maj</kbd> <kbd>C</kbd> puis <kbd>V</kbd>', 'Copier le format · l\'appliquer à la sélection')}
+    ${k('<kbd>Ctrl</kbd> <kbd>`</kbd>', 'Afficher les formules')}
+    ${k('Forme sélectionnée', '<kbd>Flèches</kbd> déplacent (avec <kbd>Maj</kbd> : 10 px) · <kbd>Entrée</kbd> modifie le texte · <kbd>Ctrl</kbd> <kbd>D</kbd> duplique · <kbd>Suppr</kbd> supprime · <kbd>Alt</kbd> déplace sans magnétisme · <kbd>Maj</kbd> + coin garde les proportions')}
     ${k('<kbd>Ctrl</kbd> <kbd>Z</kbd> · <kbd>Ctrl</kbd> <kbd>Y</kbd>', 'Annuler · rétablir')}
     ${k('<kbd>Ctrl</kbd> <kbd>F</kbd> · <kbd>Ctrl</kbd> <kbd>H</kbd>', 'Rechercher · remplacer')}
     ${k('<kbd>Ctrl</kbd> <kbd>Pg Suiv</kbd>', 'Feuille suivante')}

@@ -47,6 +47,18 @@ function renderPanel(){
         <button type="button" data-cf="above"><span class="cf-ex" style="background:#D6E4FF">&gt; moy.</span>Au-dessus de la moyenne</button>
         <button type="button" data-cf="dup"><span class="cf-ex" style="background:#FFE0B2">2×</span>Doublons</button>
         <button type="button" data-cf="late"><span class="cf-ex" style="background:#FFD1D1">📅</span>Dates dépassées</button>
+        <button type="button" data-cf="icons-dots"><span class="cf-ex ic"><i style="color:#D13B3B">●</i><i style="color:#E0A100">●</i><i style="color:#13925C">●</i></span>Feux tricolores</button>
+        <button type="button" data-cf="icons-stars"><span class="cf-ex ic" style="color:#E0A100">★★☆</span>Étoiles</button>
+        <button type="button" data-cf="icons-check"><span class="cf-ex ic"><i style="color:#D13B3B">✖</i><i style="color:#E0A100">!</i><i style="color:#13925C">✔</i></span>Coches</button>
+        <button type="button" data-cf="icons-flags"><span class="cf-ex ic"><i style="color:#D13B3B">⚑</i><i style="color:#E0A100">⚑</i><i style="color:#13925C">⚑</i></span>Drapeaux</button>
+        <button type="button" data-cf="bar2"><span class="cf-ex" style="background:linear-gradient(90deg,#2FBF71 50%,#eee 50%)"></span>Barres vertes</button>
+        <button type="button" data-cf="scale3"><span class="cf-ex" style="background:linear-gradient(90deg,#3D63FF,#fff,#F2387A)"></span>Dégradé bleu → rose</button>
+        <button type="button" data-cf="bottom"><span class="cf-ex" style="background:#FFE4E4">10</span>Les 10 plus petites</button>
+        <button type="button" data-cf="below"><span class="cf-ex" style="background:#FFE0B2">&lt; moy.</span>Sous la moyenne</button>
+        <button type="button" data-cf="uniq"><span class="cf-ex" style="background:#E9D5FF">1×</span>Valeurs uniques</button>
+        <button type="button" data-cf="empty"><span class="cf-ex" style="background:#FFF1A8">∅</span>Cellules vides</button>
+        <button type="button" data-cf="today"><span class="cf-ex" style="background:#CFF5E7">📅</span>Aujourd'hui</button>
+        <button type="button" data-cf="week"><span class="cf-ex" style="background:#D6E4FF">7 j</span>Cette semaine</button>
         <button type="button" data-cf="rule"><span class="cf-ex">…</span>Règle personnalisée</button></div>
       ${rules ? `<p class="pn-h">Règles de la feuille</p><div class="cf-rules">${rules}</div>` : ''}`;
   } else if (panel === 'theme'){
@@ -210,6 +222,8 @@ function addCf(kind){
     case 'scale2': return add({type:'scale', colors:['#ffffff', tv.ac]});
     case 'bar': return add({type:'bar', color:tv.ac});
     case 'icons': return add({type:'icons', set:'arrows'});
+    case 'icons-dots': return add({type:'icons', set:'dots'}); case 'icons-stars': return add({type:'icons', set:'stars'}); case 'icons-check': return add({type:'icons', set:'check'}); case 'icons-flags': return add({type:'icons', set:'flags'});
+    case 'bar2': return add({type:'bar', color:'#2FBF71'}); case 'scale3': return add({type:'scale', colors:['#3D63FF', '#ffffff', '#F2387A']}); case 'bottom': return add({type:'bottom', a:10, style:{bg:'#FFE4E4', fc:'#A12A2A', b:1}}); case 'below': return add({type:'below', style:{bg:'#FFE0B2'}}); case 'uniq': return add({type:'uniq', style:{bg:'#E9D5FF'}}); case 'empty': return add({type:'empty', style:{bg:'#FFF1A8'}}); case 'week': return add({type:'date', a:'week', style:{bg:'#D6E4FF'}}); case 'today': return add({type:'date', a:'today', style:{bg:'#CFF5E7', b:1}});
     case 'neg': return add({type:'neg', style:{fc:'#D92D20', bg:'#FFE4E4'}});
     case 'top': return add({type:'top', a:10, style:{bg:'#CFF5E7', fc:'#0F6E45', b:1}});
     case 'above': return add({type:'above', style:{bg:'#D6E4FF'}});

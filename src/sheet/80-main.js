@@ -97,6 +97,10 @@ function shortcutsDlg(){
     ${k('Poignée ▪ en bas à droite', 'Glisser pour recopier ou prolonger une suite (1, 2, 3… · lundi, mardi… · janvier…) · double-clic pour recopier jusqu\'au bout')}
     ${k('<kbd>Ctrl</kbd> <kbd>;</kbd>', 'Date du jour · <kbd>Ctrl</kbd> <kbd>Maj</kbd> <kbd>;</kbd> heure')}
     ${k('<kbd>Ctrl</kbd> <kbd>B</kbd> / <kbd>I</kbd> / <kbd>U</kbd>', 'Gras, italique, souligné')}
+    ${k('<kbd>Ctrl</kbd> <kbd>5</kbd>', 'Texte barré')}
+    ${k('<kbd>Ctrl</kbd> <kbd>Maj</kbd> <kbd>C</kbd> puis <kbd>V</kbd>', 'Copier le format · l\'appliquer à la sélection')}
+    ${k('<kbd>Ctrl</kbd> <kbd>`</kbd>', 'Afficher les formules')}
+    ${k('Forme sélectionnée', '<kbd>Flèches</kbd> déplacent (avec <kbd>Maj</kbd> : 10 px) · <kbd>Entrée</kbd> modifie le texte · <kbd>Ctrl</kbd> <kbd>D</kbd> duplique · <kbd>Suppr</kbd> supprime · <kbd>Alt</kbd> déplace sans magnétisme · <kbd>Maj</kbd> + coin garde les proportions')}
     ${k('<kbd>Ctrl</kbd> <kbd>Z</kbd> · <kbd>Ctrl</kbd> <kbd>Y</kbd>', 'Annuler · rétablir')}
     ${k('<kbd>Ctrl</kbd> <kbd>F</kbd> · <kbd>Ctrl</kbd> <kbd>H</kbd>', 'Rechercher · remplacer')}
     ${k('<kbd>Ctrl</kbd> <kbd>Pg Suiv</kbd>', 'Feuille suivante')}

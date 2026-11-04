@@ -241,3 +241,4 @@
 .sc-wrap.ng .sc-tbl td{border-color:transparent}.sc-h td{background:#F3F1F9;color:#7B7690;text-align:center;font-size:11px}
 @media (max-width:760px){.pr-rays{overflow-x:auto;justify-content:flex-start!important;scrollbar-width:none}.pr-rays::-webkit-scrollbar{display:none}.ray{flex:0 0 auto;min-width:56px}}
 .shp-grid{grid-template-columns:repeat(auto-fill,minmax(52px,1fr))}.shp-grid button{max-height:64px}
+.cf-ex.ic{display:inline-flex;justify-content:center;gap:1px;align-items:center}
