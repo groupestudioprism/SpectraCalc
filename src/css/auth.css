@@ -21,7 +21,7 @@
 .ap-apps li{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:0 12px;align-items:center;padding:10px 12px;border-radius:14px;background:rgb(255 255 255 / .06);border:1px solid rgb(255 255 255 / .1);backdrop-filter:blur(8px)}
 .ap-ic{grid-row:1 / span 2;grid-column:1;width:40px;height:40px;border-radius:11px;display:block}
 .ap-ic svg{width:40px;height:40px;border-radius:11px;display:block}
-.ap-ic.c{background:conic-gradient(from 210deg,#FF8A3D,#FFC83D,#45D69A,#14C2EC,#7B2FF7,#FF3F86,#FF8A3D);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.ap-ic.c{background:none}
 .ap-ic.s{background:linear-gradient(120deg,#3D63FF,#14C2EC 40%,#FFC83D 70%,#FF3F86);transform:skewY(-8deg) scale(.86);border-radius:6px}
 .ap-apps b{grid-column:2;grid-row:1;font:700 14px var(--f-disp)}
 .ap-apps span:not(.ap-ic){grid-column:2;grid-row:2;font-size:12.5px;color:rgb(255 255 255 / .6)}
