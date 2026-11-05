@@ -109,6 +109,7 @@ function shortcutsDlg(){
 }
 function globalKeys(e){
   if (g$('app').hidden) return;
+  if (DEV.open){ if (e.key === 'Escape' && g$('apDlg').hidden && !DEV.ed?.composing){ e.preventDefault(); closeDev(); } return; }
   const k = e.key, mod = e.ctrlKey || e.metaKey, lk = k.length === 1 ? k.toLowerCase() : k;
   if (mod && (lk === 'k' || k === '/')){ e.preventDefault(); return g$('spectre').hidden ? openSpectre() : closeSpectre(); }
   if (k === 'Escape'){

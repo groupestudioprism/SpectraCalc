@@ -1,6 +1,7 @@
 /* ---------- Tiroirs (Insérer, Données, Couleurs, Thème, Modèles), Embellir, Rechercher, assistant de fonctions ---------- */
 let panel = '';
 function openPanel(k){
+  if (k === 'dev') return openDev();
   if (panel === k || !k){ panel = ''; g$('edPanel').hidden = true; g$('edRail').querySelectorAll('.ray').forEach(r => r.setAttribute('aria-pressed', 'false')); return; }
   panel = k; const ray = g$('edRail').querySelector(`[data-panel="${k}"]`);
   g$('edRail').querySelectorAll('.ray').forEach(r => r.setAttribute('aria-pressed', r === ray ? 'true' : 'false'));

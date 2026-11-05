@@ -99,7 +99,7 @@ function inferNf(n, sh, depth = 0){
 }
 
 class Workbook {
-  constructor(){ this.assets = {}; this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
+  constructor(){ this.assets = {}; this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.macros = []; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
   get sh(){ return this.sheets[this.active]; }
   byName(n){ const l = String(n).toLowerCase(); return this.sheets.find(s => s.name.toLowerCase() === l) || null; }
   addSheet(name, at){ const s = new Sheet(this, {name:name || this.freeName()}); if (at == null) this.sheets.push(s); else this.sheets.splice(at, 0, s); return s; }
@@ -152,12 +152,14 @@ class Workbook {
       if (!changed) break;
     }
   }
-  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, ...(this.assets && Object.keys(this.assets).length ? {assets:this.assets} : {}), sheets:this.sheets.map(s => s.toJSON())}; }
+  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, ...(this.assets && Object.keys(this.assets).length ? {assets:this.assets} : {}), ...(this.macros && this.macros.length ? {macros:this.macros} : {}), sheets:this.sheets.map(s => s.toJSON())}; }
   load(o){
     this.sheets = []; this.title = o.title || 'Classeur sans titre'; this.theme = o.theme || {id:'spectra'}; this.names = o.names || {}; this.assets = o.assets && typeof o.assets === 'object' ? o.assets : {};
     for (const so of (o.sheets && o.sheets.length ? o.sheets : [{name:'Feuille 1'}])){ const s = new Sheet(this, {name:so.name}); this.sheets.push(s); }
     (o.sheets || []).forEach((so, i) => this.sheets[i].load(so));
     this.active = clamp(o.active || 0, 0, this.sheets.length - 1);
+    this.macros = Array.isArray(o.macros) ? o.macros.slice(0, 60).map(cleanMacro).filter(Boolean) : [];
+    if (typeof devOnLoad === 'function') devOnLoad(this);
     this.recalc();
   }
 }
@@ -181,6 +183,7 @@ function endTx(){
     if (sh){ const ma = JSON.stringify(sh.meta()); if (ma !== t.metaB){ step.metaB = t.metaB; step.metaA = ma; } }
     if (!step.cells.length && !step.metaB) return;
   }
+  if (typeof devRecStep === 'function') devRecStep(step);
   UNDO.list = UNDO.list.slice(0, UNDO.i + 1); UNDO.list.push(step); if (UNDO.list.length > 200) UNDO.list.shift(); UNDO.i = UNDO.list.length - 1;
   afterChange();
 }

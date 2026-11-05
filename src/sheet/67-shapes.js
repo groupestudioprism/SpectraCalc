@@ -130,7 +130,7 @@ function onShapeDown(e){
   e.preventDefault(); e.stopPropagation(); if (EDIT.on) commitEdit(0, 0); const s = shapeById(el.dataset.shp); if (!s) return true;
   selShape(s.id); g$('grid').focus({preventScroll:true}); if (V.ro || s.lock) return true;
   const r = el.getBoundingClientRect(), h = e.target.dataset.h;
-  SHP.drag = {mode:h ? (h === 'rot' ? 'rot' : 'rs') : 'mv', h, x:e.clientX, y:e.clientY, o:{...s}, s, moved:false, cx:r.left + r.width / 2, cy:r.top + r.height / 2};
+  SHP.drag = {shift:e.shiftKey, mode:h ? (h === 'rot' ? 'rot' : 'rs') : 'mv', h, x:e.clientX, y:e.clientY, o:{...s}, s, moved:false, cx:r.left + r.width / 2, cy:r.top + r.height / 2};
   return true;
 }
 function onShapeMove(e){
@@ -147,7 +147,7 @@ function onShapeMove(e){
 function onShapeUp(){
   const d = SHP.drag; if (!d) return false; SHP.drag = null;
   if (d.moved){ const after = {x:d.s.x, y:d.s.y, w:d.s.w, h:d.s.h, rot:d.s.rot}; Object.assign(d.s, {x:d.o.x, y:d.o.y, w:d.o.w, h:d.o.h, rot:d.o.rot}); tx(d.mode === 'mv' ? 'Déplacer la forme' : d.mode === 'rot' ? 'Pivoter la forme' : 'Redimensionner la forme', () => Object.assign(d.s, after)); layout(); schedule(); if (panel === 'shapes') renderPanel(); }
-  else renderShapes(); return true;
+  else { renderShapes(); if (d.s.macro && d.mode === 'mv' && !d.shift) runShapeMacro(d.s); } return true;
 }
 function onShapeKey(e){
   const s = SHP.sel && shapeById(SHP.sel); if (!s || EDIT.on || SHP.edit) return false; const k = e.key, mod = e.ctrlKey || e.metaKey;
@@ -162,9 +162,9 @@ function onShapeKey(e){
 function shapeMenu(e, id){
   const s = shapeById(id); if (!s) return; selShape(id); const ro = V.ro ? ' disabled' : '';
   openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})},
-    `<div class="pop-list ctx"><button type="button" data-sm="text"${ro}>Modifier le texte</button><button type="button" data-sm="dup"${ro}>Dupliquer</button><hr><button type="button" data-sm="front"${ro}>Premier plan</button><button type="button" data-sm="up"${ro}>Avancer</button><button type="button" data-sm="down"${ro}>Reculer</button><button type="button" data-sm="back"${ro}>Arrière-plan</button><hr><button type="button" data-sm="flip"${ro}>Retourner horizontalement</button><button type="button" data-sm="lock"${ro}>${s.lock ? 'Déverrouiller' : 'Verrouiller'}</button><button type="button" data-sm="png">Télécharger en image (PNG)</button><button type="button" data-sm="panel">Propriétés…</button><hr><button type="button" data-sm="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
+    `<div class="pop-list ctx"><button type="button" data-sm="text"${ro}>Modifier le texte</button><button type="button" data-sm="dup"${ro}>Dupliquer</button><button type="button" data-sm="macro"${ro}>Affecter une macro…</button><hr><button type="button" data-sm="front"${ro}>Premier plan</button><button type="button" data-sm="up"${ro}>Avancer</button><button type="button" data-sm="down"${ro}>Reculer</button><button type="button" data-sm="back"${ro}>Arrière-plan</button><hr><button type="button" data-sm="flip"${ro}>Retourner horizontalement</button><button type="button" data-sm="lock"${ro}>${s.lock ? 'Déverrouiller' : 'Verrouiller'}</button><button type="button" data-sm="png">Télécharger en image (PNG)</button><button type="button" data-sm="panel">Propriétés…</button><hr><button type="button" data-sm="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
       pp.onclick = ev => { const b = ev.target.closest('button'); if (!b || b.disabled) return; closePop(); const k = b.dataset.sm;
-        if (k === 'text') shapeEditText(id); else if (k === 'dup') dupShape(id); else if (['front', 'up', 'down', 'back'].includes(k)) shapeZ(id, k); else if (k === 'flip') updShape(id, {flip:s.flip ? undefined : 1}); else if (k === 'lock') updShape(id, {lock:s.lock ? undefined : 1}); else if (k === 'png') shapePNG(s); else if (k === 'panel'){ SHP.tab = 'shapes'; if (panel !== 'shapes') openPanel('shapes'); else renderPanel(); } else if (k === 'del') delShape(id); }; }, 'menu');
+        if (k === 'text') shapeEditText(id); else if (k === 'dup') dupShape(id); else if (k === 'macro') linkMacroDlg(id); else if (['front', 'up', 'down', 'back'].includes(k)) shapeZ(id, k); else if (k === 'flip') updShape(id, {flip:s.flip ? undefined : 1}); else if (k === 'lock') updShape(id, {lock:s.lock ? undefined : 1}); else if (k === 'png') shapePNG(s); else if (k === 'panel'){ SHP.tab = 'shapes'; if (panel !== 'shapes') openPanel('shapes'); else renderPanel(); } else if (k === 'del') delShape(id); }; }, 'menu');
 }
 /* export PNG d'une forme ou d'un graphique */
 async function svgToPNG(svg, w, h, name){
