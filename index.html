@@ -170,7 +170,7 @@ kbd{display:inline-block;min-width:22px;padding:1px 6px;border:1px solid var(--l
 .ap-apps li{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:0 12px;align-items:center;padding:10px 12px;border-radius:14px;background:rgb(255 255 255 / .06);border:1px solid rgb(255 255 255 / .1);backdrop-filter:blur(8px)}
 .ap-ic{grid-row:1 / span 2;grid-column:1;width:40px;height:40px;border-radius:11px;display:block}
 .ap-ic svg{width:40px;height:40px;border-radius:11px;display:block}
-.ap-ic.c{background:conic-gradient(from 210deg,#FF8A3D,#FFC83D,#45D69A,#14C2EC,#7B2FF7,#FF3F86,#FF8A3D);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.ap-ic.c{background:none}
 .ap-ic.s{background:linear-gradient(120deg,#3D63FF,#14C2EC 40%,#FFC83D 70%,#FF3F86);transform:skewY(-8deg) scale(.86);border-radius:6px}
 .ap-apps b{grid-column:2;grid-row:1;font:700 14px var(--f-disp)}
 .ap-apps span:not(.ap-ic){grid-column:2;grid-row:2;font-size:12.5px;color:rgb(255 255 255 / .6)}
@@ -1073,9 +1073,9 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
 [data-theme="dark"] .g-corner{background:#1B1825;border-color:#2A2638}
 [data-theme="dark"] .g-colh b,[data-theme="dark"] .g-rowh b{border-color:#2A2638}
 [data-theme="dark"] .g-colh b.on,[data-theme="dark"] .g-rowh b.on{background:color-mix(in srgb,var(--selc) 22%,#1E1A29)}
-/* logo hexagonal : pas de cadre arrondi, une ombre qui suit la forme */
-.ap-brand svg{border-radius:0;box-shadow:none;filter:drop-shadow(0 12px 30px rgb(123 47 247 / .5))}
-.hm-brand svg,.ed-home svg{border-radius:0}
+/* logo Calc (carré arrondi) : l'icône porte déjà ses coins, ombre qui suit la forme */
+.ap-brand svg{border-radius:22%;box-shadow:none;filter:drop-shadow(0 12px 30px rgb(123 47 247 / .5))}
+.hm-brand svg,.ed-home svg{border-radius:22%}
 
 .ce-tabs{margin-bottom:2px}.ce-f{max-height:min(62vh,520px);overflow:auto;padding-right:4px}.ce-f [data-pane]{display:grid;gap:10px}.ce-f [data-pane][hidden]{display:none}
 .ce-pals{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.ce-pals button{display:grid;gap:3px;justify-items:center;padding:6px 3px;border:1px solid var(--line);border-radius:9px;background:var(--panel);font-size:10.5px;color:var(--ink2)}.ce-pals button.on{border-color:var(--r-v);background:var(--accent-soft);color:var(--ink)}.ce-pals span{display:flex;height:10px;border-radius:5px;overflow:hidden;width:70%}.ce-pals i{flex:1}
@@ -1115,15 +1115,110 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
 .ray{min-width:52px;padding:4px 5px 6px;font-size:10.5px}.pr-rays{gap:1px}
 @media (max-width:1400px) and (min-width:761px){.ray span{display:none}.ray{min-width:38px;height:40px}.pr-rays{padding-left:4px;margin-left:4px}.tb{min-width:34px;padding:0 6px}.pr-tools .tsel{padding:0 8px}}
 .pr-tools.ov{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent)}
+/* Interface Développeur : éditeur de code, exemples, console, Communauté */
+.dev{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:14px;background:rgb(16 12 30 / .5);backdrop-filter:blur(3px)}
+.dev[hidden]{display:none}
+.dev-box{width:min(1240px,100%);height:min(860px,100%);display:flex;flex-direction:column;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh3);overflow:hidden}
+.dev-h{display:flex;align-items:center;gap:14px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel2);flex-wrap:wrap}
+.dev-t{display:inline-flex;align-items:center;gap:9px;font:750 17px var(--f-disp)}
+.dev-t svg{width:22px;height:22px;fill:none;stroke:#FF8A3D;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dev-tabs{display:flex;gap:4px;flex:1;min-width:0;overflow:auto}
+.dev-tabs button{height:34px;padding:0 14px;border:0;border-radius:9px;background:transparent;color:var(--ink2);font-weight:600;white-space:nowrap}
+.dev-tabs button:hover{background:var(--hover)}
+.dev-tabs button[aria-selected=true]{background:var(--ink);color:var(--panel)}
+.dev-x{width:34px;height:34px;border:0;border-radius:9px;background:transparent;color:var(--ink2);font-size:16px}
+.dev-x:hover{background:var(--hover)}
+.dev-main{flex:1;min-height:0;display:flex}
+.dv-side{width:230px;flex:none;display:flex;flex-direction:column;gap:2px;padding:10px;border-right:1px solid var(--line);overflow:auto;background:var(--panel2)}
+.dv-side ul{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:2px}
+.dv-sh{display:flex;align-items:center;justify-content:space-between;margin-top:6px;padding:0 4px;font:700 11px var(--f-ui);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.dv-sh button{width:24px;height:24px;border:1px solid var(--line2);border-radius:7px;background:var(--panel);color:var(--ink);font-size:15px;line-height:1}
+.dv-sh button:hover{background:var(--hover)}
+.dv-li{width:100%;display:flex;align-items:center;justify-content:space-between;gap:6px;height:32px;padding:0 8px;border:0;border-radius:8px;background:transparent;color:var(--ink);text-align:left}
+.dv-li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dv-li:hover{background:var(--hover)}.dv-li.on{background:var(--press);font-weight:650}
+.dv-run{font-style:normal;font-size:10px;width:22px;height:22px;display:grid;place-items:center;border-radius:6px;color:#2FBF71;flex:none}
+.dv-run:hover{background:rgb(47 191 113 / .16)}
+.dv-none{padding:4px 8px;font-size:12px;color:var(--mut)}
+.dv-side-b{margin-top:auto;display:grid;gap:6px;padding-top:10px}
+.dv-rec{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink);font-weight:600}
+.dv-rec i{width:11px;height:11px;border-radius:50%;background:#E5384F}
+.dv-rec.on{background:#E5384F;color:#fff;border-color:#E5384F}.dv-rec.on i{background:#fff;border-radius:2px}
+.dv-link{border:0;background:transparent;color:var(--ink2);text-decoration:underline;text-underline-offset:3px;height:28px}
+.dv-work{flex:1;min-width:0;display:flex;flex-direction:column}
+.dv-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.dv-name{height:34px;width:min(240px,100%);padding:0 10px;border:1px solid var(--line2);border-radius:9px;background:var(--panel);color:var(--ink);font:650 14px var(--f-ui)}
+.dv-sp{flex:1}
+.dv-hint{font-size:12.5px;color:var(--mut)}.dv-hint code{font-family:var(--f-mono);color:var(--ink2)}
+.dv-kind{display:inline-block;padding:2px 8px;border-radius:999px;font:700 11px var(--f-ui);background:#E9E4FB;color:#5B34C9}
+.dv-kind.function{background:#DDF4F9;color:#0A7391}
+:root[data-theme=dark] .dv-kind{background:#2D2550;color:#C7B6FF}:root[data-theme=dark] .dv-kind.function{background:#12343D;color:#78DDF3}
+.dv-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 14px;border:1px solid var(--line2);border-radius:9px;background:var(--panel);color:var(--ink);font-weight:600}
+.dv-btn:hover:not(:disabled){background:var(--hover)}.dv-btn:disabled{opacity:.5;cursor:default}
+.dv-btn.go{background:#7B3FF2;border-color:#7B3FF2;color:#fff}.dv-btn.go:hover:not(:disabled){background:#6A2FE0}
+.dv-btn.danger{color:#D2294A}
+.dv-ed{flex:1;min-height:140px;display:flex;background:var(--panel);font:13px/20px var(--f-mono)}
+.dv-ln{flex:none;width:44px;padding:10px 6px 10px 0;overflow:hidden;text-align:right;color:var(--mut);background:var(--panel2);border-right:1px solid var(--line);user-select:none}
+.dv-ln span{display:block;height:20px}.dv-ln .err{color:#fff;background:#E5384F;border-radius:0 4px 4px 0}
+.dv-code{position:relative;flex:1;min-width:0}
+.dv-code pre,.dv-code textarea{position:absolute;inset:0;margin:0;padding:10px 12px;border:0;font:inherit;tab-size:2;white-space:pre;overflow:auto;letter-spacing:0}
+.dv-code pre{pointer-events:none;color:var(--ink)}
+.dv-code textarea{resize:none;background:transparent;color:transparent;caret-color:var(--ink);outline:none;-webkit-text-fill-color:transparent}
+.dv-code textarea::selection{background:rgb(123 63 242 / .28);-webkit-text-fill-color:transparent}
+.dv-code textarea::placeholder{color:var(--mut);-webkit-text-fill-color:var(--mut)}
+.dv-code i,.dv-pre i{font-style:normal}
+.dv-code .c,.dv-pre .c{color:#7B7690;font-style:italic}.dv-code .s,.dv-pre .s{color:#0E8F5A}.dv-code .n,.dv-pre .n{color:#C2410C}
+.dv-code .k,.dv-pre .k{color:#7B3FF2;font-weight:600}.dv-code .l,.dv-pre .l{color:#C2185B}.dv-code .a,.dv-pre .a{color:#0A7391;font-weight:600}
+:root[data-theme=dark] .dv-code .c,:root[data-theme=dark] .dv-pre .c{color:#8E89A6}:root[data-theme=dark] .dv-code .s,:root[data-theme=dark] .dv-pre .s{color:#5FDDA0}:root[data-theme=dark] .dv-code .n,:root[data-theme=dark] .dv-pre .n{color:#FFB37A}
+:root[data-theme=dark] .dv-code .k,:root[data-theme=dark] .dv-pre .k{color:#B79BFF}:root[data-theme=dark] .dv-code .l,:root[data-theme=dark] .dv-pre .l{color:#FF8FB7}:root[data-theme=dark] .dv-code .a,:root[data-theme=dark] .dv-pre .a{color:#6DD5EE}
+.dv-con{flex:none;height:170px;display:flex;flex-direction:column;border-top:1px solid var(--line);background:var(--panel2)}
+.dv-con-h{display:flex;align-items:center;gap:10px;padding:6px 12px;font-size:12px}.dv-con-h button{margin-left:auto;border:0;background:transparent;color:var(--ink2);text-decoration:underline}
+.dv-con-h .bad,.bad{color:#D2294A;font-style:normal}
+.dv-con-l{flex:1;overflow:auto;padding:0 8px 8px;font:12px/1.5 var(--f-mono)}
+.dv-ce{display:flex;gap:10px;padding:2px 6px;border-radius:6px;color:var(--ink2)}.dv-ce time{color:var(--mut);flex:none}.dv-ce span{flex:1;white-space:pre-wrap;word-break:break-word}.dv-ce em{font-style:normal;color:var(--mut)}
+.dv-ce.error{color:#D2294A;background:rgb(229 56 79 / .08)}.dv-ce.warn{color:#B45309}.dv-ce.ok{color:#15803D}.dv-ce[data-dv=goline]{cursor:pointer}
+.dv-page{flex:1;min-width:0;overflow:auto;padding:18px 22px 26px}
+.dv-page-h h2{margin:0 0 4px;font:750 20px var(--f-disp)}.dv-page-h p{margin:0 0 16px;color:var(--ink2);max-width:70ch}
+.dv-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.dv-card{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel2)}
+.dv-card-h{display:flex;align-items:center;gap:8px}.dv-card-h b{font:700 15px var(--f-disp)}
+.dv-card p{margin:0;color:var(--ink2);font-size:13px;line-height:1.5}
+.dv-card .dv-btn{align-self:flex-start;margin-top:auto}.dv-card-a{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
+.dv-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--mut)}
+.dv-pre{margin:0;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font:12px/1.5 var(--f-mono);overflow:auto;white-space:pre;max-height:130px;color:var(--ink)}
+.dv-pre.big{max-height:42vh;font-size:12.5px}
+.dv-sub{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}.dv-sub button{height:32px;padding:0 13px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--ink2);font-weight:600}
+.dv-sub button[aria-selected=true]{background:var(--ink);color:var(--panel);border-color:var(--ink)}.dv-sub .hot{font-style:normal;background:#E5384F;color:#fff;border-radius:99px;padding:0 6px;margin-left:4px;font-size:11px}
+.dv-tools{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.dv-tools input{flex:1;min-width:200px}
+.dv-tools input,.dv-tools select,.dv-form input,.dv-form select,.dv-form textarea{height:36px;padding:0 10px;border:1px solid var(--line2);border-radius:9px;background:var(--panel);color:var(--ink);font:inherit}
+.dv-form textarea{height:auto;padding:8px 10px;resize:vertical}
+.dv-form{display:grid;gap:12px;max-width:620px}.dv-form label{display:grid;gap:5px;font-weight:600;font-size:13px}
+.dv-chk{display:flex!important;grid-template-columns:none;gap:10px;align-items:flex-start;font-weight:400!important;color:var(--ink2)}.dv-chk input{width:auto;height:auto;margin-top:3px}
+.dv-note{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:rgb(123 63 242 / .09);color:var(--ink2);font-size:13px;line-height:1.5}
+.dv-err{margin:0;color:#D2294A;min-height:1em}
+.dv-empty{padding:40px 20px;text-align:center;color:var(--ink2)}.dv-empty h3{margin:0 0 6px;font:700 17px var(--f-disp);color:var(--ink)}
+.dv-list{display:grid;gap:8px}.dv-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}
+.dv-row-i{flex:1;min-width:0;display:grid;gap:3px}.dv-row-i small{color:var(--mut)}.dv-row-i .dv-kind{width:max-content}
+.dv-st{display:inline-block;width:max-content;padding:2px 9px;border-radius:999px;font:700 11.5px var(--f-ui)}
+.dv-st.pending{background:#FFF1D6;color:#9A5B00}.dv-st.published{background:#DDF6E8;color:#16794A}.dv-st.rejected{background:#FFE0E6;color:#B3173A}
+.dv-scan{margin:0 0 10px;padding:0;list-style:none;display:grid;gap:5px;font-size:12.5px}.dv-scan li{padding:6px 10px;border-radius:8px}
+.dv-scan li.danger{background:rgb(229 56 79 / .12);color:#B3173A}.dv-scan li.warn{background:rgb(245 158 11 / .14);color:#92580A}.dv-scan.ok{color:#15803D}
+.dv-dlg .dv-pre{max-height:40vh}.dv-help-c{font-size:13px;line-height:1.55}.dv-help-c code{font-family:var(--f-mono);font-size:12px;background:var(--hover);padding:1px 5px;border-radius:5px}
+.dv-api{width:100%;border-collapse:collapse;margin:8px 0 12px}.dv-api td,.dv-api th{padding:7px 8px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.dv-pick{display:grid;gap:6px;margin-bottom:6px}.dv-pick label{display:flex;gap:9px;padding:8px 10px;border:1px solid var(--line);border-radius:9px}
+.dev-pill{position:fixed;z-index:61;top:70px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;height:40px;padding:0 8px 0 16px;border:0;border-radius:999px;background:#E5384F;color:#fff;font-weight:650;box-shadow:var(--sh2)}
+.dev-pill i{width:10px;height:10px;border-radius:50%;background:#fff;animation:devPulse 1.2s infinite}.dev-pill b{background:rgb(255 255 255 / .22);border-radius:999px;padding:5px 12px}
+@keyframes devPulse{50%{opacity:.25}}
+@media (max-width:760px){.dev{padding:0}.dev-box{border-radius:0;height:100%}.dev-main{flex-direction:column}.dv-side{width:auto;max-height:34%;border-right:0;border-bottom:1px solid var(--line)}.dv-con{height:120px}}
+@media (prefers-reduced-motion:reduce){.dev-pill i{animation:none}}
 </style>
 </head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <linearGradient id="swg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B3CF7"/><stop offset=".28" stop-color="#3D63FF"/><stop offset=".46" stop-color="#14C2EC"/><stop offset=".6" stop-color="#78DD6A"/><stop offset=".72" stop-color="#FFD43F"/><stop offset=".85" stop-color="#FF8A3D"/><stop offset="1" stop-color="#FF3F86"/></linearGradient>
-    <radialGradient id="swg2" cx=".22" cy=".18" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".55" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-    <linearGradient id="swg3" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF3F86" stop-opacity=".0"/><stop offset=".6" stop-color="#7B2FF7" stop-opacity=".22"/><stop offset="1" stop-color="#2D1A6E" stop-opacity=".35"/></linearGradient>
-    <clipPath id="schx"><path d="M32 0 64 16v32L32 64 0 48V16z"/></clipPath><symbol id="swMark" viewBox="0 0 64 64"><g clip-path="url(#schx)"><path d="M32 32L7.00 75.30L3.25 72.91Z" fill="#ff8d3d"/><path d="M32 32L3.32 72.96L-0.21 70.25Z" fill="#ff923d"/><path d="M32 32L-0.14 70.30L-3.42 67.29Z" fill="#ff973d"/><path d="M32 32L-3.36 67.36L-6.36 64.07Z" fill="#ff9c3d"/><path d="M32 32L-6.30 64.14L-9.01 60.61Z" fill="#ffa13d"/><path d="M32 32L-8.96 60.68L-11.34 56.92Z" fill="#ffa63d"/><path d="M32 32L-11.30 57.00L-13.35 53.05Z" fill="#ffac3d"/><path d="M32 32L-13.32 53.13L-15.01 49.02Z" fill="#ffb13d"/><path d="M32 32L-14.98 49.10L-16.32 44.86Z" fill="#ffb63d"/><path d="M32 32L-16.30 44.94L-17.26 40.60Z" fill="#ffbb3d"/><path d="M32 32L-17.24 40.68L-17.82 36.27Z" fill="#ffc03d"/><path d="M32 32L-17.81 36.36L-18.00 31.91Z" fill="#ffc53d"/><path d="M32 32L-18.00 32.00L-17.80 27.56Z" fill="#f7c941"/><path d="M32 32L-17.81 27.64L-17.23 23.23Z" fill="#e8ca49"/><path d="M32 32L-17.24 23.32L-16.27 18.97Z" fill="#d8cb50"/><path d="M32 32L-16.30 19.06L-14.95 14.82Z" fill="#c9cc58"/><path d="M32 32L-14.98 14.90L-13.28 10.79Z" fill="#b9cd60"/><path d="M32 32L-13.32 10.87L-11.26 6.92Z" fill="#aace68"/><path d="M32 32L-11.30 7.00L-8.91 3.25Z" fill="#9ad06f"/><path d="M32 32L-8.96 3.32L-6.25 -0.21Z" fill="#8bd177"/><path d="M32 32L-6.30 -0.14L-3.29 -3.42Z" fill="#7bd27f"/><path d="M32 32L-3.36 -3.36L-0.07 -6.36Z" fill="#6cd387"/><path d="M32 32L-0.14 -6.30L3.39 -9.01Z" fill="#5cd48e"/><path d="M32 32L3.32 -8.96L7.08 -11.34Z" fill="#4dd596"/><path d="M32 32L7.00 -11.30L10.95 -13.35Z" fill="#43d59d"/><path d="M32 32L10.87 -13.32L14.98 -15.01Z" fill="#3fd4a4"/><path d="M32 32L14.90 -14.98L19.14 -16.32Z" fill="#3bd2ab"/><path d="M32 32L19.06 -16.30L23.40 -17.26Z" fill="#37d0b2"/><path d="M32 32L23.32 -17.24L27.73 -17.82Z" fill="#33ceb9"/><path d="M32 32L27.64 -17.81L32.09 -18.00Z" fill="#2fcdc0"/><path d="M32 32L32.00 -18.00L36.44 -17.80Z" fill="#2acbc6"/><path d="M32 32L36.36 -17.81L40.77 -17.23Z" fill="#26cacd"/><path d="M32 32L40.68 -17.24L45.03 -16.27Z" fill="#22c8d4"/><path d="M32 32L44.94 -16.30L49.18 -14.95Z" fill="#1ec6db"/><path d="M32 32L49.10 -14.98L53.21 -13.28Z" fill="#1ac4e2"/><path d="M32 32L53.13 -13.32L57.08 -11.26Z" fill="#16c3e9"/><path d="M32 32L57.00 -11.30L60.75 -8.91Z" fill="#18bcec"/><path d="M32 32L60.68 -8.96L64.21 -6.25Z" fill="#21b0ed"/><path d="M32 32L64.14 -6.30L67.42 -3.29Z" fill="#29a3ee"/><path d="M32 32L67.36 -3.36L70.36 -0.07Z" fill="#3297ef"/><path d="M32 32L70.30 -0.14L73.01 3.39Z" fill="#3b8bf0"/><path d="M32 32L72.96 3.32L75.34 7.08Z" fill="#437ff1"/><path d="M32 32L75.30 7.00L77.35 10.95Z" fill="#4c72f2"/><path d="M32 32L77.32 10.87L79.01 14.98Z" fill="#5466f3"/><path d="M32 32L78.98 14.90L80.32 19.14Z" fill="#5d5af4"/><path d="M32 32L80.30 19.06L81.26 23.40Z" fill="#664ef5"/><path d="M32 32L81.24 23.32L81.82 27.73Z" fill="#6e41f6"/><path d="M32 32L81.81 27.64L82.00 32.09Z" fill="#7735f7"/><path d="M32 32L82.00 32.00L81.80 36.44Z" fill="#8130f2"/><path d="M32 32L81.81 36.36L81.23 40.77Z" fill="#8c31e9"/><path d="M32 32L81.24 40.68L80.27 45.03Z" fill="#9632df"/><path d="M32 32L80.30 44.94L78.95 49.18Z" fill="#a234d6"/><path d="M32 32L78.98 49.10L77.28 53.21Z" fill="#ac35cd"/><path d="M32 32L77.32 53.13L75.26 57.08Z" fill="#b836c3"/><path d="M32 32L75.30 57.00L72.91 60.75Z" fill="#c238ba"/><path d="M32 32L72.96 60.68L70.25 64.21Z" fill="#ce39b0"/><path d="M32 32L70.30 64.14L67.29 67.42Z" fill="#d83aa7"/><path d="M32 32L67.36 67.36L64.07 70.36Z" fill="#e43c9e"/><path d="M32 32L64.14 70.30L60.61 73.01Z" fill="#ee3d94"/><path d="M32 32L60.68 72.96L56.92 75.34Z" fill="#f93e8b"/><path d="M32 32L57.00 75.30L53.05 77.35Z" fill="#ff4283"/><path d="M32 32L53.13 77.32L49.02 79.01Z" fill="#ff487d"/><path d="M32 32L49.10 78.98L44.86 80.32Z" fill="#ff4f77"/><path d="M32 32L44.94 80.30L40.60 81.26Z" fill="#ff5571"/><path d="M32 32L40.68 81.24L36.27 81.82Z" fill="#ff5b6b"/><path d="M32 32L36.36 81.81L31.91 82.00Z" fill="#ff6165"/><path d="M32 32L32.00 82.00L27.56 81.80Z" fill="#ff685e"/><path d="M32 32L27.64 81.81L23.23 81.23Z" fill="#ff6e58"/><path d="M32 32L23.32 81.24L18.97 80.27Z" fill="#ff7452"/><path d="M32 32L19.06 80.30L14.82 78.95Z" fill="#ff7a4c"/><path d="M32 32L14.90 78.98L10.79 77.28Z" fill="#ff8146"/><path d="M32 32L10.87 77.32L6.92 75.26Z" fill="#ff8740"/></g></symbol>
+    <linearGradient id="swIbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7B2FF7"/><stop offset=".3" stop-color="#3D63FF"/><stop offset=".5" stop-color="#14C2EC"/><stop offset=".68" stop-color="#45D69A"/><stop offset=".84" stop-color="#FFC83D"/><stop offset="1" stop-color="#FF3F86"/></linearGradient><linearGradient id="swIgl" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="swIcc"><path d="M20 12H44Q48 12 48 16V48Q48 52 44 52H20Q16 52 16 48V16Q16 12 20 12Z"/></clipPath>
+    <clipPath id="schx"><rect width="64" height="64" rx="14"/></clipPath>
+    <symbol id="swMark" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="url(#swIbg)"/><rect width="64" height="64" rx="14" fill="url(#swIgl)" opacity=".6"/><g transform="translate(2.5 2.5)"><path d="M20 12H44Q48 12 48 16V48Q48 52 44 52H20Q16 52 16 48V16Q16 12 20 12Z" fill="#B9C3E6"/></g><path d="M20 12H44Q48 12 48 16V48Q48 52 44 52H20Q16 52 16 48V16Q16 12 20 12Z" fill="#fff"/><g clip-path="url(#swIcc)"><rect x="16" y="12" width="32" height="10" fill="#3D63FF"/></g><rect x="20" y="15.5" width="14" height="3" rx="1.5" fill="#fff"/><rect x="20" y="28" width="11" height="6" rx="2" fill="#14C2EC" opacity="0.95"/><rect x="33" y="28" width="11" height="6" rx="2" fill="#14C2EC" opacity="0.7"/><rect x="20" y="36.5" width="11" height="6" rx="2" fill="#14C2EC" opacity="0.7"/><rect x="33" y="36.5" width="11" height="6" rx="2" fill="#14C2EC" opacity="0.95"/><rect x="20" y="45" width="11" height="6" rx="2" fill="#14C2EC" opacity="0.95"/><rect x="33" y="45" width="11" height="6" rx="2" fill="#14C2EC" opacity="0.7"/></symbol>
   </defs>
 </svg>
 <div id="splash" role="status" aria-live="polite">
@@ -1306,7 +1401,7 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
     <div class="ap-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#swMark"/></svg><div><b>SPECTRA</b><span>Calc</span></div></div>
     <div class="ap-pitch"><h1>Vos chiffres, enfin clairs.</h1><p>Tapez vos données, SPECTRA Calc calcule, colore et dessine les graphiques. Formules en français, ouverture et export Excel, et un assistant qui comprend ce que vous voulez faire.</p></div>
     <ul class="ap-apps">
-      <li><span class="ap-ic c"></span><b>SPECTRA Calc</b><span>Tableur</span><em>Vous êtes ici</em></li>
+      <li><span class="ap-ic c"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#swMark"/></svg></span><b>SPECTRA Calc</b><span>Tableur</span><em>Vous êtes ici</em></li>
       <li><a class="ap-ic w" href="https://groupestudioprism.github.io/SpectraWriter/" aria-label="SPECTRA Writer"></a><b>SPECTRA Writer</b><span>Traitement de texte</span><em>Disponible</em></li>
       <li><a class="ap-ic s" href="https://groupestudioprism.github.io/SpectraSlide/" aria-label="SPECTRA Slide"></a><b>SPECTRA Slide</b><span>Présentations</span><em>Disponible</em></li>
     </ul>
@@ -1433,6 +1528,205 @@ body.ro .ray:not([data-panel="outline"]):not([data-panel="templates"]){opacity:.
 <div class="menu" id="homeMenu" hidden></div>
 <div id="apDlg" hidden role="dialog" aria-modal="true"><div class="dlg-card"></div></div>
 <div id="toast" hidden role="status"></div>
+<script type="text/plain" id="scWorkerSrc">
+/* SPECTRA Calc : moteur d'exécution des macros (Web Worker, dans un iframe sandbox sans réseau).
+   Aucun accès au DOM, au stockage ni au réseau : le script travaille sur une COPIE du classeur et renvoie une liste d'opérations,
+   appliquée ensuite par l'application en une seule étape annulable (Ctrl + Z). */
+'use strict';
+const post = self.postMessage.bind(self);
+const addL = self.addEventListener.bind(self);
+const _Fn = Object.getPrototypeOf(async function(){}).constructor, _Sync = Function;
+const BLOCK = ['fetch', 'XMLHttpRequest', 'WebSocket', 'EventSource', 'importScripts', 'indexedDB', 'caches', 'BroadcastChannel', 'SharedWorker', 'Worker', 'WebTransport', 'navigator', 'postMessage', 'close', 'location', 'Request', 'Response', 'Headers', 'FileReaderSync', 'localStorage', 'sessionStorage', 'openDatabase', 'WebAssembly'];
+for (const k of BLOCK){ try { delete self[k]; } catch(e){} try { Object.defineProperty(self, k, {value:undefined, configurable:false, writable:false}); } catch(e){} }
+try { Object.defineProperty(self, 'onmessage', {value:null, writable:false, configurable:false}); } catch(e){}
+
+const colName = c => { let s = ''; c++; while (c > 0){ const m = (c - 1) % 26; s = String.fromCharCode(65 + m) + s; c = (c - m - 1) / 26; } return s; };
+const colIdx = s => { let n = 0; for (const ch of s.toUpperCase()) n = n * 26 + (ch.charCodeAt(0) - 64); return n - 1; };
+const A1 = (r, c) => colName(c) + (r + 1);
+const MAXOPS = 400000;
+const ST = {gras:'b', italique:'i', souligne:'u', barre:'st', couleurTexte:'fc', couleurFond:'bg', taille:'fs', police:'ff', alignement:'ha', formatNombre:'nf', renvoi:'wrap'};
+const EN_ST = {Bold:'gras', Italic:'italique', Underline:'souligne', Color:'couleurTexte', FillColor:'couleurFond', Size:'taille', FontName:'police', Align:'alignement', NumberFormat:'formatNombre', Wrap:'renvoi'};
+const HA = {gauche:'l', centre:'c', droite:'r', left:'l', center:'c', right:'r'}, HA_R = {l:'gauche', c:'centre', r:'droite'};
+
+let ops, logs, WBS, active, titre, cnt, selAddr, selSheet;
+const push = o => { if (++cnt > MAXOPS) throw new Error('Trop d\'opérations dans une seule macro (limite : ' + MAXOPS + ').'); ops.push(o); };
+const fmtArg = a => { if (typeof a === 'string') return a; try { return typeof a === 'object' && a !== null ? JSON.stringify(a) : String(a); } catch(e){ return String(a); } };
+const log = lvl => (...a) => { if (logs.length < 500) logs.push({t:lvl, text:a.map(fmtArg).join(' ')}); };
+const parseRaw = raw => {
+  if (raw === '' || raw == null) return null;
+  if (raw[0] === '=') return null;
+  const t = String(raw).trim();
+  if (/^-?\d+([.,]\d+)?$/.test(t)) return parseFloat(t.replace(',', '.'));
+  if (/^(vrai|true)$/i.test(t)) return true; if (/^(faux|false)$/i.test(t)) return false;
+  return raw;
+};
+const sheetByName = n => WBS.find(s => s.name.toLowerCase() === String(n).toLowerCase());
+const bad = (m) => { throw new Error(m); };
+
+function parseAddr(a, sh){
+  a = String(a).trim(); let m = /^(?:'([^']+)'|([^!']+))!(.+)$/.exec(a);
+  if (m){ sh = sheetByName(m[1] || m[2]) || bad(`Feuille introuvable : « ${m[1] || m[2]} »`); a = m[3]; }
+  m = /^\$?([A-Za-z]{1,3})\$?(\d+)(?::\$?([A-Za-z]{1,3})\$?(\d+))?$/.exec(a);
+  if (!m){ const mc = /^\$?([A-Za-z]{1,3}):\$?([A-Za-z]{1,3})$/.exec(a); if (mc) return {sh, r1:0, c1:colIdx(mc[1]), r2:Math.max(0, usedR(sh)), c2:colIdx(mc[2])}; const mr = /^\$?(\d+):\$?(\d+)$/.exec(a); if (mr) return {sh, r1:+mr[1] - 1, c1:0, r2:+mr[2] - 1, c2:Math.max(0, usedC(sh))}; bad(`Adresse invalide : « ${a} »`); }
+  const r1 = +m[2] - 1, c1 = colIdx(m[1]), r2 = m[4] ? +m[4] - 1 : r1, c2 = m[3] ? colIdx(m[3]) : c1;
+  return {sh, r1:Math.min(r1, r2), c1:Math.min(c1, c2), r2:Math.max(r1, r2), c2:Math.max(c1, c2)};
+}
+const usedR = sh => { let r = -1; for (const o of sh.cells.values()) if (o.raw !== '' && o.r > r) r = o.r; return r; };
+const usedC = sh => { let c = -1; for (const o of sh.cells.values()) if (o.raw !== '' && o.c > c) c = o.c; return c; };
+const K = (r, c) => r + ',' + c;
+const cellOf = (sh, r, c) => sh.cells.get(K(r, c));
+function setLocal(sh, r, c, raw){
+  raw = raw == null ? '' : typeof raw === 'number' ? String(raw).replace('.', ',') : typeof raw === 'boolean' ? (raw ? 'VRAI' : 'FAUX') : String(raw);
+  if (raw.length > 32000) bad('Texte trop long pour une cellule (32 000 caractères maximum).');
+  if (r < 0 || c < 0 || r > 1048575 || c > 16383) bad('Cellule hors de la feuille : ' + A1(r, c));
+  let o = sh.cells.get(K(r, c)); if (!o){ o = {r, c, raw:'', v:null, s:null}; sh.cells.set(K(r, c), o); }
+  o.raw = raw; o.v = parseRaw(raw); if (raw[0] === '=') o.v = null;
+  push({t:'raw', s:sh.name, r, c, v:raw});
+}
+function styleLocal(sh, r, c, patch){
+  let o = sh.cells.get(K(r, c)); if (!o){ o = {r, c, raw:'', v:null, s:null}; sh.cells.set(K(r, c), o); }
+  o.s = {...(o.s || {})}; for (const [k, v] of Object.entries(patch)){ if (v == null || v === false || v === '') delete o.s[k]; else o.s[k] = v; }
+  push({t:'style', s:sh.name, r, c, p:patch});
+}
+
+class Plage {
+  constructor(sh, r1, c1, r2, c2){ this._ = {sh, r1, c1, r2, c2}; Object.freeze(this); }
+  get adresse(){ const g = this._; return g.r1 === g.r2 && g.c1 === g.c2 ? A1(g.r1, g.c1) : A1(g.r1, g.c1) + ':' + A1(g.r2, g.c2); }
+  get nbLignes(){ return this._.r2 - this._.r1 + 1; } get nbColonnes(){ return this._.c2 - this._.c1 + 1; }
+  get ligne(){ return this._.r1 + 1; } get colonne(){ return this._.c1 + 1; }
+  _each(fn){ const g = this._; for (let r = g.r1; r <= g.r2; r++) for (let c = g.c1; c <= g.c2; c++) fn(r, c); }
+  _grid(f){ const g = this._, out = []; for (let r = g.r1; r <= g.r2; r++){ const row = []; for (let c = g.c1; c <= g.c2; c++) row.push(f(cellOf(g.sh, r, c))); out.push(row); } return out; }
+  get valeurs(){ return this._grid(o => o ? o.v : null); }
+  get formules(){ return this._grid(o => o ? o.raw : ''); }
+  get valeur(){ const g = this._; if (g.r1 === g.r2 && g.c1 === g.c2) return cellOf(g.sh, g.r1, g.c1)?.v ?? null; return this.valeurs; }
+  set valeur(v){ this._write(v); }
+  get formule(){ const g = this._; if (g.r1 === g.r2 && g.c1 === g.c2) return cellOf(g.sh, g.r1, g.c1)?.raw ?? ''; return this.formules; }
+  set formule(v){ this._write(v); }
+  set valeurs(v){ this._write(v); } set formules(v){ this._write(v); }
+  _write(v){
+    const g = this._;
+    if (Array.isArray(v)){
+      const rows = Array.isArray(v[0]) ? v : [v];
+      rows.forEach((row, i) => (Array.isArray(row) ? row : [row]).forEach((x, j) => { if (g.r1 + i <= 1048575) setLocal(g.sh, g.r1 + i, g.c1 + j, x); }));
+    } else {
+      const n = (g.r2 - g.r1 + 1) * (g.c2 - g.c1 + 1); if (n > 200000) bad('Plage trop grande pour une écriture groupée.');
+      this._each((r, c) => setLocal(g.sh, r, c, v));
+    }
+  }
+  get format(){
+    const self = this, g = this._, F = {};
+    const first = () => cellOf(g.sh, g.r1, g.c1)?.s || {};
+    for (const [fr, k] of Object.entries(ST)) Object.defineProperty(F, fr, {enumerable:true,
+      get(){ const v = first()[k]; return k === 'ha' ? (HA_R[v] || 'gauche') : (k === 'b' || k === 'i' || k === 'u' || k === 'st' || k === 'wrap') ? !!v : v ?? null; },
+      set(v){ const val = k === 'ha' ? (HA[String(v).toLowerCase()] || bad('Alignement : gauche, centre ou droite')) : (k === 'b' || k === 'i' || k === 'u' || k === 'st' || k === 'wrap') ? (v ? 1 : 0) : k === 'fs' ? +v : v;
+        if (k === 'fc' || k === 'bg') if (v && !/^(#[0-9a-f]{3,8}|[a-z]+)$/i.test(String(v))) bad('Couleur invalide : ' + v);
+        self._each((r, c) => styleLocal(g.sh, r, c, {[k]:val})); } });
+    for (const [en, fr] of Object.entries(EN_ST)) Object.defineProperty(F, en, {get(){ return F[fr]; }, set(v){ F[fr] = v; }});
+    return F;
+  }
+  effacer(){ const g = this._; this._each((r, c) => { const o = g.sh.cells.get(K(r, c)); if (o){ o.raw = ''; o.v = null; o.s = null; } }); push({t:'clear', s:g.sh.name, r1:g.r1, c1:g.c1, r2:g.r2, c2:g.c2, w:'all'}); }
+  effacerContenu(){ const g = this._; this._each((r, c) => { const o = g.sh.cells.get(K(r, c)); if (o){ o.raw = ''; o.v = null; } }); push({t:'clear', s:g.sh.name, r1:g.r1, c1:g.c1, r2:g.r2, c2:g.c2, w:'content'}); }
+  effacerFormat(){ const g = this._; this._each((r, c) => { const o = g.sh.cells.get(K(r, c)); if (o) o.s = null; }); push({t:'clear', s:g.sh.name, r1:g.r1, c1:g.c1, r2:g.r2, c2:g.c2, w:'format'}); }
+  get cellules(){ const g = this._, out = []; this._each((r, c) => out.push(new Plage(g.sh, r, c, r, c))); return out; }
+  pourChaque(fn){ this.cellules.forEach(fn); }
+  _nums(){ const o = []; for (const row of this.valeurs) for (const v of row) if (typeof v === 'number') o.push(v); return o; }
+  somme(){ return this._nums().reduce((a, b) => a + b, 0); }
+  moyenne(){ const n = this._nums(); return n.length ? n.reduce((a, b) => a + b, 0) / n.length : 0; }
+  max(){ const n = this._nums(); return n.length ? Math.max(...n) : 0; } min(){ const n = this._nums(); return n.length ? Math.min(...n) : 0; }
+  nb(){ return this._nums().length; }
+  decaler(dl, dc = 0){ const g = this._; return new Plage(g.sh, g.r1 + dl, g.c1 + dc, g.r2 + dl, g.c2 + dc); }
+  redimensionner(nl, nc){ const g = this._; return new Plage(g.sh, g.r1, g.c1, g.r1 + nl - 1, g.c1 + nc - 1); }
+  fusionner(){ const g = this._; push({t:'merge', s:g.sh.name, r1:g.r1, c1:g.c1, r2:g.r2, c2:g.c2}); }
+  copierVers(dest){ const g = this._, d = typeof dest === 'string' ? parseAddr(dest, active) : dest._; const rows = []; for (let r = g.r1; r <= g.r2; r++){ const row = []; for (let c = g.c1; c <= g.c2; c++){ const o = cellOf(g.sh, r, c); row.push(o ? {raw:o.raw, s:o.s} : null); } rows.push(row); }
+    rows.forEach((row, i) => row.forEach((o, j) => { const sh = d.sh; setLocal(sh, d.r1 + i, d.c1 + j, o ? o.raw : ''); if (o && o.s) styleLocal(sh, d.r1 + i, d.c1 + j, o.s); })); }
+  trier(colonne = 1, croissant = true){ const g = this._, ci = g.c1 + (colonne - 1), rows = [];
+    for (let r = g.r1; r <= g.r2; r++){ const row = []; for (let c = g.c1; c <= g.c2; c++){ const o = cellOf(g.sh, r, c); row.push(o ? {raw:o.raw, v:o.v, s:o.s} : null); } rows.push(row); }
+    const kI = ci - g.c1, key = x => { const o = x[kI]; return o ? o.v : null; };
+    rows.sort((a, b) => { const x = key(a), y = key(b); if (x == null && y == null) return 0; if (x == null) return 1; if (y == null) return -1; const t = typeof x === 'number' && typeof y === 'number' ? x - y : String(x).localeCompare(String(y), 'fr', {numeric:true}); return croissant ? t : -t; });
+    rows.forEach((row, i) => row.forEach((o, j) => { setLocal(g.sh, g.r1 + i, g.c1 + j, o ? o.raw : ''); styleLocal(g.sh, g.r1 + i, g.c1 + j, o && o.s ? o.s : {b:0}); })); }
+}
+const ALIAS = {Value:'valeur', Formula:'formule', Address:'adresse', Rows:'nbLignes', Columns:'nbColonnes', Row:'ligne', Column:'colonne', Clear:'effacer', ClearContents:'effacerContenu', Offset:'decaler', Resize:'redimensionner', Merge:'fusionner', Sum:'somme', Average:'moyenne', Max:'max', Min:'min', Count:'nb', Format:'format', Values:'valeurs', Formulas:'formules'};
+for (const [en, fr] of Object.entries(ALIAS)) Object.defineProperty(Plage.prototype, en, Object.getOwnPropertyDescriptor(Plage.prototype, fr) || {value:Plage.prototype[fr]});
+
+class Feuille {
+  constructor(s){ this._ = s; Object.freeze(this); }
+  get nom(){ return this._.name; } set nom(n){ n = String(n).trim(); if (!n || n.length > 60) bad('Nom de feuille invalide.'); if (sheetByName(n) && sheetByName(n) !== this._) bad('Une feuille porte déjà ce nom.'); push({t:'renSheet', from:this._.name, to:n}); this._.name = n; }
+  get index(){ return WBS.indexOf(this._) + 1; }
+  plage(a, c1, r2, c2){ const s = this._; if (typeof a === 'number') return new Plage(s, a - 1, c1 - 1, (r2 ?? a) - 1, (c2 ?? c1) - 1); const g = parseAddr(a, s); return new Plage(g.sh, g.r1, g.c1, g.r2, g.c2); }
+  cellule(l, c){ if (typeof l === 'string') return this.plage(l); return this.plage(l, c, l, c); }
+  colonne(c){ const n = typeof c === 'number' ? c - 1 : colIdx(c); return new Plage(this._, 0, n, Math.max(0, usedR(this._)), n); }
+  ligne(l){ return new Plage(this._, l - 1, 0, l - 1, Math.max(0, usedC(this._))); }
+  get plageUtilisee(){ return new Plage(this._, 0, 0, Math.max(0, usedR(this._)), Math.max(0, usedC(this._))); }
+  largeurColonne(c, px){ push({t:'colw', s:this._.name, c:typeof c === 'number' ? c - 1 : colIdx(c), w:Math.max(8, Math.min(2000, +px))}); }
+  hauteurLigne(l, px){ push({t:'rowh', s:this._.name, r:l - 1, h:Math.max(6, Math.min(2000, +px))}); }
+  ajouterGraphique(o = {}){ const rg = typeof o.plage === 'string' ? o.plage : o.plage?.adresse; if (!rg) bad('ajouterGraphique : indiquez { plage: "A1:B5" }'); const ch = {type:String(o.type || 'col'), range:rg, title:String(o.titre || ''), x:+o.x || 40, y:+o.y || 40, w:+o.largeur || 480, h:+o.hauteur || 300, legend:o.legende !== false}; push({t:'chart', s:this._.name, ch}); return ch; }
+  activer(){ active = this._; push({t:'activate', name:this._.name}); }
+  supprimer(){ if (WBS.length < 2) bad('Impossible de supprimer la dernière feuille.'); push({t:'delSheet', name:this._.name}); WBS.splice(WBS.indexOf(this._), 1); if (active === this._) active = WBS[0]; }
+}
+for (const [en, fr] of Object.entries({Range:'plage', Cells:'cellule', Name:'nom', UsedRange:'plageUtilisee', Activate:'activer', Delete:'supprimer', AddChart:'ajouterGraphique'})) Object.defineProperty(Feuille.prototype, en, Object.getOwnPropertyDescriptor(Feuille.prototype, fr) || {value:Feuille.prototype[fr]});
+
+const wrapSheet = s => new Feuille(s);
+const feuilleActive = () => wrapSheet(active);
+const classeur = Object.freeze({
+  get titre(){ return titre; },
+  get feuilles(){ return WBS.map(wrapSheet); },
+  get feuilleActive(){ return feuilleActive(); },
+  feuille(n){ const s = typeof n === 'number' ? WBS[n - 1] : sheetByName(n); if (!s) bad(`Feuille introuvable : « ${n} »`); return wrapSheet(s); },
+  ajouterFeuille(nom){ nom = String(nom || 'Feuille ' + (WBS.length + 1)).trim(); if (sheetByName(nom)) bad(`Une feuille « ${nom} » existe déjà.`); if (WBS.length >= 100) bad('Trop de feuilles.'); const s = {name:nom, cells:new Map()}; WBS.push(s); push({t:'addSheet', name:nom}); return wrapSheet(s); },
+});
+
+const api = {
+  Classeur:classeur, classeur, Workbook:classeur,
+  FeuilleActive:feuilleActive, ActiveSheet:undefined,
+  Feuille:n => classeur.feuille(n), Sheets:n => classeur.feuille(n),
+  Plage:(a, ...r) => feuilleActive().plage(a, ...r), Range:(a, ...r) => feuilleActive().plage(a, ...r),
+  Cellule:(l, c) => feuilleActive().cellule(l, c), Cells:(l, c) => feuilleActive().cellule(l, c),
+  message:t => push({t:'toast', text:String(t).slice(0, 300)}), MsgBox:t => push({t:'toast', text:String(t).slice(0, 300)}),
+  journal:log('log'), console:{log:log('log'), info:log('info'), warn:log('warn'), error:log('error')},
+  maintenant:() => Date.now(), aujourdhui:() => { const d = new Date(); return Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) + 25569); },
+};
+Object.defineProperty(api, 'ActiveSheet', {get(){ return feuilleActive(); }, enumerable:true});
+for (const n of ['selection', 'Selection']) Object.defineProperty(api, n, {get(){ const g = parseAddr(selAddr, selSheet); return new Plage(g.sh, g.r1, g.c1, g.r2, g.c2); }, enumerable:true});
+const NAMES = Object.keys(api);
+const BLOCKED_NAMES = ['self', 'globalThis', 'window', 'document', 'fetch', 'XMLHttpRequest', 'WebSocket', 'importScripts', 'postMessage', 'Function', 'eval', 'indexedDB', 'navigator', 'location', 'addEventListener', 'removeEventListener', 'onmessage', 'close'];
+
+function load(snap){
+  ops = []; logs = []; cnt = 0; titre = snap.title || '';
+  WBS = snap.sheets.map(s => { const m = new Map(); for (const [r, c, raw, v, st] of s.cells) m.set(K(r, c), {r, c, raw, v, s:st || null}); return {name:s.name, cells:m}; });
+  active = WBS[snap.active] || WBS[0]; selSheet = active; selAddr = snap.sel || 'A1';
+}
+const errInfo = e => {
+  const st = String(e && e.stack || ''); let line = 0; const m = /<anonymous>:(\d+):(\d+)/.exec(st) || /eval.*:(\d+):(\d+)/.exec(st); if (m) line = Math.max(1, +m[1] - 3);
+  return {message:String(e && e.message || e).slice(0, 400), name:String(e && e.name || 'Error'), line};
+};
+
+addL('message', async ev => {
+  const d = ev.data || {}, t0 = Date.now();
+  try {
+    if (d.type === 'run'){
+      load(d.snap);
+      const body = '"use strict";\n' + d.code;
+      const fn = new _Fn(...NAMES, ...BLOCKED_NAMES.filter(n => !NAMES.includes(n) && !['eval'].includes(n)), body);
+      await fn(...NAMES.map(n => api[n]), ...BLOCKED_NAMES.filter(n => !NAMES.includes(n) && !['eval'].includes(n)).map(() => undefined));
+      post({id:d.id, ok:true, ops, logs, ms:Date.now() - t0});
+    } else if (d.type === 'calls'){
+      const out = [];
+      const names = d.fnames || [];
+      const fns = {};
+      try {
+        const body = '"use strict";\n' + d.code + '\nreturn {' + names.map(n => `${JSON.stringify(n)}: typeof ${n} === "function" ? ${n} : undefined`).join(',') + '};';
+        Object.assign(fns, new _Sync(...BLOCKED_NAMES.filter(n => n !== 'eval'), body)(...BLOCKED_NAMES.filter(n => n !== 'eval').map(() => undefined)));
+      } catch(e){ post({id:d.id, ok:false, error:errInfo(e)}); return; }
+      for (const c of d.calls){
+        try { const f = fns[c.fn]; if (!f) throw new Error('Fonction introuvable : ' + c.fn); let v = f(...c.args); if (v && typeof v.then === 'function') throw new Error('Une fonction personnalisée doit répondre immédiatement (pas de await).'); out.push({k:c.k, v:v === undefined ? null : v}); }
+        catch(e){ out.push({k:c.k, e:errInfo(e).message}); }
+      }
+      post({id:d.id, ok:true, out, ms:Date.now() - t0});
+    }
+  } catch(e){ post({id:d.id, ok:false, error:errInfo(e), ops:[], logs:logs || []}); }
+});
+post({ready:true});
+</script>
 <script>
 (() => {
 'use strict';
@@ -2653,7 +2947,7 @@ function inferNf(n, sh, depth = 0){
 }
 
 class Workbook {
-  constructor(){ this.assets = {}; this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
+  constructor(){ this.assets = {}; this.sheets = []; this.active = 0; this.cid = 0; this.names = {}; this.recording = null; this.macros = []; this.title = 'Classeur sans titre'; this.theme = {id:'spectra'}; }
   get sh(){ return this.sheets[this.active]; }
   byName(n){ const l = String(n).toLowerCase(); return this.sheets.find(s => s.name.toLowerCase() === l) || null; }
   addSheet(name, at){ const s = new Sheet(this, {name:name || this.freeName()}); if (at == null) this.sheets.push(s); else this.sheets.splice(at, 0, s); return s; }
@@ -2706,12 +3000,14 @@ class Workbook {
       if (!changed) break;
     }
   }
-  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, ...(this.assets && Object.keys(this.assets).length ? {assets:this.assets} : {}), sheets:this.sheets.map(s => s.toJSON())}; }
+  toJSON(){ return {v:1, app:'spectracalc', title:this.title, theme:this.theme, active:this.active, names:this.names, ...(this.assets && Object.keys(this.assets).length ? {assets:this.assets} : {}), ...(this.macros && this.macros.length ? {macros:this.macros} : {}), sheets:this.sheets.map(s => s.toJSON())}; }
   load(o){
     this.sheets = []; this.title = o.title || 'Classeur sans titre'; this.theme = o.theme || {id:'spectra'}; this.names = o.names || {}; this.assets = o.assets && typeof o.assets === 'object' ? o.assets : {};
     for (const so of (o.sheets && o.sheets.length ? o.sheets : [{name:'Feuille 1'}])){ const s = new Sheet(this, {name:so.name}); this.sheets.push(s); }
     (o.sheets || []).forEach((so, i) => this.sheets[i].load(so));
     this.active = clamp(o.active || 0, 0, this.sheets.length - 1);
+    this.macros = Array.isArray(o.macros) ? o.macros.slice(0, 60).map(cleanMacro).filter(Boolean) : [];
+    if (typeof devOnLoad === 'function') devOnLoad(this);
     this.recalc();
   }
 }
@@ -2735,6 +3031,7 @@ function endTx(){
     if (sh){ const ma = JSON.stringify(sh.meta()); if (ma !== t.metaB){ step.metaB = t.metaB; step.metaA = ma; } }
     if (!step.cells.length && !step.metaB) return;
   }
+  if (typeof devRecStep === 'function') devRecStep(step);
   UNDO.list = UNDO.list.slice(0, UNDO.i + 1); UNDO.list.push(step); if (UNDO.list.length > 200) UNDO.list.shift(); UNDO.i = UNDO.list.length - 1;
   afterChange();
 }
@@ -4007,6 +4304,7 @@ const TB_IC = {
   plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
   analyse:'<svg viewBox="0 0 24 24"><path d="M4 20h16M6 16v-4M11 16V6M16 16v-7"/><circle cx="18.5" cy="5.5" r="2"/></svg>',
   shapes:'<svg viewBox="0 0 24 24"><rect x="3.5" y="11" width="9" height="9" rx="1.5"/><circle cx="15.5" cy="8.5" r="5"/></svg>',
+  dev:'<svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg>',
   style:'<svg viewBox="0 0 24 24"><path d="M12 3 4 12a8 8 0 0 0 16 0z"/><path d="M8.5 14.5a4 4 0 0 0 3.5 3"/></svg>',
 };
 function buildToolbar(){
@@ -4017,7 +4315,7 @@ function buildToolbar(){
       <button type="button" class="tb tcol" data-t="fc" title="Couleur du texte" aria-label="Couleur du texte">${IC.color}<i id="tFc"></i></button><button type="button" class="tb tcol" data-t="bg" title="Couleur de remplissage" aria-label="Couleur de remplissage">${TB_IC.fill}<i id="tBg"></i></button></div>
     <div class="tg">${b('border', 'Bordures', TB_IC.border)}${b('align', 'Alignement', IC.al)}${b('merge', 'Fusionner et centrer', TB_IC.merge, 'hide-s')}${b('wrap', 'Renvoyer à la ligne', TB_IC.wrap, 'hide-m')}</div>
     <div class="tg">${b('sum', 'Somme automatique (Alt + =)', TB_IC.sigma)}${b('sort', 'Trier de A à Z', TB_IC.sortA, 'hide-s')}${b('filter', 'Filtrer', TB_IC.filter, 'hide-s')}<button type="button" class="tb tb-magic" data-t="magic" title="Embellir : transforme la sélection en beau tableau" aria-label="Embellir">${TB_IC.magic}<span class="hide-m">Embellir</span></button></div>`;
-  const R = [['style', 'Style', TB_IC.style, '#F2387A'], ['shapes', 'Formes', TB_IC.shapes, '#12B5E5'], ['analyse', 'Analyse', TB_IC.analyse, '#2FBF71'], ['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
+  const R = [['style', 'Style', TB_IC.style, '#F2387A'], ['shapes', 'Formes', TB_IC.shapes, '#12B5E5'], ['analyse', 'Analyse', TB_IC.analyse, '#2FBF71'], ['insert', 'Insérer', TB_IC.plus, '#7B3FF2'], ['dev', 'Développeur', TB_IC.dev, '#FF8A3D'], ['data', 'Données', TB_IC.data, '#12B5E5'], ['cf', 'Couleurs', TB_IC.cf, '#2FBF71'], ['theme', 'Thème', TB_IC.theme, '#F5B82E'], ['templates', 'Modèles', TB_IC.tpl, '#FF7A2F']];
   g$('edRail').innerHTML = R.map(([k, n, ic, c]) => `<button type="button" class="ray" data-panel="${k}" title="${n}" style="--ray:${c}" aria-pressed="false">${ic}<span>${n}</span></button>`).join('');
 }
 function refreshToolbar(){
@@ -4261,6 +4559,7 @@ const luma = h => { const [r, g, b] = hexRgb(h); return (0.299 * r + 0.587 * g +
 /* ---------- Tiroirs (Insérer, Données, Couleurs, Thème, Modèles), Embellir, Rechercher, assistant de fonctions ---------- */
 let panel = '';
 function openPanel(k){
+  if (k === 'dev') return openDev();
   if (panel === k || !k){ panel = ''; g$('edPanel').hidden = true; g$('edRail').querySelectorAll('.ray').forEach(r => r.setAttribute('aria-pressed', 'false')); return; }
   panel = k; const ray = g$('edRail').querySelector(`[data-panel="${k}"]`);
   g$('edRail').querySelectorAll('.ray').forEach(r => r.setAttribute('aria-pressed', r === ray ? 'true' : 'false'));
@@ -5067,7 +5366,7 @@ function onShapeDown(e){
   e.preventDefault(); e.stopPropagation(); if (EDIT.on) commitEdit(0, 0); const s = shapeById(el.dataset.shp); if (!s) return true;
   selShape(s.id); g$('grid').focus({preventScroll:true}); if (V.ro || s.lock) return true;
   const r = el.getBoundingClientRect(), h = e.target.dataset.h;
-  SHP.drag = {mode:h ? (h === 'rot' ? 'rot' : 'rs') : 'mv', h, x:e.clientX, y:e.clientY, o:{...s}, s, moved:false, cx:r.left + r.width / 2, cy:r.top + r.height / 2};
+  SHP.drag = {shift:e.shiftKey, mode:h ? (h === 'rot' ? 'rot' : 'rs') : 'mv', h, x:e.clientX, y:e.clientY, o:{...s}, s, moved:false, cx:r.left + r.width / 2, cy:r.top + r.height / 2};
   return true;
 }
 function onShapeMove(e){
@@ -5084,7 +5383,7 @@ function onShapeMove(e){
 function onShapeUp(){
   const d = SHP.drag; if (!d) return false; SHP.drag = null;
   if (d.moved){ const after = {x:d.s.x, y:d.s.y, w:d.s.w, h:d.s.h, rot:d.s.rot}; Object.assign(d.s, {x:d.o.x, y:d.o.y, w:d.o.w, h:d.o.h, rot:d.o.rot}); tx(d.mode === 'mv' ? 'Déplacer la forme' : d.mode === 'rot' ? 'Pivoter la forme' : 'Redimensionner la forme', () => Object.assign(d.s, after)); layout(); schedule(); if (panel === 'shapes') renderPanel(); }
-  else renderShapes(); return true;
+  else { renderShapes(); if (d.s.macro && d.mode === 'mv' && !d.shift) runShapeMacro(d.s); } return true;
 }
 function onShapeKey(e){
   const s = SHP.sel && shapeById(SHP.sel); if (!s || EDIT.on || SHP.edit) return false; const k = e.key, mod = e.ctrlKey || e.metaKey;
@@ -5099,9 +5398,9 @@ function onShapeKey(e){
 function shapeMenu(e, id){
   const s = shapeById(id); if (!s) return; selShape(id); const ro = V.ro ? ' disabled' : '';
   openPop({x:e.clientX, y:e.clientY, getBoundingClientRect:() => ({left:e.clientX, right:e.clientX, top:e.clientY, bottom:e.clientY})},
-    `<div class="pop-list ctx"><button type="button" data-sm="text"${ro}>Modifier le texte</button><button type="button" data-sm="dup"${ro}>Dupliquer</button><hr><button type="button" data-sm="front"${ro}>Premier plan</button><button type="button" data-sm="up"${ro}>Avancer</button><button type="button" data-sm="down"${ro}>Reculer</button><button type="button" data-sm="back"${ro}>Arrière-plan</button><hr><button type="button" data-sm="flip"${ro}>Retourner horizontalement</button><button type="button" data-sm="lock"${ro}>${s.lock ? 'Déverrouiller' : 'Verrouiller'}</button><button type="button" data-sm="png">Télécharger en image (PNG)</button><button type="button" data-sm="panel">Propriétés…</button><hr><button type="button" data-sm="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
+    `<div class="pop-list ctx"><button type="button" data-sm="text"${ro}>Modifier le texte</button><button type="button" data-sm="dup"${ro}>Dupliquer</button><button type="button" data-sm="macro"${ro}>Affecter une macro…</button><hr><button type="button" data-sm="front"${ro}>Premier plan</button><button type="button" data-sm="up"${ro}>Avancer</button><button type="button" data-sm="down"${ro}>Reculer</button><button type="button" data-sm="back"${ro}>Arrière-plan</button><hr><button type="button" data-sm="flip"${ro}>Retourner horizontalement</button><button type="button" data-sm="lock"${ro}>${s.lock ? 'Déverrouiller' : 'Verrouiller'}</button><button type="button" data-sm="png">Télécharger en image (PNG)</button><button type="button" data-sm="panel">Propriétés…</button><hr><button type="button" data-sm="del" class="danger"${ro}>Supprimer</button></div>`, pp => {
       pp.onclick = ev => { const b = ev.target.closest('button'); if (!b || b.disabled) return; closePop(); const k = b.dataset.sm;
-        if (k === 'text') shapeEditText(id); else if (k === 'dup') dupShape(id); else if (['front', 'up', 'down', 'back'].includes(k)) shapeZ(id, k); else if (k === 'flip') updShape(id, {flip:s.flip ? undefined : 1}); else if (k === 'lock') updShape(id, {lock:s.lock ? undefined : 1}); else if (k === 'png') shapePNG(s); else if (k === 'panel'){ SHP.tab = 'shapes'; if (panel !== 'shapes') openPanel('shapes'); else renderPanel(); } else if (k === 'del') delShape(id); }; }, 'menu');
+        if (k === 'text') shapeEditText(id); else if (k === 'dup') dupShape(id); else if (k === 'macro') linkMacroDlg(id); else if (['front', 'up', 'down', 'back'].includes(k)) shapeZ(id, k); else if (k === 'flip') updShape(id, {flip:s.flip ? undefined : 1}); else if (k === 'lock') updShape(id, {lock:s.lock ? undefined : 1}); else if (k === 'png') shapePNG(s); else if (k === 'panel'){ SHP.tab = 'shapes'; if (panel !== 'shapes') openPanel('shapes'); else renderPanel(); } else if (k === 'del') delShape(id); }; }, 'menu');
 }
 /* export PNG d'une forme ou d'un graphique */
 async function svgToPNG(svg, w, h, name){
@@ -5812,6 +6111,642 @@ function aiApply(){
   toast(res.reply ? res.reply.slice(0, 140) : 'Fait');
 }
 
+/* ==== 76-dev-core.js ==== */
+/* ---------- Développeur : macros, fonctions personnalisées, bac à sable, enregistreur ----------
+   Le code de l'utilisateur ne tourne JAMAIS dans la page : il s'exécute dans un Web Worker hébergé par un iframe « sandbox »
+   (origine opaque, politique CSP sans réseau, aucun accès au DOM, aux cookies, au stockage ni à Firebase). Le script reçoit une copie du
+   classeur et renvoie une liste d'opérations, que l'application applique en une seule étape annulable. */
+const DEV = {open:false, sel:'', run:false, con:[], rec:null, applying:false, tab:'edit'};
+const DEV_LIMIT = {macros:60, code:60000, runMs:10000, fnMs:3000};
+const validFnName = n => /^[A-Za-z_][A-Za-z0-9_]{0,39}$/.test(n);
+const macrosOf = () => WB.macros || (WB.macros = []);
+const macroBy = id => macrosOf().find(m => m.id === id);
+function cleanMacro(m){
+  if (!m || typeof m !== 'object') return null;
+  return {id:String(m.id || uidS()).slice(0, 20), name:String(m.name || 'Macro').slice(0, 40), kind:m.kind === 'function' ? 'function' : 'macro',
+    code:String(m.code || '').slice(0, DEV_LIMIT.code), desc:String(m.desc || '').slice(0, 200), ...(m.from ? {from:String(m.from).slice(0, 40)} : {})};
+}
+
+/* ---------- bac à sable ---------- */
+const SBX = {frame:null, ready:null, cur:null, seq:0, q:Promise.resolve()};
+function sbxKill(){ if (SBX.frame){ SBX.frame.remove(); SBX.frame = null; SBX.ready = null; } if (SBX.cur){ const c = SBX.cur; SBX.cur = null; c.done({ok:false, error:{message:'Exécution interrompue.', line:0}}); } }
+function sbxStart(){
+  if (SBX.ready) return SBX.ready;
+  const src = document.getElementById('scWorkerSrc')?.textContent || '';
+  const csp = "default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob:; worker-src blob:; child-src blob:";
+  const html = `<!doctype html><meta http-equiv="Content-Security-Policy" content="${csp}"><script>
+const w=new Worker(URL.createObjectURL(new Blob([${JSON.stringify(src).replace(/</g, '\\u003c')}])));
+w.onmessage=e=>parent.postMessage(e.data,'*');w.onerror=e=>parent.postMessage({fatal:String(e.message||'erreur')},'*');
+addEventListener('message',e=>{if(e.source===parent)w.postMessage(e.data)});<\/script>`;
+  const f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.title = 'Bac à sable des macros';
+  f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;border:0;visibility:hidden'; f.srcdoc = html;
+  SBX.frame = f;
+  SBX.ready = new Promise((ok, ko) => { SBX.onReady = ok; setTimeout(() => ko(new Error('Le bac à sable n\'a pas démarré.')), 6000); });
+  SBX.ready.catch(() => { if (SBX.frame === f) sbxKill(); });
+  document.body.appendChild(f);
+  return SBX.ready;
+}
+window.addEventListener('message', e => {
+  if (!SBX.frame || e.source !== SBX.frame.contentWindow) return;
+  const d = e.data; if (!d || typeof d !== 'object') return;
+  if (d.ready){ SBX.onReady && SBX.onReady(); return; }
+  if (d.fatal && SBX.cur){ const c = SBX.cur; SBX.cur = null; c.done({ok:false, error:{message:String(d.fatal).slice(0, 300), line:0}}); return; }
+  if (SBX.cur && d.id === SBX.cur.id){ const c = SBX.cur; SBX.cur = null; c.done(d); }
+});
+function sbxExec(msg, ms){
+  return new Promise(async res => {
+    try { await sbxStart(); } catch(e){ return res({ok:false, error:{message:String(e.message || e), line:0}}); }
+    const id = ++SBX.seq;
+    const timer = setTimeout(() => { SBX.cur = null; sbxKill(); res({ok:false, timeout:true, error:{message:`Temps dépassé (${ms / 1000} s) : le script a été arrêté (boucle infinie ?).`, line:0}}); }, ms);
+    SBX.cur = {id, done:r => { clearTimeout(timer); res(r); }};
+    SBX.frame.contentWindow.postMessage({...msg, id}, '*');
+  });
+}
+const sbxRun = (msg, ms) => { const p = SBX.q.then(() => sbxExec(msg, ms)); SBX.q = p.catch(() => {}); return p; };
+
+/* ---------- console ---------- */
+function devLog(t, text, extra){ DEV.con.push({t, text:String(text).slice(0, 600), at:Date.now(), ...extra}); if (DEV.con.length > 300) DEV.con.shift(); if (DEV.open) devDrawCon(); }
+
+/* ---------- copie du classeur envoyée au script ---------- */
+function snapshotWB(){
+  const cap = 300000; let n = 0;
+  const sheets = WB.sheets.map(s => { const cells = [];
+    for (const [k, c] of s.cells){ if (c.raw === '' && !c.s) continue; if (++n > cap) break; let v = c.raw === '' ? null : WB.val(s, KR(k), KC(k)); if (isErr(v)) v = String(v); else if (v !== null && typeof v === 'object') v = null; cells.push([KR(k), KC(k), c.raw, v, c.s || 0]); }
+    return {name:s.name, cells}; });
+  return {title:WB.title, active:WB.active, sel:rangeA1({r1:SEL.r1, c1:SEL.c1, r2:SEL.r2, c2:SEL.c2}), sheets};
+}
+
+/* ---------- application des opérations (une seule étape annulable) ---------- */
+function applyOps(ops, label){
+  const struct = ops.some(o => ['addSheet', 'delSheet', 'renSheet', 'activate'].includes(o.t));
+  const msgs = [];
+  DEV.applying = true;
+  try {
+    tx(label, () => {
+      const S = n => WB.byName(n);
+      for (const o of ops){
+        const sh = o.s ? S(o.s) : null;
+        switch (o.t){
+          case 'raw': if (sh) sh.setRaw(o.r, o.c, o.v); break;
+          case 'style': if (sh){ const p = {}; for (const [k, v] of Object.entries(o.p || {})) if (/^(b|i|u|st|fc|bg|fs|ff|ha|nf|wrap)$/.test(k)) p[k] = v === 0 ? false : v; sh.setStyle(o.r, o.c, p); } break;
+          case 'clear': if (sh){ for (const [k, cell] of [...sh.cells]){ const r = KR(k), c = KC(k); if (r < o.r1 || r > o.r2 || c < o.c1 || c > o.c2) continue;
+            if (o.w === 'all') sh.setCell(r, c, null); else if (o.w === 'content') sh.setRaw(r, c, ''); else if (cell.s) sh.setStyle(r, c, Object.fromEntries(Object.keys(cell.s).map(x => [x, false]))); } } break;
+          case 'merge': if (sh && !sh.merges.some(m => m.r1 === o.r1 && m.c1 === o.c1 && m.r2 === o.r2 && m.c2 === o.c2)) sh.merges.push({r1:o.r1, c1:o.c1, r2:o.r2, c2:o.c2}); break;
+          case 'colw': if (sh) sh.cw[o.c] = o.w; break;
+          case 'rowh': if (sh) sh.rh[o.r] = o.h; break;
+          case 'chart': if (sh && CHART_TYPES.some(t => t[0] === o.ch.type) && parseRange(o.ch.range)) sh.charts.push({...o.ch, id:uidS(), title:String(o.ch.title || '').slice(0, 120)}); break;
+          case 'addSheet': if (!S(o.name)) WB.addSheet(String(o.name).replace(/[\\/?*[\]:]/g, '').slice(0, 31)); break;
+          case 'delSheet': { const i = WB.sheets.findIndex(x => x.name === o.name); if (i >= 0 && WB.sheets.length > 1){ WB.sheets.splice(i, 1); WB.active = clamp(WB.active, 0, WB.sheets.length - 1); } break; }
+          case 'renSheet': { const s = S(o.from); if (s && !S(o.to)){ const nn = String(o.to).replace(/[\\/?*[\]:]/g, '').slice(0, 31); s.name = nn; for (const x of WB.sheets) for (const [k, cell] of x.cells) if (cell.raw && cell.raw[0] === '=' && cell.raw.includes(o.from)){ const nr = '=' + renameSheetInFormula(cell.raw.slice(1), o.from, nn); if (nr !== cell.raw) x.setRaw(KR(k), KC(k), nr, true); } } break; }
+          case 'activate': { const i = WB.sheets.findIndex(x => x.name === o.name); if (i >= 0) WB.active = i; break; }
+          case 'toast': msgs.push(o.text); break;
+        }
+      }
+    }, struct ? {full:true} : undefined);
+    if (struct){ WB.recalc(); V.nr = Math.max(120, V.nr); layout(); renderTabs(); schedule(); selChanged(); }
+  } finally { DEV.applying = false; }
+  return msgs;
+}
+
+/* ---------- exécution d'une macro ---------- */
+async function runMacro(m, quiet){
+  if (!m) return;
+  if (V.ro) return toast('Classeur en lecture seule : les macros sont désactivées');
+  if (DEV.run) return toast('Une macro est déjà en cours');
+  if (EDIT.on) commitEdit(0, 0);
+  DEV.run = true; if (DEV.open) devDrawBar();
+  const t0 = performance.now();
+  devLog('info', `▶ ${m.name} : exécution…`);
+  let res;
+  try { res = await sbxRun({type:'run', code:m.code, snap:snapshotWB()}, DEV_LIMIT.runMs); }
+  catch(e){ res = {ok:false, error:{message:String(e.message || e), line:0}}; }
+  DEV.run = false;
+  (res.logs || []).forEach(l => devLog(l.t, l.text));
+  if (!res.ok){
+    devLog('error', `${res.error?.name && res.error.name !== 'Error' ? res.error.name + ' : ' : ''}${res.error?.message || 'Erreur inconnue'}`, {macro:m.id, line:res.error?.line || 0});
+    devLog('warn', 'Aucune modification n\'a été appliquée au classeur.');
+    toast(`Erreur dans « ${m.name} » : voir la console Développeur`); if (DEV.open) devDrawBar();
+    return false;
+  }
+  const msgs = res.ops.length ? applyOps(res.ops, 'Macro : ' + m.name) : [];
+  devLog('ok', `✓ ${m.name} terminée en ${Math.round(performance.now() - t0)} ms · ${res.ops.filter(o => o.t !== 'toast').length} opération(s)`);
+  if (msgs.length) toast(msgs[msgs.length - 1]); else if (!quiet) toast(`Macro « ${m.name} » terminée`);
+  if (DEV.open) devDrawBar();
+  return true;
+}
+
+/* ---------- fonctions personnalisées utilisables dans les formules ---------- */
+const UDF = {names:new Set(), cache:new Map(), pend:new Map(), dead:new Set(), timer:0, builtin:null};
+function devSyncFns(){
+  if (!UDF.builtin) UDF.builtin = new Set(Object.keys(FN));
+  for (const n of UDF.names){ delete FN[n]; }
+  for (let i = FN_INFO.length - 1; i >= 0; i--) if (FN_INFO[i].custom) FN_INFO.splice(i, 1);
+  UDF.names.clear();
+  for (const m of macrosOf()){
+    if (m.kind !== 'function' || !validFnName(m.name)) continue;
+    const N = m.name.toUpperCase(); if (UDF.builtin.has(N) || FN_ALIAS[N]) continue;
+    const nm = m.name;
+    FN[N] = {f:args => udfCall(nm, args)}; UDF.names.add(N);
+    const params = /function\s+[A-Za-z_]\w*\s*\(([^)]*)\)/.exec(m.code)?.[1]?.replace(/\s+/g, '').split(',').filter(Boolean).join('; ') || '';
+    FN_INFO.push({en:N, fr:N, cat:'Personnalisées', syn:params, desc:m.desc || 'Fonction personnalisée (Développeur)', custom:true});
+  }
+}
+function udfArg(v){ if (isRng(v)) return v.h === 1 && v.w === 1 ? udfArg(v.v(0, 0)) : v.arr().map(r => r.map(udfArg)); if (isErr(v)) return String(v); if (isArr(v)) return v.map(r => Array.isArray(r) ? r.map(udfArg) : udfArg(r)); return v === MISSING ? null : v; }
+function udfCall(name, args){
+  const a = args.map(udfArg), key = name.toUpperCase() + '\u0001' + JSON.stringify(a);
+  const hit = UDF.cache.get(key);
+  if (hit){ if (hit.e) throw ER.value; const v = hit.v; if (Array.isArray(v)) return Array.isArray(v[0]) ? v : [v]; if (typeof v === 'number' && !isFinite(v)) throw ER.num; return v; }
+  if (UDF.dead.has(name.toUpperCase())) throw ER.value;
+  if (!UDF.pend.has(key)){ UDF.pend.set(key, {fn:name, args:a}); clearTimeout(UDF.timer); UDF.timer = setTimeout(udfFlush, 15); }
+  throw ER.calc;
+}
+async function udfFlush(){
+  const batch = [...UDF.pend]; UDF.pend.clear(); if (!batch.length) return;
+  const by = new Map(); for (const [k, c] of batch){ const L = by.get(c.fn.toUpperCase()) || []; L.push({k, fn:c.fn, args:c.args}); by.set(c.fn.toUpperCase(), L); }
+  for (const [N, calls] of by){
+    const m = macrosOf().find(x => x.kind === 'function' && x.name.toUpperCase() === N); if (!m) continue;
+    for (let i = 0; i < calls.length; i += 300){
+      const part = calls.slice(i, i + 300);
+      const r = await sbxRun({type:'calls', code:m.code, fnames:[m.name], calls:part}, DEV_LIMIT.fnMs);
+      if (!r.ok){ part.forEach(c => UDF.cache.set(c.k, {e:1})); if (r.timeout) UDF.dead.add(N); devLog('error', `Fonction ${m.name} : ${r.error?.message}`, {macro:m.id, line:r.error?.line || 0}); break; }
+      for (const o of r.out){ if (o.e){ UDF.cache.set(o.k, {e:1}); devLog('warn', `${m.name} : ${o.e}`, {macro:m.id}); } else UDF.cache.set(o.k, {v:o.v}); }
+    }
+  }
+  if (UDF.cache.size > 20000) for (const k of [...UDF.cache.keys()].slice(0, 5000)) UDF.cache.delete(k);
+  if (!UDF.pend.size){ WB.recalc(); layout(); schedule(); }
+}
+function udfReset(){ UDF.cache.clear(); UDF.pend.clear(); UDF.dead.clear(); }
+function devOnLoad(wb){ if (wb !== WB || window.__swPreview) return; udfReset(); devSyncFns(); }
+
+/* ---------- enregistreur de macros ---------- */
+const REC_KEYS = {b:'gras', i:'italique', u:'souligne', st:'barre', fc:'couleurTexte', bg:'couleurFond', fs:'taille', ff:'police', ha:'alignement', nf:'formatNombre', wrap:'renvoi'};
+const HA_NAME = {l:'gauche', c:'centre', r:'droite'};
+const jsLit = v => typeof v === 'number' ? String(v) : JSON.stringify(v);
+function recStart(){ DEV.rec = {lines:[], shs:new Map(), n:0, t0:Date.now()}; devLog('info', '● Enregistrement démarré : agissez dans le classeur, puis arrêtez l\'enregistreur.'); if (DEV.open) devDrawBar(); drawRecPill(); }
+function drawRecPill(){
+  let p = document.getElementById('devRecPill');
+  if (!DEV.rec){ p && p.remove(); return; }
+  if (!p){ p = document.createElement('button'); p.id = 'devRecPill'; p.type = 'button'; p.className = 'dev-pill'; p.innerHTML = '<i></i><span>Enregistrement…</span><b>Arrêter</b>'; p.onclick = () => recStop(); document.body.appendChild(p); }
+}
+function recSheetVar(name){ const R = DEV.rec; if (!R.shs.has(name)) R.shs.set(name, 'f' + (R.shs.size + 1)); return R.shs.get(name); }
+function devRecStep(step){
+  const R = DEV.rec; if (!R || DEV.applying) return;
+  if (step.fullB || step.fullA){ R.lines.push(`// Action « ${step.label} » non enregistrable (structure du classeur) : à ajouter à la main.`); return; }
+  const sh = WB.sheets.find(s => s.id === step.sheet); if (!sh) return;
+  const fv = recSheetVar(sh.name), out = [`// ${step.label}`];
+  const raws = [], styles = new Map();
+  for (const c of step.cells || []){
+    const r = KR(c.k), cc = KC(c.k), b = c.b || {raw:'', s:null}, a = c.a || {raw:'', s:null};
+    if ((b.raw || '') !== (a.raw || '')) raws.push([r, cc, a.raw || '']);
+    const sa = a.s || {}, sb = b.s || {}, patch = {};
+    for (const k of Object.keys(REC_KEYS)) if (JSON.stringify(sa[k] ?? null) !== JSON.stringify(sb[k] ?? null)) patch[k] = sa[k] ?? null;
+    if (Object.keys(patch).length){ const sig = JSON.stringify(patch); if (!styles.has(sig)) styles.set(sig, {patch, cells:[]}); styles.get(sig).cells.push([r, cc]); }
+  }
+  for (const [r, c, raw] of raws.slice(0, 60)){
+    const n = raw !== '' && /^-?\d+(,\d+)?$/.test(raw) ? parseFloat(raw.replace(',', '.')) : raw;
+    out.push(`${fv}.plage(${JSON.stringify(A1(r, c))}).valeur = ${jsLit(n)};`);
+  }
+  if (raws.length > 60) out.push(`// … ${raws.length - 60} autres cellules`);
+  for (const {patch, cells} of styles.values()){
+    const r1 = Math.min(...cells.map(x => x[0])), r2 = Math.max(...cells.map(x => x[0])), c1 = Math.min(...cells.map(x => x[1])), c2 = Math.max(...cells.map(x => x[1]));
+    const boxes = cells.length === (r2 - r1 + 1) * (c2 - c1 + 1) ? [[r1, c1, r2, c2]] : cells.slice(0, 40).map(x => [x[0], x[1], x[0], x[1]]);
+    for (const [a, b, c, d] of boxes){
+      const addr = a === c && b === d ? A1(a, b) : A1(a, b) + ':' + A1(c, d);
+      for (const [k, v] of Object.entries(patch)){ const val = k === 'ha' ? (HA_NAME[v] || 'gauche') : (k === 'b' || k === 'i' || k === 'u' || k === 'st' || k === 'wrap') ? !!v : v;
+        out.push(`${fv}.plage(${JSON.stringify(addr)}).format.${REC_KEYS[k]} = ${jsLit(val)};`); }
+    }
+  }
+  if (step.metaB){
+    try { const B = JSON.parse(step.metaB), A = JSON.parse(step.metaA);
+      for (const ch of A.charts || []) if (!(B.charts || []).some(x => x.id === ch.id)) out.push(`${fv}.ajouterGraphique({ type: ${JSON.stringify(ch.type)}, plage: ${JSON.stringify(ch.range)}, titre: ${JSON.stringify(ch.title || '')} });`);
+      for (const [c, w] of Object.entries(A.cw || {})) if (B.cw?.[c] !== w) out.push(`${fv}.largeurColonne(${+c + 1}, ${Math.round(w)});`);
+      for (const [r, h] of Object.entries(A.rh || {})) if (B.rh?.[r] !== h) out.push(`${fv}.hauteurLigne(${+r + 1}, ${Math.round(h)});`);
+      for (const m of A.merges || []) if (!(B.merges || []).some(x => x.r1 === m.r1 && x.c1 === m.c1 && x.r2 === m.r2 && x.c2 === m.c2)) out.push(`${fv}.plage(${JSON.stringify(rangeA1(m))}).fusionner();`);
+    } catch(e){}
+  }
+  if (out.length > 1){ R.lines.push(out.join('\n')); R.n++; if (R.lines.length > 400) R.lines.shift(); }
+}
+function recStop(save = true){
+  const R = DEV.rec; DEV.rec = null; drawRecPill();
+  if (!R) return null;
+  if (!R.n){ devLog('warn', 'Rien n\'a été enregistré.'); toast('Enregistrement arrêté : aucune action'); if (DEV.open) devDrawBar(); return null; }
+  const head = [...R.shs].map(([name, v]) => `const ${v} = classeur.feuille(${JSON.stringify(name)});`).join('\n');
+  const m = newMacro('macro', 'Macro enregistrée', `// Macro enregistrée automatiquement le ${new Date().toLocaleString('fr-FR')}\n${head}\n\n${R.lines.join('\n\n')}\n`);
+  devLog('ok', `■ Enregistrement terminé : « ${m.name} » créée (${R.n} action${R.n > 1 ? 's' : ''}).`);
+  toast('Macro enregistrée'); DEV.sel = m.id; openDev('edit'); return m;
+}
+
+/* ---------- gestion des macros ---------- */
+function uniqueMacroName(base, kind){
+  const ok = n => !macrosOf().some(m => m.name.toLowerCase() === n.toLowerCase()); let n = base, i = 1;
+  while (!ok(n)) n = `${base}${kind === 'function' ? '_' : ' '}${++i}`; return n;
+}
+function newMacro(kind, name, code, extra = {}){
+  if (macrosOf().length >= DEV_LIMIT.macros){ toast(`Limite de ${DEV_LIMIT.macros} scripts par classeur atteinte`); return null; }
+  const nm = uniqueMacroName(kind === 'function' ? String(name || 'MaFonction').replace(/[^A-Za-z0-9_]/g, '_').replace(/^(\d)/, '_$1') : (name || 'Macro'), kind);
+  const m = cleanMacro({id:uidS(), name:nm, kind, code, ...extra});
+  macrosOf().push(m); devCommit(kind === 'function'); return m;
+}
+/* enregistre dans le classeur (annuler/rétablir ne concerne pas l'éditeur de code : il garde son propre historique) */
+function devCommit(sync = true){ if (sync){ devSyncFns(); udfReset(); WB.recalc(); layout(); schedule(); } emitChange(); }
+function deleteMacro(id){ WB.macros = macrosOf().filter(m => m.id !== id); for (const sh of WB.sheets) for (const s of sh.shapes) if (s.macro === id) delete s.macro; if (DEV.sel === id) DEV.sel = ''; devCommit(); }
+function runShapeMacro(shape){ const m = macroBy(shape.macro); if (!m) return toast('La macro liée à ce bouton n\'existe plus'); runMacro(m, true); }
+
+/* ==== 77-dev-ui.js ==== */
+/* ---------- Interface Développeur : éditeur de code, exemples, console, Communauté ---------- */
+const DV_KW = 'async await break case catch class const continue default do else export finally for function if in instanceof let new of return switch throw try typeof var while yield'.split(' ');
+const DV_LIT = ['true', 'false', 'null', 'undefined', 'NaN', 'Infinity', 'this'];
+const DV_API = ['classeur', 'Classeur', 'FeuilleActive', 'Feuille', 'Plage', 'Cellule', 'selection', 'message', 'journal', 'console', 'maintenant', 'aujourdhui', 'Range', 'Cells', 'Sheets', 'ActiveSheet', 'MsgBox', 'Selection'];
+const DV_RX = new RegExp('(\\/\\/[^\\n]*|\\/\\*[\\s\\S]*?(?:\\*\\/|$))|("(?:\\\\.|[^"\\\\\\n])*"?|\'(?:\\\\.|[^\'\\\\\\n])*\'?|`(?:\\\\[\\s\\S]|[^`\\\\])*`?)|\\b(\\d+(?:\\.\\d+)?)\\b|\\b([A-Za-z_$][\\w$]*)\\b', 'g');
+function dvHL(code){
+  let out = '', last = 0, m;
+  DV_RX.lastIndex = 0;
+  while ((m = DV_RX.exec(code))){
+    out += escH(code.slice(last, m.index)); last = m.index + m[0].length;
+    const t = escH(m[0]);
+    if (m[1]) out += `<i class="c">${t}</i>`; else if (m[2]) out += `<i class="s">${t}</i>`; else if (m[3]) out += `<i class="n">${t}</i>`;
+    else if (DV_KW.includes(m[4])) out += `<i class="k">${t}</i>`; else if (DV_LIT.includes(m[4])) out += `<i class="l">${t}</i>`;
+    else if (DV_API.includes(m[4])) out += `<i class="a">${t}</i>`; else out += t;
+  }
+  return out + escH(code.slice(last));
+}
+/* analyse rapide du code (aide à la relecture ; le bac à sable reste la vraie protection) */
+const SCAN = [
+  [/\b(fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon|importScripts|import\s*\()/, 'danger', 'Tentative d\'accès au réseau ou chargement de code externe (bloqué par le bac à sable).'],
+  [/\b(eval|Function)\s*\(|\.constructor\b|\bconstructor\s*\(/, 'danger', 'Exécution de code construit dynamiquement (eval, Function, constructor).'],
+  [/\b(document|window|globalThis|self|parent|top|localStorage|sessionStorage|indexedDB|cookie|navigator|location|postMessage|Worker)\b/, 'danger', 'Référence à l\'environnement du navigateur (inaccessible depuis le bac à sable).'],
+  [/\b(while\s*\(\s*(true|1)\s*\)|for\s*\(\s*;\s*;\s*\))/, 'warn', 'Boucle potentiellement infinie (le script serait arrêté après 10 s).'],
+  [/\.(effacer|supprimer)\s*\(/, 'warn', 'Efface des données ou supprime une feuille.'],
+  [/\\u00[0-9a-f]{2}|\\x[0-9a-f]{2}|fromCharCode|atob\s*\(/i, 'warn', 'Texte encodé ou obfusqué : à relire avec attention.'],
+];
+const scanCode = code => SCAN.filter(([rx]) => rx.test(code)).map(([, lvl, msg]) => ({lvl, msg}));
+
+const EX_API = `// Aucune installation : le code s'exécute dans un bac à sable sécurisé (sans accès au navigateur ni au réseau).`;
+const DEV_EX = [
+  {kind:'macro', name:'Mettre en forme les en-têtes', desc:'Première ligne en gras, fond violet, texte blanc, colonnes élargies.', code:`${EX_API}
+const f = classeur.feuilleActive;
+const u = f.plageUtilisee;
+const entete = f.plage(1, 1, 1, u.nbColonnes);
+entete.format.gras = true;
+entete.format.couleurFond = "#7B3FF2";
+entete.format.couleurTexte = "#ffffff";
+entete.format.alignement = "centre";
+for (let c = 1; c <= u.nbColonnes; c++) f.largeurColonne(c, 130);
+message("En-têtes mis en forme");`},
+  {kind:'macro', name:'Ajouter une ligne de total', desc:'Somme chaque colonne numérique sous les données.', code:`const f = classeur.feuilleActive;
+const u = f.plageUtilisee;
+const l = u.nbLignes + 1;
+f.cellule(l, 1).valeur = "Total";
+for (let c = 2; c <= u.nbColonnes; c++) {
+  const col = f.plage(2, c, u.nbLignes, c);
+  if (col.nb() > 0) f.cellule(l, c).formule = "=SOMME(" + col.adresse + ")";
+}
+f.plage(l, 1, l, u.nbColonnes).format.gras = true;
+f.plage(l, 1, l, u.nbColonnes).format.couleurFond = "#EDE7FF";`},
+  {kind:'macro', name:'Trier par la première colonne', desc:'Trie les données (en-tête conservé) de A à Z.', code:`const f = classeur.feuilleActive;
+const u = f.plageUtilisee;
+if (u.nbLignes < 3) message("Pas assez de lignes à trier");
+else {
+  f.plage(2, 1, u.nbLignes, u.nbColonnes).trier(1, true);
+  message("Données triées");
+}`},
+  {kind:'macro', name:'Alterner les couleurs des lignes', desc:'Bandes de couleur sur la sélection.', code:`const s = selection;
+for (let i = 0; i < s.nbLignes; i++) {
+  const ligne = s.decaler(i).redimensionner(1, s.nbColonnes);
+  ligne.format.couleurFond = i % 2 === 0 ? "#F3EFFF" : "#FFFFFF";
+}
+message("Lignes alternées sur " + s.adresse);`},
+  {kind:'macro', name:'Graphique de la sélection', desc:'Crée un histogramme à partir des cellules sélectionnées.', code:`const s = selection;
+if (s.nbLignes < 2 || s.nbColonnes < 2) {
+  message("Sélectionnez d'abord un tableau (libellés + valeurs)");
+} else {
+  classeur.feuilleActive.ajouterGraphique({ type: "col", plage: s.adresse, titre: "Graphique de " + s.adresse });
+}`},
+  {kind:'macro', name:'Calendrier du mois', desc:'Écrit les jours du mois courant dans une nouvelle feuille.', code:`const d = new Date();
+const mois = d.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+const nb = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+const f = classeur.ajouterFeuille("Calendrier " + (classeur.feuilles.length + 1));
+f.cellule("A1").valeur = mois;
+f.cellule("A1").format.gras = true;
+f.cellule("A1").format.taille = 16;
+for (let j = 1; j <= nb; j++) {
+  const jour = new Date(d.getFullYear(), d.getMonth(), j);
+  f.cellule(j + 2, 1).valeur = jour.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric" });
+}
+f.largeurColonne(1, 160);
+f.activer();`},
+  {kind:'macro', name:'Nettoyer les espaces', desc:'Supprime les espaces en trop dans les textes de la feuille.', code:`const u = classeur.feuilleActive.plageUtilisee;
+const v = u.valeurs.map(l => l.map(x => typeof x === "string" ? x.replace(/\\s+/g, " ").trim() : x));
+u.valeurs = v;
+message("Espaces nettoyés");`},
+  {kind:'function', name:'TVA', desc:'TVA d\'un montant HT : =TVA(100; 0,2)', code:`// Utilisable dans une cellule : =TVA(montant_HT; taux)
+function TVA(ht, taux) {
+  if (taux === undefined || taux === null) taux = 0.2;
+  return Math.round(ht * taux * 100) / 100;
+}`},
+  {kind:'function', name:'MAJ_PREMIER', desc:'Met une majuscule à chaque mot : =MAJ_PREMIER(A1)', code:`function MAJ_PREMIER(texte) {
+  return String(texte).toLowerCase().replace(/(^|[\\s'-])(\\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+}`},
+  {kind:'function', name:'MOYPOND', desc:'Moyenne pondérée : =MOYPOND(valeurs; poids)', code:`function MOYPOND(valeurs, poids) {
+  const v = [].concat(...[].concat(valeurs)), p = [].concat(...[].concat(poids));
+  let s = 0, w = 0;
+  for (let i = 0; i < v.length; i++) {
+    if (typeof v[i] === "number" && typeof p[i] === "number") { s += v[i] * p[i]; w += p[i]; }
+  }
+  if (!w) throw new Error("Somme des poids nulle");
+  return s / w;
+}`},
+  {kind:'function', name:'JOURS_OUVRES_ENTRE', desc:'Nombre de jours ouvrés entre deux dates : =JOURS_OUVRES_ENTRE(A1; B1)', code:`function JOURS_OUVRES_ENTRE(debut, fin) {
+  let n = 0;
+  for (let d = Math.floor(debut); d <= Math.floor(fin); d++) {
+    const jour = (d - 2 + 7000) % 7; // 0 = samedi dans la numérotation tableur
+    if (jour !== 0 && jour !== 1) n++;
+  }
+  return n;
+}`},
+];
+const DV_HELP = `<h3>Référence de l'API</h3><div class="dv-help-c">
+<p>Le code est du JavaScript, exécuté dans un bac à sable : <b>aucun accès au navigateur, au réseau ni à vos autres données</b>. Il travaille sur une copie du classeur ; les modifications sont appliquées d'un bloc à la fin (annulables avec Ctrl + Z). En cas d'erreur, rien n'est modifié.</p>
+<table class="dv-api"><tr><th>Objet</th><th>Contenu</th></tr>
+<tr><td><code>classeur</code></td><td><code>feuilleActive</code> · <code>feuilles</code> · <code>feuille("Nom")</code> · <code>ajouterFeuille("Nom")</code> · <code>titre</code></td></tr>
+<tr><td><code>feuille</code></td><td><code>plage("A1:C5")</code> · <code>cellule(ligne, colonne)</code> · <code>colonne("B")</code> · <code>ligne(3)</code> · <code>plageUtilisee</code> · <code>largeurColonne(c, px)</code> · <code>hauteurLigne(l, px)</code> · <code>ajouterGraphique({type, plage, titre})</code> · <code>activer()</code> · <code>supprimer()</code> · <code>nom</code></td></tr>
+<tr><td><code>plage</code></td><td><code>valeur</code> · <code>valeurs</code> (tableau 2D) · <code>formule</code> · <code>format</code> · <code>effacer()</code> · <code>effacerContenu()</code> · <code>effacerFormat()</code> · <code>cellules</code> · <code>pourChaque(fn)</code> · <code>somme()</code> · <code>moyenne()</code> · <code>min()</code> · <code>max()</code> · <code>nb()</code> · <code>decaler(l, c)</code> · <code>redimensionner(l, c)</code> · <code>fusionner()</code> · <code>trier(col, croissant)</code> · <code>copierVers("E1")</code> · <code>adresse</code> · <code>nbLignes</code> · <code>nbColonnes</code></td></tr>
+<tr><td><code>format</code></td><td><code>gras</code> · <code>italique</code> · <code>souligne</code> · <code>barre</code> · <code>couleurTexte</code> · <code>couleurFond</code> · <code>taille</code> · <code>police</code> · <code>alignement</code> ("gauche", "centre", "droite") · <code>formatNombre</code> · <code>renvoi</code></td></tr>
+<tr><td>Globales</td><td><code>selection</code> · <code>message("texte")</code> · <code>journal(...)</code> / <code>console.log(...)</code> · <code>Plage("A1")</code> · <code>Cellule(l, c)</code></td></tr>
+<tr><td>Comme VBA</td><td><code>Range("A1").Value</code> · <code>Cells(2, 3).Formula</code> · <code>Sheets("Feuil1")</code> · <code>ActiveSheet</code> · <code>MsgBox("…")</code></td></tr></table>
+<p><b>Fonctions personnalisées</b> : créez un script de type « Fonction » qui déclare <code>function MAFONCTION(a, b) { … }</code> (même nom que le script). Elle s'utilise ensuite dans une cellule : <code>=MAFONCTION(A1; B1)</code>. Elle doit être pure : pas d'accès au classeur, résultat immédiat, 3 s maximum.</p>
+<p><b>Boutons</b> : « Ajouter un bouton » place sur la feuille un bouton qui lance la macro d'un clic (Maj + clic pour le sélectionner sans l'exécuter).</p></div>
+<div class="dlg-acts"><button type="button" class="ap-btn" data-dlg="close">Fermer</button></div>`;
+
+/* ---------- ouverture / fermeture ---------- */
+function devRoot(){
+  let r = document.getElementById('devUi'); if (r) return r;
+  r = document.createElement('div'); r.id = 'devUi'; r.className = 'dev'; r.hidden = true; r.setAttribute('role', 'dialog'); r.setAttribute('aria-modal', 'true'); r.setAttribute('aria-label', 'Développeur');
+  r.innerHTML = `<div class="dev-box"><header class="dev-h"><span class="dev-t"><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><b>Développeur</b></span>
+    <nav class="dev-tabs" role="tablist"><button type="button" role="tab" data-dv="tab" data-tab="edit">Éditeur de code</button><button type="button" role="tab" data-dv="tab" data-tab="examples">Exemples</button><button type="button" role="tab" data-dv="tab" data-tab="community">Communauté</button></nav>
+    <button type="button" class="dev-x" data-dv="close" aria-label="Fermer l'interface Développeur">✕</button></header><div class="dev-main" id="devMain"></div></div>`;
+  document.body.appendChild(r);
+  r.addEventListener('click', devClick); r.addEventListener('input', devInput); r.addEventListener('keydown', devKey);
+  r.addEventListener('mousedown', e => { if (e.target === r) closeDev(); });
+  return r;
+}
+function openDev(tab){
+  if (g$('edPanel') && panel) openPanel(panel);
+  if (EDIT.on) commitEdit(0, 0);
+  const r = devRoot(); DEV.open = true; r.hidden = false; if (tab) DEV.tab = tab;
+  if (!DEV.sel || !macroBy(DEV.sel)) DEV.sel = macrosOf()[0]?.id || '';
+  g$('edRail').querySelectorAll('.ray').forEach(x => x.setAttribute('aria-pressed', x.dataset.panel === 'dev' ? 'true' : 'false'));
+  devDraw();
+}
+function closeDev(){
+  const r = document.getElementById('devUi'); if (!r) return; devFlushCode(); DEV.open = false; r.hidden = true;
+  g$('edRail').querySelectorAll('.ray').forEach(x => x.setAttribute('aria-pressed', 'false')); g$('grid').focus({preventScroll:true});
+}
+function devDraw(){
+  const r = devRoot(); r.querySelectorAll('[data-dv="tab"]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === DEV.tab)));
+  if (DEV.tab === 'edit') devDrawEdit(); else if (DEV.tab === 'examples') devDrawExamples(); else devDrawCom();
+}
+
+/* ---------- onglet Éditeur ---------- */
+function devDrawEdit(){
+  const main = document.getElementById('devMain'), L = macrosOf();
+  const li = m => `<li><button type="button" class="dv-li${m.id === DEV.sel ? ' on' : ''}" data-dv="sel" data-id="${m.id}"><span>${escH(m.name)}</span>${m.kind === 'macro' ? `<i class="dv-run" data-dv="runid" data-id="${m.id}" title="Exécuter" role="button">▶</i>` : ''}</button></li>`;
+  main.innerHTML = `<aside class="dv-side"><div class="dv-sh"><span>Macros</span><button type="button" data-dv="new-macro" title="Nouvelle macro" aria-label="Nouvelle macro">+</button></div>
+      <ul>${L.filter(m => m.kind === 'macro').map(li).join('') || '<li class="dv-none">Aucune macro</li>'}</ul>
+      <div class="dv-sh"><span>Fonctions</span><button type="button" data-dv="new-fn" title="Nouvelle fonction personnalisée" aria-label="Nouvelle fonction">+</button></div>
+      <ul>${L.filter(m => m.kind === 'function').map(li).join('') || '<li class="dv-none">Aucune fonction</li>'}</ul>
+      <div class="dv-side-b"><button type="button" class="dv-rec" data-dv="rec" id="dvRec"></button><button type="button" class="dv-link" data-dv="help">Référence de l'API</button></div></aside>
+    <section class="dv-work"><div class="dv-bar" id="dvBar"></div><div class="dv-ed" id="dvEd"><div class="dv-ln" id="dvLn" aria-hidden="true"></div><div class="dv-code"><pre aria-hidden="true"><code id="dvHl"></code></pre><textarea id="dvTa" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Code du script" wrap="off"></textarea></div></div>
+      <div class="dv-con"><div class="dv-con-h"><b>Console</b><span id="dvConN"></span><button type="button" data-dv="conclear">Effacer</button></div><div class="dv-con-l" id="dvCon" role="log" aria-live="polite"></div></div></section>`;
+  DEV.ed = document.getElementById('dvTa'); devLoadCode(); devDrawBar(); devDrawCon();
+  const ta = DEV.ed;
+  ta.addEventListener('scroll', devSyncScroll);
+}
+function devLoadCode(){
+  const m = macroBy(DEV.sel), ta = document.getElementById('dvTa'); if (!ta) return;
+  ta.value = m ? m.code : ''; ta.disabled = !m || V.ro; ta.placeholder = m ? '' : 'Créez une macro avec « + », ou ajoutez un exemple depuis l\'onglet Exemples.';
+  devPaint();
+}
+function devPaint(){
+  const ta = document.getElementById('dvTa'); if (!ta) return;
+  document.getElementById('dvHl').innerHTML = dvHL(ta.value) + '\n ';
+  const n = ta.value.split('\n').length, err = DEV.errLine;
+  document.getElementById('dvLn').innerHTML = Array.from({length:n}, (_, i) => `<span${err === i + 1 ? ' class="err"' : ''}>${i + 1}</span>`).join('');
+  devSyncScroll();
+}
+function devSyncScroll(){ const ta = document.getElementById('dvTa'); if (!ta) return; const p = ta.parentElement.querySelector('pre'); p.scrollTop = ta.scrollTop; p.scrollLeft = ta.scrollLeft; document.getElementById('dvLn').scrollTop = ta.scrollTop; }
+function devDrawBar(){
+  const bar = document.getElementById('dvBar'); if (!bar) return; const m = macroBy(DEV.sel);
+  const rb = document.getElementById('dvRec'); if (rb){ rb.className = 'dv-rec' + (DEV.rec ? ' on' : ''); rb.innerHTML = DEV.rec ? '<i></i>Arrêter l\'enregistrement' : '<i></i>Enregistrer une macro'; }
+  if (!m){ bar.innerHTML = '<span class="dv-hint">Aucun script sélectionné.</span>'; return; }
+  const fn = m.kind === 'function';
+  bar.innerHTML = `<input id="dvName" class="dv-name" value="${escH(m.name)}" maxlength="40" aria-label="Nom du script"${V.ro ? ' disabled' : ''}><span class="dv-kind ${m.kind}">${fn ? 'Fonction' : 'Macro'}</span>
+    ${fn ? `<span class="dv-hint">Dans une cellule : <code>=${escH(m.name.toUpperCase())}(…)</code></span>` : `<button type="button" class="dv-btn go" data-dv="run"${DEV.run || V.ro ? ' disabled' : ''}>${DEV.run ? 'En cours…' : '▶ Exécuter'}</button><button type="button" class="dv-btn" data-dv="addbtn"${V.ro ? ' disabled' : ''}>Ajouter un bouton</button>`}
+    <span class="dv-sp"></span><button type="button" class="dv-btn" data-dv="share">Partager</button><button type="button" class="dv-btn danger" data-dv="del"${V.ro ? ' disabled' : ''}>Supprimer</button>`;
+}
+function devDrawCon(){
+  const c = document.getElementById('dvCon'); if (!c) return;
+  c.innerHTML = DEV.con.length ? DEV.con.map((e, i) => `<div class="dv-ce ${e.t}"${e.line ? ` data-dv="goline" data-i="${i}" role="button" tabindex="0"` : ''}><time>${new Date(e.at).toLocaleTimeString('fr-FR')}</time><span>${escH(e.text)}</span>${e.line ? `<em>ligne ${e.line}</em>` : ''}</div>`).join('') : '<div class="dv-ce info"><span>Les messages (journal), résultats et erreurs de vos scripts s\'affichent ici.</span></div>';
+  c.scrollTop = c.scrollHeight; const n = DEV.con.filter(e => e.t === 'error').length; const el = document.getElementById('dvConN'); if (el) el.innerHTML = n ? `<i class="bad">${n} erreur${n > 1 ? 's' : ''}</i>` : '';
+}
+let devSaveT = 0;
+function devFlushCode(){
+  clearTimeout(devSaveT); const m = macroBy(DEV.sel), ta = document.getElementById('dvTa'); if (!m || !ta || ta.value === m.code) return;
+  m.code = ta.value.slice(0, DEV_LIMIT.code); devCommit(m.kind === 'function');
+}
+function devInput(e){
+  const t = e.target;
+  if (t.id === 'dvTa'){ DEV.errLine = 0; devPaint(); clearTimeout(devSaveT); devSaveT = setTimeout(devFlushCode, 600); }
+  else if (t.id === 'dvName'){ /* validé à la sortie du champ */ }
+  else if (t.id === 'cmQ'){ DEV.com.q = t.value; devDrawComList(); }
+}
+function devKey(e){
+  const t = e.target;
+  if (t.id === 'dvTa'){
+    DEV.ed.composing = e.isComposing;
+    if (e.key === 'Tab'){ e.preventDefault(); const a = t.selectionStart, b = t.selectionEnd; t.setRangeText('  ', a, b, 'end'); t.dispatchEvent(new Event('input', {bubbles:true})); }
+    else if (e.key === 'Enter'){ const a = t.selectionStart, before = t.value.slice(0, a), ln = before.slice(before.lastIndexOf('\n') + 1), ind = /^\s*/.exec(ln)[0] + (/[{(\[]\s*$/.test(ln) ? '  ' : ''); e.preventDefault(); t.setRangeText('\n' + ind, a, t.selectionEnd, 'end'); t.dispatchEvent(new Event('input', {bubbles:true})); }
+    else if ((e.ctrlKey || e.metaKey) && e.key === 'Enter'){ e.preventDefault(); devFlushCode(); const m = macroBy(DEV.sel); if (m?.kind === 'macro') runMacro(m); }
+  } else if (t.id === 'dvName' && e.key === 'Enter'){ t.blur(); }
+  else if (e.key === 'Enter' && t.dataset?.dv === 'goline') devClick({target:t});
+}
+document.addEventListener('focusout', e => { if (e.target.id === 'dvName') devRename(e.target.value); });
+function devRename(v){
+  const m = macroBy(DEV.sel); if (!m) return; v = v.trim().slice(0, 40); if (!v || v === m.name) return devDrawBar();
+  if (m.kind === 'function' && !validFnName(v)){ toast('Nom de fonction : lettres, chiffres et _ (sans espace ni accent), sans commencer par un chiffre'); return devDrawBar(); }
+  if (macrosOf().some(x => x !== m && x.name.toLowerCase() === v.toLowerCase())){ toast('Un script porte déjà ce nom'); return devDrawBar(); }
+  if (m.kind === 'function'){ const re = new RegExp('\\bfunction\\s+' + m.name + '\\b'); if (re.test(m.code)) m.code = m.code.replace(re, 'function ' + v); }
+  m.name = v; devCommit(m.kind === 'function'); devDraw();
+}
+
+/* ---------- clics ---------- */
+async function devClick(e){
+  const b = e.target.closest ? e.target.closest('[data-dv]') : e.target; if (!b) return; const a = b.dataset.dv; if (!a) return;
+  if (b.disabled || b.tagName === 'SELECT') return;
+  if (a === 'close') return closeDev();
+  if (a === 'tab'){ devFlushCode(); DEV.tab = b.dataset.tab; return devDraw(); }
+  if (a === 'sel'){ devFlushCode(); DEV.sel = b.dataset.id; DEV.errLine = 0; return devDrawEdit(); }
+  if (a === 'runid'){ e.stopPropagation?.(); devFlushCode(); return runMacro(macroBy(b.dataset.id)); }
+  if (a === 'new-macro' || a === 'new-fn'){
+    devFlushCode(); if (V.ro) return toast('Classeur en lecture seule');
+    const fn = a === 'new-fn', name = fn ? uniqueMacroName('MaFonction', 'function') : uniqueMacroName('Macro', 'macro');
+    const m = newMacro(fn ? 'function' : 'macro', name, fn ? `// Fonction personnalisée : utilisable dans une cellule avec =${name.toUpperCase()}(valeur)\nfunction ${name}(valeur) {\n  return valeur;\n}\n` : `// Nouvelle macro : écrivez votre code ici.\n// Exemple : classeur.feuilleActive.cellule("A1").valeur = "Bonjour";\njournal("Macro lancée sur la feuille", classeur.feuilleActive.nom);\n`);
+    if (m){ DEV.sel = m.id; DEV.tab = 'edit'; devDraw(); } return;
+  }
+  if (a === 'run'){ devFlushCode(); return runMacro(macroBy(DEV.sel)); }
+  if (a === 'rec'){ if (V.ro) return toast('Classeur en lecture seule'); if (DEV.rec) recStop(); else { devFlushCode(); recStart(); closeDev(); toast('Enregistrement : faites vos actions puis cliquez sur « Arrêter »'); } return; }
+  if (a === 'help') return SWDlg.open(DV_HELP, null, 'wide dv-dlg');
+  if (a === 'conclear'){ DEV.con = []; DEV.errLine = 0; devPaint(); return devDrawCon(); }
+  if (a === 'goline'){ const en = DEV.con[+b.dataset.i]; if (!en) return; if (en.macro && en.macro !== DEV.sel){ DEV.sel = en.macro; devDrawEdit(); } const ta = document.getElementById('dvTa'); if (!ta) return; const lines = ta.value.split('\n'); const ln = clamp(en.line, 1, lines.length); DEV.errLine = ln; devPaint();
+    const start = lines.slice(0, ln - 1).join('\n').length + (ln > 1 ? 1 : 0); ta.focus(); ta.setSelectionRange(start, start + lines[ln - 1].length); ta.scrollTop = Math.max(0, (ln - 4) * 20); devSyncScroll(); return; }
+  if (a === 'del'){ const m = macroBy(DEV.sel); if (!m) return; return SWDlg.open(`<h3>Supprimer « ${escH(m.name)} » ?</h3><p class="dlg-p">Le script sera retiré de ce classeur (et les boutons qui l'utilisent ne feront plus rien).</p><div class="dlg-acts"><button type="button" class="ap-btn alt" data-dlg="close">Annuler</button><button type="button" class="ap-btn danger" id="dvDelOk">Supprimer</button></div>`, d => { d.querySelector('#dvDelOk').onclick = () => { SWDlg.close(); deleteMacro(m.id); DEV.sel = macrosOf()[0]?.id || ''; devDraw(); }; }); }
+  if (a === 'addbtn'){ const m = macroBy(DEV.sel); if (!m) return; closeDev(); addShape({k:'round', w:170, h:46, fill:'#7B3FF2', text:m.name, fc:'#FFFFFF', fs:14, b:1, macro:m.id, r:.3}); return toast('Bouton ajouté : cliquez dessus pour lancer la macro (Maj + clic pour le sélectionner)'); }
+  if (a === 'share'){ devFlushCode(); DEV.tab = 'community'; DEV.com.view = 'submit'; DEV.com.pick = DEV.sel; return devDraw(); }
+  if (a === 'ex-add'){ const ex = DEV_EX[+b.dataset.i]; if (!ex || V.ro) return V.ro ? toast('Classeur en lecture seule') : 0; const m = newMacro(ex.kind, ex.name, ex.code, {desc:ex.desc}); if (m){ DEV.sel = m.id; DEV.tab = 'edit'; devDraw(); toast(`« ${m.name} » ajouté`); } return; }
+  if (a.startsWith('cm-')) return devComClick(a, b);
+}
+function linkMacroDlg(shapeId){
+  const s = shapeById(shapeId); if (!s) return; const L = macrosOf().filter(m => m.kind === 'macro');
+  SWDlg.open(`<h3>Affecter une macro</h3><p class="dlg-p">Un clic sur cette forme lancera la macro choisie.</p><div class="dv-pick">${[['', 'Aucune macro'], ...L.map(m => [m.id, m.name])].map(([id, n]) => `<label><input type="radio" name="lm" value="${escH(id)}"${(s.macro || '') === id ? ' checked' : ''}><span>${escH(n)}</span></label>`).join('')}</div>${L.length ? '' : '<p class="dlg-p small">Vous n\'avez pas encore de macro : ouvrez l\'interface Développeur pour en créer ou en installer.</p>'}<div class="dlg-acts"><button type="button" class="ap-btn alt" data-dlg="close">Annuler</button><button type="button" class="ap-btn" id="lmOk">Valider</button></div>`, d => {
+    d.querySelector('#lmOk').onclick = () => { const v = d.querySelector('input[name=lm]:checked')?.value || ''; SWDlg.close(); tx('Affecter une macro', () => { if (v) s.macro = v; else delete s.macro; }); renderShapes(); schedule(); };
+  });
+}
+
+/* ---------- onglet Exemples ---------- */
+function devDrawExamples(){
+  document.getElementById('devMain').innerHTML = `<div class="dv-page"><div class="dv-page-h"><h2>Exemples prêts à l'emploi</h2><p>Ajoutez un exemple à votre classeur, lisez-le, modifiez-le : c'est le meilleur moyen d'apprendre. Les <b>macros</b> agissent sur le classeur ; les <b>fonctions</b> s'utilisent dans les formules.</p></div>
+    <div class="dv-cards">${DEV_EX.map((x, i) => `<article class="dv-card"><div class="dv-card-h"><span class="dv-kind ${x.kind}">${x.kind === 'macro' ? 'Macro' : 'Fonction'}</span><b>${escH(x.name)}</b></div><p>${escH(x.desc)}</p><pre class="dv-pre">${dvHL(x.code.split('\n').slice(0, 5).join('\n'))}${x.code.split('\n').length > 5 ? '\n…' : ''}</pre><button type="button" class="dv-btn go" data-dv="ex-add" data-i="${i}">Ajouter à mon classeur</button></article>`).join('')}</div></div>`;
+}
+
+/* ---------- onglet Communauté ---------- */
+const DV_CATS = ['Mise en forme', 'Calculs', 'Données', 'Graphiques', 'Utilitaires', 'Autre'];
+DEV.com = {view:'browse', published:null, mine:null, mod:null, loading:false, err:'', q:'', cat:'Toutes', sort:'pop', pick:''};
+const comStatus = {pending:'En attente de validation', published:'Validé', rejected:'Refusé'};
+const comShort = n => { const p = String(n || '').trim().split(/\s+/); return p.length > 1 ? `${p[0]} ${p[p.length - 1][0]}.` : p[0] || 'Membre'; };
+async function comLoad(kinds){
+  const C = DEV.com; C.loading = true; C.err = ''; devDrawCom();
+  try { const res = await Promise.all(kinds.map(k => window.SWScripts.list(k))); kinds.forEach((k, i) => { C[k === 'pending' ? 'mod' : k] = res[i]; }); }
+  catch(e){ C.err = e?.message || 'Impossible de joindre la Communauté.'; }
+  C.loading = false; if (DEV.open && DEV.tab === 'community') devDrawCom();
+}
+function devDrawCom(){
+  const C = DEV.com, main = document.getElementById('devMain'), S = window.SWScripts;
+  if (!S || !S.available()){ main.innerHTML = `<div class="dv-page"><div class="dv-empty"><h3>Communauté indisponible</h3><p>Connectez-vous à votre compte Studio Prism (cloud activé) pour parcourir, installer et partager des scripts.</p></div></div>`; return; }
+  const adm = S.isAdmin(), modN = (C.mod || []).length;
+  if (C.published === null && !C.loading && !C.err) setTimeout(() => comLoad(['published', 'mine', ...(adm ? ['pending'] : [])]), 0);
+  const tabs = [['browse', 'Parcourir'], ['mine', 'Mes partages'], ['submit', 'Partager un script'], ...(adm ? [['mod', `File de validation${modN ? ` <i class="hot">${modN}</i>` : ''}`]] : [])];
+  let h = `<div class="dv-page"><nav class="dv-sub" role="tablist">${tabs.map(([k, t]) => `<button type="button" role="tab" data-dv="cm-view" data-v="${k}" aria-selected="${C.view === k}">${t}</button>`).join('')}</nav>`;
+  if (C.err) h += `<div class="dv-empty"><p>${escH(C.err)}</p><button type="button" class="dv-btn" data-dv="cm-reload">Réessayer</button></div>`;
+  else if (C.loading && C.published === null) h += '<div class="dv-empty"><p>Chargement…</p></div>';
+  else if (C.view === 'browse') h += `<div class="dv-tools"><input id="cmQ" type="search" placeholder="Rechercher un script (nom, description, auteur)" value="${escH(C.q)}" aria-label="Rechercher"><select data-dv="cm-cat" aria-label="Catégorie">${['Toutes', ...DV_CATS].map(c => `<option${c === C.cat ? ' selected' : ''}>${escH(c)}</option>`).join('')}</select><select data-dv="cm-sort" aria-label="Trier"><option value="pop"${C.sort === 'pop' ? ' selected' : ''}>Les plus installés</option><option value="new"${C.sort === 'new' ? ' selected' : ''}>Les plus récents</option></select></div><div class="dv-cards" id="cmList"></div>`;
+  else if (C.view === 'mine') h += comMineHtml();
+  else if (C.view === 'submit') h += comSubmitHtml();
+  else if (C.view === 'mod') h += comModHtml();
+  main.innerHTML = h + '</div>';
+  if (C.view === 'browse' && !C.err) devDrawComList();
+}
+function devDrawComList(){
+  const C = DEV.com, box = document.getElementById('cmList'); if (!box) return;
+  const q = nrmTxt(C.q), S = window.SWScripts;
+  let L = (C.published || []).filter(x => (x.reports || 0) < S.hideReports || S.isAdmin());
+  if (C.cat !== 'Toutes') L = L.filter(x => x.cat === C.cat);
+  if (q) L = L.filter(x => nrmTxt(`${x.name} ${x.desc} ${x.ownerName} ${x.cat}`).includes(q));
+  L.sort((a, b) => C.sort === 'new' ? b.createdAt - a.createdAt : (b.installs || 0) - (a.installs || 0));
+  box.innerHTML = L.length ? L.map(x => `<article class="dv-card"><div class="dv-card-h"><span class="dv-kind ${x.kind}">${x.kind === 'function' ? 'Fonction' : 'Macro'}</span><b>${escH(x.name)}</b></div><p>${escH(x.desc || '')}</p>
+      <div class="dv-meta"><span>${escH(comShort(x.ownerName))}</span><span>${escH(x.cat || '')}</span><span>${(x.installs || 0).toLocaleString('fr-FR')} installation${(x.installs || 0) > 1 ? 's' : ''}</span></div>
+      <div class="dv-card-a"><button type="button" class="dv-btn go" data-dv="cm-install" data-id="${escH(x.id)}">Voir et installer</button><button type="button" class="dv-btn" data-dv="cm-report" data-id="${escH(x.id)}" title="Signaler ce script" aria-label="Signaler ${escH(x.name)}">Signaler</button></div></article>`).join('')
+    : `<div class="dv-empty"><h3>${(C.published || []).length ? 'Aucun résultat' : 'La Communauté démarre'}</h3><p>${(C.published || []).length ? 'Essayez d\'autres mots-clés.' : 'Aucun script publié pour l\'instant. Partagez le premier !'}</p></div>`;
+}
+function comMineHtml(){
+  const L = (DEV.com.mine || []).slice().sort((a, b) => b.createdAt - a.createdAt);
+  if (!L.length) return '<div class="dv-empty"><h3>Aucun partage</h3><p>Partagez un de vos scripts : il sera publié après validation par l\'équipe Studio Prism.</p></div>';
+  return `<div class="dv-list">${L.map(x => `<div class="dv-row"><div class="dv-row-i"><b>${escH(x.name)}</b><span class="dv-st ${x.status}">${comStatus[x.status] || x.status}</span>${x.status === 'rejected' && x.reason ? `<small>Motif : ${escH(x.reason)}</small>` : x.status === 'published' ? `<small>${(x.installs || 0).toLocaleString('fr-FR')} installation(s)</small>` : '<small>Relecture du code par un administrateur en cours.</small>'}</div>
+    <button type="button" class="dv-btn" data-dv="cm-del" data-id="${escH(x.id)}">${x.status === 'published' ? 'Retirer' : 'Supprimer'}</button></div>`).join('')}</div>`;
+}
+function comSubmitHtml(){
+  const C = DEV.com, L = macrosOf(); if (!L.length) return '<div class="dv-empty"><h3>Rien à partager</h3><p>Créez d\'abord une macro ou une fonction dans l\'éditeur.</p></div>';
+  const m = macroBy(C.pick) || L[0];
+  return `<form id="cmForm" class="dv-form"><p class="dv-note"><b>Publication après validation.</b> Votre script reste « en attente » jusqu'à ce qu'un administrateur Studio Prism ait relu son code. Il peut être refusé. Les scripts tournent toujours dans un bac à sable.</p>
+    <label>Script à partager<select id="cmPick">${L.map(x => `<option value="${x.id}"${x.id === m.id ? ' selected' : ''}>${escH(x.name)} (${x.kind === 'function' ? 'fonction' : 'macro'})</option>`).join('')}</select></label>
+    <label>Titre public<input id="cmName" maxlength="60" value="${escH(m.name)}" required></label>
+    <label>Description (ce que fait le script)<textarea id="cmDesc" rows="3" maxlength="200" placeholder="Ex. : met en forme les en-têtes et ajoute une ligne de total">${escH(m.desc || '')}</textarea></label>
+    <label>Catégorie<select id="cmCat">${DV_CATS.map(c => `<option>${escH(c)}</option>`).join('')}</select></label>
+    <label class="dv-chk"><input type="checkbox" id="cmOk"><span>Je confirme être l'auteur de ce script (ou avoir le droit de le partager), qu'il ne contient rien de malveillant ni de personnel, et j'accepte sa relecture par l'équipe Studio Prism.</span></label>
+    <p class="dv-err" id="cmErr"></p><button type="submit" class="dv-btn go">Soumettre pour validation</button></form>`;
+}
+function comModHtml(){
+  const L = (DEV.com.mod || []).slice().sort((a, b) => a.createdAt - b.createdAt);
+  if (!L.length) return '<div class="dv-empty"><h3>File vide</h3><p>Aucun script en attente ni signalé. Bravo !</p></div>';
+  return `<p class="dv-note">Réservé aux administrateurs. Le code doit être <b>relu en entier</b> avant approbation.</p><div class="dv-list">${L.map(x => `<div class="dv-row"><div class="dv-row-i"><b>${escH(x.name)}</b> <span class="dv-kind ${x.kind}">${x.kind === 'function' ? 'Fonction' : 'Macro'}</span><span class="dv-st ${x.status}">${comStatus[x.status] || x.status}</span>
+      <small>${escH(x.ownerName || '')} · ${new Date(x.createdAt).toLocaleDateString('fr-FR')}${x.reports ? ` · <b class="bad">${x.reports} signalement${x.reports > 1 ? 's' : ''}</b>` : ''}</small><small>${escH(x.desc || '')}</small></div>
+    <button type="button" class="dv-btn go" data-dv="cm-review" data-id="${escH(x.id)}">Relire le code</button></div>`).join('')}</div>`;
+}
+const comFind = id => [DEV.com.published, DEV.com.mine, DEV.com.mod].flatMap(l => l || []).find(x => x.id === id);
+function codeViewDlg(x, code, actions, wire){
+  const sc = scanCode(code);
+  SWDlg.open(`<h3>${escH(x.name)}</h3><p class="dlg-p small">${x.kind === 'function' ? 'Fonction personnalisée' : 'Macro'} · ${escH(x.ownerName || 'Membre')} · ${escH(x.desc || '')}</p>
+    ${sc.length ? `<ul class="dv-scan">${sc.map(s => `<li class="${s.lvl}">${escH(s.msg)}</li>`).join('')}</ul>` : '<p class="dv-scan ok">Analyse automatique : rien de suspect détecté (ne remplace pas la relecture).</p>'}
+    <pre class="dv-pre big" tabindex="0">${dvHL(code)}</pre>${actions}`, wire, 'wide dv-dlg');
+}
+async function devComClick(a, b){
+  const C = DEV.com, S = window.SWScripts;
+  if (a === 'cm-view'){ C.view = b.dataset.v; return devDrawCom(); }
+  if (a === 'cm-reload'){ C.published = null; C.err = ''; return devDrawCom(); }
+  if (a === 'cm-cat'){ C.cat = b.value; return devDrawComList(); }
+  if (a === 'cm-sort'){ C.sort = b.value; return devDrawComList(); }
+  const id = b.dataset.id, x = id && comFind(id);
+  if (a === 'cm-install' && x){
+    let code; try { code = await S.getCode(id); } catch(e){ return toast(e.message); }
+    codeViewDlg(x, code, `<p class="dlg-p small">L'installation copie ce script dans le classeur ouvert. Il s'exécute dans le bac à sable, uniquement quand vous le lancez${x.kind === 'function' ? ' ou quand une cellule utilise la fonction' : ''}.</p><div class="dlg-acts"><button type="button" class="ap-btn alt" data-dlg="close">Annuler</button><button type="button" class="ap-btn" id="inOk"${V.ro ? ' disabled' : ''}>Installer dans ce classeur</button></div>`, d => {
+      d.querySelector('#inOk').onclick = () => {
+        if (x.kind === 'function' && (!validFnName(x.name) || macrosOf().some(m => m.name.toLowerCase() === x.name.toLowerCase()))){ SWDlg.close(); return toast(`Une fonction « ${x.name} » existe déjà dans ce classeur : renommez-la ou supprimez-la d'abord`); }
+        const m = newMacro(x.kind === 'function' ? 'function' : 'macro', x.name, code, {desc:x.desc, from:x.id}); SWDlg.close();
+        if (m){ S.install(x.id); x.installs = (x.installs || 0) + 1; DEV.sel = m.id; toast(`« ${m.name} » installé`); DEV.tab = 'edit'; devDraw(); }
+      };
+    });
+    return;
+  }
+  if (a === 'cm-report' && x){
+    return SWDlg.open(`<h3>Signaler « ${escH(x.name)} »</h3><p class="dlg-p">Ce script sera mis en file de vérification pour les administrateurs.</p><div class="dlg-acts"><button type="button" class="ap-btn alt" data-dlg="close">Annuler</button><button type="button" class="ap-btn danger" id="rpOk">Signaler</button></div>`, d => {
+      d.querySelector('#rpOk').onclick = async () => { try { await S.report(id); x.reports = (x.reports || 0) + 1; SWDlg.close(); toast('Merci, signalement envoyé'); } catch(e){ toast(e.message); } };
+    });
+  }
+  if (a === 'cm-del' && x){ try { await S.remove(id); C.mine = (C.mine || []).filter(y => y.id !== id); C.published = (C.published || []).filter(y => y.id !== id); toast(x.status === 'published' ? 'Script retiré' : 'Partage supprimé'); } catch(e){ toast(e.message); } return devDrawCom(); }
+  if (a === 'cm-review' && x){
+    let code; try { code = await S.getCode(id); } catch(e){ return toast(e.message); }
+    codeViewDlg(x, code, `<label class="dv-chk"><input type="checkbox" id="rvOk"><span>J'ai relu l'intégralité du code ci-dessus.</span></label><p class="ap-err" id="dlgErr"></p><div class="dlg-acts"><button type="button" class="ap-btn alt" data-dlg="close">Fermer</button><button type="button" class="ap-btn danger" id="rvNo">${x.status === 'published' ? 'Retirer' : 'Refuser'}</button>${x.status === 'published' ? '<button type="button" class="ap-btn alt" id="rvKeep">Conserver</button>' : '<button type="button" class="ap-btn" id="rvYes" disabled>Approuver et publier</button>'}</div>`, d => {
+      const ok = d.querySelector('#rvOk'), yes = d.querySelector('#rvYes'); ok.onchange = () => { if (yes) yes.disabled = !ok.checked; };
+      const done = (status, reason) => { C.mod = (C.mod || []).filter(y => y.id !== id); C.published = (C.published || []).filter(y => y.id !== id); if (status === 'published') C.published.push({...x, status, reports:0}); SWDlg.close(); toast(status === 'published' ? 'Script publié' : status === 'rejected' ? 'Script refusé' : 'Signalements ignorés'); devDrawCom(); };
+      if (yes) yes.onclick = async () => { if (!ok.checked) return; try { await S.review(id, 'published', ''); done('published'); } catch(e){ d.querySelector('#dlgErr').textContent = e.message; } };
+      const keep = d.querySelector('#rvKeep'); if (keep) keep.onclick = async () => { if (!ok.checked) return d.querySelector('#dlgErr').textContent = 'Cochez la relecture du code.'; try { await S.review(id, 'published', ''); done('kept'); } catch(e){ d.querySelector('#dlgErr').textContent = e.message; } };
+      d.querySelector('#rvNo').onclick = () => { SWDlg.close(); SWAsk('Motif du refus', 'Motif (visible par l\'auteur)', '', x.status === 'published' ? 'Retirer' : 'Refuser', async v => { v = v.trim().slice(0, 280); if (!v) throw new Error('Indiquez un motif.'); await S.review(id, 'rejected', v); done('rejected', v); }); };
+    });
+  }
+}
+document.addEventListener('submit', async e => {
+  if (e.target.id !== 'cmForm') return; e.preventDefault();
+  const C = DEV.com, S = window.SWScripts, q = i => document.getElementById(i), err = q('cmErr'), m = macroBy(q('cmPick').value);
+  if (!m) return; const name = q('cmName').value.trim(), desc = q('cmDesc').value.trim(), cat = q('cmCat').value;
+  if (name.length < 2) return err.textContent = 'Donnez un titre au script.';
+  if (desc.length < 10) return err.textContent = 'Décrivez en une phrase ce que fait le script (10 caractères minimum).';
+  if (m.code.trim().length < 20) return err.textContent = 'Ce script est presque vide.';
+  if (m.code.length > S.maxCode) return err.textContent = `Script trop long pour la Communauté (${S.maxCode.toLocaleString('fr-FR')} caractères maximum).`;
+  if (!q('cmOk').checked) return err.textContent = 'Cochez la case de confirmation.';
+  const btn = e.submitter; if (btn) btn.disabled = true;
+  try {
+    if (C.mine === null) C.mine = await S.list('mine');
+    if ((C.mine || []).filter(x => x.status === 'pending').length >= S.maxPending) throw {message:`Vous avez déjà ${S.maxPending} scripts en attente de validation.`};
+    const rec = await S.submit({name, desc, cat, kind:m.kind, code:m.code});
+    C.mine = [rec, ...(C.mine || [])]; if (S.isAdmin() && C.mod) C.mod.push(rec); C.view = 'mine';
+    devDrawCom(); SWDlg.open(`<h3>Merci, c'est envoyé</h3><p class="dlg-p">« ${escH(name)} » est <b>en attente de validation</b> : un administrateur Studio Prism relira le code avant de le publier. Suivez son statut dans « Mes partages ».</p><div class="dlg-acts"><button type="button" class="ap-btn" data-dlg="close">Compris</button></div>`);
+  } catch(x){ if (btn) btn.disabled = false; err.textContent = x?.message || 'Envoi impossible.'; }
+});
+document.addEventListener('change', e => {
+  const t = e.target; if (!t.closest || !t.closest('#devUi')) return;
+  if (t.id === 'cmPick'){ DEV.com.pick = t.value; const m = macroBy(t.value); if (m){ document.getElementById('cmName').value = m.name; document.getElementById('cmDesc').value = m.desc || ''; } }
+  else if (t.dataset.dv === 'cm-cat' || t.dataset.dv === 'cm-sort') devComClick(t.dataset.dv, t);
+});
+
 /* ==== 80-main.js ==== */
 /* ---------- Démarrage du tableur, liens avec le cloud (window.SWEditor), raccourcis ---------- */
 const E2 = {userLib:{}, ro:false, loaded:false};
@@ -5924,6 +6859,7 @@ function shortcutsDlg(){
 }
 function globalKeys(e){
   if (g$('app').hidden) return;
+  if (DEV.open){ if (e.key === 'Escape' && g$('apDlg').hidden && !DEV.ed?.composing){ e.preventDefault(); closeDev(); } return; }
   const k = e.key, mod = e.ctrlKey || e.metaKey, lk = k.length === 1 ? k.toLowerCase() : k;
   if (mod && (lk === 'k' || k === '/')){ e.preventDefault(); return g$('spectre').hidden ? openSpectre() : closeSpectre(); }
   if (k === 'Escape'){
@@ -8036,6 +8972,70 @@ $a('#homeBody').addEventListener('click', async e => {
 $a('#homeBody').addEventListener('input', e => { if (e.target.id === 'pubQ'){ P.q = e.target.value; const g = $a('#pubGrid'); if (g) g.innerHTML = pubGrid((P.published || []).filter(t => (t.reports || 0) < PUB_HIDE_REPORTS || isAdm())); window.SWScaleMinis?.(g); } });
 $a('#homeBody').addEventListener('change', e => { if (e.target.id === 'pubSort'){ P.sort = e.target.value; renderHome(); } });
 $a('#homeBody').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-pub]')) e.target.click(); });
+/* =====================================================================
+   Communauté des scripts (macros et fonctions personnalisées) : couche de données.
+   Collection Firestore scScripts (+ content/main pour le code). Tout script soumis reste « en attente » (pending) jusqu'à
+   ce qu'un administrateur Studio Prism ait relu le code et l'ait publié (published) ou refusé (rejected, avec un motif).
+   Critère d'administrateur : le même que le site Studio Prism (profil users/{uid} avec role « admin » et status « active »,
+   lu dans auth.js → access.level === 'admin'), appliqué aussi par les règles Firestore (isAdmin()). Interface : onglet
+   Communauté de l'interface Développeur (src/sheet/77-dev-ui.js), via window.SWScripts.
+   ===================================================================== */
+const SCR_MAX_CODE = 40000, SCR_MAX_PENDING = 10, SCR_HIDE_REPORTS = 3;
+const scrAdm = () => access.level === 'admin';
+const ScrLocal = {
+  key:'sp.demo.scscripts',
+  db(){ const d = store.get(this.key) || {}; return {items:{}, content:{}, ...d}; },
+  put(d){ try { localStorage.setItem(this.key, JSON.stringify(d)); } catch(e){ throw {code:'app/device-full'}; } },
+  async list(kind){ await sleep(60); const all = Object.values(this.db().items);
+    return kind === 'published' ? all.filter(x => x.status === 'published') : kind === 'mine' ? all.filter(x => x.ownerUid === me.uid) : all.filter(x => x.status === 'pending' || (x.reports || 0) > 0); },
+  async get(id){ const d = this.db(), x = d.items[id]; if (!x || !(x.status === 'published' || x.ownerUid === me.uid || scrAdm())) throw {code:'permission-denied'}; return d.content[id] || ''; },
+  async create(f){ await sleep(60); const d = this.db(), id = randId('s'), now = Date.now();
+    d.items[id] = {id, ownerUid:me.uid, ownerName:f.ownerName, name:f.name, desc:f.desc, cat:f.cat, kind:f.kind, status:'pending', reason:'', size:f.size, installs:0, reports:0, reporters:[], createdAt:now, updatedAt:now};
+    d.content[id] = f.code; this.put(d); return {...d.items[id]}; },
+  async review(id, status, reason = ''){ if (!scrAdm()) throw {code:'permission-denied'}; const d = this.db(), x = d.items[id]; if (!x) throw {code:'app/not-found'};
+    Object.assign(x, {status, reason, reviewedAt:Date.now(), reviewedBy:me.uid, updatedAt:Date.now()}); if (status === 'published'){ x.reports = 0; x.reporters = []; } this.put(d); },
+  async remove(id){ const d = this.db(), x = d.items[id]; if (x && x.ownerUid !== me.uid && !scrAdm()) throw {code:'permission-denied'}; delete d.items[id]; delete d.content[id]; this.put(d); },
+  async install(id){ const d = this.db(); if (d.items[id]){ d.items[id].installs = (d.items[id].installs || 0) + 1; this.put(d); } },
+  async report(id){ const d = this.db(), x = d.items[id]; if (!x || (x.reporters || []).includes(me.uid)) return; x.reporters = [...(x.reporters || []), me.uid]; x.reports = x.reporters.length; this.put(d); },
+};
+const ScrFB = {
+  get db(){ return FirebaseAuth.db; }, ts(){ return FirebaseAuth.ts(); },
+  T(id){ return this.db.collection('scScripts').doc(id); }, C(id){ return this.T(id).collection('content').doc('main'); },
+  m(d){ const x = d.data(); return {...x, id:d.id, createdAt:ms(x.createdAt), updatedAt:ms(x.updatedAt)}; },
+  async list(kind){
+    const c = this.db.collection('scScripts');
+    if (kind === 'published') return (await c.where('status', '==', 'published').limit(400).get()).docs.map(d => this.m(d));
+    if (kind === 'mine') return (await c.where('ownerUid', '==', me.uid).limit(100).get()).docs.map(d => this.m(d));
+    const [a, b] = await Promise.all([c.where('status', '==', 'pending').limit(200).get(), c.where('reports', '>', 0).limit(200).get()]);
+    const out = new Map(); [...a.docs, ...b.docs].forEach(d => out.set(d.id, this.m(d))); return [...out.values()];
+  },
+  async get(id){ const s = await this.C(id).get(); return s.exists ? s.data().data : ''; },
+  async create(f){
+    const ref = this.db.collection('scScripts').doc(), b = this.db.batch();
+    const rec = {ownerUid:me.uid, ownerName:f.ownerName, name:f.name, desc:f.desc, cat:f.cat, kind:f.kind, status:'pending', reason:'', size:f.size, installs:0, reports:0, reporters:[], createdAt:this.ts(), updatedAt:this.ts()};
+    b.set(ref, rec); b.set(ref.collection('content').doc('main'), {data:f.code, updatedAt:this.ts()}); await b.commit();
+    return {...rec, id:ref.id, createdAt:Date.now(), updatedAt:Date.now()};
+  },
+  async review(id, status, reason = ''){ const f = {status, reason, reviewedAt:this.ts(), reviewedBy:me.uid, updatedAt:this.ts()}; if (status === 'published'){ f.reports = 0; f.reporters = []; } await this.T(id).update(f); },
+  async remove(id){ const b = this.db.batch(); b.delete(this.C(id)); b.delete(this.T(id)); await b.commit(); },
+  async install(id){ await this.T(id).update({installs:firebase.firestore.FieldValue.increment(1)}); },
+  async report(id){ await this.T(id).update({reports:firebase.firestore.FieldValue.increment(1), reporters:firebase.firestore.FieldValue.arrayUnion(me.uid)}); },
+};
+const Scr = () => cloudMode === 'firebase' ? ScrFB : cloudMode === 'demo' ? ScrLocal : null;
+const scrErr = e => e?.code === 'permission-denied' ? 'La Communauté des scripts s\'ouvrira dès que les règles Firestore de SPECTRA Calc (bloc scScripts) seront publiées.' : (e?.message && !e.code ? e.message : errMsg(e));
+window.SWScripts = {
+  available:() => !!Scr() && !!me,
+  isAdmin:() => !!me && scrAdm(),
+  uid:() => me?.uid || '',
+  maxCode:SCR_MAX_CODE, maxPending:SCR_MAX_PENDING, hideReports:SCR_HIDE_REPORTS,
+  list:async kind => { const api = Scr(); if (!api) throw {code:'app/offline'}; try { return await withTimeout(api.list(kind), 15000); } catch(e){ throw {message:scrErr(e)}; } },
+  getCode:async id => { try { return await withTimeout(Scr().get(id), 15000); } catch(e){ throw {message:scrErr(e)}; } },
+  submit:async f => { try { return await withTimeout(Scr().create({...f, ownerName:fullName(), size:byteLen(f.code)}), 20000); } catch(e){ throw {message:scrErr(e)}; } },
+  review:async (id, status, reason) => { try { await withTimeout(Scr().review(id, status, reason), 15000); } catch(e){ throw {message:scrErr(e)}; } },
+  remove:async id => { try { await withTimeout(Scr().remove(id), 15000); } catch(e){ throw {message:scrErr(e)}; } },
+  install:id => Scr().install(id).catch(() => {}),
+  report:async id => { try { await withTimeout(Scr().report(id), 15000); } catch(e){ throw {message:scrErr(e)}; } },
+};
 /* =====================================================================
    IA de SPECTRA Calc : Gemini via Firebase AI Logic (projet Studio Prism), sans serveur.
    À activer une fois dans la console Firebase : AI Logic → Commencer → « Gemini Developer API ».

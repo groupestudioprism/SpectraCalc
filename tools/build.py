@@ -5,7 +5,8 @@
   src/css/*.css               styles (ordre : CSS_ORDER)
   src/parts/body.html         structure : intro, compte, accueil, éditeur
   src/sheet/*.js              tableur (script classique, fichiers concaténés dans l'ordre alphabétique, une seule IIFE)
-  src/js/auth.js + cloud.js + community.js + ai.js + auth-end.js   compte Studio Prism, cloud, accueil (une seule IIFE)
+  src/js/sandbox-worker.js   moteur des macros (embarqué dans <script type=text/plain id=scWorkerSrc>)
+  src/js/auth.js + cloud.js + community.js + scripts.js + ai.js + auth-end.js   compte Studio Prism, cloud, accueil (une seule IIFE)
 
 Sorties :
   index.html                         site en ligne (GitHub Pages) : Firebase branché (projet Studio Prism)
@@ -15,7 +16,7 @@ Usage : python3 tools/build.py
 import pathlib, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 S = ROOT / 'src'
-CSS_ORDER = ['base.css', 'splash.css', 'auth.css', 'home.css', 'shell.css', 'calc.css']
+CSS_ORDER = ['base.css', 'splash.css', 'auth.css', 'home.css', 'shell.css', 'calc.css', 'dev.css']
 FB = '10.12.2'
 CONFIG = '''const FIREBASE_CONFIG = {
   // Projet Firebase de Studio Prism : le même que le site et qu'ARCHIPLAN. Configuration publique par conception
@@ -30,9 +31,11 @@ CONFIG = '''const FIREBASE_CONFIG = {
 def rd(p): return (S / p).read_text(encoding='utf-8')
 def assemble():
     editor = ''.join(f'/* ==== {f.name} ==== */\n' + f.read_text(encoding='utf-8') + '\n' for f in sorted((S / 'sheet').glob('*.js')))
+    worker = rd('js/sandbox-worker.js'); assert '</script' not in worker.lower()
     return (rd('parts/head.html') + '<style>\n' + ''.join(rd('css/' + c) for c in CSS_ORDER) + '</style>\n</head><body>\n' + rd('parts/body.html').replace('<!--INTRO-->', '<script>\n' + rd('js/intro.js') + '</script>')
+            + '<script type="text/plain" id="scWorkerSrc">\n' + worker + '</script>\n'
             + "<script>\n(() => {\n'use strict';\n" + editor + '})();\n</script>\n'
-            + '<script>\n' + rd('js/auth.js') + rd('js/cloud.js') + rd('js/community.js') + rd('js/ai.js') + rd('js/auth-end.js') + '</script>\n')
+            + '<script>\n' + rd('js/auth.js') + rd('js/cloud.js') + rd('js/community.js') + rd('js/scripts.js') + rd('js/ai.js') + rd('js/auth-end.js') + '</script>\n')
 def head(desc):
     return ('<!doctype html><html lang="fr"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
