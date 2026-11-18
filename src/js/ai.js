@@ -7,7 +7,7 @@
 const AI_SDK = '13.0.0';
 /* gemini-3.6-flash d'abord ; gemini-3.8-flash prend le relais quand le premier est saturé (quotas séparés) */
 const AI_MODELS = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash'];
-const AI_DAY = {free:25, pro:300, admin:1000};
+const AI_DAY = {free:300, pro:300, admin:1000};   // gamme SPECTRA gratuite : le même quota pour tous
 let aiInit = null, aiBlocked = '', aiBlockedAt = 0;
 const aiGone = new Set();   // modèles introuvables pour ce projet
 const aiDayKey = () => `sc.ai.${me?.uid || 'x'}.${new Date().toISOString().slice(0, 10)}`;

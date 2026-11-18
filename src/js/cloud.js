@@ -10,7 +10,7 @@
    ===================================================================== */
 const APP_URL = location.origin + location.pathname;
 const MAX_DATA = 950000;
-const PLANS = {free:{label:'Gratuit', bytes:10e6}, pro:{label:'Licence SPECTRA Calc', bytes:50e6}, admin:{label:'Administrateur', bytes:1e9}};
+const PLANS = {free:{label:'Gratuit', bytes:10e6}, pro:{label:'Gratuit', bytes:50e6}, admin:{label:'Administrateur', bytes:1e9}};
 const FOLDER_LIMITS = {priv:5, shared:3};
 const planKey = () => access.level === 'admin' ? 'admin' : access.level === 'licensed' ? 'pro' : 'free';
 const canCloud = () => !!me && access.level !== 'pending';

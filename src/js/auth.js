@@ -13,6 +13,10 @@ const APP_ID = 'spectracalc';
    Sans licence active (statut « active » et non expirée) : offre gratuite (cloud 10 Mo, partage, tous les outils ; exports avancés réservés aux licences).
    Un administrateur a tous les droits. */
 const LICENSE_PRODUCT = 'spectracalc';
+/* La gamme SPECTRA est 100 % gratuite : tout compte Studio Prism vérifié, avec sa fiche client, reçoit une licence gratuite
+   qui ouvre tous les outils, le cloud, l'IA et les exports. Aucune formule payante. */
+const FREE_FOR_ALL = true;
+const FREE_LICENSE = Object.freeze({type:'free', status:'active', expiresAt:null, expired:false, free:true});
 const SITE_URL = 'https://groupestudioprism.github.io/Studio-Prism/';
 const OFFERS_URL = SITE_URL + '#/produits/' + LICENSE_PRODUCT;
 const ACCOUNT_URL = SITE_URL + '#/compte';
@@ -92,6 +96,7 @@ const DemoAuth = {
     await sleep(200); const info = {accountKind:'individual', subscription:'free', role:'user', companyName:''};
     const keyed = (store.get('sp.demo.keys') || {})[u.uid];
     if (/decouverte/i.test(u.email || '') && !keyed) return {level:'discovery', info, license:null};
+    if (!keyed && FREE_FOR_ALL && !/admin/i.test(u.email || '')) return {level:'licensed', info, license:FREE_LICENSE};
     if (/admin/i.test(u.email || '')) return {level:'admin', info:{...info, role:'admin'}, license:null};   // démo : un email contenant « admin » simule un administrateur Studio Prism
     return {level:'licensed', info, license:{type:keyed ? 'pro' : 'demo', status:'active', expiresAt:null, expired:false}};
   },
@@ -227,6 +232,7 @@ const FirebaseAuth = {
     const exp = lic?.expiresAt?.toDate ? lic.expiresAt.toDate() : null, now = new Date();
     const license = lic ? {type:lic.licenseType, status:lic.status, expiresAt:exp ? exp.getTime() : null, expired:!!exp && exp <= now} : null;
     if (p.role === 'admin' && p.status === 'active') return {level:'admin', info, license};
+    if (FREE_FOR_ALL && license?.status !== 'suspended') return {level:'licensed', info, license:FREE_LICENSE};   // licence gratuite liée au compte
     return {level: license && license.status === 'active' && !license.expired ? 'licensed' : 'discovery', info, license};
   },
   // Activation d'une clé de licence (même procédure que la page « Activer une clé » du site, vérifiée par les règles Firestore).
@@ -866,6 +872,8 @@ const fmtDate = t => new Date(t).toLocaleDateString('fr-FR', {day:'numeric', mon
 function licSummary(a = access){
   const l = a.license;
   if (a.level === 'admin') return {cls:'ok', short:'Administrateur · tous les droits', title:'Accès administrateur', text:'Votre compte Studio Prism est administrateur : SPECTRA Calc est entièrement débloqué.'};
+  if (a.level === 'licensed' && l?.free) return {cls:'ok', short:'Gratuit · tous les outils, l\'IA et les exports', title:'SPECTRA Calc est gratuit',
+    text:'SPECTRA Calc est entièrement gratuit pour tout compte Studio Prism avec sa fiche client : tous les outils, le cloud, l\'IA et les exports sont ouverts.'};
   if (a.level === 'licensed') return {cls:'ok', short:`Licence ${licLabel(l.type)}${l.expiresAt ? ' · jusqu\'au ' + fmtDate(l.expiresAt) : ''}`,
     title:`Licence SPECTRA Calc ${licLabel(l.type)}`, text:l.expiresAt ? `Active jusqu'au ${fmtDate(l.expiresAt)}.` : 'Active, sans date de fin.'};
   if (a.level === 'pending') return {cls:'', short:'Vérification de la licence…', title:'Vérification…', text:''};
